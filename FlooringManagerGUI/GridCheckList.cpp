@@ -192,7 +192,14 @@ void CGridCheckList::AddToQuickbooks(long row)
 {
 	CString strId = QuickGetText(ID, row);
 	int iId = atoi(strId);
-	CGlobals::AddCheckToQuickbooks(iId);
+	if (CGlobals::AddCheckToQuickbooks(iId))
+	{
+		QuickSetText(QBTXN_ID, row, "DONE");
+	}
+	else
+	{
+		MessageBox("Unable to add to Quickbooks.", "Error");
+	}
 }
 
 void CGridCheckList::EditCheckDetail(long row )

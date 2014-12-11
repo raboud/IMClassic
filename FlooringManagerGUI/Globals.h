@@ -168,7 +168,7 @@ public:
 //	static void PrintWoodFlooringWaiver(int OrderID);
 	static void PrintCheck(int iCheckID);
 	static void ViewCheck(int iCheckID);
-	static void AddCheckToQuickbooks(int iCheckID);
+	static bool AddCheckToQuickbooks(int iCheckID);
 
 //	static void ViewWoodFlooringWaiver(int OrderID, bool PrintOnly = false);
 

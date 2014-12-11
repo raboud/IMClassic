@@ -1086,9 +1086,9 @@ void CGlobals::ViewCheck(int iCheckID)
 	ReportHelper::Check(iCheckID, Mode::View);
 }
 
-void CGlobals::AddCheckToQuickbooks(int iCheckID)
+bool CGlobals::AddCheckToQuickbooks(int iCheckID)
 {
-	Quickbooks::CreateInvoice(Singleton::Connection, iCheckID);
+	return Quickbooks::CreateInvoice(Singleton::Connection, iCheckID);
 }
 
 void CGlobals::PrintCustSatReport(int iReportID)
