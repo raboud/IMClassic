@@ -814,6 +814,9 @@ copy Flooring.exe.config $(OutDir)</Command>
     <None Include="..\Common\SSCE\runtime\SSCE5332.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="install.config">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="Flooring.exe.config">
       <DeploymentContent>true</DeploymentContent>
       <FileType>Document</FileType>

@@ -1693,6 +1693,7 @@
     <None Include="..\Common\SSCE\runtime\lex\userdic.tlx">
       <Filter>lex</Filter>
     </None>
+    <None Include="install.config" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Common\Ssce\sdk\lib\SSCE5332.lib" />
