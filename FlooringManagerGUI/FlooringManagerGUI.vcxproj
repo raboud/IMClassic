@@ -309,7 +309,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="GridRegMerchandise.cpp" />
     <ClCompile Include="GridReports.cpp" />
     <ClCompile Include="GridSchedule.cpp" />
-    <ClCompile Include="GridSelectSOMerchandise.cpp" />
     <ClCompile Include="GridSOMerchandise.cpp" />
     <ClCompile Include="GridStoreContacts.cpp" />
     <ClCompile Include="GridStores.cpp" />
@@ -390,7 +389,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="DlgDiscrepancies.cpp" />
     <ClCompile Include="DlgFind.cpp" />
     <ClCompile Include="DlgInsuranceQuestion.cpp" />
-    <ClCompile Include="DlgMaterialStatus.cpp" />
     <ClCompile Include="DlgMergeCustomers.cpp" />
     <ClCompile Include="DlgMessages.cpp" />
     <ClCompile Include="DlgNotes.cpp" />
@@ -411,7 +409,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="DlgScheduleChangeReasonSelection.cpp" />
     <ClCompile Include="DlgSelectCustomer.cpp" />
     <ClCompile Include="DlgSelectDepartment.cpp" />
-    <ClCompile Include="DlgSelectMerchandise.cpp" />
     <ClCompile Include="DlgSelectPO.cpp" />
     <ClCompile Include="DlgSelectVendor.cpp" />
     <ClCompile Include="DlgSendNote.cpp" />
@@ -612,7 +609,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClInclude Include="GridRegMerchandise.h" />
     <ClInclude Include="GridReports.h" />
     <ClInclude Include="GridSchedule.h" />
-    <ClInclude Include="GridSelectSOMerchandise.h" />
     <ClInclude Include="GridSOMerchandise.h" />
     <ClInclude Include="GridStoreContacts.h" />
     <ClInclude Include="GridStores.h" />
@@ -666,7 +662,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClInclude Include="DlgDiscrepancies.h" />
     <ClInclude Include="DlgFind.h" />
     <ClInclude Include="DlgInsuranceQuestion.h" />
-    <ClInclude Include="DlgMaterialStatus.h" />
     <ClInclude Include="DlgMergeCustomers.h" />
     <ClInclude Include="DlgMessages.h" />
     <ClInclude Include="DlgNotes.h" />
@@ -680,7 +675,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClInclude Include="DlgScheduleChangeReasonSelection.h" />
     <ClInclude Include="DlgSelectCustomer.h" />
     <ClInclude Include="DlgSelectDepartment.h" />
-    <ClInclude Include="DlgSelectMerchandise.h" />
     <ClInclude Include="DlgSelectPO.h" />
     <ClInclude Include="DlgSelectVendor.h" />
     <ClInclude Include="DlgSendNote.h" />

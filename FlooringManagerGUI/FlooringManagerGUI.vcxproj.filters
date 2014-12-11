@@ -222,9 +222,6 @@
     <ClCompile Include="GridSchedule.cpp">
       <Filter>Grids\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GridSelectSOMerchandise.cpp">
-      <Filter>Grids\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GridSOMerchandise.cpp">
       <Filter>Grids\Source Files</Filter>
     </ClCompile>
@@ -396,9 +393,6 @@
     <ClCompile Include="DlgInsuranceQuestion.cpp">
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DlgMaterialStatus.cpp">
-      <Filter>Dialogs\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DlgMergeCustomers.cpp">
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
@@ -436,9 +430,6 @@
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DlgSelectDepartment.cpp">
-      <Filter>Dialogs\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DlgSelectMerchandise.cpp">
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DlgSelectPO.cpp">
@@ -1057,9 +1048,6 @@
     <ClInclude Include="GridSchedule.h">
       <Filter>Grids\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GridSelectSOMerchandise.h">
-      <Filter>Grids\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GridSOMerchandise.h">
       <Filter>Grids\Header Files</Filter>
     </ClInclude>
@@ -1219,9 +1207,6 @@
     <ClInclude Include="DlgInsuranceQuestion.h">
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DlgMaterialStatus.h">
-      <Filter>Dialogs\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DlgMergeCustomers.h">
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
@@ -1259,9 +1244,6 @@
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DlgSelectDepartment.h">
-      <Filter>Dialogs\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DlgSelectMerchandise.h">
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DlgSelectPO.h">

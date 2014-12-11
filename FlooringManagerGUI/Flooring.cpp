@@ -26,7 +26,6 @@
 #include "SetOptions.h"
 #include "SetDivision.h"
 
-#include "DlgMaterialStatus.h"
 #include "JRSVersions.h"
 #include "QuickBooks.h"
 #include <sscemfc.hpp>
