@@ -299,10 +299,7 @@ BOOL CFlooringApp::InitInstance()
 		RUNTIME_CLASS(CViewInvoice));
 
 	ReportHelper::InitDefaultContext();
-	//CMaintenance maintenance;
-	//maintenance.Update();
 
-	//SetAdmin() ;
 	SetEmployeeID() ;
 	// create main MDI Frame window
 	CMainFrame* pMainFrame = new CMainFrame;
@@ -1350,7 +1347,6 @@ void CFlooringApp::ImpersonateUser()
 			if (dlgUsers.DoModal() == IDOK)
 			{
 				SetEmployeeID(dlgUsers.GetEmployeeID());
-				m_pperms->Refresh();
 			}
 		}
 	}

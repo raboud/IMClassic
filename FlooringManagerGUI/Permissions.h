@@ -4,9 +4,6 @@
 
 #pragma once
 
-#include "SetViewUserPermissions.h"
-#include "SetPermissions.h"
-
 class CPermissions
 {
 public:
@@ -21,12 +18,7 @@ public:
 	bool HasPermissionDivision(CString strPermission, int iDivisionID);
 	bool HasNoteTypePermission(CString strNoteType);
 
-	void Refresh();
-
 protected:
-	CSetViewUserPermissions m_setVwUserPermissions;
-	CSetPermissions m_setPermissions;
-	bool HasExplicitPermission(CString strPermission);
 	int m_iUserID;
 	bool m_bIsAdmin;
 };

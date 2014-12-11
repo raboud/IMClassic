@@ -240,7 +240,17 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="NotesPropPage.cpp" />
     <ClCompile Include="NotesPropSheet.cpp" />
     <ClCompile Include="OrderPropPage.cpp" />
-    <ClCompile Include="Permissions.cpp" />
+    <ClCompile Include="Permissions.cpp">
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Async</ExceptionHandling>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Async</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Async</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="POPropSheet.cpp" />
     <ClCompile Include="Pricing.cpp" />
     <ClCompile Include="..\Common\printer.cpp" />
@@ -374,7 +384,13 @@ copy Flooring.exe.config $(OutDir)</Command>
     </ClCompile>
     <ClCompile Include="DialogDatePicker.cpp" />
     <ClCompile Include="DialogInvoicing.cpp" />
-    <ClCompile Include="DialogPo.cpp" />
+    <ClCompile Include="DialogPo.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Async</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="DialogSchedule.cpp" />
     <ClCompile Include="Dib.cpp" />
     <ClCompile Include="DlgActionReport.cpp">
@@ -422,7 +438,6 @@ copy Flooring.exe.config $(OutDir)</Command>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
     </ClCompile>
     <ClCompile Include="DlgPONotesList.cpp" />
-    <ClCompile Include="DlgReportConfig.cpp" />
     <ClCompile Include="DlgReportList.cpp" />
     <ClCompile Include="DlgScheduleChangeReasonSelection.cpp" />
     <ClCompile Include="DlgSelectCustomer.cpp" />
@@ -505,13 +520,22 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetPayments.cpp" />
     <ClCompile Include="setpayroll.cpp" />
     <ClCompile Include="SetPayrollMessages.cpp" />
-    <ClCompile Include="SetPermissions.cpp" />
     <ClCompile Include="SetPOMarketDivision.cpp" />
     <ClCompile Include="SetPONotes.cpp" />
     <ClCompile Include="SetPONotesWithName.cpp" />
     <ClCompile Include="SetPOStatusValues.cpp" />
     <ClCompile Include="SetScheduleChangeReasonCodes.cpp" />
-    <ClCompile Include="SetSettings.cpp" />
+    <ClCompile Include="SetSettings.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">NotUsing</PrecompiledHeader>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Async</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Async</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Async</ExceptionHandling>
+    </ClCompile>
     <ClCompile Include="SetSPNImportedPOs.cpp" />
     <ClCompile Include="SetSpokeWith.cpp" />
     <ClCompile Include="SetStates.cpp" />
@@ -533,7 +557,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetViewOrderRegMerchandiseDetails.cpp" />
     <ClCompile Include="SetViewOrderSOMerchandiseDetails.cpp" />
     <ClCompile Include="SetViewStoreContacts.cpp" />
-    <ClCompile Include="SetViewUserPermissions.cpp" />
     <ClCompile Include="SetVwActivePOs.cpp" />
     <ClCompile Include="SetVwActivityList.cpp" />
     <ClCompile Include="SetvwChargeback.cpp" />
@@ -733,7 +756,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="DlgPOEntry.h" />
     <ClInclude Include="DlgPONoteEntry.h" />
     <ClInclude Include="DlgPONotesList.h" />
-    <ClInclude Include="DlgReportConfig.h" />
     <ClInclude Include="DlgReportList.h" />
     <ClInclude Include="DlgScheduleChangeReasonSelection.h" />
     <ClInclude Include="DlgSelectCustomer.h" />
@@ -813,7 +835,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetPayments.h" />
     <ClInclude Include="setpayroll.h" />
     <ClInclude Include="SetPayrollMessages.h" />
-    <ClInclude Include="SetPermissions.h" />
     <ClInclude Include="SetPOMarketDivision.h" />
     <ClInclude Include="SetPONotes.h" />
     <ClInclude Include="SetPONotesWithName.h" />
@@ -841,7 +862,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetViewOrderRegMerchandiseDetails.h" />
     <ClInclude Include="SetViewOrderSOMerchandiseDetails.h" />
     <ClInclude Include="SetViewStoreContacts.h" />
-    <ClInclude Include="SetViewUserPermissions.h" />
     <ClInclude Include="SetVwActivePOs.h" />
     <ClInclude Include="SetVwActivityList.h" />
     <ClInclude Include="SetvwChargeback.h" />
@@ -936,6 +956,12 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <Library Include="..\Common\Ssce\sdk\lib\SSCE5332.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\InstallationManager\DataModels\CFI.DB.csproj">
+      <Project>{f16b0b01-6f50-4358-ad25-c5d6ca00217d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\InstallationManager\InstallationManager.Business\CFI.InstallationManager.Business.csproj">
+      <Project>{1b61b237-ea72-4991-94e4-9e00907b82c0}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\InstallationManager\InstallationManager.ReportsUI\Reports.UI.csproj">
       <Project>{a16da113-dfa3-4724-b6cc-65d4c59c8527}</Project>
     </ProjectReference>

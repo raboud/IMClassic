@@ -8,59 +8,15 @@
 
 #include "stdafx.h"
 #include "SetSettings.h"
-IMPLEMENT_DYNAMIC(CSetSettings, CRecordset)
 
-CSetSettings::CSetSettings(CDatabase* pdb)
-	: CRecordset(pdb)
+using namespace System;
+using namespace System::Collections::Generic;
+using namespace CFI::InstallationManager::Business;
+using namespace CFI::DB::Entities;
+
+CSetSettings::CSetSettings(CDatabase*  /* pdb */)
 {
-	m_ID = 0;
-	m_Name = _T("");
-	m_Value = _T(L"");
-	m_UserID = 0;
-	m_nFields = 4;
-	m_nDefaultType = dynaset;
 }
-
-CString CSetSettings::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
-CString CSetSettings::GetDefaultSQL()
-{
-	return _T("[dbo].[Settings]");
-}
-
-void CSetSettings::DoFieldExchange(CFieldExchange* pFX)
-{
-	pFX->SetFieldType(CFieldExchange::outputColumn);
-	if (CFieldExchange::Fixup == pFX->m_nOperation)
-	{
-		pFX->m_bField = TRUE;
-	}
-// Macros such as RFX_Text() and RFX_Int() are dependent on the
-// type of the member variable, not the type of the field in the database.
-// ODBC will try to automatically convert the column value to the requested type
-	RFX_Long(pFX, _T("[ID]"), m_ID);
-	RFX_Text(pFX, _T("[Name]"), m_Name);
-	RFX_Text(pFX, _T("[Value]"), m_Value);
-	RFX_Long(pFX, _T("[UserID]"), m_UserID);
-
-}
-/////////////////////////////////////////////////////////////////////////////
-// CSetSettings diagnostics
-
-#ifdef _DEBUG
-void CSetSettings::AssertValid() const
-{
-	CRecordset::AssertValid();
-}
-
-void CSetSettings::Dump(CDumpContext& dc) const
-{
-	CRecordset::Dump(dc);
-}
-#endif //_DEBUG
 
 long CSetSettings::GetValueLong(const CString& strSettingName, int iUserID/* = -1 */, long lDefault/* = 0 */)
 {
@@ -100,68 +56,34 @@ CString CSetSettings::GetSetting(const CString& strSettingName, const CString& s
 
 	if (iUserID == -1)
 	{
-		m_strFilter.Format("Name = '%s'", strSettingName);
+		strValue = SettingsBLL::GetSetting(CachedData::Context, gcnew System::String(strSettingName), gcnew System::String(strDefault));
 	}
 	else
 	{
-		m_strFilter.Format("Name = '%s' AND UserID = %d", strSettingName, iUserID);
+		strValue = SettingsBLL::GetUserSetting(CachedData::Context, gcnew System::String(strSettingName), gcnew System::String(strDefault), iUserID);
 	}
     
-	if ( !IsOpen() )
-	{
-		Open();
-	}
-	else
-	{
-		Requery();
-	}
-
-	if (!IsEOF())
-	{
-		// move through the set to update the recordcount
-		while (!IsEOF())
-		{
-			MoveNext();
-		}
-		// there should only be 1 Name/Value pair for a given Name, ID combo
-		// global settings have UserID = -1
-		ASSERT(GetRecordCount() == 1);
-		MoveFirst();
-
-		strValue = m_Value;
-	}
-
 	return strValue;
 }
 
 CString CSetSettings::GetSettings(const CString& strSettingName, char cSeparator/* = ';'*/)
 {
+	List<String^> setting =   SettingsBLL::GetSettingsValues(CachedData::Context, gcnew System::String(strSettingName));
+
 	CString strValue = "";
-
-	m_strFilter.Format("Name = '%s'", strSettingName);
-    
-	if ( !IsOpen() )
-	{
-		Open();
-	}
-	else
-	{
-		Requery();
-	}
-
 	CString strTemp = "";
-	while (!IsEOF())
+
+	for each (String^ value in setting)
 	{
 		if (strValue.GetLength() > 0)
 		{
-			strTemp.Format("%c%s", cSeparator, m_Value);
+			strTemp.Format("%c%s", cSeparator, value);
 		}
 		else
 		{
-			strTemp = m_Value;
+			strTemp = value;
 		}
 		strValue += strTemp;
-		MoveNext();
 	}
 
 	return strValue;
@@ -169,29 +91,7 @@ CString CSetSettings::GetSettings(const CString& strSettingName, char cSeparator
 
 bool CSetSettings::SetSetting(const CString& strSettingName, const CString& strValue, int iUserID /* -1 */)
 {
-	m_strFilter.Format("Name = '%s' AND UserID = %d", strSettingName, iUserID);
-    
-	if ( !IsOpen() )
-	{
-		Open();
-	}
-	else
-	{
-		Requery();
-	}
-	
-	if (!IsEOF())
-	{
-		Edit() ;
-	}
-	else
-	{
-		AddNew() ;
-		this->m_Name = strSettingName ;
-		this->m_UserID = iUserID ;
-	}
-	this->m_Value = strValue ;
-	return (Update() == TRUE);
+    return SettingsBLL::SetUserSetting(gcnew System::String(strSettingName), gcnew System::String(strValue), iUserID, CachedData::Context);
 }
 
 bool CSetSettings::SetSetting(const CString& strSettingName, long lValue, int iUserID /* = -1 */)

@@ -456,9 +456,6 @@
     <ClCompile Include="DlgPONotesList.cpp">
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DlgReportConfig.cpp">
-      <Filter>Dialogs\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DlgReportList.cpp">
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
@@ -696,9 +693,6 @@
     <ClCompile Include="SetPayrollMessages.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SetPermissions.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SetPOMarketDivision.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
@@ -778,9 +772,6 @@
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetViewStoreContacts.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SetViewUserPermissions.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetVwActivePOs.cpp">
@@ -1351,9 +1342,6 @@
     <ClInclude Include="DlgPONotesList.h">
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DlgReportConfig.h">
-      <Filter>Dialogs\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DlgReportList.h">
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
@@ -1591,9 +1579,6 @@
     <ClInclude Include="SetPayrollMessages.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SetPermissions.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SetPOMarketDivision.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
@@ -1673,9 +1658,6 @@
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetViewStoreContacts.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SetViewUserPermissions.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetVwActivePOs.h">
