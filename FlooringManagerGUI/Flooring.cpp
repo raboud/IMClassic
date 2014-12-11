@@ -16,7 +16,6 @@
 #include "ViewInvoice.h"
 #include "DialogInvoicing.h"
 #include "DlgCheckList.h"
-#include "SetAdmins.h"
 #include "DlgChargebackList.h"
 #include "SetChecks.h"
 #include "SetCheckDetails.h"
