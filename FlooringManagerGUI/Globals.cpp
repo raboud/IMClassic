@@ -705,7 +705,7 @@ CString CGlobals::GetCurrentUserSMTPEmailAddress()
 
 CString CGlobals::GetCurrentUserReplyToEmailAddress()
 {
-	return Singleton::Cache->CurrentUser->ReplyToEmailAddress;	
+	return Singleton::Cache->CurrentUser->EmailAddress;	
 }
 
 bool CGlobals::IsSOSI(int iOrderID)
