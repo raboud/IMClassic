@@ -78,6 +78,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace CFI::InstallationManager::Reports::UI;
+using namespace CFI::InstallationManager::Business;
 
 /////////////////////////////////////////////////////////////////////////////
 // CFlooringApp
@@ -917,6 +918,7 @@ void CFlooringApp::SetEmployeeID(int ID)
 {
 	if (ID != -1)
 	{
+		CachedData::ImpersonateUser(ID);
 		CSetEmployees set(&g_dbFlooring);
 		set.m_strFilter.Format("ID = %d", ID);
 		set.Open() ;
@@ -926,6 +928,7 @@ void CFlooringApp::SetEmployeeID(int ID)
 			m_strUserName = set.m_UserName;
 		}
 		set.Close();
+
 	}
 	else
 	{
