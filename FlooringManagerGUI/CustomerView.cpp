@@ -804,42 +804,42 @@ HBRUSH CCustomerView::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 void CCustomerView::OnFindBySpecialOrder() 
 {
+	int iCustomerID;
 	CDlgFind dlg(CDlgFind::EnFIND_TYPE_SO, this) ;
 	dlg.SetCaption("Find by Special Order Number") ;
-	bool bContinue = true;
+
 	if (dlg.DoModal() == IDOK)
 	{
 		int iOrderID = CGlobals::OrderIDFromSONumberAndStoreNumber(dlg.m_strNumber, dlg.m_strStoreNumber);
 		if (iOrderID != -1)
 		{
-			CString strPONumber = CGlobals::POFromOrderID(iOrderID);
+			CSetOrders setOrders(&g_dbFlooring) ;
+			setOrders.m_strFilter.Format("[OrderID] = '%d'", iOrderID) ;
+			setOrders.Open() ;
 
-			CDlgSelectCustomer dlgCustomer;
-			int iNumRecords = dlgCustomer.SetPONumber(strPONumber, dlg.m_strStoreNumber);
-
-			if ( iNumRecords > 1 )
+			int iNumMatches = 0;
+			while (!setOrders.IsEOF())
 			{
-				if ( dlgCustomer.DoModal() != IDOK )
-				{
-					bContinue = false;
-				}
+				iNumMatches++;
+				setOrders.MoveNext();
 			}
-			
-			if (bContinue)
+
+			if (iNumMatches == 1)
 			{
-				int iCustomerID = dlgCustomer.GetCustomerID();
+				iCustomerID = setOrders.m_CustomerID;
+			}
+			setOrders.Close();
 
-				m_pSet->m_strFilter.Format("[CustomerID] = '%d'", iCustomerID) ;
-				m_pSet->Requery() ;
-				OnCustomerSelected(0,0) ;
+			m_pSet->m_strFilter.Format("[CustomerID] = '%d'", iCustomerID) ;
+			m_pSet->Requery() ;
+			OnCustomerSelected(0,0) ;
 
-				CDlgPo dlgPo ;
-				dlgPo.SetOrderId(iOrderID) ;
+			CDlgPo dlgPo ;
+			dlgPo.SetOrderId(iOrderID) ;
 
-				if (dlgPo.DoModal() == IDOK)
-				{
-					m_gridPoPickList.Update(iCustomerID) ;
-				}
+			if (dlgPo.DoModal() == IDOK)
+			{
+				m_gridPoPickList.Update(iCustomerID) ;
 			}
 		}
 		else
