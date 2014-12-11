@@ -800,6 +800,7 @@ bool CGlobals::SendEmail( CString ToAddress, CString FromAddress, CString Passwo
 	bool UseSSL = (setSettings.GetSetting("SMTPUseTLS", "0") == "1");
 
 	Mailer^ mailer = gcnew Mailer(gcnew System::String(Server), PortNumber, UseSSL );
+	System::String^ errors = System::String::Empty;
 
 	bool sendSuccessful = mailer->SendMail(gcnew System::String(Subject), 
 		gcnew System::String(Body), 
@@ -810,7 +811,13 @@ bool CGlobals::SendEmail( CString ToAddress, CString FromAddress, CString Passwo
 		gcnew System::String(FromAddress),
 		gcnew System::String(FromAddress), 
 		gcnew System::String(FromAddress), 
-		gcnew System::String(Password));
+		gcnew System::String(Password),
+		errors);
+
+	char* p =
+		(char*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(
+		errors).ToPointer();
+	Error = CString(p);
 	
 	return sendSuccessful;
 }

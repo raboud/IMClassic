@@ -915,8 +915,12 @@ void CDlgPONoteEntry::OnBnClickedPonoteSaveandemailButton()
 			{
 				if (strError.GetLength() > 0)
 				{
-					MessageBox(strError, "Error!");
-				}				
+					MessageBox(strError, "Error!", MB_ICONEXCLAMATION | MB_OK);
+				}
+				else
+				{
+					MessageBox("Email Failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
+				}
 			}
 		}
 		else
