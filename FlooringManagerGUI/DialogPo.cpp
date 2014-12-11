@@ -215,7 +215,7 @@ BOOL CDlgPo::OnInitDialog()
 	}
 
 	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+				  // EXCEPTION: OCX Property Pages should return FALSE
 }
 
 bool CDlgPo::SaveData()
@@ -477,7 +477,7 @@ void CDlgPo::OnOK()
 {
 	if (SaveData())
 	{
-        // add data to database
+		// add data to database
 		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
 		::PostMessage(pApp->m_pMainWnd->m_hWnd, wm_UPDATE_USER_ALERTS, 0, 0);
 
@@ -753,7 +753,7 @@ void CDlgPo::OnKillfocusDrawingNumber()
 			CString strTemp = strInstallNumber.GetAt(0);
 			if (strTemp == "0")
 			{
-                strInstallNumber = strInstallNumber.Right(strInstallNumber.GetLength() - 1);
+				strInstallNumber = strInstallNumber.Right(strInstallNumber.GetLength() - 1);
 			}
 			else
 			{
@@ -1152,7 +1152,7 @@ void CDlgPo::UpdateTitleBar(void)
 	{
 		strTitle.Format("Consolidated View for POs: %s", m_strPONumber);
 	}
-    SetWindowText(strTitle);
+	SetWindowText(strTitle);
 }
 
 void CDlgPo::SetMaterialTypeShortName(CString strShortName)
@@ -1202,82 +1202,82 @@ void CDlgPo::OnUpdateViewShowInactiveMaterials(CCmdUI *pCmdUI)
 void CDlgPo::OnInitMenuPopup(CMenu* pPopupMenu, UINT /*nIndex*/, BOOL /*bSysMenu*/)
 {
 	ASSERT(pPopupMenu != NULL);
-    // Check the enabled state of various menu items.
+	// Check the enabled state of various menu items.
 
-    CCmdUI state;
-    state.m_pMenu = pPopupMenu;
-    ASSERT(state.m_pOther == NULL);
-    ASSERT(state.m_pParentMenu == NULL);
+	CCmdUI state;
+	state.m_pMenu = pPopupMenu;
+	ASSERT(state.m_pOther == NULL);
+	ASSERT(state.m_pParentMenu == NULL);
 
-    // Determine if menu is popup in top-level menu and set m_pOther to
-    // it if so (m_pParentMenu == NULL indicates that it is secondary popup).
-    HMENU hParentMenu;
-    if (AfxGetThreadState()->m_hTrackingMenu == pPopupMenu->m_hMenu)
-        state.m_pParentMenu = pPopupMenu;    // Parent == child for tracking popup.
-    else if ((hParentMenu = ::GetMenu(m_hWnd)) != NULL)
-    {
-        CWnd* pParent = this;
-           // Child windows don't have menus--need to go to the top!
-        if (pParent != NULL &&
-           (hParentMenu = ::GetMenu(pParent->m_hWnd)) != NULL)
-        {
-           int nIndexMax = ::GetMenuItemCount(hParentMenu);
-           for (int nIndex = 0; nIndex < nIndexMax; nIndex++)
-           {
-            if (::GetSubMenu(hParentMenu, nIndex) == pPopupMenu->m_hMenu)
-            {
-                // When popup is found, m_pParentMenu is containing menu.
-                state.m_pParentMenu = CMenu::FromHandle(hParentMenu);
-                break;
-            }
-           }
-        }
-    }
+	// Determine if menu is popup in top-level menu and set m_pOther to
+	// it if so (m_pParentMenu == NULL indicates that it is secondary popup).
+	HMENU hParentMenu;
+	if (AfxGetThreadState()->m_hTrackingMenu == pPopupMenu->m_hMenu)
+		state.m_pParentMenu = pPopupMenu;    // Parent == child for tracking popup.
+	else if ((hParentMenu = ::GetMenu(m_hWnd)) != NULL)
+	{
+		CWnd* pParent = this;
+		   // Child windows don't have menus--need to go to the top!
+		if (pParent != NULL &&
+		   (hParentMenu = ::GetMenu(pParent->m_hWnd)) != NULL)
+		{
+		   int nIndexMax = ::GetMenuItemCount(hParentMenu);
+		   for (int nIndex = 0; nIndex < nIndexMax; nIndex++)
+		   {
+			if (::GetSubMenu(hParentMenu, nIndex) == pPopupMenu->m_hMenu)
+			{
+				// When popup is found, m_pParentMenu is containing menu.
+				state.m_pParentMenu = CMenu::FromHandle(hParentMenu);
+				break;
+			}
+		   }
+		}
+	}
 
-    state.m_nIndexMax = pPopupMenu->GetMenuItemCount();
-    for (state.m_nIndex = 0; state.m_nIndex < state.m_nIndexMax;
-      state.m_nIndex++)
-    {
-        state.m_nID = pPopupMenu->GetMenuItemID(state.m_nIndex);
-        if (state.m_nID == 0)
-           continue; // Menu separator or invalid cmd - ignore it.
+	state.m_nIndexMax = pPopupMenu->GetMenuItemCount();
+	for (state.m_nIndex = 0; state.m_nIndex < state.m_nIndexMax;
+	  state.m_nIndex++)
+	{
+		state.m_nID = pPopupMenu->GetMenuItemID(state.m_nIndex);
+		if (state.m_nID == 0)
+		   continue; // Menu separator or invalid cmd - ignore it.
 
-        ASSERT(state.m_pOther == NULL);
-        ASSERT(state.m_pMenu != NULL);
-        if (state.m_nID == (UINT)-1)
-        {
-           // Possibly a popup menu, route to first item of that popup.
-           state.m_pSubMenu = pPopupMenu->GetSubMenu(state.m_nIndex);
-           if (state.m_pSubMenu == NULL ||
-            (state.m_nID = state.m_pSubMenu->GetMenuItemID(0)) == 0 ||
-            state.m_nID == (UINT)-1)
-           {
-            continue;       // First item of popup can't be routed to.
-           }
-           state.DoUpdate(this, TRUE);   // Popups are never auto disabled.
-        }
-        else
-        {
-           // Normal menu item.
-           // Auto enable/disable if frame window has m_bAutoMenuEnable
-           // set and command is _not_ a system command.
-           state.m_pSubMenu = NULL;
-           state.DoUpdate(this, FALSE);
-        }
+		ASSERT(state.m_pOther == NULL);
+		ASSERT(state.m_pMenu != NULL);
+		if (state.m_nID == (UINT)-1)
+		{
+		   // Possibly a popup menu, route to first item of that popup.
+		   state.m_pSubMenu = pPopupMenu->GetSubMenu(state.m_nIndex);
+		   if (state.m_pSubMenu == NULL ||
+			(state.m_nID = state.m_pSubMenu->GetMenuItemID(0)) == 0 ||
+			state.m_nID == (UINT)-1)
+		   {
+			continue;       // First item of popup can't be routed to.
+		   }
+		   state.DoUpdate(this, TRUE);   // Popups are never auto disabled.
+		}
+		else
+		{
+		   // Normal menu item.
+		   // Auto enable/disable if frame window has m_bAutoMenuEnable
+		   // set and command is _not_ a system command.
+		   state.m_pSubMenu = NULL;
+		   state.DoUpdate(this, FALSE);
+		}
 
-        // Adjust for menu deletions and additions.
-        UINT nCount = pPopupMenu->GetMenuItemCount();
-        if (nCount < state.m_nIndexMax)
-        {
-           state.m_nIndex -= (state.m_nIndexMax - nCount);
-           while (state.m_nIndex < nCount &&
-            pPopupMenu->GetMenuItemID(state.m_nIndex) == state.m_nID)
-           {
-            state.m_nIndex++;
-           }
-        }
-        state.m_nIndexMax = nCount;
-    }
+		// Adjust for menu deletions and additions.
+		UINT nCount = pPopupMenu->GetMenuItemCount();
+		if (nCount < state.m_nIndexMax)
+		{
+		   state.m_nIndex -= (state.m_nIndexMax - nCount);
+		   while (state.m_nIndex < nCount &&
+			pPopupMenu->GetMenuItemID(state.m_nIndex) == state.m_nID)
+		   {
+			state.m_nIndex++;
+		   }
+		}
+		state.m_nIndexMax = nCount;
+	}
 }
 
 BOOL CDlgPo::CreateEmbeddedPropertySheet( CWnd* pParent, CPropertySheet* pPSheet, DWORD dwStyle, DWORD dwExStyle )
@@ -1618,7 +1618,7 @@ void CDlgPo::InitForConsolidatedView()
 		m_editOrderNo.ShowWindow(SW_HIDE);
 		
 		strTemp.Format("Notes for PO: %s\r\n%s\r\n\r\n", setOrders.m_PurchaseOrderNumber, setOrders.m_Notes);
-        strNotes += strTemp;
+		strNotes += strTemp;
 //		m_editNotes.SetWindowText(strNotes) ;
 //		m_editNotes.EnableWindow(m_bReadOnly == false) ;
 
@@ -1778,7 +1778,7 @@ void CDlgPo::InitNormal()
 			if (m_bConsolidatedView)
 			{
 				strTemp.Format("PO %s Billed    %s - $%.2f", setOrders.m_PurchaseOrderNumber, setOrders.m_BilledDate.Format("%Y-%m-%d"), fAmount) ;
-                strBillingInfo += strTemp + "\n";
+				strBillingInfo += strTemp + "\n";
 			}
 			else
 			{
@@ -1857,7 +1857,7 @@ void CDlgPo::InitNormal()
 //		m_editNotes.SetWindowText(strNotes) ;
 //		m_editNotes.EnableWindow(m_bReadOnly == false) ;
 
-        // Set Store Info
+		// Set Store Info
 		CSetStores setStore(&g_dbFlooring) ;
 		setStore.m_strFilter.Format("[StoreID] = '%d'", setOrders.m_StoreID) ;
 		setStore.Open() ;
