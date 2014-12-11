@@ -19,6 +19,7 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	CString m_strPONumber ;
+	CString m_strSONumber;
 	CString m_strStoreNumber;
 	int m_iCustomerID;
 	int m_iOrderID;
@@ -32,7 +33,8 @@ public:
 	CComboBox m_comboCustomers;
 	virtual BOOL OnInitDialog();
 	int SetPONumber(CString strPONumber, CString strStoreNumber);
-    int GetCustomerID();
+	int SetSONumber(CString strSONumber, CString strStoreNumber);
+	int GetCustomerID();
 	int GetOrderID();
 	CString GetStoreNumber();
 

@@ -11,6 +11,7 @@
 #include ".\dlgfind.h"
 #include "setstores.h"
 #include "setorders.h"
+#include "SetOrderSOMerchandiseDetails.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -177,6 +178,27 @@ void CDlgFind::UpdateStoreNumberCombo(CString strPONumber)
 			setOrders.Open();
 			if (!setOrders.IsEOF())
 			{
+				setStores.m_strFilter.Format("StoreID = %d", setOrders.m_StoreID);
+				setStores.Requery();
+				if (!setStores.IsEOF())
+				{
+					m_cbStoreNumber.SetCurSel(m_cbStoreNumber.FindStringExact(-1, setStores.m_StoreNumber));
+					m_btnOK.EnableWindow();
+				}
+			}
+		}
+		if (m_enType == EnFIND_TYPE_SO)
+		{
+			CSetOrderSOMerchandiseDetails setSO(&g_dbFlooring);
+			setSO.m_strFilter = "[SONumber] = '" + strPONumber + "' AND Deleted = 0";
+			setSO.m_strSort = "[ID] DESC";
+			setSO.Open();
+			if (!setSO.IsEOF())
+			{
+				CSetOrders setOrders(&g_dbFlooring);
+				setOrders.m_strFilter.Format("[OrderID] = %d", setSO.m_OrderID);
+				setOrders.Open();
+
 				setStores.m_strFilter.Format("StoreID = %d", setOrders.m_StoreID);
 				setStores.Requery();
 				if (!setStores.IsEOF())

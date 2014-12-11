@@ -805,43 +805,41 @@ void CCustomerView::OnFindBySpecialOrder()
 	CDlgFind dlg(CDlgFind::EnFIND_TYPE_SO, this) ;
 	dlg.SetCaption("Find by Special Order Number") ;
 
+	bool bContinue = true;
 	if (dlg.DoModal() == IDOK)
 	{
-		int iOrderID = CGlobals::OrderIDFromSONumberAndStoreNumber(dlg.m_strNumber, dlg.m_strStoreNumber);
-		if (iOrderID != -1)
+		CDlgSelectCustomer dlgCustomer;
+		int iNumRecords = dlgCustomer.SetSONumber(dlg.m_strNumber, dlg.m_strStoreNumber);
+
+		if (iNumRecords > 1)
 		{
-			CSetOrders setOrders(&g_dbFlooring) ;
-			setOrders.m_strFilter.Format("[OrderID] = '%d'", iOrderID) ;
-			setOrders.Open() ;
-
-			int iNumMatches = 0;
-			while (!setOrders.IsEOF())
+			if (dlgCustomer.DoModal() != IDOK)
 			{
-				iNumMatches++;
-				setOrders.MoveNext();
+				bContinue = false;
 			}
+		}
+		else if (iNumRecords == 0)
+		{
+			MessageBox("No matching records found!", "Record Not Found");
+			bContinue = false;
+		}
 
-			if (iNumMatches == 1)
-			{
-				iCustomerID = setOrders.m_CustomerID;
-			}
-			setOrders.Close();
+		if (bContinue)
+		{
+			int iCustomerID = dlgCustomer.GetCustomerID();
+			int iOrderID = dlgCustomer.GetOrderID();
 
-			m_pSet->m_strFilter.Format("[CustomerID] = '%d'", iCustomerID) ;
-			m_pSet->Requery() ;
-			OnCustomerSelected(0,0) ;
+			m_pSet->m_strFilter.Format("[CustomerID] = '%d'", iCustomerID);
+			m_pSet->Requery();
+			OnCustomerSelected(0, 0);
 
-			CDlgPo dlgPo ;
-			dlgPo.SetOrderId(iOrderID) ;
+			CDlgPo dlgPo;
+			dlgPo.SetOrderId(iOrderID);
 
 			if (dlgPo.DoModal() == IDOK)
 			{
-				m_gridPoPickList.Update(iCustomerID) ;
+				m_gridPoPickList.Update(iCustomerID);
 			}
-		}
-		else
-		{
-			MessageBox("No matching records found!", "Record Not Found") ;
 		}
 	}
 }
