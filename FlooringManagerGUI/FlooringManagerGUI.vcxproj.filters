@@ -61,6 +61,9 @@
     <Filter Include="SOSIWebService">
       <UniqueIdentifier>http://localhost/SOSIWebService/SOSIWebService.asmx</UniqueIdentifier>
     </Filter>
+    <Filter Include="lex">
+      <UniqueIdentifier>{3a879e9f-5da8-44d5-ba90-214de1378f82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CFIFormView.cpp">
@@ -1810,6 +1813,33 @@
     <None Include="ReadMe.txt" />
     <None Include="..\Common\SSCE\runtime\SSCE5332.dll" />
     <None Include="Flooring.exe.config" />
+    <None Include="..\Common\SSCE\runtime\lex\accent.tlx">
+      <Filter>lex</Filter>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\correct.tlx">
+      <Filter>lex</Filter>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\ssceam.tlx">
+      <Filter>lex</Filter>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\ssceam2.clx">
+      <Filter>lex</Filter>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\sscebr.tlx">
+      <Filter>lex</Filter>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\sscebr2.clx">
+      <Filter>lex</Filter>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\ssceca.tlx">
+      <Filter>lex</Filter>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\ssceca2.clx">
+      <Filter>lex</Filter>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\userdic.tlx">
+      <Filter>lex</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="SpnWebService\results.discomap">

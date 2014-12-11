@@ -168,7 +168,8 @@ copy Flooring.exe.config $(OutDir)</Command>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /s /Y ..\Common\SSCE\runtime $(OutDir)</Command>
+      <Command>xcopy /y /s ..\Common\SSCE\runtime $(OutDir)
+copy Flooring.exe.config $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
@@ -177,7 +178,8 @@ copy Flooring.exe.config $(OutDir)</Command>
       <AdditionalOptions>/MACHINE:I386 /ignore:4254 </AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /s /Y ..\Common\SSCE\runtime $(OutDir)</Command>
+      <Command>xcopy /y /s ..\Common\SSCE\runtime $(OutDir)
+copy Flooring.exe.config $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -858,7 +860,36 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SpnWebService.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Common\SSCE\runtime\SSCE5332.dll" />
+    <None Include="..\Common\SSCE\runtime\lex\accent.tlx">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\correct.tlx">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\ssceam.tlx">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\ssceam2.clx">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\sscebr.tlx">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\sscebr2.clx">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\ssceca.tlx">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\ssceca2.clx">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\Common\SSCE\runtime\lex\userdic.tlx">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="..\Common\SSCE\runtime\SSCE5332.dll">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="Flooring.exe.config">
       <DeploymentContent>true</DeploymentContent>
       <FileType>Document</FileType>
