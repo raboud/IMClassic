@@ -56,8 +56,6 @@ bool CGlobals::m_bAdmin;
 CMultiDocTemplate* g_pTemplateCustomerPO ;
 
 CDatabase g_dbFlooring;
-CString g_strSPNWebServiceURL;
-//CString g_strSOSIWebServiceURL;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -323,7 +321,7 @@ BOOL CFlooringApp::InitInstance()
 	pMainFrame->ShowWindow(m_nCmdShow);
 	pMainFrame->UpdateWindow();
 
-	SSCE_SetRegTreeName("HKEY_LOCAL_MACHINE\\SOFTWARE\\Custom Installations, Inc.\\Installation Manager Classic\\Sentry Spelling");
+	SSCE_SetRegTreeName("HKEY_LOCAL_MACHINE\\SOFTWARE\\R & R Engineering, LLC\\Installation Manager Classic\\Sentry Spelling");
 
 	CSetSettings setSettings;
 	CString strValue = "";
@@ -339,8 +337,6 @@ BOOL CFlooringApp::InitInstance()
 
 	strValue = setSettings.GetSetting("SSCEUserLexFiles");
 	SSCE_SetUserLexFiles(strValue);
-
-	g_strSPNWebServiceURL.Format("http://%s/SpnWebService/SpnWebService.asmx", setSettings.GetSetting("SPNWebServiceServerName") );
 
 	return TRUE;
 }
