@@ -754,7 +754,7 @@ void CPOPickList::PrintReviewChecklist()
 	while (pos)
 	{
 		int iOrderID = m_listPOs.GetNext(pos);
-		CGlobals::PrintReviewChecklist(iOrderID);	
+		CGlobals::PreparePaperWork(iOrderID, CGlobals::PM_REVIEW_CHECKLIST, true);	
 	}		
 }
 
@@ -765,7 +765,7 @@ void CPOPickList::PrintSchedulingChecklist()
 	while (pos)
 	{
 		int iOrderID = m_listPOs.GetNext(pos);
-		CGlobals::PrintSchedulingChecklist(iOrderID);	
+		CGlobals::PreparePaperWork(iOrderID, CGlobals::PM_SCHEDULE_CHECKLIST, true);	
 	}		
 }
 

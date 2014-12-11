@@ -165,15 +165,15 @@ public:
 	static void PrintCustSatReport(int iReportID);
 	static void ViewCustSatReport(int iReportID);
 
-	static void PrintPO(int iOrderID);
-	static void ViewPO(int iOrderID);
-	static void PrintReviewChecklist(int OrderID);	
-	static void PrintSchedulingChecklist(int OrderID);	
-	static void PrintWoodFlooringWaiver(int OrderID);
+//	static void PrintPO(int iOrderID);
+//	static void ViewPO(int iOrderID);
+//	static void PrintReviewChecklist(int OrderID);	
+//	static void PrintSchedulingChecklist(int OrderID);	
+//	static void PrintWoodFlooringWaiver(int OrderID);
 	static void PrintCheck(int iCheckID);
 	static void ViewCheck(int iCheckID);
 
-	static void ViewWoodFlooringWaiver(int OrderID, bool PrintOnly = false);
+//	static void ViewWoodFlooringWaiver(int OrderID, bool PrintOnly = false);
 
 	static void PayrollReport(CString strGrandTotal, COleDateTime timeWE);
 	static void SetEmployeeID();
@@ -233,7 +233,8 @@ public:
 	static bool GetBasicPrices(int iBasicLaborID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice);
 	static bool GetOptionPrices(int iOptionID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice);
 
-	enum PRINT_MODE {PM_INVOICE = 0, PM_WORKORDER, PM_WAIVER, PM_DIAGRAMS, PM_STORE_PICKUP, PM_INSPECTION, PM_PO, PM_WOODWAIVER, PM_ALL} ;
+	enum PRINT_MODE {PM_INVOICE = 0, PM_WORKORDER, PM_WAIVER, PM_DIAGRAMS, PM_STORE_PICKUP, PM_INSPECTION, PM_PO, PM_WOODWAIVER, PM_INSTALLER_CHECKLIST, PM_REVIEW_CHECKLIST, PM_SCHEDULE_CHECKLIST, PM_ALL} ;
+	static void PreparePaperWork(int po, PRINT_MODE enMode, bool PrintOnly = false);
 	static void PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool PrintOnly = false);
 };
 

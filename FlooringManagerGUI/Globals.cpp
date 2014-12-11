@@ -55,6 +55,13 @@ CGlobals::~CGlobals(void)
 	return l;
 }
 
+::System::Collections::Generic::List<int>^ GetPoList(int po)
+{
+	::System::Collections::Generic::List<int>^ l = gcnew ::System::Collections::Generic::List<int>();
+			l->Add(po);
+	return l;
+}
+
 CString CGlobals::POFromOrderID(int iOrderID)
 {
 	CString strPONumber = "";
@@ -874,6 +881,11 @@ bool CGlobals::SPNUpdatePO(CString strStoreNumber, CString strPONumber)
 	return FormSPN::SPNUpdatePO(Singleton::Connection->Clone(), gcnew System::String(strStoreNumber), gcnew System::String(strPONumber));
 }
 	
+void CGlobals::PreparePaperWork(int id, PRINT_MODE enMode, bool printOnly)
+{
+	ReportHelper::PreparePaperWork(GetPoList(id), (CFI::InstallationManager::Reports::UI::POReport) enMode, printOnly ? Mode::Print : Mode::View);
+}
+	
 void CGlobals::PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool printOnly)
 {
 	ReportHelper::PreparePaperWork(GetPoList(listPOs), (CFI::InstallationManager::Reports::UI::POReport) enMode, printOnly ? Mode::Print : Mode::View);
@@ -1061,43 +1073,43 @@ void CGlobals::ViewCustSatReport(int iReportID)
 {
 	ReportHelper::CustomerSatisfactionConcern(iReportID, Mode::View);
 }
-void CGlobals::PrintPO(int iOrderID)
-{
-	ReportHelper::PO(iOrderID, Mode::Print);
-}
+//void CGlobals::PrintPO(int iOrderID)
+//{
+//	PreparePaperWork(iOrderID, (PO(iOrderID, Mode::Print);
+//}
 
-void CGlobals::ViewPO(int iOrderID)
-{
-	ReportHelper::PO(iOrderID, Mode::View);
-}
-
-void CGlobals::PrintReviewChecklist(int OrderID)
-{
-	ReportHelper::ReviewChecklist(OrderID, Mode::Print);
-}
-
-void CGlobals::PrintSchedulingChecklist(int OrderID)
-{
-	ReportHelper::SchedulingChecklist(OrderID, Mode::Print);
-}
-
-void CGlobals::ViewWoodFlooringWaiver(int OrderID, bool PrintOnly)
-{
-	if (PrintOnly)
-	{
-		ReportHelper::WoodFlooringWaiver(OrderID, Mode::Print);
-	}
-	else
-	{
-		ReportHelper::WoodFlooringWaiver(OrderID, Mode::View);
-	}
-}
-
-void CGlobals::PrintWoodFlooringWaiver(int OrderID)
-{
-	ViewWoodFlooringWaiver(OrderID, true);
-
-}
+//void CGlobals::ViewPO(int iOrderID)
+//{
+//	ReportHelper::PO(iOrderID, Mode::View);
+//}
+//
+//void CGlobals::PrintReviewChecklist(int OrderID)
+//{
+//	ReportHelper::ReviewChecklist(OrderID, Mode::Print);
+//}
+//
+//void CGlobals::PrintSchedulingChecklist(int OrderID)
+//{
+//	ReportHelper::SchedulingChecklist(OrderID, Mode::Print);
+//}
+//
+//void CGlobals::ViewWoodFlooringWaiver(int OrderID, bool PrintOnly)
+//{
+//	if (PrintOnly)
+//	{
+//		ReportHelper::WoodFlooringWaiver(OrderID, Mode::Print);
+//	}
+//	else
+//	{
+//		ReportHelper::WoodFlooringWaiver(OrderID, Mode::View);
+//	}
+//}
+//
+//void CGlobals::PrintWoodFlooringWaiver(int OrderID)
+//{
+//	ViewWoodFlooringWaiver(OrderID, true);
+//
+//}
 
 void CGlobals::PayrollReport(CString strGrandTotal, COleDateTime timeWE)
 {
