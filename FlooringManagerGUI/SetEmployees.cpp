@@ -56,7 +56,6 @@ void CSetEmployees::DoFieldExchange(CFieldExchange* pFX)
 // type of the member variable, not the type of the field in the database.
 // ODBC will try to automatically convert the column value to the requested type
 	RFX_Long(pFX, _T("[ID]"), m_ID);
-	//RFX_Long(pFX, _T("[uid]"), m_uid);
 	RFX_Text(pFX, _T("[FirstName]"), m_FirstName);
 	RFX_Text(pFX, _T("[LastName]"), m_LastName);
 	RFX_Text(pFX, _T("[NickName]"), m_NickName);

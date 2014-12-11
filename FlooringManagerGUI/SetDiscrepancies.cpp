@@ -63,7 +63,7 @@ void CSetDiscrepancies::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Long(pFX, _T("[OrderID]"), m_OrderID);
 	RFX_Long(pFX, _T("[DetailID]"), m_DetailID);
 	RFX_Bool(pFX, _T("[Reviewed]"), m_Reviewed);
-	RFX_Long(pFX, _T("[ReviewedBy]"), m_ReviewedBy);
+	RFX_Long(pFX, _T("[ReviewedByID]"), m_ReviewedBy);
 	RFX_Date(pFX, _T("[DateReviewed]"), m_ReviewedDate);
 
 
