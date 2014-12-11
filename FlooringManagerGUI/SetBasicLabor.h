@@ -29,13 +29,6 @@ public:
 	CString	m_UnitCost;
 	long	m_MaterialTypeID;
 	BOOL	m_Active;
-//	long    m_MaterialCatagoryID;
-//	BOOL	m_HasSONumber;
-//	BOOL	m_Has2Dimensions;
-//	BOOL	m_HasColor;
-//	BOOL	m_HasStyle;
-	BOOL	m_IsPadding;
-	long	m_YardsPerRoll;
 	//}}AFX_FIELD
 
 

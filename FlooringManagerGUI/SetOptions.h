@@ -28,8 +28,6 @@ public:
 	CString	m_UnitCost;
 	long	m_UnitOfMeasureID;
 	long	m_MaterialTypeID;
-	BOOL	m_IsPadding;
-	long	m_YardsPerRoll;
 	BOOL	m_ApplyToMinimum;
 	BOOL	m_ApplyToMinimumWO;
 	BOOL	m_PrintOnInvoice;

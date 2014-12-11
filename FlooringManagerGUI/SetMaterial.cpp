@@ -35,10 +35,8 @@ CSetMaterial::CSetMaterial(CDatabase* pdb)
 	m_Has2Dimensions = FALSE;
 	m_HasColor = FALSE;
 	m_HasStyle = FALSE;
-	m_IsPadding = FALSE;
-	m_YardsPerRoll = 0;
 	m_Active = FALSE;
-	m_nFields = 14;
+	m_nFields = 12;
 	//}}AFX_FIELD_INIT
 	m_nDefaultType = dynaset;
 }
@@ -73,8 +71,6 @@ void CSetMaterial::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Bool(pFX, _T("[Has2Dimensions]"), m_Has2Dimensions);
 	RFX_Bool(pFX, _T("[HasColor]"), m_HasColor);
 	RFX_Bool(pFX, _T("[HasStyle]"), m_HasStyle);
-	RFX_Bool(pFX, _T("[IsPadding]"), m_IsPadding);
-	RFX_Long(pFX, _T("[YardsPerRoll]"), m_YardsPerRoll);
 	RFX_Bool(pFX, _T("[Active]"), m_Active);
 	//}}AFX_FIELD_MAP
 }

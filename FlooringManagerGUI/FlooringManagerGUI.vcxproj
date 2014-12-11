@@ -222,6 +222,9 @@ copy Flooring.exe.config $(OutDir)</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+      <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Windows\Microsoft.NET\Framework\v4.0.30319</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <ClCompile Include="FlooringDoc.cpp" />
     <ClCompile Include="..\Common\FRecordView.cpp" />
@@ -485,7 +488,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetActivityTypes.cpp" />
     <ClCompile Include="SetAdmins.cpp" />
     <ClCompile Include="SetBasicLabor.cpp" />
-    <ClCompile Include="SetCatagories.cpp" />
     <ClCompile Include="SetChargeBacks.cpp" />
     <ClCompile Include="SetCheckCBDetails.cpp" />
     <ClCompile Include="SetCheckDetails.cpp" />
@@ -797,7 +799,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetActivityTypes.h" />
     <ClInclude Include="SetAdmins.h" />
     <ClInclude Include="SetBasicLabor.h" />
-    <ClInclude Include="SetCatagories.h" />
     <ClInclude Include="SetChargeBacks.h" />
     <ClInclude Include="SetCheckCBDetails.h" />
     <ClInclude Include="SetCheckDetails.h" />

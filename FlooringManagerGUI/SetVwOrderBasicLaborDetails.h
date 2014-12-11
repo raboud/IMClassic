@@ -25,7 +25,6 @@ public:
 	CString	m_FirstName;
 	CString	m_LastName;
 	double	m_InstallQuantity;
-	BOOL	m_IsPadding;
 	CString	m_LaborDescription;
 	BOOL	m_Scheduled;
 	COleDateTime	m_ScheduleStartDate;

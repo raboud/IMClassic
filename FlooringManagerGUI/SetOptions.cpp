@@ -30,14 +30,12 @@ CSetOptions::CSetOptions(CDatabase* pdb)
 	m_UnitCost = _T("");
 	m_UnitOfMeasureID = 0;
 	m_MaterialTypeID = 0;
-	m_IsPadding = FALSE;
-	m_YardsPerRoll = 0;
 	m_ApplyToMinimum = FALSE;
 	m_ApplyToMinimumWO = FALSE;
 	m_PrintOnInvoice = FALSE;
 	m_PrintOnWorkOrder = FALSE;
 	m_Active = 0;
-	m_nFields = 13;
+	m_nFields = 11;
 	//}}AFX_FIELD_INIT
 	m_nDefaultType = dynaset;
 }
@@ -67,8 +65,6 @@ void CSetOptions::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[UnitCost]"), m_UnitCost);
 	RFX_Long(pFX, _T("[UnitOfMeasureID]"), m_UnitOfMeasureID);
 	RFX_Long(pFX, _T("[MaterialTypeID]"), m_MaterialTypeID);
-	RFX_Bool(pFX, _T("[IsPadding]"), m_IsPadding);
-	RFX_Long(pFX, _T("[YardsPerRoll]"), m_YardsPerRoll);
 	RFX_Bool(pFX, _T("[ApplyToMinimum]"), m_ApplyToMinimum);
 	RFX_Bool(pFX, _T("[ApplyToMinimumWO]"), m_ApplyToMinimumWO);
 	RFX_Bool(pFX, _T("[PrintOnInvoice]"), m_PrintOnInvoice);

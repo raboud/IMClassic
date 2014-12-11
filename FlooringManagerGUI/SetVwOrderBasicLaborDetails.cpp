@@ -18,7 +18,6 @@ CSetVwOrderBasicLaborDetails::CSetVwOrderBasicLaborDetails(CDatabase* pdb)
 	m_FirstName = "";
 	m_LastName = "";
 	m_InstallQuantity = 0.0;
-	m_IsPadding = FALSE;
 	m_LaborDescription = "";
 	m_Scheduled = FALSE;
 	m_ScheduleStartDate;
@@ -43,7 +42,7 @@ CSetVwOrderBasicLaborDetails::CSetVwOrderBasicLaborDetails(CDatabase* pdb)
 	m_Deleted = FALSE ;
 	m_PrintOnInvoice = FALSE ;
 	m_PrintOnWO = FALSE ;
-	m_nFields = 30;
+	m_nFields = 29;
 	m_nDefaultType = dynaset;
 }
 
@@ -72,7 +71,6 @@ void CSetVwOrderBasicLaborDetails::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[FirstName]"), m_FirstName);
 	RFX_Text(pFX, _T("[LastName]"), m_LastName);
 	RFX_Double(pFX, _T("[InstallQuantity]"), m_InstallQuantity);
-	RFX_Bool(pFX, _T("[IsPadding]"), m_IsPadding);
 	RFX_Text(pFX, _T("[LaborDescription]"), m_LaborDescription);
 	RFX_Bool(pFX, _T("[Scheduled]"), m_Scheduled);
 	RFX_Date(pFX, _T("[ScheduleStartDate]"), m_ScheduleStartDate);

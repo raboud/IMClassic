@@ -33,8 +33,6 @@ public:
 	BOOL	m_Has2Dimensions;
 	BOOL	m_HasColor;
 	BOOL	m_HasStyle;
-	BOOL	m_IsPadding;
-	long	m_YardsPerRoll;
 	BOOL	m_Active;
 	//}}AFX_FIELD
 
