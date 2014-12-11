@@ -29,7 +29,7 @@ public:
 	CString	m_UnitCost;
 	long	m_MaterialTypeID;
 	BOOL	m_Active;
-	long    m_MaterialCatagoryID;
+//	long    m_MaterialCatagoryID;
 //	BOOL	m_HasSONumber;
 //	BOOL	m_Has2Dimensions;
 //	BOOL	m_HasColor;

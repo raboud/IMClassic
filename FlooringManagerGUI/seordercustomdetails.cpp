@@ -80,7 +80,7 @@ void CSetOrderCustomDetails::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Bool(pFX, _T("[Deleted]"), m_Deleted);
 	RFX_Long(pFX, _T("[EntryMethodID]"), m_EntryMethodID);
 	RFX_Bool(pFX, _T("[Reviewed]"), m_Reviewed);
-	RFX_Long(pFX, _T("[ReviewedBy]"), m_ReviewedBy);
+	RFX_Long(pFX, _T("[ReviewedByID]"), m_ReviewedBy);
 	RFX_Date(pFX, _T("[ReviewedDate]"), m_ReviewedDate);
 
 	pFX->m_prs->ClearNullFieldStatus(7) ;

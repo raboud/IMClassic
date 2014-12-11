@@ -1631,7 +1631,7 @@ void CPOPickList::SetPOReviewed(int iOrderID, bool bReviewed)
 	int iUserID = pApp->GetEmployeeID();
 	
 	CString strSQL;
-	strSQL.Format("UPDATE Orders SET Reviewed = %d, ReviewedDate = '%s', ReviewedBy = %d WHERE OrderID = %d", iReviewed, CGlobals::GetCurrentSystemTime().Format(), iUserID, iOrderID);
+	strSQL.Format("UPDATE Orders SET Reviewed = %d, ReviewedDate = '%s', ReviewedByID = %d WHERE OrderID = %d", iReviewed, CGlobals::GetCurrentSystemTime().Format(), iUserID, iOrderID);
 	g_dbFlooring.ExecuteSQL(strSQL);
     
 }

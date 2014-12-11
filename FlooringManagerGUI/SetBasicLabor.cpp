@@ -31,7 +31,7 @@ CSetBasicLabor::CSetBasicLabor(CDatabase* pdb)
 	m_UnitCost = _T("");
 	m_MaterialTypeID = 0;
 	m_Active = FALSE;
-	m_MaterialCatagoryID = 0;
+//	m_MaterialCatagoryID = 0;
 	m_nFields = 10;
 //	m_HasSONumber = FALSE;
 //	m_Has2Dimensions = FALSE;
@@ -69,7 +69,7 @@ void CSetBasicLabor::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[UnitCost]"), m_UnitCost);
 	RFX_Long(pFX, _T("[MaterialTypeID]"), m_MaterialTypeID);
 	RFX_Bool(pFX, _T("[Active]"), m_Active);
-	RFX_Long(pFX, _T("[MaterialCatagoryID]"), m_MaterialCatagoryID);
+//	RFX_Long(pFX, _T("[MaterialCatagoryID]"), m_MaterialCatagoryID);
 
 //	RFX_Bool(pFX, _T("[HasSONumber]"), m_HasSONumber);
 //	RFX_Bool(pFX, _T("[Has2Dimensions]"), m_Has2Dimensions);

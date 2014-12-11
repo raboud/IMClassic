@@ -76,7 +76,7 @@ void CSetOrderRegMerchandiseDetails::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Long(pFX, _T("[TransferredFrom]"), m_TransferredFrom);
 	RFX_Text(pFX, _T("@@IDENTITY"), m_Identity);
 	RFX_Bool(pFX, _T("[Reviewed]"), m_Reviewed);
-	RFX_Long(pFX, _T("[ReviewedBy]"), m_ReviewedBy);
+	RFX_Long(pFX, _T("[ReviewedByID]"), m_ReviewedBy);
 	RFX_Date(pFX, _T("[ReviewedDate]"), m_ReviewedDate);
 	RFX_Long(pFX, _T("[OriginalOrderID]"), m_OriginalOrderID);
 }
