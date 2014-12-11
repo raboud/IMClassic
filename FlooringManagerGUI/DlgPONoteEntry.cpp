@@ -445,6 +445,8 @@ bool CDlgPONoteEntry::Validate()
 
 		// go ahead and get the time filter string in case we need it below.
 		CString strTimeFilter = strDateTime;
+		CSetPONotes set(&g_dbFlooring) ;
+		set.m_strFilter.Format("OrderId = %d AND DateTimeEntered = '%s'", m_iOrderID, strTimeFilter);
 
 		if (bSchedule || bUnschedule)
 		{
@@ -481,11 +483,14 @@ bool CDlgPONoteEntry::Validate()
 					return bValid;
 				}
 			}
+			POSITION pos = dlgSched.m_listPOsWithModifiedSchedules.GetHeadPosition();
+			if (pos == NULL)
+			{
+				return bValid;
+			}
 			// we need to update the other POs that had their schedules modified with a note
 			// saying what happened.
-			CSetPONotes set(&g_dbFlooring) ;
 			set.Open() ;
-			POSITION pos = dlgSched.m_listPOsWithModifiedSchedules.GetHeadPosition();
 			while (pos)
 			{
 				int iOrderID = dlgSched.m_listPOsWithModifiedSchedules.GetNext(pos);
@@ -527,17 +532,6 @@ bool CDlgPONoteEntry::Validate()
 					// update the record - this moves the record ptr to the first one.
 					set.Update() ;
 
-					if ( m_iId == -1 && (iOrderID == m_iOrderID))
-					{
-						// we just added a new record and do not know what the m_iId is, so the next few lines
-						// requery the recordset to find the record that was just added.  This is done by filtering
-						// on the user id and date/time.
-			
-						set.m_strFilter.Format("OrderId = %d AND DateTimeEntered = '%s'", m_iOrderID, strTimeFilter);
-						set.Requery();
-						ASSERT( set.GetRecordCount() == 1 );
-						m_iId = set.m_ID;
-					}
 //					TRY
 //					{
 ////						g_dbFlooring.ExecuteSQL(strSQL);
@@ -549,7 +543,6 @@ bool CDlgPONoteEntry::Validate()
 //					END_CATCH
 				}
 			}
-			set.Close() ;
 		}
 		else
 		{
@@ -599,8 +592,19 @@ bool CDlgPONoteEntry::Validate()
 				ASSERT( set.GetRecordCount() == 1 );
 				m_iId = set.m_ID;
 			}
-			set.Close() ;
 		}
+		if ( m_iId == -1)
+		{
+			// we just added a new record and do not know what the m_iId is, so the next few lines
+			// requery the recordset to find the record that was just added.  This is done by filtering
+			// on the user id and date/time.
+			
+			set.m_strFilter.Format("OrderId = %d AND DateTimeEntered = '%s'", m_iOrderID, strTimeFilter);
+			set.Requery();
+			ASSERT( set.GetRecordCount() == 1 );
+			m_iId = set.m_ID;
+		}
+		set.Close() ;
 
 		CSetCustomer setCustomer(&g_dbFlooring) ;
 		setCustomer.m_strFilter.Format("CustomerID = '%d'", m_iCustomerID) ;

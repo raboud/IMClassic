@@ -69,32 +69,38 @@ BOOL CDialogSchedule::OnInitDialog()
 void CDialogSchedule::OnOK() 
 {
 	m_grid.Update() ;
-
-	if (m_grid.m_listSPNPOsWithModifiedSchedules.GetCount() > 0)
-	{
-		// we have modified POs
-		CString strSQL = "";
-		int iOrderID = -1;
-		POSITION pos = m_grid.m_listSPNPOsWithModifiedSchedules.GetHeadPosition();
-		while (pos)
-		{
-			// TODO - rar
-			iOrderID = m_grid.m_listSPNPOsWithModifiedSchedules.GetNext(pos);
-			CGlobals::QueueSchedulePO(iOrderID);
-		}
-	}
-
-	// copy OrderIDs from our grid collection up to the dialog collection
 	if (m_grid.m_listPOsWithModifiedSchedules.GetCount() > 0)
 	{
-		POSITION pos = m_grid.m_listPOsWithModifiedSchedules.GetHeadPosition();
-		while (pos)
+		if (m_grid.m_listSPNPOsWithModifiedSchedules.GetCount() > 0)
 		{
-			m_listPOsWithModifiedSchedules.AddTail(m_grid.m_listPOsWithModifiedSchedules.GetNext(pos));
+			// we have modified POs
+			CString strSQL = "";
+			int iOrderID = -1;
+			POSITION pos = m_grid.m_listSPNPOsWithModifiedSchedules.GetHeadPosition();
+			while (pos)
+			{
+				// TODO - rar
+				iOrderID = m_grid.m_listSPNPOsWithModifiedSchedules.GetNext(pos);
+				CGlobals::QueueSchedulePO(iOrderID);
+			}
 		}
-	}
 
-	CDialog::OnOK();
+		// copy OrderIDs from our grid collection up to the dialog collection
+		if (m_grid.m_listPOsWithModifiedSchedules.GetCount() > 0)
+		{
+			POSITION pos = m_grid.m_listPOsWithModifiedSchedules.GetHeadPosition();
+			while (pos)
+			{
+				m_listPOsWithModifiedSchedules.AddTail(m_grid.m_listPOsWithModifiedSchedules.GetNext(pos));
+			}
+		}
+
+		CDialog::OnOK();
+	}
+	else
+	{
+		MessageBox("No Changes detected.", "", MB_OK);
+	}
 }
 
 void CDialogSchedule::SetScheduled(long lCustomerId, long lOrderId, COleDateTime dateSchedule, COleDateTime dateScheduleEnd, bool bAM)
