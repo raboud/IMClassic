@@ -14,7 +14,6 @@
 #include "SetMaterialType.h"
 #include "SetOrderSOMerchandiseDetails.h"
 #include "SetMatStatus.h"
-#include "pricing.h"
 #include "DlgSplitLineItem.h"
 #include "DlgSelectPO.h"
 #include "Globals.h"

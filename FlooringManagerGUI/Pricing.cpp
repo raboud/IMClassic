@@ -18,14 +18,20 @@ CPricing::~CPricing(void)
 
 bool CPricing::GetBasicPrices(int iBasicLaborID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice)
 {
-	dPrice = PricingBLL::GetBasicPrice(CachedData::Context, iBasicLaborID, iStoreID, System::DateTime::FromOADate(OrderDate));
-	dCost = PricingBLL::GetBasicPrice(CachedData::Context, iBasicLaborID, iStoreID, System::DateTime::FromOADate(ScheduleDate));
+	double temp = -11.0;
+	temp = PricingBLL::GetBasicPrice(CachedData::Context, iBasicLaborID, iStoreID, System::DateTime::FromOADate(OrderDate));
+	dPrice = temp;
+	temp = PricingBLL::GetBasicCost(CachedData::Context, iBasicLaborID, iStoreID, System::DateTime::FromOADate(ScheduleDate));
+	dCost = temp;
 	return true;
 }
 
 bool CPricing::GetOptionPrices(int iOptionID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice)
 {
-	dPrice = PricingBLL::GetOptionPrice(CachedData::Context, iOptionID, iStoreID, System::DateTime::FromOADate(OrderDate));
-	dCost = PricingBLL::GetOptionPrice(CachedData::Context, iOptionID, iStoreID, System::DateTime::FromOADate(ScheduleDate));
+	double temp = -11.0;
+	temp = PricingBLL::GetOptionPrice(CachedData::Context, iOptionID, iStoreID, System::DateTime::FromOADate(OrderDate));
+	dPrice = temp;
+	temp = PricingBLL::GetOptionCost(CachedData::Context, iOptionID, iStoreID, System::DateTime::FromOADate(ScheduleDate));
+	dCost = temp;
 	return true;
 }
