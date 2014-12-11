@@ -111,8 +111,7 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy /s ..\Common\SSCE\runtime $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -168,8 +167,7 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy /s ..\Common\SSCE\runtime $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
@@ -177,6 +175,9 @@
       <AdditionalDependencies>odbc32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/MACHINE:I386 /ignore:4254 </AdditionalOptions>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /s ..\Common\SSCE\runtime $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="System.Xml">
@@ -869,6 +870,7 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SpnWebService.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Common\SSCE\runtime\SSCE5332.dll" />
     <None Include="res\bitmap2.bmp" />
     <None Include="res\bold.bmp" />
     <None Include="res\cursor1.cur" />

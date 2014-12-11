@@ -1814,6 +1814,7 @@
     </None>
     <None Include="res\filecopy.avi" />
     <None Include="ReadMe.txt" />
+    <None Include="..\Common\SSCE\runtime\SSCE5332.dll" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="SpnWebService\results.discomap">
