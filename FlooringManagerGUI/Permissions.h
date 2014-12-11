@@ -17,16 +17,7 @@ public:
 	bool HasPermissionMarket(const CString strPermission, int iMarketID);
 	bool HasPermissionDivision(const CString strPermission, int iDivisionID);
 	bool HasNoteTypePermission(const CString strNoteType);
-
-protected:
-	int m_iUserID;
-	bool m_bIsAdmin;
 };
-
-inline bool CPermissions::IsAdmin()
-{
-	return m_bIsAdmin;
-}
 
 inline bool CPermissions::HasPermissionMarket(const CString strPermission, int iMarketID)
 {
