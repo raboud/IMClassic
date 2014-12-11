@@ -615,6 +615,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 193
     END
+
+    IDD_DLGUNITTESTRESULTS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 193
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -1757,6 +1765,16 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,263,179,50,14
 END
 
+IDD_DLGUNITTESTRESULTS DIALOGEX 0, 0, 320, 200
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Unit Test Results"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,209,179,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,263,179,50,14
+    LISTBOX         IDC_UNIT_TEST_RESULTS_LIST,7,28,306,126,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -1865,6 +1883,7 @@ BEGIN
         POPUP "&Maintenance",                   65535,MFT_STRING,MFS_ENABLED
         BEGIN
             MENUITEM "SPN Discrepancies",           32846,MFT_STRING,MFS_ENABLED
+            MENUITEM "Unit Tests",                  ID_MAINTENANCE_UNITTESTS,MFT_STRING,MFS_ENABLED
         END
         MENUITEM MFT_SEPARATOR
         MENUITEM "E&xit",                       57665,MFT_STRING,MFS_ENABLED
@@ -2092,6 +2111,8 @@ BEGIN
     POPUP "&Help"
     BEGIN
         MENUITEM "&Help Topics",                ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "&Report Issue...",            32859
         MENUITEM SEPARATOR
         MENUITEM "&About Installation Manager...", ID_APP_ABOUT
     END

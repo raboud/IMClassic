@@ -924,6 +924,12 @@
     <ClCompile Include="SetVwMaterialsRequiringWoodWaiver.cpp">
       <Filter>Record Sets</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgUnitTestResults.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Flooring.rc">
@@ -1707,6 +1713,12 @@
     </ClInclude>
     <ClInclude Include="SetVwMaterialsRequiringWoodWaiver.h">
       <Filter>Record Sets</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgUnitTestResults.h">
+      <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

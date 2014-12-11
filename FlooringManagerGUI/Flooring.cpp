@@ -54,6 +54,8 @@
 #include "DlgUserSelect.h"
 #include "WorkOrderHelper.h"
 #include "WaiverHelper.h"
+#include "UnitTests.h"
+#include "DlgUnitTestResults.h"
 
 #include "ExceptionHandler.h"
 
@@ -150,6 +152,7 @@ BEGIN_MESSAGE_MAP(CFlooringApp, CWinApp)
 	ON_UPDATE_COMMAND_UI(ID_SUB_HELPERS, OnUpdateSubHelpers)
 	ON_COMMAND(ID_REPORTS_FINANCIAL_MATERIAL_PRICING, OnFinancialMaterialpricing)
 	ON_COMMAND(ID_MAINTENANCE_SPNDISCREPANCIES, OnMaintenanceSpndiscrepancies)
+	ON_COMMAND(ID_MAINTENANCE_UNITTESTS, OnMaintenanceUnitTests)
 	ON_UPDATE_COMMAND_UI(ID_REPORTS_FINANCIAL_MATERIAL_PRICING, OnUpdateReportsFinancialMaterialPricing)
 	ON_UPDATE_COMMAND_UI(ID_MAINTENANCE_SPNDISCREPANCIES, OnUpdateMaintenanceSpndiscrepancies)
 	ON_COMMAND(ID_VIEW_USERALERTS, OnViewUseralerts)
@@ -1251,13 +1254,26 @@ void CFlooringApp::OnFinancialMaterialpricing()
 
 void CFlooringApp::OnMaintenanceSpndiscrepancies()
 {
-	// cause a crash...
-//	int *p = 0;
-//	*p = 0;
-
 	CDlgDiscrepancies dlg;
 	dlg.DoModal();
 }
+
+void CFlooringApp::OnMaintenanceUnitTests()
+{
+	DlgUnitTestResults* p_dialogUnitTestResults = new DlgUnitTestResults();
+	p_dialogUnitTestResults->Create(DlgUnitTestResults::IDD);
+	p_dialogUnitTestResults->ShowWindow(SW_SHOW);
+
+	UnitTests tests;
+	
+	bool result = tests.TestSendEmail();
+	p_dialogUnitTestResults->AddResults("TestSendEmail()", result);
+
+
+	//dialogUnitTestResults.DoModal();
+}
+
+
 
 void CFlooringApp::OnUpdateReportsFinancialMaterialPricing(CCmdUI *pCmdUI)
 {

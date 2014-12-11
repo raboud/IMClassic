@@ -19,6 +19,7 @@
 #define IDD_VIEWACTIVITYLIST            113
 #define IDD_REPORTDIALOGWF              120
 #define IDD_DATABASECONFIGWF            121
+#define IDD_DLGUNITTESTRESULTS          122
 #define IDR_MAINFRAME                   128
 #define IDR_CUSTOMTYPE                  129
 #define IDD_STORE                       130
@@ -547,6 +548,7 @@
 #define IDC_CHECKNOTETOEXPEMAIL         1382
 #define IDC_CUSTOMERNAME                1383
 #define IDC_SITEADDRESS                 1384
+#define IDC_UNIT_TEST_RESULTS_LIST      1385
 #define ID_VIEW_STORES                  32772
 #define ID_STORE_INFO                   32773
 #define IDC_SUB_RETAINAGE               32774
@@ -630,6 +632,8 @@
 #define ID_FILE_SETEMAILPASSWORD        32881
 #define ID_HELP_CHECKFORUPDATES         32882
 #define ID_HELP_UPDATEOPTIONS           32883
+#define ID_MAINTENANCE_UNIT             32884
+#define ID_MAINTENANCE_UNITTESTS        32885
 
 // Next default values for new objects
 // 
@@ -637,8 +641,8 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        245
-#define _APS_NEXT_COMMAND_VALUE         32884
-#define _APS_NEXT_CONTROL_VALUE         1385
-#define _APS_NEXT_SYMED_VALUE           122
+#define _APS_NEXT_COMMAND_VALUE         32886
+#define _APS_NEXT_CONTROL_VALUE         1386
+#define _APS_NEXT_SYMED_VALUE           123
 #endif
 #endif
