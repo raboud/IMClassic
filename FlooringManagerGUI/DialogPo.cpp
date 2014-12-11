@@ -2177,7 +2177,7 @@ void CDlgPo::EnableAlertsButton()
 	{
 		int iOrderID = GetFirstOrderID();
 		CString strRecordSetFilter;
-		strRecordSetFilter.Format("OrderID = %d", iOrderID);
+		strRecordSetFilter.Format("(OrderID = %d)", iOrderID);
 
 		// we update the button in the call to HasCustomerDiscrepancies
 		CSetVwDiscrepancies setDiscrepancies(&g_dbFlooring) ;
@@ -2189,7 +2189,7 @@ void CDlgPo::EnableAlertsButton()
 			strRecordSetFilter += strExtraFilter;
 		}
 
-		strRecordSetFilter = "(" + strRecordSetFilter + ")";
+		strRecordSetFilter = "((" + strRecordSetFilter + ") AND (Reviewed = 0))";
 		setDiscrepancies.m_strFilter = strRecordSetFilter;
 		setDiscrepancies.Open() ;
 		if (!setDiscrepancies.IsEOF())
