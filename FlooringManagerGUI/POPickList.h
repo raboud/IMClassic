@@ -86,7 +86,14 @@ protected:
 
 	void PrintReviewChecklist() ;
 	void PrintSchedulingChecklist() ;
+	void PrintInstallerChecklist();
 	void PrintWoodFlooringWaiver() ;
+
+	void ViewReviewChecklist() ;
+	void ViewSchedulingChecklist() ;
+	void ViewInstallerChecklist();
+	void ViewWoodFlooringWaiver() ;
+
 	void UpdatePO() ;
 	void SetPOReviewed(int iOrderID, bool bReviewed);
 

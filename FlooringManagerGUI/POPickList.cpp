@@ -245,19 +245,37 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 				delete m_pPrintMenu ;
 			}
 			m_pPrintMenu = new CMenu ;
-
 			m_pPrintMenu->CreateMenu() ;
+
+			if (m_pViewMenu != NULL)
+			{
+				delete m_pViewMenu ;
+			}
+			m_pViewMenu = new CMenu ;
+			m_pViewMenu->CreateMenu() ;			
 			
 			m_pPrintMenu->AppendMenu(MF_STRING, 3000, "All Paperwork") ;
 			if (iNumSelected == 1)
 			{
 				m_pPrintMenu->AppendMenu(MF_STRING, 3001, "Invoices") ;
+				m_pViewMenu->AppendMenu(MF_STRING, 3101, "Invoice") ;
+				m_pPrintMenu->AppendMenu(MF_STRING, 3007, "Review Checklist") ;
+				m_pViewMenu->AppendMenu(MF_STRING, 3107, "Review Checklist") ;
+				m_pPrintMenu->AppendMenu(MF_STRING, 3008, "Scheduling Checklist") ;
+				m_pViewMenu->AppendMenu(MF_STRING, 3108, "Scheduling Checklist") ;
+				m_pPrintMenu->AppendMenu(MF_STRING, 3009, "Installer Checklist") ;
+				m_pViewMenu->AppendMenu(MF_STRING, 3109, "Installer Checklist") ;
+				m_pViewMenu->AppendMenu(MF_STRING, 3106, "Selected PO") ;
 			}
 			m_pPrintMenu->AppendMenu(MF_STRING, 3002, "Work Order") ;
+			m_pViewMenu->AppendMenu(MF_STRING, 3102, "Work Order") ;
 			m_pPrintMenu->AppendMenu(MF_STRING, 3003, "Release") ;
+			m_pViewMenu->AppendMenu(MF_STRING, 3103, "Release") ;
+
 			if (CGlobals::RequiresWoodWaiver((long)QuickGetNumber(ID, row)))
 			{
-				m_pPrintMenu->AppendMenu(MF_STRING, 3009, "F&&I Wood Waiver");
+				m_pPrintMenu->AppendMenu(MF_STRING, 3010, "F&&I Wood Waiver");
+				m_pViewMenu->AppendMenu(MF_STRING, 3110, "F&&I Wood Waiver") ;
 			}			
 			m_pPrintMenu->AppendMenu(MF_STRING, 3004, "Diagram") ;
 			if (!CGlobals::HasStorePickup((long)QuickGetNumber(ID, row)))
@@ -265,38 +283,10 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 				nGrayed = 1;
 			}
 			m_pPrintMenu->AppendMenu(MF_STRING | nGrayed, 3005, "Store Pickup") ;
+			m_pViewMenu->AppendMenu(MF_STRING | nGrayed, 3105, "Store Pickup") ;
 			m_pPrintMenu->AppendMenu(MF_STRING, 3006, "Selected POs") ;
-
-			if (iNumSelected == 1)
-			{
-				m_pPrintMenu->AppendMenu(MF_STRING, 3007, "Review Checklist") ;
-				m_pPrintMenu->AppendMenu(MF_STRING, 3008, "Scheduling Checklist") ;
-			}
-			
+		
 			this->m_menu->AppendMenu(MF_POPUP, (UINT) m_pPrintMenu->m_hMenu, "Print") ;
-
-			if (m_pViewMenu != NULL)
-			{
-				delete m_pViewMenu ;
-			}
-			m_pViewMenu = new CMenu ;
-
-			m_pViewMenu->CreateMenu() ;			
-			
-			if (iNumSelected == 1)
-			{
-				m_pViewMenu->AppendMenu(MF_STRING, 3105, "Invoice") ;
-				m_pViewMenu->AppendMenu(MF_STRING, 3101, "Selected PO") ;
-			}
-			
-			m_pViewMenu->AppendMenu(MF_STRING, 3102, "Work Order") ;
-			m_pViewMenu->AppendMenu(MF_STRING, 3103, "Release") ;
-			
-			if (CGlobals::RequiresWoodWaiver((long)QuickGetNumber(ID, row)))
-			{
-				m_pViewMenu->AppendMenu(MF_STRING, 3104, "F&&I Wood Waiver") ;
-			}						
-
 			this->m_menu->AppendMenu(MF_POPUP, (UINT) m_pViewMenu->m_hMenu, "View") ;
 
 			if (m_pModifyMenu != NULL)
@@ -378,7 +368,7 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 				PrintPaperWork(CGlobals::PM_INVOICE) ;
 				break ;
 
-			case 3105:
+			case 3101:
 				ViewPaperWork(CGlobals::PM_INVOICE) ;
 				break ;
 
@@ -386,9 +376,17 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 				PrintPaperWork(CGlobals::PM_WORKORDER) ;
 				break ;
 
+			case 3102:
+				ViewPaperWork(CGlobals::PM_WORKORDER);
+				break;
+
 			case 3003:
 				PrintPaperWork(CGlobals::PM_WAIVER) ;
 				break ;
+
+			case 3103:
+				ViewPaperWork(CGlobals::PM_WAIVER);
+				break;
 
 			case 3004:
 				PrintPaperWork(CGlobals::PM_DIAGRAMS) ;
@@ -398,35 +396,52 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 				PrintPaperWork(CGlobals::PM_STORE_PICKUP) ;
 				break ;
 
+			case 3105:
+				ViewPaperWork(CGlobals::PM_STORE_PICKUP) ;
+				break ;
+
 			case 3006:
 				PrintPaperWork(CGlobals::PM_PO) ;
 				break ;
 
-			case 3007:
-				this->PrintReviewChecklist();
-				break;
-
-			case 3008:
-				this->PrintSchedulingChecklist();
-				break;
-
-			case 3009:
-				PrintPaperWork(CGlobals::PM_WOODWAIVER);
-				break;
-
-			case 3101:
+			case 3106:
 				ViewPaperWork(CGlobals::PM_PO);
 				break;
 
-			case 3102:
-				ViewPaperWork(CGlobals::PM_WORKORDER);
+			case 3007:
+				PrintPaperWork(CGlobals::PM_REVIEW_CHECKLIST);
+//				this->PrintReviewChecklist();
 				break;
 
-			case 3103:
-				ViewPaperWork(CGlobals::PM_WAIVER);
+			case 3107:
+				ViewPaperWork(CGlobals::PM_REVIEW_CHECKLIST);
+//				this->PrintReviewChecklist();
 				break;
 
-			case 3104:
+			case 3008:
+				PrintPaperWork(CGlobals::PM_SCHEDULE_CHECKLIST);
+//				this->PrintSchedulingChecklist();
+				break;
+
+			case 3108:
+				ViewPaperWork(CGlobals::PM_SCHEDULE_CHECKLIST);
+//				this->PrintSchedulingChecklist();
+				break;
+
+			case 3009:
+				PrintPaperWork(CGlobals::PM_INSTALLER_CHECKLIST);
+				break;
+
+			case 3109:
+				ViewPaperWork(CGlobals::PM_INSTALLER_CHECKLIST);
+				break;
+
+
+			case 3010:
+				PrintPaperWork(CGlobals::PM_WOODWAIVER);
+				break;
+
+			case 3110:
 				ViewPaperWork(CGlobals::PM_WOODWAIVER);
 				break;
 
@@ -755,6 +770,17 @@ void CPOPickList::PrintReviewChecklist()
 	{
 		int iOrderID = m_listPOs.GetNext(pos);
 		CGlobals::PreparePaperWork(iOrderID, CGlobals::PM_REVIEW_CHECKLIST, true);	
+	}		
+}
+
+void CPOPickList::PrintInstallerChecklist()
+{
+	GetSelectedPOs() ;
+	POSITION pos = m_listPOs.GetHeadPosition() ;
+	while (pos)
+	{
+		int iOrderID = m_listPOs.GetNext(pos);
+		CGlobals::PreparePaperWork(iOrderID, CGlobals::PM_INSTALLER_CHECKLIST, true);	
 	}		
 }
 
