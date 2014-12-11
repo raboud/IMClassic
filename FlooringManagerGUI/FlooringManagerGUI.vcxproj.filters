@@ -615,9 +615,6 @@
     <ClCompile Include="SetIssueTypes.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SetJob.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SetJobAssignmentDetailed.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
@@ -1493,9 +1490,6 @@
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetIssueTypes.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SetJob.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetJobAssignmentDetailed.h">

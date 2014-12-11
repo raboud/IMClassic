@@ -5,7 +5,6 @@
 #include "Flooring.h"
 #include "DlgDeletePOConfirm.h"
 
-#include "SetJob.h"
 #include "SetCheckDetails.h"
 
 
@@ -106,20 +105,9 @@ bool CDlgDeletePOConfirm::CanDeletePO()
 	setCheckDetails.m_strFilter = "OrderID = -1";
 	setCheckDetails.Open();
 
-	/*CSetJob setJob(&g_dbFlooring);
-	setJob.m_strFilter = "OrderID = -1";
-	setJob.Open();*/
-
 	while(pos)
 	{
 		int iOrderID = m_PoList.GetNext(pos);
-		//setJob.m_strFilter.Format("OrderID = %d", iOrderID);
-		//setJob.Requery();
-		//if ( !setJob.IsEOF() )
-		//{
-		//	// we found a record, so can't delete PO
-		//	return false;
-		//}
 
 		setCheckDetails.m_strFilter.Format("OrderID = %d", iOrderID);
 		setCheckDetails.Requery();
@@ -130,7 +118,6 @@ bool CDlgDeletePOConfirm::CanDeletePO()
 		}
 	}
 
-	//setJob.Close();
 	setCheckDetails.Close();
 
 	return bCanDelete;

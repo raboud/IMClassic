@@ -491,7 +491,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetIssues.cpp" />
     <ClCompile Include="SetIssueStatus.cpp" />
     <ClCompile Include="SetIssueTypes.cpp" />
-    <ClCompile Include="SetJob.cpp" />
     <ClCompile Include="SetJobAssignmentDetailed.cpp" />
     <ClCompile Include="SetMarket.cpp" />
     <ClCompile Include="SetMaterial.cpp" />
@@ -804,7 +803,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetIssues.h" />
     <ClInclude Include="SetIssueStatus.h" />
     <ClInclude Include="SetIssueTypes.h" />
-    <ClInclude Include="SetJob.h" />
     <ClInclude Include="SetJobAssignmentDetailed.h" />
     <ClInclude Include="SetMarket.h" />
     <ClInclude Include="SetMaterial.h" />
