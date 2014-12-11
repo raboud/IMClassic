@@ -2244,7 +2244,7 @@ CString CDlgPo::GetDiagramName(bool bFullPath)
 			strDiagramName = setDiagrams.m_DiagramFileName;
 			if (bFullPath)
 			{
-				CSetSettings setSettings(&g_dbFlooring);
+				CSetSettings setSettings;
 				CString strDrawingsFolder = setSettings.GetSetting("DrawingsFolder");
 				if (strDrawingsFolder.GetLength() > 0)
 				{

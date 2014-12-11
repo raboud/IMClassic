@@ -16,7 +16,7 @@ using namespace CFI::DB::Entities;
 using namespace CFI::InstallationManager::Controls;
 using namespace CFI::InstallationManager;
 
-CSetSettings::CSetSettings(CDatabase*  /* pdb */)
+CSetSettings::CSetSettings()
 {
 }
 
@@ -58,11 +58,11 @@ CString CSetSettings::GetSetting(const CString& strSettingName, const CString& s
 
 	if (iUserID == -1)
 	{
-		strValue = SettingsBLL::GetSetting(Singleton::Connection, gcnew System::String(strSettingName), gcnew System::String(strDefault));
+		strValue = SettingsBLL::GetSetting(Singleton::Connection->Clone(), gcnew System::String(strSettingName), gcnew System::String(strDefault));
 	}
 	else
 	{
-		strValue = SettingsBLL::GetUserSetting(Singleton::Connection, gcnew System::String(strSettingName), gcnew System::String(strDefault), iUserID);
+		strValue = SettingsBLL::GetUserSetting(Singleton::Connection->Clone(), gcnew System::String(strSettingName), gcnew System::String(strDefault), iUserID);
 	}
     
 	return strValue;
@@ -70,7 +70,7 @@ CString CSetSettings::GetSetting(const CString& strSettingName, const CString& s
 
 CString CSetSettings::GetSettings(const CString& strSettingName, char cSeparator/* = ','*/)
 {
-	List<String^>^ setting =   SettingsBLL::GetSettingsValues(Singleton::Connection, gcnew System::String(strSettingName));
+	List<String^>^ setting =   SettingsBLL::GetSettingsValues(Singleton::Connection->Clone(), gcnew System::String(strSettingName));
 
 	CString strValue = "";
 	CString strTemp = "";
@@ -93,7 +93,7 @@ CString CSetSettings::GetSettings(const CString& strSettingName, char cSeparator
 
 bool CSetSettings::SetSetting(const CString& strSettingName, const CString& strValue, int iUserID /* -1 */)
 {
-    return SettingsBLL::SetUserSetting(gcnew System::String(strSettingName), gcnew System::String(strValue), iUserID, Singleton::Connection);
+    return SettingsBLL::SetUserSetting(gcnew System::String(strSettingName), gcnew System::String(strValue), iUserID, Singleton::Connection->Clone());
 }
 
 bool CSetSettings::SetSetting(const CString& strSettingName, long lValue, int iUserID /* = -1 */)

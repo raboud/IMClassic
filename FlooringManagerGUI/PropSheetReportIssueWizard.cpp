@@ -95,7 +95,7 @@ int CPropSheetReportIssueWizard::SubmitIssue()
 		// email the info
 		CString strSubject;
 		strSubject.Format("Installation Manager Issue: %d - %s (Submitted By: %s)", iSubmitID, strType, strUserName);
-		CSetSettings setSettings(&g_dbFlooring);
+		CSetSettings setSettings;
 		if (setSettings.GetSetting("IssueNotificationEmailEnable") == "1")
 		{
 			SendIssueEmailSMTP(strSubject, strInfo, iUserID);
@@ -111,7 +111,7 @@ void CPropSheetReportIssueWizard::SendIssueEmailSMTP(CString strSubject, CString
 	CString EmailReplyTo = CGlobals::GetCurrentUserReplyToEmailAddress();
 	CString EmailFromPassword = CGlobals::GetUserEmailPassword();
 	
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	CString EmailTo = setSettings.GetSettings("IssueNotificationEmailTo");
 	
 	if (EmailFrom.GetLength() == 0)

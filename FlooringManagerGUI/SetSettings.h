@@ -7,7 +7,7 @@
 class CSetSettings
 {
 public:
-	CSetSettings(CDatabase* pDatabase);
+	CSetSettings();
 
 // Overrides
 	// Wizard generated virtual function overrides

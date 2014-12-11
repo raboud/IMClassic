@@ -234,7 +234,7 @@ CString CQuickBooks::GetSetting(CString strKey, CString strDefault)
 {
 	// retrieve the setting value based on the strKey (the Name of the setting)
 	// these settings don't use UserID, therefore called with default params
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	CString strValue = setSettings.GetSetting(strKey);
 
 	// return default if key is not found

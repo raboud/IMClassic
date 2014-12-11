@@ -157,7 +157,7 @@ void CGlobals::GetUserSetting(const CString& strSetting, bool& bValue, bool bDef
 {
 	int iUserID = CGlobals::GetEmployeeID();
 
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	long lDefault = (bDefault) ? 1 : 0;
 	long lValue = setSettings.GetValueLong(strSetting, iUserID, lDefault);
 
@@ -168,7 +168,7 @@ void CGlobals::GetUserSetting(const CString& strSetting, CString& strValue, cons
 {
 	int iUserID = CGlobals::GetEmployeeID();
 
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	strValue = setSettings.GetValueString(strSetting, iUserID, strDefault);
 }
 
@@ -176,7 +176,7 @@ void CGlobals::SetUserSetting(const CString& strSetting, bool bValue)
 {
 	int iUserID = CGlobals::GetEmployeeID();
 
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 		
 	if (bValue)
 	{
@@ -192,7 +192,7 @@ void CGlobals::SetUserSetting(const CString& strSetting, const CString& strValue
 {
 	int iUserID = CGlobals::GetEmployeeID();
 
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	
 	if (strValue.GetLength() > 0)
 	{
@@ -758,7 +758,7 @@ CString CGlobals::GetUserEmailPassword()
 
 	try
 	{
-		CSetSettings setSettings(&g_dbFlooring);
+		CSetSettings setSettings;
 
 		strEmailPassword = setSettings.GetSetting("UserEmailPassword", "",CGlobals::GetEmployeeID());
 		if (strEmailPassword.GetLength() == 0)
@@ -783,7 +783,7 @@ CString CGlobals::GetUserEmailPassword()
 
 bool CGlobals::SendEmail( CString ToAddress, CString FromAddress, CString Password, CString CCAddress, CString ReplyToAddress, CString Subject, CString Body, CString &Error )
 {
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 
 	Error = "";
 
@@ -866,12 +866,12 @@ bool CGlobals::SPNUpdatePO(CPoList* pListPOs)
 			l->Add(pListPOs->GetNext(pos));
 		}
 
-		return FormSPN::SPNUpdatePO(Singleton::Connection, l);
+		return FormSPN::SPNUpdatePO(Singleton::Connection->Clone(), l);
 }
 
 bool CGlobals::SPNUpdatePO(CString strStoreNumber, CString strPONumber)
 {
-	return FormSPN::SPNUpdatePO(Singleton::Connection, gcnew System::String(strStoreNumber), gcnew System::String(strPONumber));
+	return FormSPN::SPNUpdatePO(Singleton::Connection->Clone(), gcnew System::String(strStoreNumber), gcnew System::String(strPONumber));
 }
 	
 void CGlobals::PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool printOnly)
@@ -881,7 +881,9 @@ void CGlobals::PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool printO
 
 void CGlobals::InitDefaultContext()
 {
-	ReportHelper::InitDefaultContext();
+	Singleton::Connection = DataConnection::Create("InstallationManager");
+
+	ReportHelper::Connection = Singleton::Connection->Clone();
 }
 
 void CGlobals::OnStoreInfo() 
@@ -1154,13 +1156,13 @@ BOOL CGlobals::ValidateMinimumVersion( CString strVersion )
 	CString computerName = GetComputerName();
 	if (computerName.GetLength() > 0)
 	{
-		CSetSettings setSettings(&g_dbFlooring);
+		CSetSettings setSettings;
 		CString ComputerAndVersionValue = "";
 		ComputerAndVersionValue.Format("%s - %s", computerName, strVersion);
 		setSettings.SetSetting("IMClassicVersion", ComputerAndVersionValue, CGlobals::m_iUserID);
 	}
 
-	VersionBLL^ versionBll = gcnew VersionBLL(Singleton::Connection);
+	VersionBLL^ versionBll = gcnew VersionBLL(Singleton::Connection->Clone());
 
 	if ( (iMinimumVersionMajorSW > versionBll->IMClassicMinimumVersionMajor) ||
 		 ((iMinimumVersionMajorSW == versionBll->IMClassicMinimumVersionMajor) &&

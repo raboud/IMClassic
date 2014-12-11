@@ -74,7 +74,7 @@ BOOL CDlgActivePOs::OnInitDialog()
 	m_pgridActivePOs = new CGridActivePOs(iUserID);
 	m_pgridActivePOs->AttachGrid(this, IDC_ACTIVE_POS_GRID) ;
 
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	CString strTimer = setSettings.GetSetting("ActivePOsUpdateTimer");
 	m_TimerLength = 30000;  // default to 30 sec.
 	if (strTimer.GetLength() > 0)

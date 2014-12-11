@@ -126,7 +126,7 @@ BOOL CDlgActivityList::OnInitDialog()
 	m_pgridActivityList = new CGridActivityList(iUserID);
 	m_pgridActivityList->AttachGrid(this, IDC_ACTIVITY_LIST_GRID) ;
 
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	CString strTimer = setSettings.GetSetting("ActivityListUpdateTimer");
 	m_TimerLength = 60000;  // default to 60 sec.
 	if (strTimer.GetLength() > 0)

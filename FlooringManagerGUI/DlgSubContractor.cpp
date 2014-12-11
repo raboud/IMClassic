@@ -229,7 +229,7 @@ BOOL CDlgSubContractor::OnInitDialog()
 
 	if (m_pSet->m_PictureFilename.GetLength() > 0)
 	{
-		CSetSettings setSettings(&g_dbFlooring);
+		CSetSettings setSettings;
 		CString strPicturePathFilename = setSettings.GetSetting("SubContractorPicturesPath");
 		strPicturePathFilename += m_pSet->m_PictureFilename;
 		m_pictSubContractor.LoadImage(strPicturePathFilename);
@@ -728,7 +728,7 @@ void CDlgSubContractor::OnBnClickedSubPictureSelect()
 		{
 			m_pSet->m_PictureFilename = strNewFilename;
 
-			CSetSettings setSettings(&g_dbFlooring);
+			CSetSettings setSettings;
 			CString strPicturePathFilename = setSettings.GetSetting("SubContractorPicturesPath");
 			strPicturePathFilename += strNewFilename;
 
@@ -756,7 +756,7 @@ bool CDlgSubContractor::CopyPicture(const CString& strPathAndFilename, const CSt
 {
 	bool bSuccess = true;
 
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	CString strDestPath = setSettings.GetSetting("SubContractorPicturesPath");
 
 	if (strDestPath.GetLength() == 0)

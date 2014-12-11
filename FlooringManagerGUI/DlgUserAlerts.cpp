@@ -87,7 +87,7 @@ BOOL CDlgUserAlerts::OnInitDialog()
 		m_btnShowOnlyMyPOs.EnableWindow(FALSE);
 	}
 
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	CString strTimer = setSettings.GetSetting("UserAlertsUpdateTimer");
 	m_TimerLength = 30000;  // default to 30 sec.
 	if (strTimer.GetLength() > 0)

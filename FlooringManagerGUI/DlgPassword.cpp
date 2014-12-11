@@ -58,7 +58,7 @@ bool CDlgPassword::ValidatePassword()
 {
 	bool bValid = false;
 
-	CSetSettings settings(&g_dbFlooring);
+	CSetSettings settings;
 	CString strPassword = settings.GetSetting("FlooringPassword");
 	if (strPassword == m_strPassword)
 	{

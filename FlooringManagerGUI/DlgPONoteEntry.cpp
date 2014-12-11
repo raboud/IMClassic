@@ -642,7 +642,7 @@ bool CDlgPONoteEntry::HasAlerts()
 bool CDlgPONoteEntry::AllowSchedulingWithAlerts()
 {
 	bool bAllow = false;
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	if (setSettings.GetValueLong("AllowSchedulingWithAlerts") == 1)
 	{
 		bAllow = true;

@@ -53,7 +53,7 @@ bool CInstallerJobData::Open(CString strStoreNumber, CString strInstallPO, CStri
 	bool bStatus = false ;
 	CString strParams ;
 	CString strName ;
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	CString strDrawingsFolder = setSettings.GetSetting("DrawingsFolder");
 	strName.Format(strDrawingsFolder + "%s-%s-%s-%s.xml", strStoreNumber, strInstallPO, strInstallOrderNumber, strMeasureNumber) ;
 
@@ -522,7 +522,7 @@ CString CInstallerJobData::FormatDrawingFilename(CString strStoreNumber, CString
 {
 	CString strFileName;
 	CString strCalcDate = CalcDate.Format("%m%d%Y%H%M");
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	CString strDrawingsFolder = setSettings.GetSetting("DrawingsFolder");
 	strFileName.Format(strDrawingsFolder + "%s-%s-%s-%s-%s-%d-%d.pdf", strStoreNumber, strInstallPO, strInstallOrderNumber, strMeasureNumber, strCalcDate, iStyle, iLineNumber) ;
 

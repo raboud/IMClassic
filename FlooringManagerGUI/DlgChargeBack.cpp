@@ -207,7 +207,7 @@ void CDlgChargeBack::OnBnClickedOk()
 			CButton* pbtn = (CButton*) GetDlgItem(IDC_APPROVED);
 			if ((pbtn->GetCheck()) && (m_OriginalApproved == FALSE) && (m_OriginalApprovalNumber == 0))
 			{
-				CSetSettings setSettings(&g_dbFlooring) ;
+				CSetSettings setSettings ;
 				setSettings.SetSetting("NextApprovalNumber", (iLastValidApprovalNumber + 1) );
 			}
 		}
@@ -418,7 +418,7 @@ void CDlgChargeBack::AssignApprovalNumber()
 {
 	if ((m_setCB.m_Approved == TRUE) && (m_OriginalApproved == FALSE) && (m_OriginalApprovalNumber == 0))
 	{
-		CSetSettings setSettings(&g_dbFlooring) ;
+		CSetSettings setSettings ;
 		m_setCB.m_ApprovalNumber = setSettings.GetValueLong("NextApprovalNumber");
 	}
 }

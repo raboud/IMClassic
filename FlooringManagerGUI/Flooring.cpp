@@ -322,7 +322,7 @@ BOOL CFlooringApp::InitInstance()
 
 	SSCE_SetRegTreeName("HKEY_LOCAL_MACHINE\\SOFTWARE\\Custom Installations, Inc.\\Installation Manager Classic\\Sentry Spelling");
 
-	CSetSettings setSettings(&g_dbFlooring);
+	CSetSettings setSettings;
 	CString strValue = "";
 		
 	strValue = setSettings.GetSetting("SSCEMainLexPath");
@@ -881,7 +881,7 @@ void CFlooringApp::OnFileSetEmailPassword()
 	if (dlgEmailPassword.DoModal() == IDOK)
 	{
 		CString strEmailPassword = dlgEmailPassword.GetPassword();
-		CSetSettings setSettings(&g_dbFlooring);
+		CSetSettings setSettings;
 		setSettings.SetSetting("UserEmailPassword", strEmailPassword, CGlobals::GetEmployeeID());
 	}
 }
