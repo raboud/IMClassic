@@ -110,7 +110,7 @@ void CSetOrders::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[CostAmount]"), m_CostAmount);
 	RFX_Bool(pFX, _T("[Invoice]"), m_Invoice) ;
 	RFX_Date(pFX, _T("[DateEntered]"), m_DateEntered);
-	RFX_Long(pFX, _T("[EnteredBy]"), m_EnteredBy) ;
+	RFX_Long(pFX, _T("[EnteredByID]"), m_EnteredBy) ;
 	RFX_Long(pFX, _T("[EntryMethodID]"), m_EntryMethodID) ;
 	RFX_Date(pFX, _T("[FollowUpDate]"), m_FollowUpDate);
 	RFX_Text(pFX, _T("[FollowUpAction]"), m_FollowUpAction);

@@ -32,7 +32,7 @@ CSetBasicLabor::CSetBasicLabor(CDatabase* pdb)
 	m_MaterialTypeID = 0;
 	m_Active = FALSE;
 //	m_MaterialCatagoryID = 0;
-	m_nFields = 10;
+	m_nFields = 9;
 //	m_HasSONumber = FALSE;
 //	m_Has2Dimensions = FALSE;
 //	m_HasColor = FALSE;
