@@ -1354,8 +1354,8 @@ void CFlooringApp::OnFinancialMaterialpricing()
 void CFlooringApp::OnMaintenanceSpndiscrepancies()
 {
 	// cause a crash...
-	int *p = 0;
-	*p = 0;
+//	int *p = 0;
+//	*p = 0;
 
 	CDlgDiscrepancies dlg;
 	dlg.DoModal();
