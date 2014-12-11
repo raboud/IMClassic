@@ -454,7 +454,11 @@ bool CDlgPo::SaveData()
 					setOrderDiagrams.SetFieldNull(&setOrderDiagrams.m_DiagramFileName);
 				}
 
-				setOrderDiagrams.Update();
+				if ( ((setOrderDiagrams.m_DiagramNumber.IsEmpty() == false ) && (setOrderDiagrams.m_DiagramDateTime != NULL)) ||
+					  (setOrderDiagrams.m_DiagramFileName.IsEmpty() == false) )
+				{
+					setOrderDiagrams.Update();
+				}				
 			
 				try
 				{
