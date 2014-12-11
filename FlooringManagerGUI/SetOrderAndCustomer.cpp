@@ -64,7 +64,7 @@ CSetOrderAndCustomer::CSetOrderAndCustomer(CDatabase* pdb)
 	m_MarkBilledWhenPaid = FALSE;
 	m_XMLOrderCostAmount = _T("");
 	m_EntryMethodID = 0;
-	m_nFields = 44;
+	m_nFields = 43;
 	//}}AFX_FIELD_INIT
 	m_nDefaultType = dynaset;
 }
