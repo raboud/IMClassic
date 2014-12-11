@@ -1183,7 +1183,7 @@ void CPOPickList::UnInvoice(long lRow)
 
 	m_setOrders.Edit();
 	m_setOrders.m_Billed = FALSE;
-	m_setOrders.SetFieldNull(&m_setOrders.m_BilledAmount);
+//	m_setOrders.SetFieldNull(&m_setOrders.m_BilledAmount);
 	m_setOrders.SetFieldNull(&m_setOrders.m_BilledDate);
 	m_setOrders.Update();
 	m_setOrders.Requery();

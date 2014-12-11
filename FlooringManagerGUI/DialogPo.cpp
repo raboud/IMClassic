@@ -270,7 +270,7 @@ bool CDlgPo::SaveData()
 				setOrders.m_Billed = false ;
 				setOrders.m_Paid = false ;
 				setOrders.m_Called = false ;
-				setOrders.SetFieldNull(&setOrders.m_BilledAmount) ;
+//				setOrders.SetFieldNull(&setOrders.m_BilledAmount) ;
 				setOrders.m_EnteredBy = CGlobals::GetEmployeeID() ;
 				setOrders.m_DateEntered = current;
 				m_bCancelled = false;
@@ -357,7 +357,7 @@ bool CDlgPo::SaveData()
 					if (strAmount.IsEmpty())
 					{
 						setOrders.Edit() ;
-						setOrders.SetFieldNull(&setOrders.m_BilledAmount) ;
+						setOrders.m_BilledAmount = strAmount ;
 						setOrders.Update() ;
 					}
 					else if (!strAmount.IsEmpty())
