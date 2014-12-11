@@ -167,6 +167,7 @@ copy Flooring.exe.config $(OutDir)</Command>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y /s ..\Common\SSCE\runtime $(OutDir)
