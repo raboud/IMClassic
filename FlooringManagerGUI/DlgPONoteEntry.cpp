@@ -489,15 +489,68 @@ bool CDlgPONoteEntry::Validate()
 				int iOrderID = dlgSched.m_listPOsWithModifiedSchedules.GetNext(pos);
 //				if (iOrderID != m_iOrderID)
 				{
-					CString strSQL = "";
-					CString strSQLSafeNotes = strNotes;
-					strSQLSafeNotes.Replace("'", "''");
-					strSQL.Format("EXEC AddPONote %d, %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d, '%s'", iOrderID, iNoteType,
-						iSpokeWithID, spokeWith, CGlobals::GetCurrentSystemTime().Format("%m/%d/%Y %H:%M:%S" ), strSQLSafeNotes, iEnteredByUser,
-						bCustomerToCall, bSchedule, bUnschedule, bScheduledAM, dateSchedStart.Format("%m/%d/%Y %H:%M:%S" ));
+//					CString strSQL = "";
+//					CString strSQLSafeNotes = strNotes;
+//					strSQLSafeNotes.Replace("'", "''");
+//					strSQL.Format("EXEC AddPONote %d, %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d, '%s'", iOrderID, iNoteType,
+//						iSpokeWithID, spokeWith, CGlobals::GetCurrentSystemTime().Format("%m/%d/%Y %H:%M:%S" ), strSQLSafeNotes, iEnteredByUser,
+//						bCustomerToCall, bSchedule, bUnschedule, bScheduledAM, dateSchedStart.Format("%m/%d/%Y %H:%M:%S" ));
+
+					//					strSQL.Format("EXEC AddPONote %d, %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d, '%s'", ,
+//						, , , ,
+//						, , , bScheduledAM, dateSchedStart.Format("%m/%d/%Y %H:%M:%S" ));
+					CSetPONotes set(&g_dbFlooring) ;
+					set.m_strFilter = "ID = -1";
+
+					if (m_iId == -1)
+					{
+						set.Open() ;
+						set.AddNew();
+						set.m_OrderID = m_iOrderID ;
+						// set the date/time this note was entered.
+						set.m_DateTimeEntered = time ;
+					}
+					else
+					{
+						set.m_strFilter.Format("ID = '%d'", m_iId) ;
+						set.Open() ;
+						set.MoveFirst() ;
+						set.Edit() ;
+					}
+					// update the database
+					set.m_NoteText = strNotes;
+					set.m_EnteredByUserID = iEnteredByUser;
+					set.m_Scheduled = bSchedule;
+					set.m_UnScheduled = bUnschedule;
+					set.m_CustomerToCallBack = bCustomerToCall;
+					set.m_ScheduledAM = bScheduledAM;
+					set.m_ScheduledDate = dateSchedStart;
+		
+					set.m_NoteTypeID = (long) iNoteType ;
+					set.m_SpokeWithID = iSpokeWithID;
+					set.m_ContactName = spokeWith;
+					set.m_SentViaXML = 0;
+					set.SetFieldNull(&set.m_DateTimeSent);
+					set.m_Deleted = 0;
+
+					// update the record - this moves the record ptr to the first one.
+					set.Update() ;
+
+					if ( m_iId == -1 && (iOrderID == m_iOrderID))
+					{
+						// we just added a new record and do not know what the m_iId is, so the next few lines
+						// requery the recordset to find the record that was just added.  This is done by filtering
+						// on the user id and date/time.
+			
+						set.m_strFilter.Format("OrderId = %d AND DateTimeEntered = '%s'", m_iOrderID, strTimeFilter);
+						set.Requery();
+						ASSERT( set.GetRecordCount() == 1 );
+						m_iId = set.m_ID;
+					}
+					set.Close() ;
 					TRY
 					{
-						g_dbFlooring.ExecuteSQL(strSQL);
+//						g_dbFlooring.ExecuteSQL(strSQL);
 					}
 					CATCH(CDBException, e)
 					{
@@ -518,7 +571,7 @@ bool CDlgPONoteEntry::Validate()
 				set.AddNew();
 				set.m_OrderID = m_iOrderID ;
 				// set the date/time this note was entered.
-				set.m_DateTimeEntered = CGlobals::GetCurrentSystemTime() ;
+				set.m_DateTimeEntered = time ;
 			}
 			else
 			{
