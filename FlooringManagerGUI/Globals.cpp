@@ -700,7 +700,7 @@ CString CGlobals::GetTitleName(int iTitleID)
 
 CString CGlobals::GetCurrentUserSMTPEmailAddress()
 {
-	return Singleton::Cache->CurrentUser->EmailAddress;	
+	return Singleton::Cache->CurrentUser->EmailAccount;	
 }
 
 CString CGlobals::GetCurrentUserReplyToEmailAddress()
