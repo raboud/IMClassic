@@ -56,7 +56,7 @@ CSetOrders::CSetOrders(CDatabase* pdb)
 	m_Reviewed = 0;
 	m_ReviewedBy = -1;
 	m_ReviewedDate;
-	m_nFields = 42;
+	m_nFields = 41;
 	//}}AFX_FIELD_INIT
 	m_nDefaultType = dynaset;
 }
