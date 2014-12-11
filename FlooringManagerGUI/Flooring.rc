@@ -1921,7 +1921,6 @@ BEGIN
         END
         POPUP "&Jobs"
         BEGIN
-            MENUITEM "&Assignments...",             32832
             MENUITEM "&Billing Cover",              ID_JOBS_BILLINGCOVER
             MENUITEM "&Pull List...",               168
             POPUP "HD Job &Status"

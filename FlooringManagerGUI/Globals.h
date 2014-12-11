@@ -234,7 +234,7 @@ public:
 	static bool GetBasicPrices(int iBasicLaborID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice);
 	static bool GetOptionPrices(int iOptionID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice);
 
-	enum PRINT_MODE {PM_INVOICE = 0, PM_WORKORDER, PM_WAIVER, PM_DIAGRAMS, PM_STORE_PICKUP, PM_INSPECTION, PM_PO, PM_WOODWAIVER, PM_INSTALLER_CHECKLIST, PM_REVIEW_CHECKLIST, PM_SCHEDULE_CHECKLIST, PM_ALL} ;
+	enum PRINT_MODE {PM_INVOICE = 0, PM_WORKORDER, PM_WAIVER, PM_DIAGRAMS, PM_STORE_PICKUP, PM_INSPECTION, PM_PO, PM_WOODWAIVER, PM_INSTALLER_CHECKLIST, PM_REVIEW_CHECKLIST, PM_SCHEDULE_CHECKLIST, PM_MEASURE, PM_ALL} ;
 	static void PreparePaperWork(int po, PRINT_MODE enMode, bool PrintOnly = false);
 	static void PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool PrintOnly = false);
 };

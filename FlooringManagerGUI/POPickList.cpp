@@ -266,6 +266,9 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 				m_pPrintMenu->AppendMenu(MF_STRING, 3009, "Installer Checklist") ;
 				m_pViewMenu->AppendMenu(MF_STRING, 3109, "Installer Checklist") ;
 				m_pViewMenu->AppendMenu(MF_STRING, 3106, "Selected PO") ;
+
+				m_pPrintMenu->AppendMenu(MF_STRING, 3011, "Measure Grid") ;
+				m_pViewMenu->AppendMenu(MF_STRING, 3111, "Measure Grid") ;
 			}
 			m_pPrintMenu->AppendMenu(MF_STRING, 3002, "Work Order") ;
 			m_pViewMenu->AppendMenu(MF_STRING, 3102, "Work Order") ;
@@ -448,6 +451,14 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 
 			case 3110:
 				ViewPaperWork(CGlobals::PM_WOODWAIVER);
+				break;
+
+			case 3011:
+				PrintPaperWork(CGlobals::PM_MEASURE);
+				break;
+
+			case 3111:
+				ViewPaperWork(CGlobals::PM_MEASURE);
 				break;
 
 			case 3200:
