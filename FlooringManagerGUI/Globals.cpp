@@ -836,9 +836,10 @@ bool CGlobals::SendEmail( CString ToAddress, CString FromAddress, CString Passwo
 
 	bool sendSuccessful = mailer->SendMail(gcnew System::String(Subject), 
 		gcnew System::String(Body), 
-		false, 
+		false,
 		gcnew System::String(""), 
 		gcnew System::String(ToAddress), 
+		gcnew System::String(CCAddress), 
 		gcnew System::String(FromAddress),
 		gcnew System::String(FromAddress), 
 		gcnew System::String(FromAddress), 
