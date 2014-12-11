@@ -36,7 +36,6 @@
 #include "DlgMaterialStatus.h"
 #include "JRSVersions.h"
 #include "SetVersion.h"
-#include "DlgReportConfig.h"
 #include "QuickBooks.h"
 #include <sscemfc.hpp>
 #include "Permissions.h"
