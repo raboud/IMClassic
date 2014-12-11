@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://localhost/SpnWebService/SpnWebService.asmx?wsdl" docRef="http://localhost/SpnWebService/SpnWebService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://localhost/SpnWebService/SpnWebService.asmx" xmlns:q1="Jrs-Tech.net/SPNWebSerices" binding="q1:SPNServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://localhost/SpnWebService/SpnWebService.asmx" xmlns:q2="Jrs-Tech.net/SPNWebSerices" binding="q2:SPNServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

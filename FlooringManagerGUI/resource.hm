@@ -1,0 +1,6 @@
+// Microsoft Visual C++ generated Help ID include file.
+// Used by Flooring.rc
+//
+#define HIDC_DRAWING_TIME               0x8085044e    // IDD_PO
+#define HIDC_DRAWING_UPDATE             0x8085044f    // IDD_PO
+#define HIDC_DRAWING_VIEW               0x80850450    // IDD_PO

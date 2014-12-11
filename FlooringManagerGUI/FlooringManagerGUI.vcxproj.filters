@@ -1,0 +1,1844 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7a19e496-b7a9-4aef-92db-4fd7397cd411}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{21eb67d0-9e1b-43ad-bb72-0b0e151b7516}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{da974a9e-37c3-4961-963b-c5616a6a6232}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Dundas">
+      <UniqueIdentifier>{aece574f-27ef-4684-97e3-d41516a0621f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Grids">
+      <UniqueIdentifier>{de418c2d-64a0-4644-aeed-c730b23ee394}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Grids\Source Files">
+      <UniqueIdentifier>{187c9934-1aea-4dcd-b31d-9742e03cc202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Grids\Header Files">
+      <UniqueIdentifier>{7255ccf4-9915-40d2-aab6-7a85a9cfba8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controls">
+      <UniqueIdentifier>{fd20a57e-73a4-4476-897f-839c5cd9e5e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controls\Source Files">
+      <UniqueIdentifier>{b92ebbae-e874-412a-a4d7-88994bbe2138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controls\Header Files">
+      <UniqueIdentifier>{eb89eaf5-c1fa-4729-a412-20694ee8aaac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogs">
+      <UniqueIdentifier>{e10cbc8c-9837-4e9e-ab0b-b10aa79a1aca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogs\Source Files">
+      <UniqueIdentifier>{6cba2e26-c603-4964-b70b-4d71b87602c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogs\Header Files">
+      <UniqueIdentifier>{f0df416a-cb4d-4a05-bf18-e2df8364d0ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Record Sets">
+      <UniqueIdentifier>{13a1f54b-bbaa-4d2e-b90d-b7520c124c27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Record Sets\Source Files">
+      <UniqueIdentifier>{14617029-ed29-4a79-a84e-dae733214261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Record Sets\Header Files">
+      <UniqueIdentifier>{dbcb7cb1-6372-4557-8667-d66e6db1e46c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SpnWebService">
+      <UniqueIdentifier>http://localhost/SpnWebService/SpnWebService.asmx</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{67DA6AC5-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SOSIWebService">
+      <UniqueIdentifier>http://localhost/SOSIWebService/SOSIWebService.asmx</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CFIFormView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\CFIMaskedEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CFRichEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CFScrollView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\CFViewReport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChildFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\ColorTabCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\CShellFileOp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CurrencyFormat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomerSatPropertyPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomerView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\DataExchange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FindCustomers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Flooring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FlooringDoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\FRecordView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InstallerJobData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\JRSVersions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NotesEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NotesPropPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NotesPropSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderPropPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Permissions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="POPropSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pricing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\printer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPageReportIssueDescription.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPageReportIssueStorePONumber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPageReportIssueSummary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropPageReportIssueTypeOfIssue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropSheetReportIssueWizard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QuickBooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RegMerchPropPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReportDialogWF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOMerchPropPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateMaterialCost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateOptionCost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewActivePOs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewActivityList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewInvoice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewStoreInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WaiverHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkOrderHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomerPickList.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridActivePOs.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridActivityList.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridChargeBacks.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridChecking.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridCheckList.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridDiscrepancies.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridInvoicing.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridJobAssignment.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridLabor.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridPayrollMessages.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridPOBase.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridPONotes.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridRegMerchandise.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridReports.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridSchedule.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridSelectSOMerchandise.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridSOMerchandise.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridStoreContacts.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridStores.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridSubContractorsList.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridUserAlerts.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="POPickList.cpp">
+      <Filter>Grids\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\AutoRichEditCtrl.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\CFEdit.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\CFGrid.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboBoxInstallerStatus.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboBoxMaterialType.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboBoxStore.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboBoxStoreMarket.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboBoxStoreType.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboBoxVendors.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboCustomer.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboDivision.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboIssueTypes.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboMarket.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboPONoteType.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboSpokeWith.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboSubContractor.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboUsers.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatEdit.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FontPreviewCombo.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListBoxDivision.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListBoxInstallerError.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListBoxMeasureError.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="listBoxMillError.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListBoxStoreError.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\MultiLineListBox.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiListBox.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NumericEdit.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NumericFormat.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\PictCtrl.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Picture.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\StatLink.cpp">
+      <Filter>Controls\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TransactionDetailsDialog.cpp">
+      <Filter>Controls\Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogChecking.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogDatePicker.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogInvoicing.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogPo.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogSchedule.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dib.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgActionReport.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgActivePOs.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgActivityList.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgAttachedDocsList.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgChangePONumber.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgChargeBack.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgChargebackList.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgCheckList.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgCheckNew.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgDeletePOConfirm.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgDiscrepancies.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFind.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgInsuranceQuestion.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMaterialStatus.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMergeCustomers.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMessages.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgNotes.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPassword.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPayrollMessage.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPayrollMessages.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPOEntry.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPONoteEntry.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPONotesList.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgReportConfig.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgReportList.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgScheduleChangeReasonSelection.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSelectCustomer.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSelectDepartment.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSelectMerchandise.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSelectPO.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSelectVendor.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSendNote.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSplitLineItem.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgStore.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgStoreCustDiscrepancy.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgStoreSelection.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgStoresPickList.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSubContractor.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSubContractorInsurance.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSubContractorsList.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgTransferPO.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgUserAlerts.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgUserSelect.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgWebService.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JobAssignment.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectMailRecipientsDlg.cpp">
+      <Filter>Dialogs\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicPricing.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionPricing.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SeOrderCustomDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetActionReport.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetActionReportWithName.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetActivityTypes.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetAdmins.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetBasicLabor.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetBills.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetCatagories.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetChargeBacks.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetCheckCBDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetCheckDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetChecks.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetCompanyInfo.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetContactTitles.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetCustomer.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetCustomerDocuments.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDepartments.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDepartmentsRequiredContacts.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDepartmentsStoresAssignments.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDiscrepancies.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDiscrepanciesPrice.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDivision.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetDuplicates.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetEmployees.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetInstallerError.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetInstallerStatus.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetIssues.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetIssueStatus.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetIssueTypes.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetJob.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetJobAssignmentDetailed.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMarket.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMaterial.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMaterialType.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMatStatus.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMeasureCompCalcData.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMeasureCompCustData.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMeasureCompLineItemData.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMeasureCompOrderData.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMeasureError.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMillError.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetNoteTypes.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetOptions.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetOrderAndCustomer.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetOrderBasicLaborDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetOrderDiagrams.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetOrderOptionsDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetOrderRegMerchandiseDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetOrders.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetOrderSOMerchandiseDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPadFix.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPayments.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="setpayroll.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPayrollMessages.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPermissions.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPOMarketDivision.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPONotes.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPONotesWithName.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPOStatusValues.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetScheduleChangeReasonCodes.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetSettings.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetSPNImportedPOs.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetSpokeWith.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetStates.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetStoreContacts.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetStoreError.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetStores.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetStoreType.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetSubCat.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetSubContractor.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetSubContractorsDivisionAssignments.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetTotalPayment.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUintOfMeaser.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUnpaid.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUser.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUserMarketDivisionAssignments.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUserPermissions.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVendorNumbers.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVersion.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetViewOrderRegMerchandiseDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetViewOrderSOMerchandiseDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetViewStoreContacts.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetViewUserPermissions.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwActivePOs.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwActivityList.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetvwChargeback.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwChargeBacksTaken.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwChecksWithVendorInfo.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwDepartmentsContactTitles.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwDiscrepancies.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwMaterialTypesAndMarketsMapping.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwOrderBasicLaborDetails.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwOrdersWithDiscrepancies.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwPOPickList.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwUserAlerts.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vwPOMarketDivision.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vwWorkOrderMaterialsChecklist.cpp">
+      <Filter>Record Sets\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTbutn.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTdtp.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\DUNDAS\Ultimate Toolbox\source\OXAdvancedAssert.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\DUNDAS\Ultimate Toolbox\source\OXAdvancedAssertMail.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\EditControls\OXMaskedEdit.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCBType.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCell.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCelTyp.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCnrBtn.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCTarrw.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTmfnt.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCtrl.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTsarw.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGDLType.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGDrgDrp.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGDrwHnt.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGDtaSrc.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGEdit.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGEditBase.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugformat.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\uggdinfo.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGGrid.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGHint.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ughscrol.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugLstBox.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGMEdit.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGMemMan.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGMultiS.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugprint.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugptrlst.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugsidehd.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugtab.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGTopHdg.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugvscrol.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\DUNDAS\Ultimate Toolbox\source\UTBStrOp.cpp">
+      <Filter>Dundas</Filter>
+    </ClCompile>
+    <ClCompile Include="ExceptionHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetWinVer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniVersion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetVwMaterialsRequiringWoodWaiver.cpp">
+      <Filter>Record Sets</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Flooring.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CFIFormView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\CFIMaskedEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\CFRES.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CFScrollView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\CFViewReport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChildFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\ColorTabCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboIssueTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboPONoteType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboSpokeWith.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboUsers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\CShellFileOp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomerSatPropertyPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomerView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\DataExchange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FindCustomers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Flooring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FlooringDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\FRecordView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InstallerJobData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\JRSVersions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\MultiLineListBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NotesEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NotesPropPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NotesPropSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderPropPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Permissions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="POPropSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pricing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Printer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPageReportIssueDescription.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPageReportIssueStorePONumber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPageReportIssueSummary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropPageReportIssueTypeOfIssue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropSheetReportIssueWizard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickBooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RegMerchPropPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReportDialogWF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOMerchPropPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TransactionDetailsDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateMaterialCost.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateOptionCost.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="versionno.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewActivePOs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewActivityList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewInvoice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewStoreInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WaiverHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WebService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkOrderHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomerPickList.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridActivePOs.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridActivityList.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridChargeBacks.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridChecking.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCheckList.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridDiscrepancies.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridInvoicing.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridJobAssignment.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridLabor.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridPayrollMessages.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridPOBase.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridPONotes.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridRegMerchandise.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridReports.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridSchedule.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridSelectSOMerchandise.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridSOMerchandise.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridStoreContacts.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridStores.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridSubContractorsList.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridUserAlerts.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="POPickList.h">
+      <Filter>Grids\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\AutoRichEditCtrl.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\CFEdit.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\CFGrid.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CFRichEdit.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboBoxInstallerStatus.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboBoxMaterialType.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboBoxStore.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboBoxStoreMarket.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboBoxStoreType.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboBoxVendors.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboCustomer.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboDivision.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboMarket.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboSubContractor.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CurrencyFormat.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatEdit.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FontPreviewCombo.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListBoxDivision.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListBoxInstallerError.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListBoxMeasureError.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="listBoxMillError.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListBoxStoreError.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Common\Include\MultiLineListBox.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiListBox.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NumericEdit.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NumericFormat.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\PictCtrl.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Picture.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\StatLink.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogChecking.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogDatePicker.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogInvoicing.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogPo.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogSchedule.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgActionReport.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgActivePOs.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgActivityList.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgAttachedDocsList.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgChangePONumber.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgChargeBack.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgChargebackList.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgCheckList.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgCheckNew.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgDeletePOConfirm.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgDiscrepancies.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFind.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgInsuranceQuestion.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMaterialStatus.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMergeCustomers.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMessages.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgNotes.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPassword.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPayrollMessage.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPayrollMessages.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPOEntry.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPONoteEntry.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPONotesList.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgReportConfig.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgReportList.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgScheduleChangeReasonSelection.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSelectCustomer.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSelectDepartment.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSelectMerchandise.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSelectPO.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSelectVendor.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSendNote.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSplitLineItem.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgStore.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgStoreCustDiscrepancy.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgStoreSelection.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgStoresPickList.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSubContractor.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSubContractorInsurance.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSubContractorsList.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgTransferPO.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgUserAlerts.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgUserSelect.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgWebService.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JobAssignment.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectMailRecipientsDlg.h">
+      <Filter>Dialogs\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicPricing.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionPricing.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SeOrderCustomDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetActionReport.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetActionReportWithName.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetActivityTypes.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetAdmins.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetBasicLabor.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetBills.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetCatagories.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetChargeBacks.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetCheckCBDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetCheckDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetChecks.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetCompanyInfo.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetContactTitles.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetCustomer.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetCustomerDocuments.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDepartments.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDepartmentsRequiredContacts.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDepartmentsStoresAssignments.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDiscrepancies.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDiscrepanciesPrice.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDivision.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetDuplicates.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetEmployees.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetInstallerError.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetInstallerStatus.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetIssues.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetIssueStatus.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetIssueTypes.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetJob.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetJobAssignmentDetailed.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMarket.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMaterial.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMaterialType.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMatStatus.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMeasureCompCalcData.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMeasureCompCustData.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMeasureCompLineItemData.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMeasureCompOrderData.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMeasureError.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMillError.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetNoteTypes.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetOptions.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetOrderAndCustomer.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetOrderBasicLaborDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetOrderDiagrams.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetOrderOptionsDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetOrderRegMerchandiseDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetOrders.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetOrderSOMerchandiseDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPadFix.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPayments.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setpayroll.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPayrollMessages.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPermissions.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPOMarketDivision.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPONotes.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPONotesWithName.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPOStatusValues.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetScheduleChangeReasonCodes.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetSettings.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetSPNImportedPOs.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetSpokeWith.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetStates.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetStoreContacts.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetStoreError.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetStores.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetStoreType.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetSubCat.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetSubContractor.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetSubContractorsDivisionAssignments.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetTotalPayment.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUintOfMeaser.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUnpaid.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUser.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUserMarketDivisionAssignments.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUserPermissions.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVendorNumbers.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVersion.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetViewOrderRegMerchandiseDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetViewOrderSOMerchandiseDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetViewStoreContacts.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetViewUserPermissions.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwActivePOs.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwActivityList.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetvwChargeback.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwChargeBacksTaken.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwChecksWithVendorInfo.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwDepartmentsContactTitles.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwDiscrepancies.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwMaterialTypesAndMarketsMapping.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwOrderBasicLaborDetails.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwOrdersWithDiscrepancies.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwPOPickList.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwUserAlerts.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vwPOMarketDivision.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vwWorkOrderMaterialsChecklist.h">
+      <Filter>Record Sets\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOSIWebService.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpnWebService.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTdtp.h">
+      <Filter>Dundas</Filter>
+    </ClInclude>
+    <ClInclude Include="ExceptionHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CrashFileNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GetWinVer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniVersion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetVwMaterialsRequiringWoodWaiver.h">
+      <Filter>Record Sets</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\bitmap2.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bold.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cursor1.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cursor2.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\depot.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\expo2.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\FindCustomers.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Flooring.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Flooring.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\FlooringDoc.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\font_tru.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\idr_cust.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\italic.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\..\Documents and Settings\dbartram\Desktop\large.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\large.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\report.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resource.hm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\small.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\..\Documents and Settings\dbartram\Desktop\small.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\underline.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\filecopy.avi" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="SpnWebService\results.discomap">
+      <Filter>SpnWebService</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SpnWebService\SpnWebService.disco">
+      <Filter>SpnWebService</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SpnWebService\SpnWebService.wsdl">
+      <Filter>SpnWebService</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SOSIWebService\results.discomap">
+      <Filter>SOSIWebService</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SOSIWebService\SOSIWebService.disco">
+      <Filter>SOSIWebService</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SOSIWebService\SOSIWebService.wsdl">
+      <Filter>SOSIWebService</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\Common\Ssce\sdk\lib\SSCE5332.lib" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,923 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}</ProjectGuid>
+    <RootNamespace>FlooringManagerGUI</RootNamespace>
+    <SccProjectName>$/InstallationManagerClassic/Main/Src/FlooringManagerGUI</SccProjectName>
+    <SccAuxPath>http://fusion-tfs:8084/tfs/cficollection</SccAuxPath>
+    <SccLocalPath>.</SccLocalPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Flooring</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Flooring</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Flooring</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Debug/Flooring.tlb</TypeLibraryName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>..\Common\ATL\include;..\Common\DUNDAS\UG6MFC\Include;..\Common\DUNDAS\UG6MFC\EditControls;..\Common\Dundas\UG6MFC\CellTypes;..\Common\DUNDAS\Ultimate Toolbox\include;..\Common;..\..\..\common\include;$(SystemDir)\Code\Third Party Libraries\Mailbee Objects;..\Common\ssce\sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>.\Debug/Flooring.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <CompileAsManaged>false</CompileAsManaged>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>..\..\..\..\Dev\DUNDAS\Ultimate Toolbox\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>VFW32.LIB;odbc32.lib;version.lib;mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)Flooring.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <StripPrivateSymbols>$(OutDir)$(ProjectName)_stripped.pdb</StripPrivateSymbols>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Release/Flooring.tlb</TypeLibraryName>
+    </Midl>
+    <ClCompile>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>..\Common\ATL\include;..\Common\Dundas\ug6mfc\Include;..\Common\Dundas\ug6mfc\EditControls;..\Common\Dundas\ug6mfc\CellTypes;..\Common\Dundas\Ultimate Toolbox\include;..\Common;..\..\..\common\include;$(SystemRoot)\Code\Third Party Libraries\Mailbee Objects;..\Common\ssce\sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>.\Release/Flooring.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_AFXDLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>..\common;..\..\..\..\Dev\DUNDAS\Ultimate Toolbox\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>VFW32.LIB;odbc32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)Flooring.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>C:\OpenSSL-Win32\lib\VC;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <StripPrivateSymbols>$(OutDir)$(ProjectName)_stripped.pdb</StripPrivateSymbols>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(ProjectName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <Link>
+      <AdditionalDependencies>odbc32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="CFI.InstallationManager.Reports, Version=1.0.4485.18342, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\InstallationManagerMain\InstallationManager.Reports\bin\x86\Release\CFI.InstallationManager.Reports.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CFIFormView.cpp" />
+    <ClCompile Include="..\Common\CFIMaskedEdit.cpp" />
+    <ClCompile Include="CFRichEdit.cpp" />
+    <ClCompile Include="CFScrollView.cpp" />
+    <ClCompile Include="..\Common\CFViewReport.cpp" />
+    <ClCompile Include="ChildFrm.cpp" />
+    <ClCompile Include="..\Common\ColorTabCtrl.cpp" />
+    <ClCompile Include="..\Common\CShellFileOp.cpp" />
+    <ClCompile Include="CurrencyFormat.cpp" />
+    <ClCompile Include="CustomerSatPropertyPage.cpp" />
+    <ClCompile Include="CustomerView.cpp" />
+    <ClCompile Include="..\Common\DataExchange.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="ExceptionHandler.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="FindCustomers.cpp" />
+    <ClCompile Include="Flooring.cpp">
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <StringPooling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</StringPooling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="FlooringDoc.cpp" />
+    <ClCompile Include="..\Common\FRecordView.cpp" />
+    <ClCompile Include="GetWinVer.cpp" />
+    <ClCompile Include="Globals.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="InstallerJobData.cpp" />
+    <ClCompile Include="..\Common\JRSVersions.cpp" />
+    <ClCompile Include="..\Common\Logger.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MiniVersion.cpp" />
+    <ClCompile Include="NotesEdit.cpp" />
+    <ClCompile Include="NotesPropPage.cpp" />
+    <ClCompile Include="NotesPropSheet.cpp" />
+    <ClCompile Include="OrderPropPage.cpp" />
+    <ClCompile Include="Permissions.cpp" />
+    <ClCompile Include="POPropSheet.cpp" />
+    <ClCompile Include="Pricing.cpp" />
+    <ClCompile Include="..\Common\printer.cpp" />
+    <ClCompile Include="PropPageReportIssueDescription.cpp" />
+    <ClCompile Include="PropPageReportIssueStorePONumber.cpp" />
+    <ClCompile Include="PropPageReportIssueSummary.cpp" />
+    <ClCompile Include="PropPageReportIssueTypeOfIssue.cpp" />
+    <ClCompile Include="PropSheetReportIssueWizard.cpp" />
+    <ClCompile Include="QuickBooks.cpp" />
+    <ClCompile Include="RegMerchPropPage.cpp" />
+    <ClCompile Include="ReportDialogWF.cpp">
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="SetVwMaterialsRequiringWoodWaiver.cpp" />
+    <ClCompile Include="SOMerchPropPage.cpp" />
+    <ClCompile Include="StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="UpdateMaterialCost.cpp" />
+    <ClCompile Include="UpdateOptionCost.cpp" />
+    <ClCompile Include="ViewActivePOs.cpp" />
+    <ClCompile Include="ViewActivityList.cpp" />
+    <ClCompile Include="ViewInvoice.cpp" />
+    <ClCompile Include="ViewStoreInfo.cpp" />
+    <ClCompile Include="WaiverHelper.cpp" />
+    <ClCompile Include="WorkOrderHelper.cpp" />
+    <ClCompile Include="..\Common\DUNDAS\Ultimate Toolbox\source\OXAdvancedAssert.cpp" />
+    <ClCompile Include="..\Common\DUNDAS\Ultimate Toolbox\source\OXAdvancedAssertMail.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\EditControls\OXMaskedEdit.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCBType.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCell.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCelTyp.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCnrBtn.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCTarrw.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTbutn.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTdtp.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTmfnt.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGCtrl.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTsarw.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGDLType.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGDrgDrp.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGDrwHnt.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGDtaSrc.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGEdit.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGEditBase.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugformat.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\uggdinfo.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGGrid.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGHint.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ughscrol.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugLstBox.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGMEdit.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGMemMan.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGMultiS.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugprint.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugptrlst.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugsidehd.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugtab.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\UGTopHdg.cpp" />
+    <ClCompile Include="..\Common\Dundas\ug6mfc\Source\ugvscrol.cpp" />
+    <ClCompile Include="..\Common\DUNDAS\Ultimate Toolbox\source\UTBStrOp.cpp" />
+    <ClCompile Include="CustomerPickList.cpp" />
+    <ClCompile Include="GridActivePOs.cpp" />
+    <ClCompile Include="GridActivityList.cpp" />
+    <ClCompile Include="GridChargeBacks.cpp" />
+    <ClCompile Include="GridChecking.cpp" />
+    <ClCompile Include="GridCheckList.cpp" />
+    <ClCompile Include="GridDiscrepancies.cpp" />
+    <ClCompile Include="GridInvoicing.cpp" />
+    <ClCompile Include="GridJobAssignment.cpp" />
+    <ClCompile Include="GridLabor.cpp" />
+    <ClCompile Include="GridPayrollMessages.cpp" />
+    <ClCompile Include="GridPOBase.cpp" />
+    <ClCompile Include="GridPONotes.cpp" />
+    <ClCompile Include="GridRegMerchandise.cpp" />
+    <ClCompile Include="GridReports.cpp" />
+    <ClCompile Include="GridSchedule.cpp" />
+    <ClCompile Include="GridSelectSOMerchandise.cpp" />
+    <ClCompile Include="GridSOMerchandise.cpp" />
+    <ClCompile Include="GridStoreContacts.cpp" />
+    <ClCompile Include="GridStores.cpp" />
+    <ClCompile Include="GridSubContractorsList.cpp" />
+    <ClCompile Include="GridUserAlerts.cpp" />
+    <ClCompile Include="POPickList.cpp" />
+    <ClCompile Include="..\Common\AutoRichEditCtrl.cpp" />
+    <ClCompile Include="..\Common\CFEdit.cpp" />
+    <ClCompile Include="..\Common\CFGrid.cpp" />
+    <ClCompile Include="ComboBoxInstallerStatus.cpp" />
+    <ClCompile Include="ComboBoxMaterialType.cpp" />
+    <ClCompile Include="ComboBoxStore.cpp" />
+    <ClCompile Include="ComboBoxStoreMarket.cpp" />
+    <ClCompile Include="ComboBoxStoreType.cpp" />
+    <ClCompile Include="ComboBoxVendors.cpp" />
+    <ClCompile Include="ComboCustomer.cpp" />
+    <ClCompile Include="ComboDivision.cpp" />
+    <ClCompile Include="ComboIssueTypes.cpp" />
+    <ClCompile Include="ComboMarket.cpp" />
+    <ClCompile Include="ComboPONoteType.cpp" />
+    <ClCompile Include="ComboSpokeWith.cpp" />
+    <ClCompile Include="ComboSubContractor.cpp" />
+    <ClCompile Include="ComboUsers.cpp" />
+    <ClCompile Include="FloatEdit.cpp" />
+    <ClCompile Include="FontPreviewCombo.cpp" />
+    <ClCompile Include="ListBoxDivision.cpp" />
+    <ClCompile Include="ListBoxInstallerError.cpp" />
+    <ClCompile Include="ListBoxMeasureError.cpp" />
+    <ClCompile Include="listBoxMillError.cpp" />
+    <ClCompile Include="ListBoxStoreError.cpp" />
+    <ClCompile Include="..\Common\MultiLineListBox.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="MultiListBox.cpp" />
+    <ClCompile Include="NumericEdit.cpp" />
+    <ClCompile Include="NumericFormat.cpp" />
+    <ClCompile Include="..\Common\PictCtrl.cpp" />
+    <ClCompile Include="..\Common\Picture.cpp" />
+    <ClCompile Include="..\Common\StatLink.cpp" />
+    <ClCompile Include="TransactionDetailsDialog.cpp" />
+    <ClCompile Include="DialogChecking.cpp">
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="DialogDatePicker.cpp" />
+    <ClCompile Include="DialogInvoicing.cpp" />
+    <ClCompile Include="DialogPo.cpp" />
+    <ClCompile Include="DialogSchedule.cpp" />
+    <ClCompile Include="Dib.cpp" />
+    <ClCompile Include="DlgActionReport.cpp">
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="DlgActivePOs.cpp" />
+    <ClCompile Include="DlgActivityList.cpp" />
+    <ClCompile Include="DlgAttachedDocsList.cpp" />
+    <ClCompile Include="DlgChangePONumber.cpp" />
+    <ClCompile Include="DlgChargeBack.cpp" />
+    <ClCompile Include="DlgChargebackList.cpp" />
+    <ClCompile Include="DlgCheckList.cpp" />
+    <ClCompile Include="DlgCheckNew.cpp" />
+    <ClCompile Include="DlgDeletePOConfirm.cpp" />
+    <ClCompile Include="DlgDiscrepancies.cpp" />
+    <ClCompile Include="DlgFind.cpp" />
+    <ClCompile Include="DlgInsuranceQuestion.cpp" />
+    <ClCompile Include="DlgMaterialStatus.cpp" />
+    <ClCompile Include="DlgMergeCustomers.cpp" />
+    <ClCompile Include="DlgMessages.cpp" />
+    <ClCompile Include="DlgNotes.cpp" />
+    <ClCompile Include="DlgPassword.cpp" />
+    <ClCompile Include="DlgPayrollMessage.cpp" />
+    <ClCompile Include="DlgPayrollMessages.cpp" />
+    <ClCompile Include="DlgPOEntry.cpp" />
+    <ClCompile Include="DlgPONoteEntry.cpp">
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+    </ClCompile>
+    <ClCompile Include="DlgPONotesList.cpp" />
+    <ClCompile Include="DlgReportConfig.cpp" />
+    <ClCompile Include="DlgReportList.cpp" />
+    <ClCompile Include="DlgScheduleChangeReasonSelection.cpp" />
+    <ClCompile Include="DlgSelectCustomer.cpp" />
+    <ClCompile Include="DlgSelectDepartment.cpp" />
+    <ClCompile Include="DlgSelectMerchandise.cpp" />
+    <ClCompile Include="DlgSelectPO.cpp" />
+    <ClCompile Include="DlgSelectVendor.cpp" />
+    <ClCompile Include="DlgSendNote.cpp" />
+    <ClCompile Include="DlgSplitLineItem.cpp" />
+    <ClCompile Include="DlgStore.cpp" />
+    <ClCompile Include="DlgStoreCustDiscrepancy.cpp" />
+    <ClCompile Include="DlgStoreSelection.cpp" />
+    <ClCompile Include="DlgStoresPickList.cpp" />
+    <ClCompile Include="DlgSubContractor.cpp" />
+    <ClCompile Include="DlgSubContractorInsurance.cpp" />
+    <ClCompile Include="DlgSubContractorsList.cpp" />
+    <ClCompile Include="DlgTransferPO.cpp" />
+    <ClCompile Include="DlgUserAlerts.cpp" />
+    <ClCompile Include="DlgUserSelect.cpp" />
+    <ClCompile Include="DlgWebService.cpp" />
+    <ClCompile Include="JobAssignment.cpp" />
+    <ClCompile Include="SelectMailRecipientsDlg.cpp" />
+    <ClCompile Include="BasicPricing.cpp" />
+    <ClCompile Include="OptionPricing.cpp" />
+    <ClCompile Include="SeOrderCustomDetails.cpp" />
+    <ClCompile Include="SetActionReport.cpp" />
+    <ClCompile Include="SetActionReportWithName.cpp" />
+    <ClCompile Include="SetActivityTypes.cpp" />
+    <ClCompile Include="SetAdmins.cpp" />
+    <ClCompile Include="SetBasicLabor.cpp" />
+    <ClCompile Include="SetBills.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">c:\code\common\include;C:\dev\Dundas\Ultimate Toolbox\include;C:\dev\Dundas\ug97mfc\Include;..\Common;..\..\..\code\CFI\FlooringManager\FlooringManagerGUI</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="SetCatagories.cpp" />
+    <ClCompile Include="SetChargeBacks.cpp" />
+    <ClCompile Include="SetCheckCBDetails.cpp" />
+    <ClCompile Include="SetCheckDetails.cpp" />
+    <ClCompile Include="SetChecks.cpp" />
+    <ClCompile Include="SetCompanyInfo.cpp" />
+    <ClCompile Include="SetContactTitles.cpp" />
+    <ClCompile Include="SetCustomer.cpp" />
+    <ClCompile Include="SetCustomerDocuments.cpp" />
+    <ClCompile Include="SetDepartments.cpp" />
+    <ClCompile Include="SetDepartmentsRequiredContacts.cpp" />
+    <ClCompile Include="SetDepartmentsStoresAssignments.cpp" />
+    <ClCompile Include="SetDetails.cpp" />
+    <ClCompile Include="SetDiscrepancies.cpp" />
+    <ClCompile Include="SetDiscrepanciesPrice.cpp" />
+    <ClCompile Include="SetDivision.cpp" />
+    <ClCompile Include="SetDuplicates.cpp" />
+    <ClCompile Include="SetEmployees.cpp" />
+    <ClCompile Include="SetInstallerError.cpp" />
+    <ClCompile Include="SetInstallerStatus.cpp" />
+    <ClCompile Include="SetIssues.cpp" />
+    <ClCompile Include="SetIssueStatus.cpp" />
+    <ClCompile Include="SetIssueTypes.cpp" />
+    <ClCompile Include="SetJob.cpp" />
+    <ClCompile Include="SetJobAssignmentDetailed.cpp" />
+    <ClCompile Include="SetMarket.cpp" />
+    <ClCompile Include="SetMaterial.cpp" />
+    <ClCompile Include="SetMaterialType.cpp" />
+    <ClCompile Include="SetMatStatus.cpp" />
+    <ClCompile Include="SetMeasureCompCalcData.cpp" />
+    <ClCompile Include="SetMeasureCompCustData.cpp" />
+    <ClCompile Include="SetMeasureCompLineItemData.cpp" />
+    <ClCompile Include="SetMeasureCompOrderData.cpp" />
+    <ClCompile Include="SetMeasureError.cpp" />
+    <ClCompile Include="SetMillError.cpp" />
+    <ClCompile Include="SetNoteTypes.cpp" />
+    <ClCompile Include="SetOptions.cpp" />
+    <ClCompile Include="SetOrderAndCustomer.cpp" />
+    <ClCompile Include="SetOrderBasicLaborDetails.cpp" />
+    <ClCompile Include="SetOrderDiagrams.cpp" />
+    <ClCompile Include="SetOrderOptionsDetails.cpp" />
+    <ClCompile Include="SetOrderRegMerchandiseDetails.cpp" />
+    <ClCompile Include="SetOrders.cpp" />
+    <ClCompile Include="SetOrderSOMerchandiseDetails.cpp" />
+    <ClCompile Include="SetPadFix.cpp" />
+    <ClCompile Include="SetPayments.cpp" />
+    <ClCompile Include="setpayroll.cpp" />
+    <ClCompile Include="SetPayrollMessages.cpp" />
+    <ClCompile Include="SetPermissions.cpp" />
+    <ClCompile Include="SetPOMarketDivision.cpp" />
+    <ClCompile Include="SetPONotes.cpp" />
+    <ClCompile Include="SetPONotesWithName.cpp" />
+    <ClCompile Include="SetPOStatusValues.cpp" />
+    <ClCompile Include="SetScheduleChangeReasonCodes.cpp" />
+    <ClCompile Include="SetSettings.cpp" />
+    <ClCompile Include="SetSPNImportedPOs.cpp" />
+    <ClCompile Include="SetSpokeWith.cpp" />
+    <ClCompile Include="SetStates.cpp" />
+    <ClCompile Include="SetStoreContacts.cpp" />
+    <ClCompile Include="SetStoreError.cpp" />
+    <ClCompile Include="SetStores.cpp" />
+    <ClCompile Include="SetStoreType.cpp" />
+    <ClCompile Include="SetSubCat.cpp" />
+    <ClCompile Include="SetSubContractor.cpp" />
+    <ClCompile Include="SetSubContractorsDivisionAssignments.cpp" />
+    <ClCompile Include="SetTotalPayment.cpp" />
+    <ClCompile Include="SetUintOfMeaser.cpp" />
+    <ClCompile Include="SetUnpaid.cpp" />
+    <ClCompile Include="SetUser.cpp" />
+    <ClCompile Include="SetUserMarketDivisionAssignments.cpp" />
+    <ClCompile Include="SetUserPermissions.cpp" />
+    <ClCompile Include="SetVendorNumbers.cpp" />
+    <ClCompile Include="SetVersion.cpp" />
+    <ClCompile Include="SetViewOrderRegMerchandiseDetails.cpp" />
+    <ClCompile Include="SetViewOrderSOMerchandiseDetails.cpp" />
+    <ClCompile Include="SetViewStoreContacts.cpp" />
+    <ClCompile Include="SetViewUserPermissions.cpp" />
+    <ClCompile Include="SetVwActivePOs.cpp" />
+    <ClCompile Include="SetVwActivityList.cpp" />
+    <ClCompile Include="SetvwChargeback.cpp" />
+    <ClCompile Include="SetVwChargeBacksTaken.cpp" />
+    <ClCompile Include="SetVwChecksWithVendorInfo.cpp" />
+    <ClCompile Include="SetVwDepartmentsContactTitles.cpp" />
+    <ClCompile Include="SetVwDiscrepancies.cpp" />
+    <ClCompile Include="SetVwMaterialTypesAndMarketsMapping.cpp" />
+    <ClCompile Include="SetVwOrderBasicLaborDetails.cpp" />
+    <ClCompile Include="SetVwOrdersWithDiscrepancies.cpp" />
+    <ClCompile Include="SetVwPOPickList.cpp" />
+    <ClCompile Include="SetVwUserAlerts.cpp" />
+    <ClCompile Include="vwPOMarketDivision.cpp" />
+    <ClCompile Include="vwWorkOrderMaterialsChecklist.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Flooring.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CFIFormView.h" />
+    <ClInclude Include="..\Common\CFIMaskedEdit.h" />
+    <ClInclude Include="..\Common\CFRES.h" />
+    <ClInclude Include="CFScrollView.h" />
+    <ClInclude Include="..\common\CFViewReport.h" />
+    <ClInclude Include="ChildFrm.h" />
+    <ClInclude Include="..\Common\ColorTabCtrl.h" />
+    <ClInclude Include="ComboIssueTypes.h" />
+    <ClInclude Include="ComboPONoteType.h" />
+    <ClInclude Include="ComboSpokeWith.h" />
+    <ClInclude Include="ComboUsers.h" />
+    <ClInclude Include="..\Common\CShellFileOp.h" />
+    <ClInclude Include="CrashFileNames.h" />
+    <ClInclude Include="CustomerSatPropertyPage.h" />
+    <ClInclude Include="CustomerView.h" />
+    <ClInclude Include="..\Common\DataExchange.h" />
+    <ClInclude Include="Dib.h" />
+    <ClInclude Include="ExceptionHandler.h" />
+    <ClInclude Include="FindCustomers.h" />
+    <ClInclude Include="Flooring.h" />
+    <ClInclude Include="FlooringDoc.h" />
+    <ClInclude Include="..\Common\FRecordView.h" />
+    <ClInclude Include="GetWinVer.h" />
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="InstallerJobData.h" />
+    <ClInclude Include="..\common\JRSVersions.h" />
+    <ClInclude Include="..\Common\Logger.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="..\Common\MultiLineListBox.h" />
+    <ClInclude Include="MiniVersion.h" />
+    <ClInclude Include="NotesEdit.h" />
+    <ClInclude Include="NotesPropPage.h" />
+    <ClInclude Include="NotesPropSheet.h" />
+    <ClInclude Include="OrderPropPage.h" />
+    <ClInclude Include="Permissions.h" />
+    <ClInclude Include="POPropSheet.h" />
+    <ClInclude Include="Pricing.h" />
+    <ClInclude Include="..\Common\Printer.h" />
+    <ClInclude Include="PropPageReportIssueDescription.h" />
+    <ClInclude Include="PropPageReportIssueStorePONumber.h" />
+    <ClInclude Include="PropPageReportIssueSummary.h" />
+    <ClInclude Include="PropPageReportIssueTypeOfIssue.h" />
+    <ClInclude Include="PropSheetReportIssueWizard.h" />
+    <ClInclude Include="QuickBooks.h" />
+    <ClInclude Include="RegMerchPropPage.h" />
+    <ClInclude Include="ReportDialogWF.h" />
+    <CustomBuild Include="Resource.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Making help include file...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">echo. &gt;"hlp\$(TargetName).hm"
+echo // Commands (ID_* and IDM_*) &gt;&gt;"hlp\$(TargetName).hm"
+makehm ID_,HID_,0x10000 IDM_,HIDM_,0x10000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
+echo. &gt;&gt;"hlp\$(TargetName).hm"
+echo // Prompts (IDP_*) &gt;&gt;"hlp\$(TargetName).hm"
+makehm IDP_,HIDP_,0x30000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
+echo. &gt;&gt;"hlp\$(TargetName).hm"
+echo // Resources (IDR_*) &gt;&gt;"hlp\$(TargetName).hm"
+makehm IDR_,HIDR_,0x20000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
+echo. &gt;&gt;"hlp\$(TargetName).hm"
+echo // Dialogs (IDD_*) &gt;&gt;"hlp\$(TargetName).hm"
+makehm IDD_,HIDD_,0x20000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
+echo. &gt;&gt;"hlp\$(TargetName).hm"
+echo // Frame Controls (IDW_*) &gt;&gt;"hlp\$(TargetName).hm"
+makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">hlp\$(TargetName).hm;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Making help include file...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">echo. &gt;"hlp\$(TargetName).hm"
+echo // Commands (ID_* and IDM_*) &gt;&gt;"hlp\$(TargetName).hm"
+makehm ID_,HID_,0x10000 IDM_,HIDM_,0x10000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
+echo. &gt;&gt;"hlp\$(TargetName).hm"
+echo // Prompts (IDP_*) &gt;&gt;"hlp\$(TargetName).hm"
+makehm IDP_,HIDP_,0x30000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
+echo. &gt;&gt;"hlp\$(TargetName).hm"
+echo // Resources (IDR_*) &gt;&gt;"hlp\$(TargetName).hm"
+makehm IDR_,HIDR_,0x20000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
+echo. &gt;&gt;"hlp\$(TargetName).hm"
+echo // Dialogs (IDD_*) &gt;&gt;"hlp\$(TargetName).hm"
+makehm IDD_,HIDD_,0x20000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
+echo. &gt;&gt;"hlp\$(TargetName).hm"
+echo // Frame Controls (IDW_*) &gt;&gt;"hlp\$(TargetName).hm"
+makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">hlp\$(TargetName).hm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="SetVwMaterialsRequiringWoodWaiver.h" />
+    <ClInclude Include="SOMerchPropPage.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="TransactionDetailsDialog.h" />
+    <ClInclude Include="UpdateMaterialCost.h" />
+    <ClInclude Include="UpdateOptionCost.h" />
+    <ClInclude Include="versionno.h" />
+    <ClInclude Include="ViewActivePOs.h" />
+    <ClInclude Include="ViewActivityList.h" />
+    <ClInclude Include="ViewInvoice.h" />
+    <ClInclude Include="ViewStoreInfo.h" />
+    <ClInclude Include="WaiverHelper.h" />
+    <ClInclude Include="WebService.h" />
+    <ClInclude Include="WorkOrderHelper.h" />
+    <ClInclude Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTdtp.h" />
+    <ClInclude Include="CustomerPickList.h" />
+    <ClInclude Include="GridActivePOs.h" />
+    <ClInclude Include="GridActivityList.h" />
+    <ClInclude Include="GridChargeBacks.h" />
+    <ClInclude Include="GridChecking.h" />
+    <ClInclude Include="GridCheckList.h" />
+    <ClInclude Include="GridDiscrepancies.h" />
+    <ClInclude Include="GridInvoicing.h" />
+    <ClInclude Include="GridJobAssignment.h" />
+    <ClInclude Include="GridLabor.h" />
+    <ClInclude Include="GridPayrollMessages.h" />
+    <ClInclude Include="GridPOBase.h" />
+    <ClInclude Include="GridPONotes.h" />
+    <ClInclude Include="GridRegMerchandise.h" />
+    <ClInclude Include="GridReports.h" />
+    <ClInclude Include="GridSchedule.h" />
+    <ClInclude Include="GridSelectSOMerchandise.h" />
+    <ClInclude Include="GridSOMerchandise.h" />
+    <ClInclude Include="GridStoreContacts.h" />
+    <ClInclude Include="GridStores.h" />
+    <ClInclude Include="GridSubContractorsList.h" />
+    <ClInclude Include="GridUserAlerts.h" />
+    <ClInclude Include="POPickList.h" />
+    <ClInclude Include="..\Common\AutoRichEditCtrl.h" />
+    <ClInclude Include="..\Common\CFEdit.h" />
+    <ClInclude Include="..\Common\CFGrid.h" />
+    <ClInclude Include="CFRichEdit.h" />
+    <ClInclude Include="ComboBoxInstallerStatus.h" />
+    <ClInclude Include="ComboBoxMaterialType.h" />
+    <ClInclude Include="ComboBoxStore.h" />
+    <ClInclude Include="ComboBoxStoreMarket.h" />
+    <ClInclude Include="ComboBoxStoreType.h" />
+    <ClInclude Include="ComboBoxVendors.h" />
+    <ClInclude Include="ComboCustomer.h" />
+    <ClInclude Include="ComboDivision.h" />
+    <ClInclude Include="ComboMarket.h" />
+    <ClInclude Include="ComboSubContractor.h" />
+    <ClInclude Include="CurrencyFormat.h" />
+    <ClInclude Include="FloatEdit.h" />
+    <ClInclude Include="FontPreviewCombo.h" />
+    <ClInclude Include="ListBoxDivision.h" />
+    <ClInclude Include="ListBoxInstallerError.h" />
+    <ClInclude Include="ListBoxMeasureError.h" />
+    <ClInclude Include="listBoxMillError.h" />
+    <ClInclude Include="ListBoxStoreError.h" />
+    <ClInclude Include="..\..\..\Common\Include\MultiLineListBox.h" />
+    <ClInclude Include="MultiListBox.h" />
+    <ClInclude Include="NumericEdit.h" />
+    <ClInclude Include="NumericFormat.h" />
+    <ClInclude Include="..\Common\PictCtrl.h" />
+    <ClInclude Include="..\Common\Picture.h" />
+    <ClInclude Include="..\Common\StatLink.h" />
+    <ClInclude Include="DialogChecking.h" />
+    <ClInclude Include="DialogDatePicker.h" />
+    <ClInclude Include="DialogInvoicing.h" />
+    <ClInclude Include="DialogPo.h" />
+    <ClInclude Include="DialogSchedule.h" />
+    <ClInclude Include="DlgActionReport.h" />
+    <ClInclude Include="DlgActivePOs.h" />
+    <ClInclude Include="DlgActivityList.h" />
+    <ClInclude Include="DlgAttachedDocsList.h" />
+    <ClInclude Include="DlgChangePONumber.h" />
+    <ClInclude Include="DlgChargeBack.h" />
+    <ClInclude Include="DlgChargebackList.h" />
+    <ClInclude Include="DlgCheckList.h" />
+    <ClInclude Include="DlgCheckNew.h" />
+    <ClInclude Include="DlgDeletePOConfirm.h" />
+    <ClInclude Include="DlgDiscrepancies.h" />
+    <ClInclude Include="DlgFind.h" />
+    <ClInclude Include="DlgInsuranceQuestion.h" />
+    <ClInclude Include="DlgMaterialStatus.h" />
+    <ClInclude Include="DlgMergeCustomers.h" />
+    <ClInclude Include="DlgMessages.h" />
+    <ClInclude Include="DlgNotes.h" />
+    <ClInclude Include="DlgPassword.h" />
+    <ClInclude Include="DlgPayrollMessage.h" />
+    <ClInclude Include="DlgPayrollMessages.h" />
+    <ClInclude Include="DlgPOEntry.h" />
+    <ClInclude Include="DlgPONoteEntry.h" />
+    <ClInclude Include="DlgPONotesList.h" />
+    <ClInclude Include="DlgReportConfig.h" />
+    <ClInclude Include="DlgReportList.h" />
+    <ClInclude Include="DlgScheduleChangeReasonSelection.h" />
+    <ClInclude Include="DlgSelectCustomer.h" />
+    <ClInclude Include="DlgSelectDepartment.h" />
+    <ClInclude Include="DlgSelectMerchandise.h" />
+    <ClInclude Include="DlgSelectPO.h" />
+    <ClInclude Include="DlgSelectVendor.h" />
+    <ClInclude Include="DlgSendNote.h" />
+    <ClInclude Include="DlgSplitLineItem.h" />
+    <ClInclude Include="DlgStore.h" />
+    <ClInclude Include="DlgStoreCustDiscrepancy.h" />
+    <ClInclude Include="DlgStoreSelection.h" />
+    <ClInclude Include="DlgStoresPickList.h" />
+    <ClInclude Include="DlgSubContractor.h" />
+    <ClInclude Include="DlgSubContractorInsurance.h" />
+    <ClInclude Include="DlgSubContractorsList.h" />
+    <ClInclude Include="DlgTransferPO.h" />
+    <ClInclude Include="DlgUserAlerts.h" />
+    <ClInclude Include="DlgUserSelect.h" />
+    <ClInclude Include="DlgWebService.h" />
+    <ClInclude Include="JobAssignment.h" />
+    <ClInclude Include="SelectMailRecipientsDlg.h" />
+    <ClInclude Include="BasicPricing.h" />
+    <ClInclude Include="OptionPricing.h" />
+    <ClInclude Include="SeOrderCustomDetails.h" />
+    <ClInclude Include="SetActionReport.h" />
+    <ClInclude Include="SetActionReportWithName.h" />
+    <ClInclude Include="SetActivityTypes.h" />
+    <ClInclude Include="SetAdmins.h" />
+    <ClInclude Include="SetBasicLabor.h" />
+    <ClInclude Include="SetBills.h" />
+    <ClInclude Include="SetCatagories.h" />
+    <ClInclude Include="SetChargeBacks.h" />
+    <ClInclude Include="SetCheckCBDetails.h" />
+    <ClInclude Include="SetCheckDetails.h" />
+    <ClInclude Include="SetChecks.h" />
+    <ClInclude Include="SetCompanyInfo.h" />
+    <ClInclude Include="SetContactTitles.h" />
+    <ClInclude Include="SetCustomer.h" />
+    <ClInclude Include="SetCustomerDocuments.h" />
+    <ClInclude Include="SetDepartments.h" />
+    <ClInclude Include="SetDepartmentsRequiredContacts.h" />
+    <ClInclude Include="SetDepartmentsStoresAssignments.h" />
+    <ClInclude Include="SetDetails.h" />
+    <ClInclude Include="SetDiscrepancies.h" />
+    <ClInclude Include="SetDiscrepanciesPrice.h" />
+    <ClInclude Include="SetDivision.h" />
+    <ClInclude Include="SetDuplicates.h" />
+    <ClInclude Include="SetEmployees.h" />
+    <ClInclude Include="SetInstallerError.h" />
+    <ClInclude Include="SetInstallerStatus.h" />
+    <ClInclude Include="SetIssues.h" />
+    <ClInclude Include="SetIssueStatus.h" />
+    <ClInclude Include="SetIssueTypes.h" />
+    <ClInclude Include="SetJob.h" />
+    <ClInclude Include="SetJobAssignmentDetailed.h" />
+    <ClInclude Include="SetMarket.h" />
+    <ClInclude Include="SetMaterial.h" />
+    <ClInclude Include="SetMaterialType.h" />
+    <ClInclude Include="SetMatStatus.h" />
+    <ClInclude Include="SetMeasureCompCalcData.h" />
+    <ClInclude Include="SetMeasureCompCustData.h" />
+    <ClInclude Include="SetMeasureCompLineItemData.h" />
+    <ClInclude Include="SetMeasureCompOrderData.h" />
+    <ClInclude Include="SetMeasureError.h" />
+    <ClInclude Include="SetMillError.h" />
+    <ClInclude Include="SetNoteTypes.h" />
+    <ClInclude Include="SetOptions.h" />
+    <ClInclude Include="SetOrderAndCustomer.h" />
+    <ClInclude Include="SetOrderBasicLaborDetails.h" />
+    <ClInclude Include="SetOrderDiagrams.h" />
+    <ClInclude Include="SetOrderOptionsDetails.h" />
+    <ClInclude Include="SetOrderRegMerchandiseDetails.h" />
+    <ClInclude Include="SetOrders.h" />
+    <ClInclude Include="SetOrderSOMerchandiseDetails.h" />
+    <ClInclude Include="SetPadFix.h" />
+    <ClInclude Include="SetPayments.h" />
+    <ClInclude Include="setpayroll.h" />
+    <ClInclude Include="SetPayrollMessages.h" />
+    <ClInclude Include="SetPermissions.h" />
+    <ClInclude Include="SetPOMarketDivision.h" />
+    <ClInclude Include="SetPONotes.h" />
+    <ClInclude Include="SetPONotesWithName.h" />
+    <ClInclude Include="SetPOStatusValues.h" />
+    <ClInclude Include="SetScheduleChangeReasonCodes.h" />
+    <ClInclude Include="SetSettings.h" />
+    <ClInclude Include="SetSPNImportedPOs.h" />
+    <ClInclude Include="SetSpokeWith.h" />
+    <ClInclude Include="SetStates.h" />
+    <ClInclude Include="SetStoreContacts.h" />
+    <ClInclude Include="SetStoreError.h" />
+    <ClInclude Include="SetStores.h" />
+    <ClInclude Include="SetStoreType.h" />
+    <ClInclude Include="SetSubCat.h" />
+    <ClInclude Include="SetSubContractor.h" />
+    <ClInclude Include="SetSubContractorsDivisionAssignments.h" />
+    <ClInclude Include="SetTotalPayment.h" />
+    <ClInclude Include="SetUintOfMeaser.h" />
+    <ClInclude Include="SetUnpaid.h" />
+    <ClInclude Include="SetUser.h" />
+    <ClInclude Include="SetUserMarketDivisionAssignments.h" />
+    <ClInclude Include="SetUserPermissions.h" />
+    <ClInclude Include="SetVendorNumbers.h" />
+    <ClInclude Include="SetVersion.h" />
+    <ClInclude Include="SetViewOrderRegMerchandiseDetails.h" />
+    <ClInclude Include="SetViewOrderSOMerchandiseDetails.h" />
+    <ClInclude Include="SetViewStoreContacts.h" />
+    <ClInclude Include="SetViewUserPermissions.h" />
+    <ClInclude Include="SetVwActivePOs.h" />
+    <ClInclude Include="SetVwActivityList.h" />
+    <ClInclude Include="SetvwChargeback.h" />
+    <ClInclude Include="SetVwChargeBacksTaken.h" />
+    <ClInclude Include="SetVwChecksWithVendorInfo.h" />
+    <ClInclude Include="SetVwDepartmentsContactTitles.h" />
+    <ClInclude Include="SetVwDiscrepancies.h" />
+    <ClInclude Include="SetVwMaterialTypesAndMarketsMapping.h" />
+    <ClInclude Include="SetVwOrderBasicLaborDetails.h" />
+    <ClInclude Include="SetVwOrdersWithDiscrepancies.h" />
+    <ClInclude Include="SetVwPOPickList.h" />
+    <ClInclude Include="SetVwUserAlerts.h" />
+    <ClInclude Include="vwPOMarketDivision.h" />
+    <ClInclude Include="vwWorkOrderMaterialsChecklist.h" />
+    <ClInclude Include="SOSIWebService.h" />
+    <ClInclude Include="SpnWebService.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\bitmap2.bmp" />
+    <None Include="res\bold.bmp" />
+    <None Include="res\cursor1.cur" />
+    <None Include="res\cursor2.cur" />
+    <None Include="res\depot.bmp" />
+    <None Include="res\expo2.bmp" />
+    <None Include="res\FindCustomers.ico" />
+    <None Include="res\Flooring.ico" />
+    <None Include="res\Flooring.rc2" />
+    <None Include="res\FlooringDoc.ico" />
+    <None Include="res\font_tru.bmp" />
+    <None Include="res\idr_cust.ico" />
+    <None Include="res\italic.bmp" />
+    <None Include="..\..\..\..\Documents and Settings\dbartram\Desktop\large.bmp" />
+    <None Include="res\large.bmp" />
+    <None Include="res\report.ico" />
+    <None Include="resource.hm" />
+    <None Include="res\small.bmp" />
+    <None Include="..\..\..\..\Documents and Settings\dbartram\Desktop\small.bmp" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\underline.bmp" />
+    <None Include="res\filecopy.avi" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="SpnWebService\results.discomap" />
+    <CustomBuild Include="SpnWebService\SpnWebService.disco">
+      <DeploymentContent>true</DeploymentContent>
+    </CustomBuild>
+    <CustomBuild Include="SpnWebService\SpnWebService.wsdl">
+      <SubType>Designer</SubType>
+    </CustomBuild>
+    <CustomBuild Include="SOSIWebService\results.discomap" />
+    <CustomBuild Include="SOSIWebService\SOSIWebService.disco">
+      <DeploymentContent>true</DeploymentContent>
+    </CustomBuild>
+    <CustomBuild Include="SOSIWebService\SOSIWebService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\Common\Ssce\sdk\lib\SSCE5332.lib" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="Flooring.rc" _x007B_C932BA85-4374-101B-A56C-00AA003668DC_x007D_="CMaskednumber" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

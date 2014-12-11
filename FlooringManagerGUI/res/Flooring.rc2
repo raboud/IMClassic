@@ -1,0 +1,54 @@
+//
+// FLOORING.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#include "versionno.h"
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+#ifndef _JRSVERSION_INFO
+#define _JRSVERSION_INFO
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION VINFO_HI_FILEVERSION, VINFO_LO_FILEVERSION, VINFO_HI_FILEBUILD, VINFO_LO_FILEBUILD
+PRODUCTVERSION VINFO_HI_PRODUCTVERSION, VINFO_LO_PRODUCTVERSION, VINFO_HI_PRODUCTBUILD, VINFO_LO_PRODUCTBUILD
+FILEFLAGSMASK 0x3fL
+FILEFLAGS VINFO_VERSIONFLAGS
+FILEOS 0x4L
+FILETYPE 0x1L
+FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", VINFO_STRING_COMMENTS
+            VALUE "CompanyName", VINFO_STRING_COMPANYNAME
+            VALUE "FileDescription", VINFO_STRING_FILEDESCRIPTION
+            VALUE "FileVersion", VINFO_STRING_FILEVERSION
+            VALUE "InternalName", VINFO_STRING_INTERNALNAME
+            VALUE "LegalCopyright", VINFO_STRING_COPYRIGHT
+            VALUE "OriginalFilename", VINFO_STRING_ORIGINALNAME
+            VALUE "ProductName", VINFO_STRING_PRODUCTNAME
+            VALUE "ProductVersion", VINFO_STRING_PRODUCTVERSION
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif
+
+
