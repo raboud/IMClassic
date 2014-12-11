@@ -14,8 +14,7 @@ CGridPOBase::CGridPOBase()
 	m_bInvokedFromSPN = false;
 	m_bCanMarkReviewed = true;
 
-	CPermissions perm;
-	if (perm.HasPermission("CanModifyImportedItem"))
+	if (CGlobals::HasPermission("CanModifyImportedItem"))
 	{
 		m_bCanModifyImported = true;
 	}
@@ -24,7 +23,7 @@ CGridPOBase::CGridPOBase()
 		m_bCanModifyImported = false;
 	}
 
-	m_bIsAdmin = perm.IsAdmin() ;
+	m_bIsAdmin = CGlobals::IsAdmin() ;
 }
 
 CGridPOBase::~CGridPOBase()
@@ -152,7 +151,6 @@ void CGridPOBase::SetPOList(CPoList* pListPOs, bool bUpdateGrid /*=true*/)
 
 	m_strRecordSetFilter = "";
 
-	CPermissions perm;
 	int iMarketID = -1;
 	int iDivisionID = -1;
 	POSITION pos = m_listPOs.GetHeadPosition();
@@ -167,7 +165,7 @@ void CGridPOBase::SetPOList(CPoList* pListPOs, bool bUpdateGrid /*=true*/)
 		strTemp.Format("([OrderID] = %d)", iOrderID);
 		m_strRecordSetFilter += strTemp;
 		CGlobals::MarketAndDivisionFromOrderID(iOrderID, iMarketID, iDivisionID);
-		m_bCanMarkReviewed = m_bCanMarkReviewed && perm.HasPermission("CanReviewAlert", iMarketID, iDivisionID);
+		m_bCanMarkReviewed = m_bCanMarkReviewed && CGlobals::HasPermission("CanReviewAlert", iMarketID, iDivisionID);
 	}
 
 	if (bUpdateGrid)

@@ -15,7 +15,6 @@
 #include "SetViewOrderSOMerchandiseDetails.h"
 #include "DlgFind.h"
 #include "DlgSelectCustomer.h"
-#include "DlgWebService.h"
 #include "Globals.h"
 
 #ifdef _DEBUG
@@ -585,8 +584,7 @@ void CCustomerView::OnFindByPo()
 			ASSERT(dlg.m_strStoreNumber.GetLength() == 4);
 			ASSERT(dlg.m_strNumber.GetLength() == 8);
 
-			CDlgWebService dlg2;
-			if (dlg2.SPNUpdatePO(dlg.m_strStoreNumber, dlg.m_strNumber))
+			if (CGlobals::SPNUpdatePO(dlg.m_strStoreNumber, dlg.m_strNumber))
 			{
 				iNumRecords = dlgCustomer.SetPONumber(dlg.m_strNumber, dlg.m_strStoreNumber);
 				if ( iNumRecords > 1 )

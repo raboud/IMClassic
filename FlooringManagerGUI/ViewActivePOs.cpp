@@ -90,9 +90,7 @@ void CViewActivePOs::OnInitialUpdate()
 	m_dtpStartDate.SetRange(&dtMin, &dtMax);
 	m_dtpEndDate.SetRange(&dtMin, &dtMax);
 
-	
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	int iUserID = pApp->GetEmployeeID();
+	int iUserID = CGlobals::GetEmployeeID();
 
 	m_pgridActivePOs = new CGridActivePOs(iUserID);
 	m_pgridActivePOs->AttachGrid(this, IDC_ACTIVE_POS_GRID) ;
@@ -269,8 +267,7 @@ void CViewActivePOs::InitControls()
 		m_cbAutoUpdate.SetCheck(BST_CHECKED);
 	}
 
-	CPermissions perm;
-	if (!perm.HasPermission("CanViewAllPOs"))
+	if (!CGlobals::HasPermission("CanViewAllPOs"))
 	{
 		m_btnShowOnlyMyPOs.EnableWindow(FALSE);
 	}

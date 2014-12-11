@@ -94,8 +94,7 @@ protected:
 inline void CGridActivityList::SetShowOnlyMyActivities(bool bShowOnlyMyActivities, bool bUpdate)
 {
 	bool bTemp = m_bShowOnlyMyActivities;
-	CPermissions perm;
-	if ((perm.HasPermission("CanViewAllActivities")) && (bShowOnlyMyActivities == false))
+	if ((CGlobals::HasPermission("CanViewAllActivities")) && (bShowOnlyMyActivities == false))
 	{
 		m_bShowOnlyMyActivities = false;
 	}

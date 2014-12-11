@@ -26,6 +26,7 @@ public:
 	long	m_NumberOfDecimals;
 	double	m_UnitPrice;
 	double	m_UnitRetail;
+//	BOOL	m_PrintOnInvoice;
 
 // Overrides
 	// Wizard generated virtual function overrides

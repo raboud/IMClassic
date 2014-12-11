@@ -54,8 +54,7 @@ BOOL CDlgUserAlerts::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	int iUserID = pApp->GetEmployeeID();
+	int iUserID = CGlobals::GetEmployeeID();
 
 	bool bValue = false;
 	CGlobals::GetUserSetting("UserAlertsShowOnlyMyPOs", bValue);
@@ -83,8 +82,7 @@ BOOL CDlgUserAlerts::OnInitDialog()
 	}
 	m_pgridUserAlerts->ShowWindow(SW_SHOW);
 
-	CPermissions perm;
-	if (!perm.HasPermission("CanViewAllAlerts"))
+	if (!CGlobals::HasPermission("CanViewAllAlerts"))
 	{
 		m_btnShowOnlyMyPOs.EnableWindow(FALSE);
 	}

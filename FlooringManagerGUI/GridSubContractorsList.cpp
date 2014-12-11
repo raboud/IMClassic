@@ -33,8 +33,7 @@ void CGridSubContractorsList::OnSetup()
 	InitColumnHeadings();
 
 	// hide the retainage column if not admin
-	CPermissions permissions;
-	if (!permissions.IsAdmin())
+	if (!CGlobals::IsAdmin())
 	{
 		HideColumn(RETAINAGE_RATE);
 	}
@@ -76,7 +75,6 @@ void CGridSubContractorsList::Update()
 		setSubContractor.m_strFilter.Format("[Status] = %d", m_iInstallerStatusFilter);
 	}
 	setSubContractor.Open() ;
-	CPermissions permissions;
 	while (!setSubContractor.IsEOF())
 	{
 		AppendRow() ;
@@ -109,21 +107,20 @@ int CGridSubContractorsList::OnMenuStart(int /* col */, long row, int section)
 	{
 		//* Empty the Menu!!
 		EmptyMenu();
-		CPermissions permissions;
 
 		if ((row >= 0) && (row < GetNumberRows()))
 		{
-			if (permissions.HasPermission("CanEditSubContractor"))
+			if (CGlobals::HasPermission("CanEditSubContractor"))
 			{
 				AddMenuItem(EDIT_SUB, "Edit") ;
 			}
 
-			if (permissions.HasPermission("CanAddSubContractor"))
+			if (CGlobals::HasPermission("CanAddSubContractor"))
 			{
 				AddMenuItem(NEW_SUB, "New") ;
 			}
 
-			if (permissions.HasPermission("CanDeleteSubContractor"))
+			if (CGlobals::HasPermission("CanDeleteSubContractor"))
 			{
 				AddMenuItem(DELETE_SUB, "Delete");
 			}
@@ -168,8 +165,7 @@ void CGridSubContractorsList::OnDClicked(int /* col */,long row, RECT * /* rect 
 
 void CGridSubContractorsList::EditSubContractor(long row)
 {
-	CPermissions permissions;
-	if (permissions.HasPermission("CanEditSubContractor"))
+	if (CGlobals::HasPermission("CanEditSubContractor"))
 	{
 		CString strId = QuickGetText(ID, row) ;
 		int iId = atoi(strId) ;

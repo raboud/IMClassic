@@ -138,11 +138,12 @@ void CGridReports::OnMenuCommand(int /* col */, long row, int section, int item)
 		}
 		if (item == 1002)
 		{
-			CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-			pApp->PrintCustSatReport(int(QuickGetNumber(ID, row)));
+			CGlobals::PrintCustSatReport(int(QuickGetNumber(ID, row)));
 		}
 	}
 }
+
+
 
 void CGridReports::Update()
 {

@@ -34,7 +34,6 @@
 #include "JRSVersions.h"
 #include "QuickBooks.h"
 #include <sscemfc.hpp>
-#include "Permissions.h"
 
 #include "SetSettings.h"
 
@@ -48,8 +47,6 @@
 #include "PropSheetReportIssueWizard.h"
 #include "DlgPassword.h"
 #include "DlgUserSelect.h"
-#include "WorkOrderHelper.h"
-#include "WaiverHelper.h"
 #include "UnitTests.h"
 #include "DlgUnitTestResults.h"
 
@@ -57,7 +54,9 @@
 
 #include "Logger.h"
 
-//#include "DatabaseConfig.h"
+int CGlobals::m_iUserID;
+CString CGlobals::m_strUserName;
+bool CGlobals::m_bAdmin;		
 
 CMultiDocTemplate* g_pTemplateWorkOrder ;
 CMultiDocTemplate* g_pTemplateInvoice ;
@@ -72,9 +71,6 @@ CString g_strSPNWebServiceURL;
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
-
-using namespace CFI::InstallationManager::Reports::UI;
-using namespace CFI::InstallationManager::Business;
 
 /////////////////////////////////////////////////////////////////////////////
 // CFlooringApp
@@ -169,19 +165,18 @@ CFlooringApp::CFlooringApp()
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
-	m_strUserName = _T("Unknown");
+	CGlobals::m_strUserName = "";
+	CGlobals::m_iUserID = -1;
+
 	m_pDlgUserAlerts = NULL;
 	m_pDlgActivePOs = NULL;
 	m_pDlgActivityList = NULL;
 	m_strEmailPassword = "";
-	m_iUserID = -1;
-	m_strUserName = "";
 	m_strEmailPassword = "";
 }
 
 CFlooringApp::~CFlooringApp()
 {
-	delete m_pperms;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -295,9 +290,9 @@ BOOL CFlooringApp::InitInstance()
 		RUNTIME_CLASS(CMDIChildWnd), // custom MDI child frame
 		RUNTIME_CLASS(CViewInvoice));
 
-	ReportHelper::InitDefaultContext();
+	CGlobals::InitDefaultContext();
 
-	SetEmployeeID() ;
+	CGlobals::SetEmployeeID() ;
 	// create main MDI Frame window
 	CMainFrame* pMainFrame = new CMainFrame;
 	if (!pMainFrame->LoadFrame(IDR_MAINFRAME))
@@ -322,7 +317,7 @@ BOOL CFlooringApp::InitInstance()
 #endif
 
 	CString strVersion = clVersion.GetProductVersion();
-	if (!ValidateMinimumVersion(strVersion))
+	if (!CGlobals::ValidateMinimumVersion(strVersion))
 	{
 		return FALSE;
 	}
@@ -353,9 +348,6 @@ BOOL CFlooringApp::InitInstance()
 	SSCE_SetUserLexFiles(strValue);
 
 	g_strSPNWebServiceURL.Format("http://%s/SpnWebService/SpnWebService.asmx", setSettings.GetSetting("SPNWebServiceServerName") );
-//	g_strSOSIWebServiceURL.Format("http://%s/SOSIWebService/SOSIWebService.asmx", setSettings.GetSetting("SOSIWebServiceServerName") );
-
-	m_pperms = new CPermissions();
 
 	return TRUE;
 }
@@ -461,11 +453,6 @@ int CFlooringApp::ExitInstance()
 	return CWinApp::ExitInstance();
 }
 
-void CFlooringApp::OnStoreInfo() 
-{
-	ReportHelper::Stores(Mode::View);
-}
-
 void CFlooringApp::OnViewSubcontractors() 
 {
 	CDlgSubContractorsList dlg(this->GetMainWnd()) ;
@@ -500,11 +487,6 @@ void CFlooringApp::OnBillingReceivecheck()
 #include <math.h>
 #include ".\flooring.h"
 
-bool CFlooringApp::IsAdmin()
-{
-	return m_bAdmin;
-}
-
 CString CFlooringApp::GetEmailPassword()
 {
 	return m_strEmailPassword;
@@ -517,12 +499,12 @@ void CFlooringApp::SetEmailPassword(CString strPassword)
 
 void CFlooringApp::OnUpdateBillingReceivecheck(CCmdUI* pCmdUI) 
 {
-	pCmdUI->Enable(m_pperms->HasPermission("CanReceiveCheck") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("CanReceiveCheck") == true) ;
 }
 
 void CFlooringApp::OnUpdateInvoicing(CCmdUI* pCmdUI) 
 {
-	pCmdUI->Enable(m_pperms->HasPermission("CanEnterInvoice") == true ) ;
+	pCmdUI->Enable(CGlobals::HasPermission("CanEnterInvoice") == true ) ;
 }
 
 void CFlooringApp::OnBillingChargebacks() 
@@ -532,16 +514,6 @@ void CFlooringApp::OnBillingChargebacks()
 	dlg.DoModal() ;
 //	CFrameWnd* pFrame = m_pTemplateChargeBackView->CreateNewFrame(NULL,NULL) ;
 //	pFrame->InitialUpdateFrame(NULL, true) ;
-}
-
-void CFlooringApp::OnOverdueInvoices() 
-{
-	ReportHelper::OverdueInvoices(Mode::View);
-}
-
-void CFlooringApp::OnOpenInvoices() 
-{
-	ReportHelper::OpenInvoices(Mode::View);
 }
 
 void CFlooringApp::OnPayroll() 
@@ -592,7 +564,7 @@ void CFlooringApp::OnPayroll()
 		// from today.
 		COleDateTime timeWE = clQB.GetWeekEnding();
 
-		ReportHelper::PayrollReport(gcnew System::String(strGrandTotal), System::DateTime::FromOADate(timeWE), Mode::View);
+		CGlobals::PayrollReport(strGrandTotal, timeWE);
 	}
 	else
 	{
@@ -615,278 +587,14 @@ void CFlooringApp::OnPayroll()
 
 void CFlooringApp::OnUpdatePayroll(CCmdUI* pCmdUI) 
 {
-	pCmdUI->Enable(m_pperms->HasPermission("CanProcessPayroll") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("CanProcessPayroll") == true) ;
 }
 
-
-void CFlooringApp::OnReportsPending() 
-{
-	ReportHelper::PendingInvoices(Mode::View);
-}
-
-//int DownloadDrawingList(CString strNumber, CString& strTimeStamp)
-//{
-//	int iNumberFound = -1 ;
-//
-//	try
-//	{
-//		CInternetSession session;
-//		CHttpConnection* pConnection = session.GetHttpConnection(_T("www.measurecomp.com"));
-//
-//		CString strHeaders = _T("Content-Type: application/x-www-form-urlencoded");
-//		CString strFormData = _T("Name=raboud&Password=justdoit");
-//
-//		DWORD dwRet ;
-//		CString	name = "" ;
-//
-//		GetPage(pConnection, "/scripts/renderpdfsys.exe/login", strHeaders, strFormData, name ) ;
-//
-//		strFormData.Format("MeasNum=%s&StoreOrder=&Style=0", strNumber);
-//		strHeaders = _T("Content-Type: application/x-www-form-urlencoded");
-//		dwRet = GetPage(pConnection, "/scripts/renderpdfsys.exe/choosecalc", strHeaders, strFormData, name) ;
-//
-//		int iIndex = 0 ;
-//		strTimeStamp = "" ;
-//		iNumberFound = 0 ;
-///*
-//		int i = 0 ;
-//		while (i < name.GetLength())
-//		{
-//			TRACE("%s", name.Mid(i, 128)) ;
-//			i += 128 ;
-//
-//		}
-//*/		while  ((iIndex = name.Find("CalcNum=", iIndex)) > 0)
-//		{
-//			iIndex = name.Find('>', iIndex) + 1;
-//			iNumberFound ++ ;
-//			if (iNumberFound > 1)
-//			{
-//				strTimeStamp += "\n" ;
-//			}
-//			strTimeStamp += name.Mid(iIndex, name.Find('<', iIndex) - iIndex ) ;
-//		}
-//
-//		pConnection->Close() ;
-//		delete pConnection;
-//		session.Close() ;
-//	}
-//	catch(CInternetException* pE)
-//	{
-//		pE->Delete() ;
-//	}
-//	return iNumberFound ;
-//}
-
-
-//int DownloadDrawing(CString strNumber, CString strTimeStamp)
-//{
-//	CString strTemp = strTimeStamp ;
-//	strTemp.Replace("/", "") ;
-//	strTemp.Replace(":", "") ;
-//	CSetSettings setSettings(&g_dbFlooring);
-//	CString strDrawingsFolder = setSettings.GetSetting("DrawingsFolder");
-//	CString strFileName  = strDrawingsFolder + strNumber + "-" + strTemp + ".pdf" ;
-//	DWORD dwWritten = 0;
-//
-//	try
-//	{
-//		CInternetSession session;
-//		CHttpConnection* pConnection = session.GetHttpConnection(_T("www.measurecomp.com"));
-//
-//		CString strHeaders = _T("Content-Type: application/x-www-form-urlencoded");
-//		CString strFormData = _T("Name=raboud&Password=justdoit");
-//
-//		DWORD dwRet ;
-//		CString	name = "" ;
-//
-//		GetPage(pConnection, "/scripts/renderpdfsys.exe/login", strHeaders, strFormData, name) ;
-//
-//		strFormData.Format("MeasNum=%s&StoreOrder=&Style=0", strNumber);
-//		strHeaders = _T("Content-Type: application/x-www-form-urlencoded");
-//		dwRet = GetPage(pConnection, "/scripts/renderpdfsys.exe/choosecalc", strHeaders, strFormData, name) ;
-//
-//		// locate the timestamp we want, this identifies the area of the buffer in which to extract our
-//		// link
-//		int iIndex = name.Find(strTimeStamp) - 4 ;
-//		if (iIndex < 0)
-//		{
-//			pConnection->Close() ;
-//			delete pConnection;
-//			session.Close() ;
-//			::MessageBox(NULL, "Could not retrieve MeasureComp drawing.", "MeasureComp Error", MB_OK) ;
-//			return -1 ;
-//		}
-//
-//		// go backwards from the timestamp to the beginning of the anchor tag contents
-//		int iStart = name.Left(iIndex).ReverseFind('"') + 1;
-//				
-//		if (iStart < 0)
-//		{
-//			pConnection->Close() ;
-//			delete pConnection;
-//			session.Close() ;
-//			::MessageBox(NULL, "Could not retrieve MeasureComp drawing.", "MeasureComp Error", MB_OK) ;
-//			return -1 ;
-//		}
-//
-//		// get the substring from the buffer that contains our anchor tag contents (the characters
-//		// between the quotes inside the <a> tag)
-//				
-//		CString strSub;				// substring that will hold the drawing link in it
-//		strSub = name.Mid(iStart, iIndex - iStart);
-//		
-//		// this function uses the Tokenize() call to extract the portion of the URL we want.
-//		CString strUrl = "";
-//		CString strTemp = GetDrawingURL(strSub);
-//
-//		if (strTemp.GetLength() == 0)
-//		{
-//			pConnection->Close() ;
-//			delete pConnection;
-//			session.Close() ;
-//			::MessageBox(NULL, "Could not retrieve MeasureComp drawing.", "MeasureComp Error", MB_OK) ;
-//			return -1 ;
-//		}
-//
-//		// format our url to get the PDF file.
-//		strUrl.Format("/scripts/renderpdfsys.exe/%s", strTemp) ;
-//
-//		strFormData = _T("");
-//		strHeaders = _T("");
-//		HANDLE heMail =	CreateFile (strFileName, GENERIC_WRITE, FILE_SHARE_READ,NULL,
-//				CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-//		
-//		// get the pdf and save to disk.  If dwWritten is 0, means we could not write the drawing
-//		dwRet = GetPage(pConnection, strUrl, strHeaders, strFormData, name, dwWritten, heMail) ;
-//
-//		CloseHandle(heMail);
-//		pConnection->Close() ;
-//		delete pConnection;
-//		session.Close() ;
-//	}
-//	catch(CInternetException* pE)
-//	{
-//		pE->Delete() ;
-//		::MessageBox(NULL, "MeasureComp drawing is not available", "MeasureComp Error", MB_OK) ;
-//	}
-//
-//	if (dwWritten == 0)
-//	{
-//		::MessageBox(NULL, "Could not retrieve MeasureComp drawing.", "MeasureComp Error", MB_OK) ;
-//	}
-//	else
-//	{
-//		ShellExecute(NULL, "print", strFileName, NULL, NULL, SW_HIDE ) ;
-//	}
-//	return 1 ;
-//}
-
-//CString GetDrawingURL(CString strSubString)
-//{
-//	// passed in string must contain the 'renderpdf?' substring to extract
-//	CString strURL = "";
-//	CString strTokenSep = "'";
-//
-//	int iCurPos = 0;
-//	
-//	CString strToken = strSubString.Tokenize(strTokenSep, iCurPos);
-//    while (strToken != "")
-//	{
-//		if (strToken.Find("renderpdf?") > -1)
-//		{
-//			strURL = strToken;
-//			break;
-//		}
-//		strToken = strSubString.Tokenize(strTokenSep, iCurPos);
-//	}
-//
-//	return strURL;
-//}
-
-//DWORD GetPage(CHttpConnection* pConnection, CString strUrl, CString strHeaders, CString strFormData, CString &name, HANDLE heMail)
-//{
-//	DWORD dwWritten = 0;
-//	return GetPage(pConnection, strUrl, strHeaders, strFormData, name, dwWritten, heMail);
-//}
-
-//DWORD GetPage(CHttpConnection* pConnection, CString strUrl, CString strHeaders, CString strFormData, CString &name, DWORD &dwTotalWritten, HANDLE heMail)
-//{
-//	CHttpFile* pFile = pConnection->OpenRequest(CHttpConnection::HTTP_VERB_POST, strUrl);
-//	pFile->SendRequest(strHeaders, (LPVOID)(LPCTSTR)strFormData, strFormData.GetLength()); 
-//
-//	DWORD dwRet ;
-//	DWORD dwRead ;
-//	DWORD dwWritten = 0;
-//	dwTotalWritten = 0;
-//	char aBuffer[1024] ;
-//
-//	pFile->QueryInfoStatusCode(dwRet);
-//	name = "" ;
-//
-//	if (dwRet == HTTP_STATUS_OK)
-//	{
-//		while ((dwRead = pFile->Read(aBuffer, sizeof(aBuffer)-1)) > 0)
-//		{
-//			aBuffer[dwRead]=NULL;
-//			if (heMail != NULL)
-//			{
-//				WriteFile (heMail, aBuffer, dwRead, &dwWritten, NULL); 
-//				dwTotalWritten += dwWritten;
-//			}
-//			name += aBuffer;
-//		}
-//	}
-//	pFile->Close() ;
-//	delete pFile;
-//
-//	return dwRet ;
-//}
-//
-//
-//
-//
-///*
-//	http://www.measurecomp.com/scripts/renderpdfsys.exe/login
-//	Name=raboud&Password=justdoit
-//	Content-Type: application/x-www-form-urlencoded
-//
-//  	http://www.measurecomp.com/scripts/renderpdfsys.exe/choosecalc
-//	MeasNum=706929&StoreOrder=
-//	Content-Type: application/x-www-form-urlencoded
-//
-//	http://www.measurecomp.com/scripts/renderpdfsys.exe/renderpdf?MeasNum=706929&CalcNum=0
-//
-//  */
-
-
-
-void CFlooringApp::OnNotBilled() 
-{
-	ReportHelper::NotBilled(Mode::View);
-}
-
-void CFlooringApp::OnInventory() 
-{
-	ReportHelper::Inventory(Mode::View);
-}
-
-void CFlooringApp::SetAdmin()
-{
-	GetEmployeeID();
-	UserBLL^ userBll = gcnew UserBLL(m_iUserID, CachedData::Context);
-	m_bAdmin = userBll->IsAdmin;
-}
 
 void CFlooringApp::OnCriminalCheckName() 
 {
 	// TODO: Add your command handler code here
 	
-}
-
-void CFlooringApp::OnReportsBilling() 
-{
-	ReportHelper::Billing(Mode::View);
 }
 
 void CFlooringApp::OnMaterialsChangestatus() 
@@ -895,286 +603,115 @@ void CFlooringApp::OnMaterialsChangestatus()
 	dlg.DoModal() ;
 }
 
-void CFlooringApp::SetEmployeeID(int ID)
-{
-	if (ID != -1)
-	{
-		CachedData::ImpersonateUser(ID);						
-	}
-
-	SetEmployeeID();
-}
-
-void CFlooringApp::SetEmployeeID()
-{
-	UserBLL^ userBll = CachedData::CurrentUser;
-	m_iUserID = userBll->UserID;
-	m_strUserName = userBll->UserName;
-
-	SetAdmin();
-}
-
-CString CFlooringApp::GetComputerName()
-{
-	CString computerName = "";
-	TCHAR buffer[256] = TEXT("");	
-	DWORD dwSize = sizeof(buffer);
-
-	if (GetComputerNameEx(ComputerNamePhysicalDnsHostname, buffer, &dwSize))
-	{
-		computerName = CString(buffer);
-	}
-
-	return computerName;
-}
-
-int CFlooringApp::GetEmployeeID()
-{
-	if (m_iUserID == -1)
-	{
-		SetEmployeeID();
-	}
-	
-	return m_iUserID ;
-}
-
 CString CFlooringApp::GetCFUserName()
 {
-	return m_strUserName ;
-}
-
-CString CFlooringApp::GetUserFirstAndLastName()
-{
-	UserBLL^ userBll = CachedData::CurrentUser;
-
-	return userBll->FullName;	
-}
-
-void CFlooringApp::OnWarrantySched() 
-{
-	ReportHelper::ScheduledWarranties(Mode::View);
-}
-
-void CFlooringApp::OnWarrantyOpen() 
-{
-	ReportHelper::OpenWarranties(Mode::View);
-}
-
-void CFlooringApp::OnMaterialRa() 
-{
-	ReportHelper::InventoryWaitingOnRA(Mode::View);
-}
-
-void CFlooringApp::OnMaterialsNotreceivedyet() 
-{
-	ReportHelper::InventoryNotPresent(Mode::View);
-}
-
-void CFlooringApp::OnReportsStatus() 
-{
-
-	// This function call will cause the stored procedure to generate data for all stores
-	int iResponse = AfxMessageBox("This report takes more than 1 minute to generate.\n\nClick OK button to proceed, Cancel to quit.", MB_OKCANCEL | MB_ICONINFORMATION);
-
-	if (iResponse == IDOK)
-	{
-		ReportHelper::DetailedStatus(Mode::View);
-	}
-}
-
-void CFlooringApp::OnReportsStatusSingle() 
-{
-	CDlgStoreSelection dlgStore ;
-
-	if (dlgStore.DoModal() == IDOK)
-	{
-		ReportHelper::DetailedStatusByStore(gcnew System::String(dlgStore.GetStoreNumber()), Mode::View);
-	}
-}
-
-void CFlooringApp::OnReportsPulllist()
-{
-	ReportHelper::PullList(Mode::View);
-}
-
-void CFlooringApp::OnReportsWeeklyTotals() 
-{
-	ReportHelper::WeeklyTotals(Mode::View);
-}
-
-void CFlooringApp::OnReportsCompletedJobsNotPaid()
-{
-	ReportHelper::CompletedJobsNotPaid(Mode::View);
-}
-
-void CFlooringApp::OnReportsChargebacksByDate()
-{
-	ReportHelper::ChargebacksByDate(Mode::View);
-}
-
-void CFlooringApp::OnReportsWorkSummaryByWeek()
-{
-	ReportHelper::WeeklyUnitsTotals(Mode::View);
+	return CGlobals::m_strUserName ;
 }
 
 void CFlooringApp::OnUpdateReportsWorkSummaryByWeek(CCmdUI* pCmdUI) 
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportWorkSummary") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportWorkSummary") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportsBilling(CCmdUI* pCmdUI) 
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportBilling") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportBilling") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportsPending(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportPending") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportPending") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportNotBilled(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportNotBilled") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportNotBilled") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportsWeeklytotals(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportWeeklyTotals") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportWeeklyTotals") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportOpenInvoice(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportOpenInvoiceRequests") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportOpenInvoiceRequests") == true) ;
 }
 
 void CFlooringApp::OnUpdateOverdueInvoices(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportOver14Days") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportOver14Days") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportsPulllist(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportPullList") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportPullList") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportsChargebacksbydate(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportChargeBacksByDate") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportChargeBacksByDate") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportsCompletedjobsnotpaid(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportCompletedJobsNotPaid") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportCompletedJobsNotPaid") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportsStatus(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportStatusAll") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportStatusAll") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportsStatusSingle(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportStatusSingle") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportStatusSingle") == true) ;
 }
 
 void CFlooringApp::OnUpdateWarrantyOpen(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportWarrantyOpen") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportWarrantyOpen") == true) ;
 }
 
 void CFlooringApp::OnUpdateWarrantySched(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportWarrantySched") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportWarrantySched") == true) ;
 }
 
 void CFlooringApp::OnUpdateInventory(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportMaterialsInventory") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportMaterialsInventory") == true) ;
 }
 
 void CFlooringApp::OnUpdateMaterialsNotreceivedyet(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportMaterialsNotReceivedYet") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportMaterialsNotReceivedYet") == true) ;
 }
 
 void CFlooringApp::OnUpdateMaterialRa(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportMaterialsRA") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportMaterialsRA") == true) ;
 }
 
 void CFlooringApp::OnUpdateBillingChargebacks(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("AccessBillingChargeBacks") == true) ;
-}
-
-void CFlooringApp::OnReportsSubPhonelist()
-{
-	ReportHelper::SubContractorsPhoneList(Mode::View);
+	pCmdUI->Enable(CGlobals::HasPermission("AccessBillingChargeBacks") == true) ;
 }
 
 void CFlooringApp::OnUpdateReportsSubPhonelist(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportSubContractorPhoneList") == true) ;
-}
-
-void CFlooringApp::OnBackgroundChecksAlphaByLastName()
-{
-	ReportHelper::SubContractorsBackgroundCheckStatus(Mode::View);
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportSubContractorPhoneList") == true) ;
 }
 
 void CFlooringApp::OnUpdateBackgroundChecksAlphaByLastName(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportSubContractorBackground") == true) ;
-}
-
-void CFlooringApp::OnJobsAssignments()
-{
-	ReportHelper::InstallerAssignments(Mode::View);
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportSubContractorBackground") == true) ;
 }
 
 void CFlooringApp::OnUpdateJobsAssignments(CCmdUI *pCmdUI)
 {
 	// yes using same permission as for pull list - really not different data
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportInstallerAssignments") == true) ;
-}
-
-BOOL CFlooringApp::ValidateMinimumVersion( CString strVersion )
-{
-	BOOL bValid = FALSE;
-
-	int iMinimumVersionMajorSW = atoi(strVersion.Left(strVersion.Find('.')));
-	int iMinimumVersionMinorSW = atoi(strVersion.Right(strVersion.GetLength() - strVersion.Find('.') - 1));
-
-	CString computerName = GetComputerName();
-	if (computerName.GetLength() > 0)
-	{
-		CSetSettings setSettings(&g_dbFlooring);
-		CString ComputerAndVersionValue = "";
-		ComputerAndVersionValue.Format("%s - %s", computerName, strVersion);
-		setSettings.SetSetting("IMClassicVersion", ComputerAndVersionValue, m_iUserID);
-	}
-
-	VersionBLL^ versionBll = gcnew VersionBLL(CachedData::Context);
-
-	if ( (iMinimumVersionMajorSW > versionBll->IMClassicMinimumVersionMajor) ||
-		 ((iMinimumVersionMajorSW == versionBll->IMClassicMinimumVersionMajor) &&
-		 (iMinimumVersionMinorSW >= versionBll->IMClassicMinimumVersionMinor))
-	   )
-	{
-		bValid = TRUE;
-	}
-	else
-	{
-		CString strReqVersion;
-		strReqVersion.Format("%d.%d", versionBll->IMClassicMinimumVersionMajor, versionBll->IMClassicMinimumVersionMinor);
-		CString strMessage;
-		strMessage.Format("This version of Installation Manager (%s) and is too old to run against the database.  You must run Flooring version %s or higher.",
-			strVersion, strReqVersion);
-		AfxMessageBox(strMessage, MB_OK);
-	}
-
-    return bValid;
-
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportInstallerAssignments") == true) ;
 }
 void CFlooringApp::OnPayrollMessages()
 {
@@ -1184,12 +721,7 @@ void CFlooringApp::OnPayrollMessages()
 
 void CFlooringApp::OnUpdatePayrollMessages(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->IsAdmin() == true );
-}
-
-void CFlooringApp::OnSubHelpers()
-{
-	ReportHelper::HelperAssignments(Mode::View);
+	pCmdUI->Enable(CGlobals::IsAdmin() == true );
 }
 
 void CFlooringApp::OnMaintenanceSpndiscrepancies()
@@ -1212,17 +744,17 @@ void CFlooringApp::OnMaintenanceUnitTests()
 
 void CFlooringApp::OnUpdateMaintenanceUnitTests(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("CanRunUnitTests"));
+	pCmdUI->Enable(CGlobals::HasPermission("CanRunUnitTests"));
 }
 
 void CFlooringApp::OnUpdateMaintenanceSpndiscrepancies(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewMaintenanceSPNDiscrepancies"));	
+	pCmdUI->Enable(CGlobals::HasPermission("ViewMaintenanceSPNDiscrepancies"));	
 }
 
 void CFlooringApp::OnUpdateSubHelpers(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportSubHelpers"));	
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportSubHelpers"));	
 }
 
 void CFlooringApp::OnViewUseralerts()
@@ -1260,24 +792,14 @@ void CFlooringApp::OnViewUseralerts()
 }
 
 
-void CFlooringApp::OnWorkmansCompByDate()
-{
-	ReportHelper::WorkmansCompByDate(Mode::View);
-}
-
-void CFlooringApp::OnLiabilityByDate()
-{
-	ReportHelper::LiabilityByDate(Mode::View);
-}
-
 void CFlooringApp::OnUpdateWorkmansCompByDate(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportWorkmansCompByDate") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportWorkmansCompByDate") == true) ;
 }
 
 void CFlooringApp::OnUpdateLiabilityByDate(CCmdUI *pCmdUI)
 {
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportLiabilityByDate") == true) ;
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportLiabilityByDate") == true) ;
 }
 
 void CFlooringApp::OnHelpReportissue()
@@ -1296,7 +818,7 @@ void CFlooringApp::ImpersonateUser()
 			CDlgUserSelect dlgUsers;
 			if (dlgUsers.DoModal() == IDOK)
 			{
-				SetEmployeeID(dlgUsers.GetEmployeeID());
+				CGlobals::SetEmployeeID(dlgUsers.GetEmployeeID());
 			}
 		}
 	}
@@ -1370,130 +892,6 @@ void CFlooringApp::OnViewActivitylist()
 	}
 }
 
-void CFlooringApp::OnMaterialsDamaged()
-{
-	ReportHelper::InventoryDamage(Mode::View);
-}
-
-void CFlooringApp::PrintPONote(int iNoteID)
-{
-	ReportHelper::PONote(iNoteID, Mode::Print);
-}
-
-void CFlooringApp::PrintCustSatReport(int iReportID)
-{
-	ReportHelper::CustomerSatisfactionConcern(iReportID, Mode::Print);
-}
-
-void CFlooringApp::PrintPO(int iOrderID)
-{
-	ReportHelper::PO(iOrderID, Mode::Print);
-}
-
-void CFlooringApp::ViewPO(int iOrderID)
-{
-	ReportHelper::PO(iOrderID, Mode::View);
-}
-
-void CFlooringApp::PrintStorePickup(int iOrderID)
-{
-	ReportHelper::StorePickup(iOrderID, Mode::Print);
-}
-
-::System::Collections::Generic::List<int>^ GetPoList(CPoList* listPOs)
-{
-	::System::Collections::Generic::List<int>^ l = gcnew ::System::Collections::Generic::List<int>();
-		POSITION pos = listPOs->GetHeadPosition() ;
-		while (pos)
-		{
-			l->Add(listPOs->GetNext(pos));
-		}
-	return l;
-}
-
-void CFlooringApp::ViewWorkOrder(CPoList* listPOs, bool PrintOnly)
-{
-	CWorkOrderHelper WorkOrderHelper;
-	if (WorkOrderHelper.SetPoList(listPOs))
-	{
-		if (PrintOnly)
-		{
-			ReportHelper::WorkOrder(GetPoList(listPOs), Mode::Print);
-		}
-		else
-		{
-			ReportHelper::WorkOrder(GetPoList(listPOs), Mode::View);
-		}
-	}
-	else
-	{
-		if (WorkOrderHelper.m_strErrorMessage.GetLength() > 0)
-		{
-			MessageBox(NULL, WorkOrderHelper.m_strErrorMessage, "Notice", MB_OK);
-		}
-	}	
-}
-
-void CFlooringApp::PrintWorkOrder(CPoList* listPOs)
-{
-	ViewWorkOrder(listPOs, true);
-}
-
-void CFlooringApp::ViewWaiver(CPoList* listPOs, bool PrintOnly)
-{
-	CWaiverHelper WaiverHelper;
-	if (WaiverHelper.SetPoList(listPOs))
-	{
-		if (PrintOnly)
-		{
-			ReportHelper::Waiver(GetPoList(listPOs), Mode::Print);
-		}
-		else
-		{
-			ReportHelper::Waiver(GetPoList(listPOs), Mode::View);
-		}
-	}
-	else
-	{
-		if (WaiverHelper.m_strErrorMessage.GetLength() > 0)
-		{
-			MessageBox(NULL, WaiverHelper.m_strErrorMessage, "Notice", MB_OK);
-		}
-	}	
-}
-
-void CFlooringApp::PrintWaiver(CPoList* listPOs)
-{
-	ViewWaiver(listPOs, true);
-}
-
-void CFlooringApp::PrintReviewChecklist(int OrderID)
-{
-	ReportHelper::ReviewChecklist(OrderID, Mode::Print);
-}
-
-void CFlooringApp::PrintSchedulingChecklist(int OrderID)
-{
-	ReportHelper::SchedulingChecklist(OrderID, Mode::Print);
-}
-
-void CFlooringApp::ViewWoodFlooringWaiver(int OrderID, bool PrintOnly)
-{
-	if (PrintOnly)
-	{
-		ReportHelper::WoodFlooringWaiver(OrderID, Mode::Print);
-	}
-	else
-	{
-		ReportHelper::WoodFlooringWaiver(OrderID, Mode::View);
-	}
-}
-
-void CFlooringApp::PrintWoodFlooringWaiver(int OrderID)
-{
-	ViewWoodFlooringWaiver(OrderID, true);
-}
-
 void CFlooringApp::OnFileSetEmailPassword()
 {
 	CDlgPassword dlgEmailPassword;
@@ -1502,6 +900,141 @@ void CFlooringApp::OnFileSetEmailPassword()
 	{
 		CString strEmailPassword = dlgEmailPassword.GetPassword();
 		CSetSettings setSettings(&g_dbFlooring);
-		setSettings.SetSetting("UserEmailPassword", strEmailPassword, GetEmployeeID());
+		setSettings.SetSetting("UserEmailPassword", strEmailPassword, CGlobals::GetEmployeeID());
 	}
+}
+//////////////////////////////// .Net Code /////////////////////////
+void CFlooringApp::OnStoreInfo() 
+{
+	CGlobals::OnStoreInfo();
+}
+
+void CFlooringApp::OnOverdueInvoices() 
+{
+	CGlobals::OnOverdueInvoices();
+}
+
+void CFlooringApp::OnOpenInvoices() 
+{
+	CGlobals::OnOpenInvoices();
+}
+
+void CFlooringApp::OnReportsPending() 
+{
+	CGlobals::OnReportsPending();
+}
+
+void CFlooringApp::OnNotBilled() 
+{
+	CGlobals::OnNotBilled();
+}
+
+void CFlooringApp::OnInventory() 
+{
+	CGlobals::OnInventory();
+}
+
+void CFlooringApp::OnReportsBilling() 
+{
+	CGlobals::OnReportsBilling();
+}
+
+void CFlooringApp::OnWarrantySched() 
+{
+	CGlobals::OnWarrantySched();
+}
+
+void CFlooringApp::OnWarrantyOpen() 
+{
+	CGlobals::OnWarrantyOpen();
+}
+
+void CFlooringApp::OnMaterialRa() 
+{
+	CGlobals::OnMaterialRa();
+}
+
+void CFlooringApp::OnMaterialsNotreceivedyet() 
+{
+	CGlobals::OnMaterialsNotreceivedyet();
+}
+
+void CFlooringApp::OnReportsStatus() 
+{
+	CGlobals::OnReportsStatus();
+}
+
+void CFlooringApp::OnReportsStatusSingle() 
+{
+	CGlobals::OnReportsStatusSingle();
+}
+
+void CFlooringApp::OnReportsPulllist()
+{
+	CGlobals::OnReportsPulllist();
+}
+
+void CFlooringApp::OnReportsWeeklyTotals() 
+{
+	CGlobals::OnReportsWeeklyTotals();
+}
+
+void CFlooringApp::OnReportsCompletedJobsNotPaid()
+{
+	CGlobals::OnReportsCompletedJobsNotPaid();
+//	ReportHelper::CompletedJobsNotPaid(Mode::View);
+}
+
+void CFlooringApp::OnReportsChargebacksByDate()
+{
+	CGlobals::OnReportsChargebacksByDate();
+//	ReportHelper::ChargebacksByDate(Mode::View);
+}
+
+void CFlooringApp::OnReportsWorkSummaryByWeek()
+{
+	CGlobals::OnReportsWorkSummaryByWeek();
+//	ReportHelper::WeeklyUnitsTotals(Mode::View);
+}
+
+void CFlooringApp::OnReportsSubPhonelist()
+{
+	CGlobals::OnReportsSubPhonelist();
+//	ReportHelper::SubContractorsPhoneList(Mode::View);
+}
+
+void CFlooringApp::OnBackgroundChecksAlphaByLastName()
+{
+	CGlobals::OnBackgroundChecksAlphaByLastName();
+//	ReportHelper::SubContractorsBackgroundCheckStatus(Mode::View);
+}
+
+void CFlooringApp::OnJobsAssignments()
+{
+	CGlobals::OnJobsAssignments();
+//	ReportHelper::InstallerAssignments(Mode::View);
+}
+
+void CFlooringApp::OnSubHelpers()
+{
+	CGlobals::OnSubHelpers();
+//	ReportHelper::HelperAssignments(Mode::View);
+}
+
+void CFlooringApp::OnWorkmansCompByDate()
+{
+	CGlobals::OnWorkmansCompByDate();
+//	ReportHelper::WorkmansCompByDate(Mode::View);
+}
+
+void CFlooringApp::OnLiabilityByDate()
+{
+	CGlobals::OnLiabilityByDate();
+//	ReportHelper::LiabilityByDate(Mode::View);
+}
+
+void CFlooringApp::OnMaterialsDamaged()
+{
+	CGlobals::OnMaterialsDamaged();
+//	ReportHelper::InventoryDamage(Mode::View);
 }

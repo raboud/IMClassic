@@ -62,8 +62,7 @@ void CComboPONoteType::PopulateList(bool bShowAll)
 		bool bCanShow = true;
 		if ((!bShowAll) && (TRUE == setNoteTypes.m_PermissionRequiredToSelect))
 		{
-			CPermissions perm;
-			bCanShow = perm.HasNoteTypePermission(setNoteTypes.m_NoteTypeDescription);
+			bCanShow = CGlobals::HasNoteTypePermission(setNoteTypes.m_NoteTypeDescription);
 		}
 
 		if (bCanShow)

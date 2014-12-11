@@ -19,31 +19,9 @@ CSetVwOrderBasicLaborDetails::CSetVwOrderBasicLaborDetails(CDatabase* pdb)
 	m_NumberOfDecimals = 0;
 	m_UnitPrice = 0.0;
 	m_UnitRetail = 0.0;
-
-	//m_Cancelled = FALSE;
-	//m_ScheduledAM = FALSE;
-	//m_FirstName = "";
-	//m_LastName = "";
-	//m_Scheduled = FALSE;
-	//m_ScheduleStartDate;
-	//m_StoreID = 0;
-	//m_CustomerID = 0;
-	//m_StoreNumber = "";
-	//m_OrderID = 0;
-	//m_Billed = FALSE;
-	//m_PurchaseOrderNumber = "";
-	//m_UnitCost = 0.0;
-	//m_YardsPerRoll = 0;
-	//m_Paid = FALSE;
-	//m_Warrenty = FALSE;
-	//m_MaterialTypeName = "";
-	//m_Invoice = FALSE;
-	//m_DivisionID = 0;
-	//m_MarketId = 0;
-	//m_Deleted = FALSE ;
-	//m_PrintOnInvoice = FALSE ;
+//	m_PrintOnInvoice = FALSE ;
 	//m_PrintOnWO = FALSE ;
-	m_nFields = 26;
+	m_nFields = 6;
 	m_nDefaultType = dynaset;
 }
 
@@ -73,6 +51,7 @@ void CSetVwOrderBasicLaborDetails::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Long(pFX, _T("[NumberOfDecimals]"), m_NumberOfDecimals);
 	RFX_Double(pFX, _T("[UnitPrice]"), m_UnitPrice);
 	RFX_Double(pFX, _T("[UnitRetail]"), m_UnitRetail);
+//	RFX_Bool(pFX, _T("[PrintOnInvoice]"), m_PrintOnInvoice);
 
 }
 /////////////////////////////////////////////////////////////////////////////

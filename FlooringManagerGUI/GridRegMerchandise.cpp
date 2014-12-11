@@ -420,8 +420,7 @@ void CGridRegMerchandise::UpdateRecordSet()
 					// if not-reviewed and dirty, update name/date
 					if ((bReviewed) || (bReviewedDirty && !bReviewed))
 					{
-						CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-						setDetails.m_ReviewedBy = pApp->GetEmployeeID();
+						setDetails.m_ReviewedBy = CGlobals::GetEmployeeID();
 						setDetails.m_ReviewedDate = CGlobals::GetCurrentSystemTime();
 					}
 				}
@@ -532,7 +531,6 @@ void CGridRegMerchandise::UpdateGrid()
 
 			UpdateRowColor(lRow);
 
-			CPermissions perm;
 			if (!m_bAllowStatusUpdate)
 			{
 				if (m_setViewOrderRegMerchandiseDetails.m_EntryMethodID != CGlobals::ENTRY_MANUAL)
@@ -542,7 +540,7 @@ void CGridRegMerchandise::UpdateGrid()
 						 (!m_bInvokedFromSPN) && (!(m_setViewOrderRegMerchandiseDetails.m_Deleted == 1)))
 					{
 						QuickSetCellType(UOM, lRow, UGCT_NORMAL);
-						if (!perm.HasPermission("CanModifyRegMerchStatus"))
+						if (!CGlobals::HasPermission("CanModifyRegMerchStatus"))
 						{
 							QuickSetCellType(STATUS, lRow, UGCT_NORMAL);
 						}

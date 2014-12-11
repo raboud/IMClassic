@@ -39,8 +39,6 @@ protected:
 
 	virtual bool IsRowDirty(long lRow);
 	virtual bool IsColumnDirty(int iCol, long lRow);
-
-	CPermissions* m_pperms;
 };
 
 #endif // !defined(AFX_GridPONotes_H__5C2216D4_6BA7_4B06_BDF2_AD22FCD67027__INCLUDED_)

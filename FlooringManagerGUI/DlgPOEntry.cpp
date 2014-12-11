@@ -68,10 +68,9 @@ BOOL CDlgPOEntry::OnInitDialog()
 	CDialog::OnInitDialog();
 	m_editPONumber.SetLimitText(8);
 	
-	CPermissions perm;
-	if (perm.HasPermission("CanEnterRegularPO")) m_comboPOType.AddString("Regular");
-	if (perm.HasPermission("CanEnterInvoicePO")) m_comboPOType.AddString("Invoice");
-	if (perm.HasPermission("CanEnterWarrantyPO")) m_comboPOType.AddString("Warranty");
+	if (CGlobals::HasPermission("CanEnterRegularPO")) m_comboPOType.AddString("Regular");
+	if (CGlobals::HasPermission("CanEnterInvoicePO")) m_comboPOType.AddString("Invoice");
+	if (CGlobals::HasPermission("CanEnterWarrantyPO")) m_comboPOType.AddString("Warranty");
 
 	if ( (m_bAdding) || (m_strPOType != "Warranty") )
 	{

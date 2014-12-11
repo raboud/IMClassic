@@ -80,8 +80,7 @@ protected:
 inline void CGridActivePOs::SetShowOnlyMyPOs(bool bShowOnlyMyPOs, bool bUpdate)
 {
 	bool bTemp = m_bShowOnlyMyPOs;
-	CPermissions perm;
-	if ((perm.HasPermission("CanViewAllPOs")) && (bShowOnlyMyPOs == false))
+	if ((CGlobals::HasPermission("CanViewAllPOs")) && (bShowOnlyMyPOs == false))
 	{
 		m_bShowOnlyMyPOs = false;
 	}

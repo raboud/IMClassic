@@ -309,7 +309,6 @@ int CGridActivePOs::OnMenuStart(int col, long row, int section)
 	{
 		//* Empty the Menu!!
 		EmptyMenu();
-		CPermissions permissions;
 
 		if ((row >= 0) && (row < this->GetNumberRows()))
 		{

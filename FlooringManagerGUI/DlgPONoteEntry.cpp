@@ -11,7 +11,6 @@
 #include "DialogSchedule.h"
 #include "SetSettings.h"
 #include "SelectMailRecipientsDlg.h"
-#include "DlgWebService.h"
 #include "DlgSendNote.h"
 #include "Globals.h"
 
@@ -147,14 +146,11 @@ BOOL CDlgPONoteEntry::OnInitDialog()
 
 void CDlgPONoteEntry::ConfigureNoteEditFields() 
 {
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	if (pApp)
 	{
-		CPermissions perm;
-		BOOL bCanEditNoteType = perm.HasNoteTypePermission(m_comboNoteType.GetCurrentLBText());
+		BOOL bCanEditNoteType = CGlobals::HasNoteTypePermission(m_comboNoteType.GetCurrentLBText());
 
 		// if we are editing, but do not have permissions, then show the additional window to add notes
-		if ((perm.HasPermission("EditCallNote") == false) && (m_bEditing == true))
+		if ((CGlobals::HasPermission("EditCallNote") == false) && (m_bEditing == true))
 		{
 			// show 2nd Edit box for additional comments and enable it
 			//m_editAddNotes.EnableWindow(bCanEditNoteType);
@@ -309,8 +305,7 @@ void CDlgPONoteEntry::OnOK()
 			{
 				if (MessageBox("Do you want to print note so it can be FAXed to store?", "Print?", MB_YESNO) == IDYES)
 				{
-					CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-					pApp->PrintPONote(m_iId);
+					CGlobals::PrintPONote(m_iId);
 				}
 			}
 			
@@ -372,9 +367,7 @@ bool CDlgPONoteEntry::Validate()
 				}
 			}
 
-			CPermissions perm;
-			
-			if ((TRUE == setNoteType.m_CanSendToExpeditor) && (perm.HasPermission("CanSendNoteToStore") == true))
+			if ((TRUE == setNoteType.m_CanSendToExpeditor) && (CGlobals::HasPermission("CanSendNoteToStore") == true))
 			{
 				m_bAskToSend = true;
 			}
@@ -454,8 +447,7 @@ bool CDlgPONoteEntry::Validate()
 		}
 
 		// update the database
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-		set.m_EnteredByUserID = pApp->GetEmployeeID() ;
+		set.m_EnteredByUserID = CGlobals::GetEmployeeID() ;
 
 		set.m_Scheduled = bSchedule;
 		set.m_UnScheduled = bUnschedule;
@@ -482,7 +474,7 @@ bool CDlgPONoteEntry::Validate()
 		// format the note text
 		if (strAdditionalNotes.GetLength() > 0)
 		{
-			strNotes += "\r\nAdditional notes added by " + pApp->GetUserFirstAndLastName() + " on: " + strDateTime + "\r\n";
+			strNotes += "\r\nAdditional notes added by " + CGlobals::GetUserFirstAndLastName() + " on: " + strDateTime + "\r\n";
 			strNotes += strAdditionalNotes;
 		}
 
@@ -823,12 +815,11 @@ void CDlgPONoteEntry::EnableButtons(int iNoteTypeID)
 		if (TRUE == setNoteType.m_PermissionRequiredToSelect)
 		{
 			bEnable = false;
-			CPermissions perm;
 			CString strPermissionName;
 			CString strTemp = setNoteType.m_NoteTypeDescription;
 			strTemp.Remove(' ');
 			strPermissionName.Format("CanSelectNoteType_%s", strTemp);
-			if (perm.HasPermission(strPermissionName))
+			if (CGlobals::HasPermission(strPermissionName))
 			{
 				bEnable = true;
 			}

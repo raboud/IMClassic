@@ -93,6 +93,8 @@ int CGridCheckList::OnMenuStart(int /* col */, long row, int section)
 		{
 			AddMenuItem(EDIT_CHECK, "Edit") ;
 			AddMenuItem(EDIT_CHECK_DETAILS, "Edit Check Details") ;
+			AddMenuItem(PRINT_CHECK, "Print Check Report") ;
+			AddMenuItem(VIEW_CHECK, "View Check Report") ;
 			AddMenuItem(NEW_CHECK, "New") ;
 		}
 	}
@@ -117,6 +119,14 @@ void CGridCheckList::OnMenuCommand(int /* col */, long row, int section, int ite
 			NewCheck() ;
 			break ;
 
+		case PRINT_CHECK:
+			PrintCheck(row);
+			break;
+
+		case VIEW_CHECK:
+			ViewCheck(row);
+			break;
+
 		default:
 			break ;
 		}
@@ -131,6 +141,20 @@ void CGridCheckList::OnSH_DClicked(int /* col */,long row, RECT * /* rect */, PO
 void CGridCheckList::OnDClicked(int /* col */,long row, RECT * /* rect */, POINT * /* point */, BOOL /* processed */)
 {
 	EditCheckDetail(row) ;
+}
+
+void CGridCheckList::PrintCheck(long row)
+{
+	CString strId = QuickGetText(ID, row) ;
+	int iId = atoi(strId) ;
+	CGlobals::PrintCheck(iId) ;
+}
+
+void CGridCheckList::ViewCheck(long row)
+{
+	CString strId = QuickGetText(ID, row) ;
+	int iId = atoi(strId) ;
+	CGlobals::ViewCheck(iId) ;
 }
 
 void CGridCheckList::EditCheck(long row)

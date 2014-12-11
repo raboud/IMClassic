@@ -339,16 +339,15 @@ int CGridStoreContacts::OnMenuStart(int /* col */, long row, int section)
 	{
 		//* Empty the Menu!!
 		EmptyMenu();
-		CPermissions permissions;
 
-		if (permissions.HasPermission("CanAddStoreContact"))
+		if (CGlobals::HasPermission("CanAddStoreContact"))
 		{
 			AddMenuItem(NEW_CONTACT, "New");
 		}
 
 		if ((row >= 0) && (row < GetNumberRows()))
 		{
-			if (permissions.HasPermission("CanDeleteContact"))
+			if (CGlobals::HasPermission("CanDeleteContact"))
 			{
 				AddMenuItem(DELETE_CONTACT, "Delete");
 			}

@@ -178,6 +178,107 @@ public:
 	static bool RequiresWoodWaiver(int OrderID);
 
 	static bool QueueNoteForExpeditor(int NoteID, bool CopyToSASM, bool CopyToExpeditorEmail);
+
+// .Net Wrappers
+	static bool SPNUpdatePO(CPoList* pListPOs);
+	static bool SPNUpdatePO(CString strStoreNumber, CString strPONumber);
+	static void InitDefaultContext();
+
+	
+	static void PrintPONote(int iNoteID);
+	static void PrintCustSatReport(int iReportID);
+	static void ViewCustSatReport(int iReportID);
+
+	static void PrintPO(int iOrderID);
+	static void ViewPO(int iOrderID);
+	static void PrintStorePickup(int iOrderID);
+	static void PrintWaiver(CPoList* listPOs);	
+	static void PrintReviewChecklist(int OrderID);	
+	static void PrintSchedulingChecklist(int OrderID);	
+	static void PrintWoodFlooringWaiver(int OrderID);
+	static void PrintCheck(int iCheckID);
+	static void ViewCheck(int iCheckID);
+
+	static void PrintWorkOrder(CPoList* listPOs);
+	static void ViewWorkOrder(CPoList* listPOs, bool PrintOnly = false);
+
+	static void ViewWaiver(CPoList* listPOs, bool PrintOnly = false);
+	static void ViewWoodFlooringWaiver(int OrderID, bool PrintOnly = false);
+
+	static void PayrollReport(CString strGrandTotal, COleDateTime timeWE);
+	static void SetEmployeeID();
+	static void SetEmployeeID(int ID);
+	static bool IsAdmin() ;
+	static CString GetUserFirstAndLastName();
+
+	static int m_iUserID;
+	static CString m_strUserName;
+	static bool m_bAdmin;		
+	static int GetEmployeeID();
+
+
+	
+	static void OnReportsPulllist();
+	static void OnReportsCompletedJobsNotPaid();
+	static void OnReportsChargebacksByDate();
+	static void OnSubHelpers();
+	static void OnViewUseralerts();	
+	static void OnWorkmansCompByDate();
+	static void OnLiabilityByDate();
+	static void OnHelpReportissue();
+	static void OnViewActivePOs();
+	static void OnViewActivitylist();
+	static void OnMaterialsDamaged();
+	static void OnReportsSubPhonelist();
+	static void OnBackgroundChecksAlphaByLastName();
+	static void OnJobsAssignments();
+	static void OnPayrollMessages();
+	static void OnStoreInfo();
+	static void OnOverdueInvoices();
+	static void OnOpenInvoices();
+	static void OnReportsBilling();
+	static void OnWarrantySched();
+	static void OnWarrantyOpen();
+	static void OnMaterialRa();
+	static void OnMaterialsNotreceivedyet();
+	static void OnReportsStatusSingle();
+	static void OnReportsWorkSummaryByWeek();
+	static void OnReportsPending();
+	static void OnReportsWeeklyTotals();
+	static void OnNotBilled();
+	static void OnInventory();
+	static void OnWorkmanscompBydate();
+	static void OnWorkmanscompByname();
+	static void OnCriminalCheckName();
+	static void OnReportsStatus();
+	static void SetAdmin();
+
+	static BOOL ValidateMinimumVersion( CString strVersion );
+	static CString GetComputerName();
+
+	static bool HasPermission(const CString strPermission);
+	static bool HasPermission(const CString strPermission, int iMarketID, int iDivisionID);
+	static bool HasPermissionMarket(const CString strPermission, int iMarketID);
+	static bool HasPermissionDivision(const CString strPermission, int iDivisionID);
+	static bool HasNoteTypePermission(const CString strNoteType);
+
+	static bool GetBasicPrices(int iBasicLaborID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice);
+	static bool GetOptionPrices(int iOptionID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice);
+
+	enum PRINT_MODE {PM_INVOICE, PM_WORKORDER, PM_WAIVER, PM_DIAGRAMS, PM_STORE_PICKUP, PM_INSPECTION, PM_PO, PM_WOODWAIVER, PM_ALL} ;
+	static void PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool PrintOnly = false);
+	static bool IsNotPresent(CPoList* listPOs);
+
 };
+
+inline bool CGlobals::HasPermissionMarket(const CString strPermission, int iMarketID)
+{
+	return HasPermission(strPermission, iMarketID, -1);
+}
+
+inline bool CGlobals::HasPermissionDivision(const CString strPermission, int iDivisionID)
+{
+	return HasPermission(strPermission, -1, iDivisionID);
+}
 
 #endif

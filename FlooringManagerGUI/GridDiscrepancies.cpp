@@ -190,7 +190,6 @@ void CGridDiscrepancies::Update()
 
 	setDiscrepancies.m_strFilter = m_strRecordSetFilter;
 	setDiscrepancies.Open() ;
-	CPermissions perm;
 	bool bCanReviewCustomerAlert = CanReviewAlertForCustomer();
 	while (!setDiscrepancies.IsEOF())
 	{
@@ -220,7 +219,7 @@ void CGridDiscrepancies::Update()
 		if ((setDiscrepancies.m_Type != "CUSTOMER") || (setDiscrepancies.m_Type == "CUSTOMER" && m_lCustomerID == -1))
 		{
 			// non-customer alert
-			bCanReviewAlert = perm.HasPermission("CanReviewAlert", setDiscrepancies.m_MarketID, setDiscrepancies.m_DivisionID);
+			bCanReviewAlert = CGlobals::HasPermission("CanReviewAlert", setDiscrepancies.m_MarketID, setDiscrepancies.m_DivisionID);
 		}
 		else
 		{
@@ -492,8 +491,7 @@ void CGridDiscrepancies::UpdateRecordSet()
 				{
 					setDisc.Edit();
 					setDisc.m_Reviewed = QuickGetBool(REVIEWED, lRow);
-					CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-					setDisc.m_ReviewedBy = pApp->GetEmployeeID();
+					setDisc.m_ReviewedBy = CGlobals::GetEmployeeID();
 					setDisc.m_ReviewedDate = CGlobals::GetCurrentSystemTime();
 					setDisc.Update();
 				}
@@ -559,8 +557,6 @@ bool CGridDiscrepancies::CanReviewAlertForCustomer()
 	// exit.
 	bool bCanReview = false;
 
-	CPermissions perm;
-	
 	if (m_lCustomerID != -1)
 	{
 		CSetOrders setOrders(&g_dbFlooring);
@@ -568,7 +564,7 @@ bool CGridDiscrepancies::CanReviewAlertForCustomer()
 		setOrders.Open();
 		while (!setOrders.IsEOF() && bCanReview == false)
 		{
-			bCanReview = perm.HasPermission("CanReviewAlert", CGlobals::MarketIDFromStoreID(setOrders.m_StoreID), CGlobals::DivisionIDFromMaterialTypeID(setOrders.m_MaterialTypeID));
+			bCanReview = CGlobals::HasPermission("CanReviewAlert", CGlobals::MarketIDFromStoreID(setOrders.m_StoreID), CGlobals::DivisionIDFromMaterialTypeID(setOrders.m_MaterialTypeID));
 			setOrders.MoveNext();
 		}
 	}

@@ -226,10 +226,6 @@ bool CDlgPo::SaveData()
 	{
 		UpdateData();
 
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-
-		CPermissions perm;
-
 		if (m_POPropSheet.HasUnknownStatus())
 		{
 			if (IDYES != MessageBox("At least one material has an UNKNOWN status.  Save anyway?", "Question", MB_ICONQUESTION | MB_YESNOCANCEL))
@@ -238,7 +234,7 @@ bool CDlgPo::SaveData()
 			}
 		}
 
-		if (!m_bReadOnly || (perm.HasPermission("CanOverridePO") == true))
+		if (!m_bReadOnly || (CGlobals::HasPermission("CanOverridePO") == true))
 		{
 			if ((m_strPOType != "Invoice"))
 			{
@@ -275,7 +271,7 @@ bool CDlgPo::SaveData()
 				setOrders.m_Paid = false ;
 				setOrders.m_Called = false ;
 				setOrders.SetFieldNull(&setOrders.m_BilledAmount) ;
-				setOrders.m_EnteredBy = pApp->GetEmployeeID() ;
+				setOrders.m_EnteredBy = CGlobals::GetEmployeeID() ;
 				setOrders.m_DateEntered = current;
 				m_bCancelled = false;
 				m_bBilled = false;
@@ -330,7 +326,7 @@ bool CDlgPo::SaveData()
 			// list...
 			if (m_listPOs.GetCount() == 0)
 			{
-				setOrders.m_strFilter.Format("PurchaseOrderNumber = '%s' AND StoreID = %d AND EnteredByID = %d and DateEntered = '%s'", m_strPONumber, m_lStoreId, pApp->GetEmployeeID(), current.Format("%m/%d/%y %H:%M:%S") );
+				setOrders.m_strFilter.Format("PurchaseOrderNumber = '%s' AND StoreID = %d AND EnteredByID = %d and DateEntered = '%s'", m_strPONumber, m_lStoreId, CGlobals::GetEmployeeID(), current.Format("%m/%d/%y %H:%M:%S") );
 				setOrders.Requery();
 				while (!setOrders.IsEOF())
 				{
@@ -352,7 +348,7 @@ bool CDlgPo::SaveData()
 
 			if (bSaveOK)
 			{
-				if ( perm.HasPermission("CanUpdatePOBilledAmount") == true )
+				if ( CGlobals::HasPermission("CanUpdatePOBilledAmount") == true )
 				{
 					CString strAmount ;
 					m_editBillAmount.GetWindowText(strAmount) ;
@@ -373,7 +369,7 @@ bool CDlgPo::SaveData()
 					setOrders.MoveLast() ;
 				}
 
-				if ( perm.HasPermission("CanUpdatePOPaid") == true )
+				if ( CGlobals::HasPermission("CanUpdatePOPaid") == true )
 				{
 					CSetPayments setPayments(&g_dbFlooring) ;
 					setPayments.m_strFilter.Format("[OrderID] = '%d'", setOrders.m_OrderID) ;
@@ -491,9 +487,8 @@ void CDlgPo::OnOK()
 		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
 		::PostMessage(pApp->m_pMainWnd->m_hWnd, wm_UPDATE_USER_ALERTS, 0, 0);
 
-		CPermissions perm;
 		int iDivisionID = CGlobals::DivisionIDFromMaterialTypeID(m_lMaterialType);
-		if (perm.HasPermission("CanMarkPOReviewed", m_lMarketId, iDivisionID))
+		if (CGlobals::HasPermission("CanMarkPOReviewed", m_lMarketId, iDivisionID))
 		{
 			int iOrderID = GetFirstOrderID();
 			if (CGlobals::OrderHasAlerts(iOrderID) == false)
@@ -563,8 +558,7 @@ void CDlgPo::SetReviewed(int iOrderID, bool bReviewed)
 	{
 		setOrders.Edit();
 		setOrders.m_Reviewed = bReviewed;
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-		int iUserID = pApp->GetEmployeeID();
+		int iUserID = CGlobals::GetEmployeeID();
 		setOrders.m_ReviewedBy = iUserID;
 		setOrders.m_ReviewedDate = CGlobals::GetCurrentSystemTime();
 		setOrders.Update();
@@ -582,8 +576,7 @@ void CDlgPo::OnKillfocusType()
 		EnableMaterialTypesCombo(FALSE) ;
 		GetDlgItem(IDOK)->EnableWindow() ;
 
-		CPermissions perm;
-		if ( perm.HasPermission("EditPOBillAmount") == true )
+		if ( CGlobals::HasPermission("EditPOBillAmount") == true )
 		{
 			m_editBillAmount.EnableWindow(m_bReadOnly == false) ;
 			m_editBillAmount.ShowWindow(SW_SHOW) ;
@@ -1626,7 +1619,6 @@ void CDlgPo::InitForConsolidatedView()
 			}
 		}
 
-		CPermissions perm;
 		m_editBillAmount.ShowWindow(SW_HIDE);
 		m_butSevenDay.ShowWindow(SW_HIDE);
 		m_editOrderNo.ShowWindow(SW_HIDE);
@@ -1838,10 +1830,8 @@ void CDlgPo::InitNormal()
 			}*/
 		}
 		
-		CPermissions perm;
-
 		// Init the Bill Amount field
-		if ( perm.HasPermission("EditPOBillAmount") == true )
+		if ( CGlobals::HasPermission("EditPOBillAmount") == true )
 		{
 			if (!setOrders.IsFieldNull(&setOrders.m_BilledAmount))
 			{
@@ -1977,8 +1967,7 @@ void CDlgPo::InitNormal()
 void CDlgPo::InitMenu()
 {
 	CMenu* mmenu = GetMenu();
-	CPermissions perm;
-	if ( (perm.HasPermission("CanClearReadOnlyPO") == true) && (!m_bConsolidatedView))
+	if ( (CGlobals::HasPermission("CanClearReadOnlyPO") == true) && (!m_bConsolidatedView))
 	{
 		mmenu->EnableMenuItem(ID_EDIT_CLEARREADONLY, MF_BYCOMMAND | MF_ENABLED);
 	}
@@ -1987,7 +1976,7 @@ void CDlgPo::InitMenu()
 		mmenu->EnableMenuItem(ID_EDIT_CLEARREADONLY, MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
 	}
 
-	if ( ((m_strPONumber.GetLength() == 4) || perm.HasPermission("CanEditPONumber") == true) && !m_bConsolidatedView)
+	if ( ((m_strPONumber.GetLength() == 4) || CGlobals::HasPermission("CanEditPONumber") == true) && !m_bConsolidatedView)
 	{
 		mmenu->EnableMenuItem(ID_EDIT_EDITPONUMBER, MF_BYCOMMAND | MF_ENABLED);
 	}
@@ -1996,7 +1985,7 @@ void CDlgPo::InitMenu()
 		mmenu->EnableMenuItem(ID_EDIT_EDITPONUMBER, MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
 	}
 
-	if (perm.HasPermission("CanViewCFIPrice") == true)
+	if (CGlobals::HasPermission("CanViewCFIPrice") == true)
 	{
 		mmenu->EnableMenuItem(ID_VIEW_SHOWCFIPRICE, MF_BYCOMMAND | MF_ENABLED);
 	}
@@ -2014,8 +2003,7 @@ void CDlgPo::OnBnClickedViewWorkorder()
 {
 	if (SaveData())
 	{
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-		pApp->ViewWorkOrder(&m_listPOs);
+		CGlobals::ViewWorkOrder(&m_listPOs);
 	}
 }
 
@@ -2306,8 +2294,7 @@ void CDlgPo::CloseCancelActivities( int iOrderID)
 	{
 		CString strDateTime = CGlobals::GetCurrentSystemTime().Format("%m/%d/%Y %H:%M:%S");
 		CString strSQL;
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-		strSQL.Format("UPDATE ActivityList SET ClosedByID = %d, ClosedDate = '%s' WHERE OrderID = %d AND ActivityTypeID = %d AND ClosedByID IS NULL", pApp->GetEmployeeID(), strDateTime, iOrderID, CGlobals::ACTIVITY_CANCELLED_PO_RECEIVED);
+		strSQL.Format("UPDATE ActivityList SET ClosedByID = %d, ClosedDate = '%s' WHERE OrderID = %d AND ActivityTypeID = %d AND ClosedByID IS NULL", CGlobals::GetEmployeeID(), strDateTime, iOrderID, CGlobals::ACTIVITY_CANCELLED_PO_RECEIVED);
 		g_dbFlooring.ExecuteSQL(strSQL);
 	}
 	catch (CDBException* e)
@@ -2324,8 +2311,7 @@ void CDlgPo::CloseChangeActivities( int iOrderID)
 	{
 		CString strDateTime = CGlobals::GetCurrentSystemTime().Format("%m/%d/%Y %H:%M:%S");
 		CString strSQL;
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-		strSQL.Format("UPDATE ActivityList SET ClosedByID = %d, ClosedDate = '%s' WHERE OrderID = %d AND ActivityTypeID = %d AND ClosedByID IS NULL", pApp->GetEmployeeID(), strDateTime, iOrderID, CGlobals::ACTIVITY_CHANGED_PO_RECEIVED);
+		strSQL.Format("UPDATE ActivityList SET ClosedByID = %d, ClosedDate = '%s' WHERE OrderID = %d AND ActivityTypeID = %d AND ClosedByID IS NULL", CGlobals::GetEmployeeID(), strDateTime, iOrderID, CGlobals::ACTIVITY_CHANGED_PO_RECEIVED);
 		g_dbFlooring.ExecuteSQL(strSQL);
 	}
 	catch (CDBException* e)

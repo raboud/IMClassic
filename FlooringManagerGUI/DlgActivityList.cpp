@@ -121,8 +121,7 @@ BOOL CDlgActivityList::OnInitDialog()
 	m_dtpStartDate.SetRange(&dtMin, &dtMax);
 	m_dtpEndDate.SetRange(&dtMin, &dtMax);
 	
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	int iUserID = pApp->GetEmployeeID();
+	int iUserID = CGlobals::GetEmployeeID();
 
 	m_pgridActivityList = new CGridActivityList(iUserID);
 	m_pgridActivityList->AttachGrid(this, IDC_ACTIVITY_LIST_GRID) ;
@@ -207,8 +206,7 @@ void CDlgActivityList::InitControls()
 		m_cbAutoUpdate.SetCheck(BST_CHECKED);
 	}
 
-	CPermissions perm;
-	if (!perm.HasPermission("CanViewAllActivities"))
+	if (!CGlobals::HasPermission("CanViewAllActivities"))
 	{
 		m_btnShowOnlyMyActivities.EnableWindow(FALSE);
 	}

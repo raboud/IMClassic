@@ -132,8 +132,6 @@ void CNotesEdit::HandleAddNote()
 		CString strExisting;
 		GetWindowText(strExisting);
 		
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-		
 		CString strDateTime;
 		COleDateTime time = CGlobals::GetCurrentSystemTime();
 		
@@ -142,7 +140,7 @@ void CNotesEdit::HandleAddNote()
 		{
             strTemp  = "\r\n---------------------------------------------------------\r\n";
 		}
-		strTemp += "Modified By: " + pApp->GetUserFirstAndLastName() + " on " + time.Format("%m/%d/%Y at %I:%M:%S %p") + "\r\n";
+		strTemp += "Modified By: " + CGlobals::GetUserFirstAndLastName() + " on " + time.Format("%m/%d/%Y at %I:%M:%S %p") + "\r\n";
 		strTemp += dlg.m_strNotes;
 		strTemp = strExisting + strTemp;
 		if (strTemp.GetLength() > CGlobals::iMAX_ORDER_NOTES)

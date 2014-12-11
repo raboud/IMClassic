@@ -19,11 +19,6 @@ static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
-//extern CMultiDocTemplate* g_pTemplateWorkOrder ;
-extern CMultiDocTemplate* g_pTemplateInvoice ;
-//extern CMultiDocTemplate* g_pTemplateReportRelease ;
-//extern CMultiDocTemplate* g_pTemplateViewStorePickup ;
-
 #include "DlgDeletePOConfirm.h"
 #include "DlgTransferPO.h"
 #include "DlgChangePONumber.h"
@@ -33,13 +28,8 @@ extern CMultiDocTemplate* g_pTemplateInvoice ;
 #include "DlgFind.h"
 #include "SetVwOrderBasicLaborDetails.h"
 #include "SetViewOrderSOMerchandiseDetails.h"
-#include "InstallerJobData.h"
-//#include "DlgSpnDownload.h"
-#include "DlgWebService.h"
-#include "SetOrderDiagrams.h"
 #include "SetSettings.h"
 #include "DlgPONotesList.h"
-#include "DlgWebService.h"
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -219,10 +209,8 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 		//* Empty the Menu!!
 		EmptyMenu();
 
-		CPermissions perm;
-
 		//** Add the Menu Items
-		if (perm.HasPermission("CanAddPO"))
+		if (CGlobals::HasPermission("CanAddPO"))
 		{
             AddMenuItem(1000,"New PO");
 		}
@@ -345,16 +333,16 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			{
 				nGrayed = 0;
 				
-				nGrayed = (perm.HasPermission("CanEditPONumber")) ? 0 : MF_GRAYED;
+				nGrayed = (CGlobals::HasPermission("CanEditPONumber")) ? 0 : MF_GRAYED;
 				m_pModifyMenu->AppendMenu(MF_STRING | nGrayed, 3201, "Change PO Number") ;
 
-				nGrayed = (perm.HasPermission("CanDeletePO")) ? 0 : MF_GRAYED;
+				nGrayed = (CGlobals::HasPermission("CanDeletePO")) ? 0 : MF_GRAYED;
 				m_pModifyMenu->AppendMenu(MF_STRING | nGrayed, 3200, "Delete PO") ;
 
-				nGrayed = (perm.HasPermission("CanTransferPO")) ? 0 : MF_GRAYED;
+				nGrayed = (CGlobals::HasPermission("CanTransferPO")) ? 0 : MF_GRAYED;
 				m_pModifyMenu->AppendMenu(MF_STRING | nGrayed, 3202, "Transfer PO") ;
 
-				nGrayed = (IsInvoicedNotPaid(row) && perm.HasPermission("CanUnInvoicePO")) ? 0 : MF_GRAYED;
+				nGrayed = (IsInvoicedNotPaid(row) && CGlobals::HasPermission("CanUnInvoicePO")) ? 0 : MF_GRAYED;
 				m_pModifyMenu->AppendMenu(MF_STRING | nGrayed, 3204, "Un-Invoice PO") ;
 			}
 
@@ -362,10 +350,10 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			{
 				nGrayed = 0;
 				
-				nGrayed = (perm.HasPermission("CanDeletePO")) ? 0 : MF_GRAYED;
+				nGrayed = (CGlobals::HasPermission("CanDeletePO")) ? 0 : MF_GRAYED;
 				m_pModifyMenu->AppendMenu(MF_STRING | nGrayed, 3200, "Delete POs") ;
 
-				nGrayed = (perm.HasPermission("CanTransferPO")) ? 0 : MF_GRAYED;
+				nGrayed = (CGlobals::HasPermission("CanTransferPO")) ? 0 : MF_GRAYED;
 				m_pModifyMenu->AppendMenu(MF_STRING | nGrayed, 3202, "Transfer POs") ;
 			}
 
@@ -373,7 +361,7 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			{
 				UINT nGrayed = 0;
 				
-				nGrayed = (perm.HasPermission("CanSwapPONumbers")) ? 0 : MF_GRAYED;
+				nGrayed = (CGlobals::HasPermission("CanSwapPONumbers")) ? 0 : MF_GRAYED;
 				m_pModifyMenu->AppendMenu(MF_STRING | nGrayed, 3203, "Swap PO Numbers") ;
 			}
 			m_menu->AppendMenu(MF_POPUP, (UINT) m_pModifyMenu->m_hMenu, "Modify") ;
@@ -382,7 +370,7 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			int iOrderID = atoi(QuickGetText(ID, row));
 			if (CGlobals::OrderIsReviewed(iOrderID) == true)
 			{
-				if (perm.HasPermission("CanMarkPOReviewed"))
+				if (CGlobals::HasPermission("CanMarkPOReviewed"))
 				{
 					AddMenuItem(4006, "Mark Order Un-Reviewed") ;
 				}
@@ -406,27 +394,27 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 				break ;
 		
 			case 3000:
-				PrintPaperWork(PM_ALL) ;
+				PrintPaperWork(CGlobals::PM_ALL) ;
 				break ;
 		
 			case 3001:
-				PrintPaperWork(PM_INVOICE) ;
+				PrintPaperWork(CGlobals::PM_INVOICE) ;
 				break ;
 
 			case 3002 :
-				PrintPaperWork(PM_WORKORDER) ;
+				PrintPaperWork(CGlobals::PM_WORKORDER) ;
 				break ;
 
 			case 3003:
-				PrintPaperWork(PM_WAIVER) ;
+				PrintPaperWork(CGlobals::PM_WAIVER) ;
 				break ;
 
 			case 3004:
-				PrintPaperWork(PM_DIAGRAMS) ;
+				PrintPaperWork(CGlobals::PM_DIAGRAMS) ;
 				break ;
 
 			case 3005:
-				PrintPaperWork(PM_STORE_PICKUP) ;
+				PrintPaperWork(CGlobals::PM_STORE_PICKUP) ;
 				break ;
 
 			case 3006:
@@ -442,22 +430,22 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 				break;
 
 			case 3009:
-				PrintPaperWork(PM_WOODWAIVER);
+				PrintPaperWork(CGlobals::PM_WOODWAIVER);
 				break;
 
 			case 3101:
-				ViewPaperWork(PM_PO);
+				ViewPaperWork(CGlobals::PM_PO);
 				break;
 			case 3102:
-				ViewPaperWork(PM_WORKORDER);
+				ViewPaperWork(CGlobals::PM_WORKORDER);
 				break;
 
 			case 3103:
-				ViewPaperWork(PM_WAIVER);
+				ViewPaperWork(CGlobals::PM_WAIVER);
 				break;
 
 			case 3104:
-				ViewPaperWork(PM_WOODWAIVER);
+				ViewPaperWork(CGlobals::PM_WOODWAIVER);
 				break;
 
 			case 3200:
@@ -771,10 +759,8 @@ int CPOPickList::OnEditStart(int /* col */, long /* row */, CWnd ** /* edit */)
 	return FALSE ;
 }
 
-bool CPOPickList::InitPOList(PRINT_MODE enMode)
+void CPOPickList::InitPOList()
 {
-	bool bOK = true;
-
 	m_listPOs.RemoveAll();
 
 	//Add the Column Heading to the grid
@@ -784,105 +770,32 @@ bool CPOPickList::InitPOList(PRINT_MODE enMode)
 
 	CWaitCursor curWait ;
 
-	if (enMode != PM_DIAGRAMS)
-	{
-		if (IsNotPresent())
-		{
-			if (MessageBox("Not all material is present. Continue printing paperwork?", "Materials", MB_YESNO) == IDNO )
-			{
-				return false;
-			}
-		}
-	}
-
 	EnumFirstSelected(&iCol, &lRow) ;
 	do
 	{
 		if (lRow != lLastRow)
 		{
-			if ((enMode == PM_INVOICE) || (enMode == PM_ALL))
-			{
-				CSetOrders setOrders(&g_dbFlooring) ;
-				setOrders.m_strFilter.Format("[OrderId] = '%d'", int(QuickGetNumber(-1, lRow))) ;
-				setOrders.m_strSort = "[PurchaseOrderNumber]" ;
-				setOrders.Open() ;
-				if (!setOrders.IsEOF())
-				{
-					if (!setOrders.m_Warrenty && (enMode == PM_INVOICE))
-					{
-						CFrameWnd* pFrame = g_pTemplateInvoice->CreateNewFrame(NULL,NULL) ;
-						if (pFrame != NULL)
-						{
-							pFrame->InitialUpdateFrame(NULL, false) ;
-							CViewInvoice* pView = (CViewInvoice*) pFrame->GetActiveView() ;
-							pView->SetPo(int(QuickGetNumber(-1, lRow))) ;
-							pView->SendMessage(WM_COMMAND, ID_FILE_PRINT, 0l) ;
-						}
-						else
-						{
-							MessageBox("Error trying to print Invoice...Please try to reprint.", "Error", MB_OK);
-						}
-					}
-				}
-				setOrders.Close() ;
-			}
 			m_listPOs.AddTail(int(QuickGetNumber(-1, lRow)));
 		}
 		lLastRow = lRow ;
 	} while (this->EnumNextSelected(&iCol, &lRow) == UG_SUCCESS) ;
-
-	return bOK;
 }
 
-void CPOPickList::ViewPaperWork(PRINT_MODE enMode)
+void CPOPickList::ViewPaperWork(CGlobals::PRINT_MODE enMode)
 {
-	if ( !InitPOList(enMode) )
-	{
-		return;
-	}
+	InitPOList();
 
-	if ( (enMode == PM_PO))
-	{
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-		POSITION pos = m_listPOs.GetHeadPosition() ;
-		if (pos)
-		{
-			pApp->ViewPO(m_listPOs.GetNext(pos));
-		}
-	}
-
-	if ( (enMode == PM_WORKORDER) )
-	{
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-		pApp->ViewWorkOrder(&m_listPOs);		
-	}
-
-	if ( (enMode == PM_WAIVER) )
-	{
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-		pApp->ViewWaiver(&m_listPOs);		
-	}
-
-	if ( (enMode == PM_WOODWAIVER))
-	{
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-		POSITION pos = m_listPOs.GetHeadPosition() ;
-		if (pos)
-		{
-			pApp->ViewWoodFlooringWaiver(m_listPOs.GetNext(pos));
-		}
-	}
+	CGlobals::PreparePaperWork(&m_listPOs, enMode, false);
 }
 
 void CPOPickList::PrintPO()
 {
 	GetSelectedPOs() ;
 
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
 	POSITION pos = m_listPOs.GetHeadPosition() ;
 	while (pos)
 	{
-		pApp->PrintPO(m_listPOs.GetNext(pos));
+		CGlobals::PrintPO(m_listPOs.GetNext(pos));
 	}
 
 	Update(m_lCustomerId) ;
@@ -890,34 +803,31 @@ void CPOPickList::PrintPO()
 
 void CPOPickList::PrintReviewChecklist()
 {
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
 	POSITION pos = m_listPOs.GetHeadPosition() ;
 	while (pos)
 	{
 		int iOrderID = m_listPOs.GetNext(pos);
-		pApp->PrintReviewChecklist(iOrderID);	
+		CGlobals::PrintReviewChecklist(iOrderID);	
 	}		
 }
 
 void CPOPickList::PrintSchedulingChecklist()
 {
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
 	POSITION pos = m_listPOs.GetHeadPosition() ;
 	while (pos)
 	{
 		int iOrderID = m_listPOs.GetNext(pos);
-		pApp->PrintSchedulingChecklist(iOrderID);	
+		CGlobals::PrintSchedulingChecklist(iOrderID);	
 	}		
 }
 
 void CPOPickList::PrintWoodFlooringWaiver()
 {
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
 	POSITION pos = m_listPOs.GetHeadPosition() ;
 	while (pos)
 	{
 		int iOrderID = m_listPOs.GetNext(pos);
-		pApp->PrintWoodFlooringWaiver(iOrderID);
+		CGlobals::PrintWoodFlooringWaiver(iOrderID);
 	}		
 }
 
@@ -925,168 +835,16 @@ void CPOPickList::UpdatePO()
 {
 	GetSelectedPOs() ;
 
-	CDlgWebService dlg;
-	dlg.SPNUpdatePO(&m_listPOs);
+	CGlobals::SPNUpdatePO(&m_listPOs);
 	Update(m_lCustomerId) ;
 }
 
-void CPOPickList::PrintPaperWork(PRINT_MODE enMode)
+void CPOPickList::PrintPaperWork(CGlobals::PRINT_MODE enMode)
 {
-	if ( !InitPOList(enMode) )
-	{
-		return;
-	}
-
-	if ((enMode == PM_WORKORDER) || (enMode == PM_ALL))
-	{
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-		pApp->PrintWorkOrder(&m_listPOs);		
-	}
-
-	if ((enMode == PM_DIAGRAMS) || (enMode == PM_ALL))
-	{
-		CSetOrderDiagrams setOrderDiagrams(&g_dbFlooring) ;
-		setOrderDiagrams.m_strFilter = "OrderID = -1";
-		setOrderDiagrams.Open() ;
-
-		CSetOrders setOrders(&g_dbFlooring) ;
-		setOrders.m_strFilter = "OrderID = -1";
-		setOrders.Open() ;
-
-		POSITION pos = m_listPOs.GetHeadPosition() ;
-		while(pos)
-		{
-			int iOrderID = m_listPOs.GetNext(pos);
-			setOrderDiagrams.m_strFilter.Format("[OrderID] = '%d'", iOrderID) ;
-			setOrderDiagrams.Requery() ;
-			if (!setOrderDiagrams.IsEOF())
-			{
-				if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramNumber) && !setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramDateTime))
-				{
-					CString strTimeStamp = setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%y %H:%M") ;
-					setOrders.m_strFilter.Format("[OrderId] = '%d'", iOrderID) ;
-					setOrders.Requery() ;
-					if (!setOrders.IsEOF())
-					{
-						CWaitCursor curWait ;
-						CString strStoreNumber = CGlobals::StoreNumberFromOrderID(iOrderID);
-						CString strPONumber = setOrders.m_PurchaseOrderNumber;
-						CString strInstallNumber = setOrders.m_CustOrderNo.Trim();
-						CString strMeasureNumber = setOrderDiagrams.m_DiagramNumber;
-						CString strCalc = setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%y %H:%M");
-						if ( !CInstallerJobData::GetDrawing(true, strStoreNumber, strPONumber, strInstallNumber, strMeasureNumber, setOrderDiagrams.m_DiagramDateTime) )
-						{
-							MessageBox("Drawing Number or Calculation date is invalid", "Diagram", MB_OK) ;
-						}
-					}
-					else
-					{
-						MessageBox("Order Number could not be found.", "Diagram", MB_OK) ;
-					}
-				}
-				else if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramFileName))
-				{
-					// if there is no measure number / measure date/time, it was probably a drawing sent via SOSI
-					// and is therefore only accessible via the name
-					if (setOrderDiagrams.m_DiagramFileName.GetLength() > 0)
-					{
-						CSetSettings setSettings(&g_dbFlooring);
-						CString strDiagramFolder = setSettings.GetSetting("DrawingsFolder");
-						CString strFileName = strDiagramFolder + setOrderDiagrams.m_DiagramFileName;
-						if (PathFileExists(strFileName))
-						{
-							ShellExecute(NULL, "print", strFileName, NULL, NULL, SW_HIDE ) ;
-						}
-						else
-						{
-							MessageBox("Could not find file: " + strFileName, "Diagram", MB_OK) ;
-						}
-					}
-				}
-			}
-		}
-	}
-	if ((enMode == PM_WAIVER) || (enMode == PM_ALL))
-	{
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-		pApp->PrintWaiver(&m_listPOs);	
-	}
-	if ((enMode == PM_WOODWAIVER) || (enMode == PM_ALL))
-	{
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-		POSITION pos = m_listPOs.GetHeadPosition() ;
-		while (pos)
-		{
-			int iOrderID = m_listPOs.GetNext(pos);
-			if (CGlobals::RequiresWoodWaiver(iOrderID))
-			{
-				pApp->PrintWoodFlooringWaiver(iOrderID);
-			}
-		}	
-	}
-	if ((enMode == PM_STORE_PICKUP) || (enMode == PM_ALL))
-	{
-		/*if (!CGlobals::HasStorePickup(&m_listPOs))
-		{
-			return;
-		}*/
-
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-		POSITION pos = m_listPOs.GetHeadPosition() ;
-		while (pos)
-		{
-			int iOrderID = m_listPOs.GetNext(pos);
-			if (CGlobals::HasStorePickup(iOrderID))
-			{
-				pApp->PrintStorePickup(iOrderID);
-			}
-		}	
-	}
-	
+	InitPOList();
+	CGlobals::PreparePaperWork(&m_listPOs, enMode, true);
 	Update(m_lCustomerId) ;
 	RedrawAll() ;
-}
-
-bool CPOPickList::IsNotPresent()
-{
-	int iCol ;
-	long lRow ;
-	long lLastRow = -1 ;
-	CString strFilter = "" ;
-	CSetViewOrderSOMerchandiseDetails set(&g_dbFlooring);
-	set.m_strFilter = "((" ;
-	bool bFirst = true ;
-	bool bAllPresent = true ;
-
-	EnumFirstSelected(&iCol, &lRow) ;
-	do
-	{
-		if (lRow != lLastRow)
-		{
-			if (!bFirst)
-			{
-				set.m_strFilter += " OR " ;
-			}
-			strFilter.Format("[OrderId] = '%d'", int(QuickGetNumber(-1, lRow))) ;
-			set.m_strFilter += strFilter ;
-			bFirst = false ;
-		}
-		lLastRow = lRow ;
-	} while (this->EnumNextSelected(&iCol, &lRow) == UG_SUCCESS) ;
-	set.m_strFilter += ") and (Deleted = 0) and (Quantity > 0))" ;
-	set.Open() ;
-
-	while (!set.IsEOF())
-	{
-		if (set.m_MaterialStatusID == 1)
-		{
-			bAllPresent = false ;
-		}
-		set.MoveNext() ;
-	}
-	set.Close() ;
-
-	return !bAllPresent ;
 }
 
 void CPOPickList::CalledList()
@@ -1604,9 +1362,7 @@ void CPOPickList::ViewConsolidatedPOs()
 void CPOPickList::SetPOReviewed(int iOrderID, bool bReviewed)
 {
 	int iReviewed = bReviewed ? 1 : 0;
-
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	int iUserID = pApp->GetEmployeeID();
+	int iUserID = CGlobals::GetEmployeeID();
 	
 	CString strSQL;
 	strSQL.Format("UPDATE Orders SET Reviewed = %d, ReviewedDate = '%s', ReviewedByID = %d WHERE OrderID = %d", iReviewed, CGlobals::GetCurrentSystemTime().Format(), iUserID, iOrderID);

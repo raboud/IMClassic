@@ -201,8 +201,7 @@ BOOL CDlgSubContractor::OnInitDialog()
 	m_editInsuranceRatePct.SetLimitText(iMAX_RETAINAGE_CHARS);
 	m_editState.SetLimitText(2);
 	
-	CPermissions permissions;
-	if (!permissions.IsAdmin())
+	if (!CGlobals::IsAdmin())
 	{
 		ShowRetainageControls(false);
 	}
@@ -236,7 +235,7 @@ BOOL CDlgSubContractor::OnInitDialog()
 		m_pictSubContractor.LoadImage(strPicturePathFilename);
 	}
 
-	if (!permissions.HasPermission("CanBrowseSubContractorPictures"))
+	if (!CGlobals::HasPermission("CanBrowseSubContractorPictures"))
 	{
 		m_butSetPicture.EnableWindow(FALSE);
 	}
@@ -300,8 +299,7 @@ void CDlgSubContractor::OnOK()
 			bool bCont = true;
 			if (!ValidateSSN())
 			{
-				CPermissions perm;
-				if (perm.IsAdmin())
+				if (CGlobals::IsAdmin())
 				{
 					int iResponse = MessageBox("The SSN is invalid. Continue?", "Info", MB_YESNO | MB_ICONQUESTION   );
 					if (iResponse != IDYES)

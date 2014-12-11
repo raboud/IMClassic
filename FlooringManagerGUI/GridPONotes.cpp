@@ -16,7 +16,6 @@
 #include "SetOrders.h"
 #include "SetMaterialType.h"
 
-#include "DlgWebService.h"
 #include "DlgSendNote.h"
 #include "Logger.h"
 
@@ -34,12 +33,10 @@ CGridPONotes::CGridPONotes()
 {
 	HighlightCurrentRow();
 	m_iColumnToSizeTo = NOTES ;
-	m_pperms = new CPermissions();
 }
 
 CGridPONotes::~CGridPONotes()
 {
-	delete m_pperms;
 }
 
 void CGridPONotes::SetOrderId(int iOrderId)
@@ -94,7 +91,7 @@ int CGridPONotes::OnMenuStart(int /* col */, long row, int section)
 		{
 			AddMenuItem(1001, "Edit") ;
 			AddMenuItem(1002, "Print for Faxing") ;
-			bool bGrayed = (m_pperms->HasPermission("CanSendNoteToStore") == FALSE);
+			bool bGrayed = (CGlobals::HasPermission("CanSendNoteToStore") == FALSE);
 			if (CanSendToExpeditor(row))
 			{
 				if (SentToExpeditor(row))
@@ -159,8 +156,7 @@ void CGridPONotes::OnMenuCommand(int /* col */, long row, int section, int item)
 		}
 		else if (item == 1002)  // print for faxing
 		{
-			CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-			pApp->PrintPONote(int(QuickGetNumber(ID, row)));
+			CGlobals::PrintPONote(int(QuickGetNumber(ID, row)));
 		}
 		else if ( (item == 1003) || (item == 1004))  // resend to store , send to store
 		{

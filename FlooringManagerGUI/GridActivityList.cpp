@@ -55,8 +55,7 @@ CGridActivityList::CGridActivityList(int iUserID)
 	aszSortString[MARKET] = "MarketName";
 	aszSortString[DIVISION] = "Division";
 
-	CPermissions perm;
-	m_bCanCloseCancelled = perm.HasPermission("CanMarkPOReviewed");
+	m_bCanCloseCancelled = CGlobals::HasPermission("CanMarkPOReviewed");
 }
 
 CGridActivityList::~CGridActivityList()
@@ -194,9 +193,6 @@ void CGridActivityList::UpdateRecordSetFilter()
 
 	m_strRecordSetFilter += strTemp;
 
-	
-
-	CPermissions permissions;
 	CString strPermissionSQL = "";
 	strTemp = "";
 
@@ -210,7 +206,7 @@ void CGridActivityList::UpdateRecordSetFilter()
 			CString strPermission = setActivityTypes.m_Name;
 			strPermission.Replace(" ", "");
 			strPermission = "CanViewActivity" + strPermission;
-			if (permissions.HasPermission(strPermission))
+			if (CGlobals::HasPermission(strPermission))
 			{
 				strPermissionSQL.Format("ActivityTypeID = %d", setActivityTypes.m_ID);
 			}
@@ -397,9 +393,8 @@ int CGridActivityList::OnMenuStart(int col, long row, int section)
 
 			bool bGrayed = true;
 
-			CPermissions perm;
 			int ClosedByID = (int) QuickGetNumber(CLOSED_BY_ID, row);
-			if ( ( ClosedByID == m_iUserID) || ( ClosedByID != -1 && perm.HasPermission("CanReopenActivity") ))
+			if ( ( ClosedByID == m_iUserID) || ( ClosedByID != -1 && CGlobals::HasPermission("CanReopenActivity") ))
 			{
 				bGrayed = false;
 			}
@@ -678,8 +673,7 @@ BOOL CGridActivityList::HandleAction( long row )
 			break;
 		default:
 			{
-				CPermissions perm;
-				if (perm.IsAdmin())
+				if (CGlobals::IsAdmin())
 				{
 					CloseActivity((int)QuickGetNumber(ACTIVITY_ID, row));
 				}

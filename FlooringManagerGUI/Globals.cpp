@@ -22,13 +22,21 @@
 #include "SetVwMaterialsRequiringWoodWaiver.h"
 #include "DlgPassword.h"
 #include "Logger.h"
+#include "WorkOrderHelper.h"
+#include "WaiverHelper.h"
+#include "ViewInvoice.h"
 
-//#import "mailbee.dll" no_namespace
+#include "SetOrderDiagrams.h"
+#include "InstallerJobData.h"
 
 extern CDatabase g_dbFlooring;
 
+extern CMultiDocTemplate* g_pTemplateInvoice ;
+
 using namespace CFI::Utility::Mail;
 using namespace CFI::InstallationManager::Business;
+using namespace CFI::InstallationManager::Reports::UI;
+using namespace CFI::InstallationManager::SharedForms;
 
 CGlobals::CGlobals(void)
 {
@@ -138,8 +146,7 @@ long CGlobals::CustomerIDFromOrderID(int iOrderID)
 
 void CGlobals::GetUserSetting(const CString& strSetting, bool& bValue, bool bDefault)
 {
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	int iUserID = pApp->GetEmployeeID();
+	int iUserID = CGlobals::GetEmployeeID();
 
 	CSetSettings setSettings(&g_dbFlooring);
 	long lDefault = (bDefault) ? 1 : 0;
@@ -150,8 +157,7 @@ void CGlobals::GetUserSetting(const CString& strSetting, bool& bValue, bool bDef
 
 void CGlobals::GetUserSetting(const CString& strSetting, CString& strValue, const CString& strDefault)
 {
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	int iUserID = pApp->GetEmployeeID();
+	int iUserID = CGlobals::GetEmployeeID();
 
 	CSetSettings setSettings(&g_dbFlooring);
 	strValue = setSettings.GetValueString(strSetting, iUserID, strDefault);
@@ -159,8 +165,7 @@ void CGlobals::GetUserSetting(const CString& strSetting, CString& strValue, cons
 
 void CGlobals::SetUserSetting(const CString& strSetting, bool bValue) 
 {
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	int iUserID = pApp->GetEmployeeID();
+	int iUserID = CGlobals::GetEmployeeID();
 
 	CSetSettings setSettings(&g_dbFlooring);
 		
@@ -176,8 +181,7 @@ void CGlobals::SetUserSetting(const CString& strSetting, bool bValue)
 
 void CGlobals::SetUserSetting(const CString& strSetting, const CString& strValue) 
 {
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	int iUserID = pApp->GetEmployeeID();
+	int iUserID = CGlobals::GetEmployeeID();
 
 	CSetSettings setSettings(&g_dbFlooring);
 	
@@ -747,11 +751,9 @@ CString CGlobals::GetUserEmailPassword()
 
 	try
 	{
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-
 		CSetSettings setSettings(&g_dbFlooring);
 
-		strEmailPassword = setSettings.GetSetting("UserEmailPassword", "", pApp->GetEmployeeID());
+		strEmailPassword = setSettings.GetSetting("UserEmailPassword", "",CGlobals::GetEmployeeID());
 		if (strEmailPassword.GetLength() == 0)
 		{
 			CDlgPassword dlgEmailPassword;
@@ -759,7 +761,7 @@ CString CGlobals::GetUserEmailPassword()
 			if (dlgEmailPassword.DoModal() == IDOK)
 			{
 				strEmailPassword = dlgEmailPassword.GetPassword();
-				setSettings.SetSetting("UserEmailPassword", strEmailPassword, pApp->GetEmployeeID());
+				setSettings.SetSetting("UserEmailPassword", strEmailPassword, CGlobals::GetEmployeeID());
 			}			
 		}
 	}
@@ -851,6 +853,631 @@ bool CGlobals::QueueNoteForExpeditor(int NoteID, bool CopyToSASM, bool CopyToExp
 	
 	return Success;
 }
+
+bool CGlobals::SPNUpdatePO(CPoList* pListPOs)
+{
+	::System::Collections::Generic::List<int>^ l = gcnew ::System::Collections::Generic::List<int>();
+		POSITION pos = pListPOs->GetHeadPosition() ;
+		while (pos)
+		{
+			l->Add(pListPOs->GetNext(pos));
+		}
+
+		return FormSPN::SPNUpdatePO(l);
+}
+
+bool CGlobals::SPNUpdatePO(CString strStoreNumber, CString strPONumber)
+{
+	return FormSPN::SPNUpdatePO(gcnew System::String(strStoreNumber), gcnew System::String(strPONumber));
+}
+
+bool CGlobals::IsNotPresent(CPoList* listPOs)
+{
+	CString strFilter = "" ;
+	CSetViewOrderSOMerchandiseDetails set(&g_dbFlooring);
+	set.m_strFilter = "((" ;
+	bool bFirst = true ;
+	bool bAllPresent = true ;
+
+	POSITION pos = listPOs->GetHeadPosition() ;
+	while(pos)
+	{
+		int iOrderID = listPOs->GetNext(pos);
+		if (!bFirst)
+		{
+			set.m_strFilter += " OR " ;
+		}
+		strFilter.Format("[OrderId] = '%d'", iOrderID) ;
+		set.m_strFilter += strFilter ;
+		bFirst = false ;
+	}
+	set.m_strFilter += ") and (Deleted = 0) and (Quantity > 0))" ;
+	set.Open() ;
+
+	while (!set.IsEOF())
+	{
+		if (set.m_MaterialStatusID == 1)
+		{
+			bAllPresent = false ;
+		}
+		set.MoveNext() ;
+	}
+	set.Close() ;
+
+	return !bAllPresent ;
+}
+	
+void CGlobals::PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool printOnly)
+{
+
+	if (enMode != PM_DIAGRAMS)
+	{
+		if (IsNotPresent(listPOs))
+		{
+			if (MessageBox(NULL, "Not all material is present. Continue printing paperwork?", "Materials", MB_YESNO) == IDNO )
+			{
+				return ;
+			}
+		}
+	}
+
+	if ((enMode == PM_WORKORDER) || (enMode == PM_ALL))
+	{
+		ViewWorkOrder(listPOs, printOnly);
+	}
+
+	if ((enMode == PM_INVOICE) || (enMode == PM_ALL))
+	{
+		POSITION pos = listPOs->GetHeadPosition() ;
+		while(pos)
+		{
+			int iOrderID = listPOs->GetNext(pos);
+
+			CSetOrders setOrders(&g_dbFlooring) ;
+			setOrders.m_strFilter.Format("[OrderId] = '%d'", iOrderID) ;
+			setOrders.m_strSort = "[PurchaseOrderNumber]" ;
+			setOrders.Open() ;
+			if (!setOrders.IsEOF())
+			{
+				if (!setOrders.m_Warrenty && (enMode == PM_INVOICE))
+				{
+					CFrameWnd* pFrame = g_pTemplateInvoice->CreateNewFrame(NULL,NULL) ;
+					if (pFrame != NULL)
+					{
+						pFrame->InitialUpdateFrame(NULL, false) ;
+						CViewInvoice* pView = (CViewInvoice*) pFrame->GetActiveView() ;
+						pView->SetPo(iOrderID) ;
+						pView->SendMessage(WM_COMMAND, ID_FILE_PRINT, 0l) ;
+					}
+					else
+					{
+						MessageBox(NULL, "Error trying to print Invoice...Please try to reprint.", "Error", MB_OK);
+					}
+				}
+			}
+			setOrders.Close() ;
+		}
+	}
+
+	if ((enMode == PM_DIAGRAMS) || (enMode == PM_ALL))
+	{
+		CSetOrderDiagrams setOrderDiagrams(&g_dbFlooring) ;
+		setOrderDiagrams.m_strFilter = "OrderID = -1";
+		setOrderDiagrams.Open() ;
+
+		CSetOrders setOrders(&g_dbFlooring) ;
+		setOrders.m_strFilter = "OrderID = -1";
+		setOrders.Open() ;
+
+		POSITION pos = listPOs->GetHeadPosition() ;
+		while(pos)
+		{
+			int iOrderID = listPOs->GetNext(pos);
+			setOrderDiagrams.m_strFilter.Format("[OrderID] = '%d'", iOrderID) ;
+			setOrderDiagrams.Requery() ;
+			if (!setOrderDiagrams.IsEOF())
+			{
+				if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramNumber) && !setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramDateTime))
+				{
+					CString strTimeStamp = setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%y %H:%M") ;
+					setOrders.m_strFilter.Format("[OrderId] = '%d'", iOrderID) ;
+					setOrders.Requery() ;
+					if (!setOrders.IsEOF())
+					{
+						CWaitCursor curWait ;
+						CString strStoreNumber = CGlobals::StoreNumberFromOrderID(iOrderID);
+						CString strPONumber = setOrders.m_PurchaseOrderNumber;
+						CString strInstallNumber = setOrders.m_CustOrderNo.Trim();
+						CString strMeasureNumber = setOrderDiagrams.m_DiagramNumber;
+						CString strCalc = setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%y %H:%M");
+						if ( !CInstallerJobData::GetDrawing(true, strStoreNumber, strPONumber, strInstallNumber, strMeasureNumber, setOrderDiagrams.m_DiagramDateTime) )
+						{
+							MessageBox(NULL, "Drawing Number or Calculation date is invalid", "Diagram", MB_OK) ;
+						}
+					}
+					else
+					{
+						MessageBox(NULL, "Order Number could not be found.", "Diagram", MB_OK) ;
+					}
+				}
+				else if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramFileName))
+				{
+					// if there is no measure number / measure date/time, it was probably a drawing sent via SOSI
+					// and is therefore only accessible via the name
+					if (setOrderDiagrams.m_DiagramFileName.GetLength() > 0)
+					{
+						CSetSettings setSettings(&g_dbFlooring);
+						CString strDiagramFolder = setSettings.GetSetting("DrawingsFolder");
+						CString strFileName = strDiagramFolder + setOrderDiagrams.m_DiagramFileName;
+						if (PathFileExists(strFileName))
+						{
+							ShellExecute(NULL, "print", strFileName, NULL, NULL, SW_HIDE ) ;
+						}
+						else
+						{
+							MessageBox(NULL, "Could not find file: " + strFileName, "Diagram", MB_OK) ;
+						}
+					}
+				}
+			}
+		}
+	}
+	if ((enMode == PM_WAIVER) || (enMode == PM_ALL))
+	{
+		ViewWaiver(listPOs, printOnly);
+	}
+	if ((enMode == PM_WOODWAIVER) || (enMode == PM_ALL))
+	{
+		POSITION pos = listPOs->GetHeadPosition() ;
+		while (pos)
+		{
+			int iOrderID = listPOs->GetNext(pos);
+			if (CGlobals::RequiresWoodWaiver(iOrderID))
+			{
+				ViewWoodFlooringWaiver(iOrderID, printOnly);
+			}
+		}	
+	}
+	if ((enMode == PM_STORE_PICKUP) || (enMode == PM_ALL))
+	{
+		POSITION pos = listPOs->GetHeadPosition() ;
+		while (pos)
+		{
+			int iOrderID = listPOs->GetNext(pos);
+			if (CGlobals::HasStorePickup(iOrderID))
+			{
+				CGlobals::PrintStorePickup(iOrderID);
+			}
+		}	
+	}
+}
+
+void CGlobals::InitDefaultContext()
+{
+	ReportHelper::InitDefaultContext();
+}
+
+void CGlobals::OnStoreInfo() 
+{
+	ReportHelper::Stores(Mode::View);
+}
+
+void CGlobals::OnOverdueInvoices() 
+{
+	ReportHelper::OverdueInvoices(Mode::View);
+}
+
+void CGlobals::OnOpenInvoices() 
+{
+	ReportHelper::OpenInvoices(Mode::View);
+}
+
+void CGlobals::OnReportsPending() 
+{
+	ReportHelper::PendingInvoices(Mode::View);
+}
+
+void CGlobals::OnNotBilled() 
+{
+	ReportHelper::NotBilled(Mode::View);
+}
+
+void CGlobals::OnInventory() 
+{
+	ReportHelper::Inventory(Mode::View);
+}
+
+int CGlobals::GetEmployeeID()
+{
+	if (CGlobals::m_iUserID == -1)
+	{
+		CGlobals::SetEmployeeID();
+	}
+	
+	return CGlobals::m_iUserID ;
+}
+
+void CGlobals::SetAdmin()
+{
+	CGlobals::GetEmployeeID();
+	UserBLL^ userBll = gcnew UserBLL(m_iUserID, CachedData::Context);
+	m_bAdmin = userBll->IsAdmin;
+}
+
+void CGlobals::OnReportsBilling() 
+{
+	ReportHelper::Billing(Mode::View);
+}
+
+void CGlobals::OnWarrantySched() 
+{
+	ReportHelper::ScheduledWarranties(Mode::View);
+}
+
+void CGlobals::OnWarrantyOpen() 
+{
+	ReportHelper::OpenWarranties(Mode::View);
+}
+
+void CGlobals::OnMaterialRa() 
+{
+	ReportHelper::InventoryWaitingOnRA(Mode::View);
+}
+
+void CGlobals::OnMaterialsNotreceivedyet() 
+{
+	ReportHelper::InventoryNotPresent(Mode::View);
+}
+
+void CGlobals::OnReportsStatus() 
+{
+
+	// This function call will cause the stored procedure to generate data for all stores
+	int iResponse = AfxMessageBox("This report takes more than 1 minute to generate.\n\nClick OK button to proceed, Cancel to quit.", MB_OKCANCEL | MB_ICONINFORMATION);
+
+	if (iResponse == IDOK)
+	{
+		ReportHelper::DetailedStatus(Mode::View);
+	}
+}
+
+void CGlobals::OnReportsStatusSingle() 
+{
+	CDlgStoreSelection dlgStore ;
+
+	if (dlgStore.DoModal() == IDOK)
+	{
+		ReportHelper::DetailedStatusByStore(gcnew System::String(dlgStore.GetStoreNumber()), Mode::View);
+	}
+}
+
+void CGlobals::OnReportsPulllist()
+{
+	ReportHelper::PullList(Mode::View);
+}
+
+void CGlobals::OnReportsWeeklyTotals() 
+{
+	ReportHelper::WeeklyTotals(Mode::View);
+}
+
+void CGlobals::OnReportsCompletedJobsNotPaid()
+{
+	ReportHelper::CompletedJobsNotPaid(Mode::View);
+}
+
+void CGlobals::OnReportsChargebacksByDate()
+{
+	ReportHelper::ChargebacksByDate(Mode::View);
+}
+
+void CGlobals::OnReportsWorkSummaryByWeek()
+{
+	ReportHelper::WeeklyUnitsTotals(Mode::View);
+}
+
+void CGlobals::OnReportsSubPhonelist()
+{
+	ReportHelper::SubContractorsPhoneList(Mode::View);
+}
+
+void CGlobals::OnBackgroundChecksAlphaByLastName()
+{
+	ReportHelper::SubContractorsBackgroundCheckStatus(Mode::View);
+}
+
+void CGlobals::OnJobsAssignments()
+{
+	ReportHelper::InstallerAssignments(Mode::View);
+}
+
+void CGlobals::OnSubHelpers()
+{
+	ReportHelper::HelperAssignments(Mode::View);
+}
+
+void CGlobals::OnWorkmansCompByDate()
+{
+	ReportHelper::WorkmansCompByDate(Mode::View);
+}
+
+void CGlobals::OnLiabilityByDate()
+{
+	ReportHelper::LiabilityByDate(Mode::View);
+}
+
+void CGlobals::OnMaterialsDamaged()
+{
+	ReportHelper::InventoryDamage(Mode::View);
+}
+
+void CGlobals::PrintPONote(int iNoteID)
+{
+	ReportHelper::PONote(iNoteID, Mode::Print);
+}
+
+void CGlobals::PrintCheck(int iCheckID)
+{
+	ReportHelper::Check(iCheckID, Mode::Print);
+}
+
+void CGlobals::ViewCheck(int iCheckID)
+{
+	ReportHelper::Check(iCheckID, Mode::View);
+}
+
+void CGlobals::PrintCustSatReport(int iReportID)
+{
+	ReportHelper::CustomerSatisfactionConcern(iReportID, Mode::Print);
+}
+void CGlobals::ViewCustSatReport(int iReportID)
+{
+	ReportHelper::CustomerSatisfactionConcern(iReportID, Mode::View);
+}
+void CGlobals::PrintPO(int iOrderID)
+{
+	ReportHelper::PO(iOrderID, Mode::Print);
+}
+
+void CGlobals::ViewPO(int iOrderID)
+{
+	ReportHelper::PO(iOrderID, Mode::View);
+}
+
+void CGlobals::PrintStorePickup(int iOrderID)
+{
+	ReportHelper::StorePickup(iOrderID, Mode::Print);
+}
+
+::System::Collections::Generic::List<int>^ GetPoList(CPoList* listPOs)
+{
+	::System::Collections::Generic::List<int>^ l = gcnew ::System::Collections::Generic::List<int>();
+		POSITION pos = listPOs->GetHeadPosition() ;
+		while (pos)
+		{
+			l->Add(listPOs->GetNext(pos));
+		}
+	return l;
+}
+
+void CGlobals::ViewWorkOrder(CPoList* listPOs, bool PrintOnly)
+{
+	CWorkOrderHelper WorkOrderHelper;
+	if (WorkOrderHelper.SetPoList(listPOs))
+	{
+		if (PrintOnly)
+		{
+			ReportHelper::WorkOrder(GetPoList(listPOs), Mode::Print);
+		}
+		else
+		{
+			ReportHelper::WorkOrder(GetPoList(listPOs), Mode::View);
+		}
+	}
+	else
+	{
+		if (WorkOrderHelper.m_strErrorMessage.GetLength() > 0)
+		{
+			MessageBox(NULL, WorkOrderHelper.m_strErrorMessage, "Notice", MB_OK);
+		}
+	}	
+}
+
+void CGlobals::PrintWorkOrder(CPoList* listPOs)
+{
+	ViewWorkOrder(listPOs, true);
+}
+
+void CGlobals::ViewWaiver(CPoList* listPOs, bool PrintOnly)
+{
+	CWaiverHelper WaiverHelper;
+	if (WaiverHelper.SetPoList(listPOs))
+	{
+		if (PrintOnly)
+		{
+			ReportHelper::Waiver(GetPoList(listPOs), Mode::Print);
+		}
+		else
+		{
+			ReportHelper::Waiver(GetPoList(listPOs), Mode::View);
+		}
+	}
+	else
+	{
+		if (WaiverHelper.m_strErrorMessage.GetLength() > 0)
+		{
+			MessageBox(NULL, WaiverHelper.m_strErrorMessage, "Notice", MB_OK);
+		}
+	}	
+}
+
+void CGlobals::PrintWaiver(CPoList* listPOs)
+{
+	ViewWaiver(listPOs, true);
+}
+
+void CGlobals::PrintReviewChecklist(int OrderID)
+{
+	ReportHelper::ReviewChecklist(OrderID, Mode::Print);
+}
+
+void CGlobals::PrintSchedulingChecklist(int OrderID)
+{
+	ReportHelper::SchedulingChecklist(OrderID, Mode::Print);
+}
+
+void CGlobals::ViewWoodFlooringWaiver(int OrderID, bool PrintOnly)
+{
+	if (PrintOnly)
+	{
+		ReportHelper::WoodFlooringWaiver(OrderID, Mode::Print);
+	}
+	else
+	{
+		ReportHelper::WoodFlooringWaiver(OrderID, Mode::View);
+	}
+}
+
+void CGlobals::PrintWoodFlooringWaiver(int OrderID)
+{
+	ViewWoodFlooringWaiver(OrderID, true);
+
+}
+
+void CGlobals::PayrollReport(CString strGrandTotal, COleDateTime timeWE)
+{
+	ReportHelper::PayrollReport(gcnew System::String(strGrandTotal), System::DateTime::FromOADate(timeWE), Mode::View);
+}
+
+void CGlobals::SetEmployeeID(int ID)
+{
+	if (ID != -1)
+	{
+		CachedData::ImpersonateUser(ID);						
+	}
+
+	SetEmployeeID();
+}
+
+void CGlobals::SetEmployeeID()
+{
+	UserBLL^ userBll = CachedData::CurrentUser;
+	m_iUserID = userBll->UserID;
+	m_strUserName = userBll->UserName;
+
+	SetAdmin();
+}
+
+bool CGlobals::IsAdmin()
+{
+	return m_bAdmin;
+}
+
+CString CGlobals::GetUserFirstAndLastName()
+{
+	UserBLL^ userBll = CachedData::CurrentUser;
+
+	return userBll->FullName;	
+}
+
+CString CGlobals::GetComputerName()
+{
+	CString computerName = "";
+	TCHAR buffer[256] = TEXT("");	
+	DWORD dwSize = sizeof(buffer);
+
+	if (GetComputerNameEx(ComputerNamePhysicalDnsHostname, buffer, &dwSize))
+	{
+		computerName = CString(buffer);
+	}
+
+	return computerName;
+}
+
+BOOL CGlobals::ValidateMinimumVersion( CString strVersion )
+{
+	BOOL bValid = FALSE;
+
+	int iMinimumVersionMajorSW = atoi(strVersion.Left(strVersion.Find('.')));
+	int iMinimumVersionMinorSW = atoi(strVersion.Right(strVersion.GetLength() - strVersion.Find('.') - 1));
+
+	CString computerName = GetComputerName();
+	if (computerName.GetLength() > 0)
+	{
+		CSetSettings setSettings(&g_dbFlooring);
+		CString ComputerAndVersionValue = "";
+		ComputerAndVersionValue.Format("%s - %s", computerName, strVersion);
+		setSettings.SetSetting("IMClassicVersion", ComputerAndVersionValue, CGlobals::m_iUserID);
+	}
+
+	VersionBLL^ versionBll = gcnew VersionBLL(CachedData::Context);
+
+	if ( (iMinimumVersionMajorSW > versionBll->IMClassicMinimumVersionMajor) ||
+		 ((iMinimumVersionMajorSW == versionBll->IMClassicMinimumVersionMajor) &&
+		 (iMinimumVersionMinorSW >= versionBll->IMClassicMinimumVersionMinor))
+	   )
+	{
+		bValid = TRUE;
+	}
+	else
+	{
+		CString strReqVersion;
+		strReqVersion.Format("%d.%d", versionBll->IMClassicMinimumVersionMajor, versionBll->IMClassicMinimumVersionMinor);
+		CString strMessage;
+		strMessage.Format("This version of Installation Manager (%s) and is too old to run against the database.  You must run Flooring version %s or higher.",
+			strVersion, strReqVersion);
+		AfxMessageBox(strMessage, MB_OK);
+	}
+
+    return bValid;
+
+}
+
+bool CGlobals::HasPermission(const CString strPermission)
+{
+	int m_iUserID = CGlobals::GetEmployeeID();
+	UserBLL^ userBll = gcnew UserBLL(m_iUserID, CachedData::Context);
+	bool bOK = userBll->HasPermission(gcnew System::String(strPermission));
+	return bOK;
+}
+
+bool CGlobals::HasPermission(const CString strPermission, int iMarketID, int iDivisionID)
+{
+	int m_iUserID = CGlobals::GetEmployeeID();
+	UserBLL^ userBll = gcnew UserBLL(m_iUserID, CachedData::Context);
+	bool bOK = userBll->HasPermission(iMarketID, iDivisionID, gcnew System::String(strPermission));
+	return bOK;
+}
+
+bool CGlobals::HasNoteTypePermission(const CString strNoteType)
+{
+	int m_iUserID = CGlobals::GetEmployeeID();
+	UserBLL^ userBll = gcnew UserBLL(m_iUserID, CachedData::Context);
+	bool bOK = userBll->HasNoteTypePermission(gcnew System::String(strNoteType));
+	return bOK;
+}
+
+
+bool CGlobals::GetBasicPrices(int iBasicLaborID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice)
+{
+	double temp = -11.0;
+	temp = PricingBLL::GetBasicPrice(CachedData::Context, iBasicLaborID, iStoreID, System::DateTime::FromOADate(OrderDate));
+	dPrice = temp;
+	temp = PricingBLL::GetBasicCost(CachedData::Context, iBasicLaborID, iStoreID, System::DateTime::FromOADate(ScheduleDate));
+	dCost = temp;
+	return true;
+}
+
+bool CGlobals::GetOptionPrices(int iOptionID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice)
+{
+	double temp = -11.0;
+	temp = PricingBLL::GetOptionPrice(CachedData::Context, iOptionID, iStoreID, System::DateTime::FromOADate(OrderDate));
+	dPrice = temp;
+	temp = PricingBLL::GetOptionCost(CachedData::Context, iOptionID, iStoreID, System::DateTime::FromOADate(ScheduleDate));
+	dCost = temp;
+	return true;
+}
+
 //
 //UINT CGlobals::SendEmailWorkerThread( LPVOID pParam )
 //{

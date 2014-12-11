@@ -503,8 +503,7 @@ void CGridSOMerchandise::UpdateRecordSet()
 					// if not-reviewed and dirty, update name/date
 					if ((bReviewed) || (bReviewedDirty && !bReviewed))
 					{
-						CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-						setDetails.m_ReviewedBy = pApp->GetEmployeeID();
+						setDetails.m_ReviewedBy = CGlobals::GetEmployeeID();
 						setDetails.m_ReviewedDate = CGlobals::GetCurrentSystemTime();
 					}
 				}

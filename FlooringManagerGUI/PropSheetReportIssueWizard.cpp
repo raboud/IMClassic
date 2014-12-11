@@ -61,10 +61,8 @@ int CPropSheetReportIssueWizard::SubmitIssue()
 	int iSubmitID = -1;
 
 	// get user ID
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-
-	int iUserID = pApp->GetEmployeeID();
-	CString strUserName = pApp->GetUserFirstAndLastName();
+	int iUserID = CGlobals::GetEmployeeID();
+	CString strUserName = CGlobals::GetUserFirstAndLastName();
 	CString strInfo = GetSubmitInfo();
 	CString strType = m_propTypeOfIssue.GetInfo();
 

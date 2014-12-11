@@ -20,8 +20,6 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace CFI::InstallationManager::Reports::UI;
-
 /////////////////////////////////////////////////////////////////////////////
 // CDlgActionReport dialog
 
@@ -238,8 +236,7 @@ BOOL CDlgActionReport::OnInitDialog()
 		m_ppageNature->SetExistingWindowText(set.m_Nature);
 		m_strCurrentNatureText = set.m_Nature;
 
-		CPermissions perm;
-		if ( perm.HasPermission("EditExistingActionReport") == true )
+		if ( CGlobals::HasPermission("EditExistingActionReport") == true )
 		{
 			m_ppageAction->SetExistingReadOnly( false );
 			m_ppageCause->SetExistingReadOnly( false );
@@ -335,7 +332,7 @@ void CDlgActionReport::OnBnClickedActionReportViewprintreportButton()
 	UpdateCurrentRecord();
 
 	ASSERT(m_iId != -1);
-	ReportHelper::CustomerSatisfactionConcern(m_iId, Mode::View);
+	CGlobals::ViewCustSatReport(m_iId);
 }
 
 void CDlgActionReport::UpdateCurrentRecord()
@@ -371,7 +368,7 @@ void CDlgActionReport::UpdateCurrentRecord()
 		{
 			// editing record
 			set.m_LastEditedDate = CGlobals::GetCurrentSystemTime();
-			set.m_LastEditedBy = ((CFlooringApp*) AfxGetApp())->GetEmployeeID();
+			set.m_LastEditedBy = CGlobals::GetEmployeeID();
 		}
 		else
 		{
@@ -379,19 +376,17 @@ void CDlgActionReport::UpdateCurrentRecord()
 			COleDateTime datetime = CGlobals::GetCurrentSystemTime();;
 			set.m_ReportDate = datetime;
 			set.m_LastEditedDate = datetime;
-			set.m_EnteredBy = ((CFlooringApp*) AfxGetApp())->GetEmployeeID();
-			set.m_LastEditedBy = ((CFlooringApp*) AfxGetApp())->GetEmployeeID();
+			set.m_EnteredBy = CGlobals::GetEmployeeID();
+			set.m_LastEditedBy = CGlobals::GetEmployeeID();
 		}
 		
 		// used to id the new record
 		int iUID = set.m_LastEditedBy;
 		COleDateTime dt = set.m_LastEditedDate;		
 
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;	
-
 		CString strName = "";
 
-		strName.Format(_T("Entered By: %s on %s"), pApp->GetUserFirstAndLastName(), dt.Format("%m/%d/%Y %I:%M:%S %p"));
+		strName.Format(_T("Entered By: %s on %s"), CGlobals::GetUserFirstAndLastName(), dt.Format("%m/%d/%Y %I:%M:%S %p"));
 
 		CString strRTFText = "";
 

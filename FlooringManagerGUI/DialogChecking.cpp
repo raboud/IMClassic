@@ -17,7 +17,6 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 extern CMultiDocTemplate* g_pTemplateReportCheck ;
-using namespace CFI::InstallationManager::Reports::UI;
 
 /////////////////////////////////////////////////////////////////////////////
 // CDialogChecking dialog
@@ -99,7 +98,7 @@ void CDialogChecking::OnOK()
 
 	if (MessageBox("Do you wish to print the check report?", "Check Report", MB_YESNO) == IDYES)
 	{
-		ReportHelper::Check(m_iCheckID, Mode::Print);
+		CGlobals::PrintCheck(m_iCheckID);
 	}
 
 	CDialog::OnOK();

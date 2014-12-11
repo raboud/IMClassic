@@ -284,7 +284,7 @@ void CViewInvoice::DrawOptions(CDC *pDC, CRect& rect)
 			m_setOptions.m_strFilter.Format("[OptionID] = '%d'", m_setOptionDetails.m_OptionID) ;
 			m_setOptions.Requery() ;
 
-			if (m_setOptions.m_PrintOnInvoice)
+//			if (m_setOptions.m_PrintOnInvoice)
 			{
 				m_setUOM.m_strFilter.Format("[UnitOfMeasureID] = '%d'", m_setOptions.m_UnitOfMeasureID) ;
 				m_setUOM.Requery() ;
@@ -438,11 +438,11 @@ void CViewInvoice::InitializeFilters()
 {
 	CString strFilter ;
 
-	strFilter.Format("[OrderID] = '%d'", m_lPO) ;
+	strFilter.Format("([OrderID] = '%d')", m_lPO) ;
 
-	m_setMaterialDetails.m_strFilter = "((" + strFilter + ") AND (Deleted = 0) AND (PrintOnInvoice = 1))" ; ;
-	m_setOptionDetails.m_strFilter = "((" + strFilter + ") AND (Deleted = 0) AND (PrintOnInvoice = 1))" ;
-	m_setCustomDetails.m_strFilter = "((" + strFilter + ") AND (Deleted = 0) AND (NotOnInvoice = 0))" ; ;
+	m_setMaterialDetails.m_strFilter = strFilter;
+	m_setOptionDetails.m_strFilter = "(" + strFilter + " AND (Deleted = 0) AND (PrintOnInvoice = 1))" ;
+	m_setCustomDetails.m_strFilter = "(" + strFilter + " AND (Deleted = 0) AND (NotOnInvoice = 0))" ;
 	m_setOrders.m_strFilter = strFilter ;
 
 //	m_setMaterialDetails.m_NotOnWorkOrder = 0 ;

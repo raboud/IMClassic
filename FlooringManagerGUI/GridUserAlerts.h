@@ -63,8 +63,7 @@ protected:
 inline void CGridUserAlerts::SetShowOnlyMyPOs(bool bShowOnlyMyPOs)
 {
 	bool bTemp = m_bShowOnlyMyPOs;
-	CPermissions perm;
-	if ((perm.HasPermission("CanViewAllAlerts")) && (bShowOnlyMyPOs == false))
+	if ((CGlobals::HasPermission("CanViewAllAlerts")) && (bShowOnlyMyPOs == false))
 	{
 		m_bShowOnlyMyPOs = false;
 	}

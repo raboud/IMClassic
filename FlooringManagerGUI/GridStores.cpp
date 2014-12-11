@@ -111,21 +111,20 @@ int CGridStores::OnMenuStart(int /* col */, long row, int section)
 	{
 		//* Empty the Menu!!
 		EmptyMenu();
-		CPermissions permissions;
 
 		if ((row >= 0) && (row < this->GetNumberRows()))
 		{
-			if (permissions.HasPermission("CanEditStore"))
+			if (CGlobals::HasPermission("CanEditStore"))
 			{
 				AddMenuItem(EDIT_STORE, "Edit") ;
 			}
 
-			if (permissions.HasPermission("CanAddStore"))
+			if (CGlobals::HasPermission("CanAddStore"))
 			{
 				AddMenuItem(NEW_STORE, "New") ;
 			}
 
-			if (permissions.HasPermission("CanDeleteStore"))
+			if (CGlobals::HasPermission("CanDeleteStore"))
 			{
 				AddMenuItem(DELETE_STORE, "Delete");
 			}
@@ -170,8 +169,7 @@ void CGridStores::OnDClicked(int /* col */,long row, RECT * /* rect */, POINT * 
 
 void CGridStores::EditStore(long row)
 {
-	CPermissions permissions;
-	if (permissions.HasPermission("CanEditStore"))
+	if (CGlobals::HasPermission("CanEditStore"))
 	{
 		CString strId = QuickGetText(ID, row) ;
 		int iId = atoi(strId) ;

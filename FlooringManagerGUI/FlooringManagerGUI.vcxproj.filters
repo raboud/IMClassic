@@ -135,13 +135,7 @@
     <ClCompile Include="OrderPropPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Permissions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="POPropSheet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pricing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\printer.cpp">
@@ -502,9 +496,6 @@
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DlgUserSelect.cpp">
-      <Filter>Dialogs\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DlgWebService.cpp">
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SelectMailRecipientsDlg.cpp">
@@ -994,13 +985,7 @@
     <ClInclude Include="OrderPropPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Permissions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="POPropSheet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Pricing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Printer.h">
@@ -1355,9 +1340,6 @@
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DlgUserSelect.h">
-      <Filter>Dialogs\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DlgWebService.h">
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SelectMailRecipientsDlg.h">

@@ -211,22 +211,25 @@ copy Flooring.exe.config $(OutDir)</Command>
     </ClCompile>
     <ClCompile Include="FindCustomers.cpp" />
     <ClCompile Include="Flooring.cpp">
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <StringPooling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</StringPooling>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
       <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Windows\Microsoft.NET\Framework\v4.0.30319</AdditionalUsingDirectories>
       <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">$(ProgramFiles)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">false</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="FlooringDoc.cpp" />
+    <ClCompile Include="FlooringDoc.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">false</CompileAsManaged>
+    </ClCompile>
     <ClCompile Include="..\Common\FRecordView.cpp" />
     <ClCompile Include="GetWinVer.cpp" />
     <ClCompile Include="Globals.cpp">
@@ -252,29 +255,7 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="NotesPropPage.cpp" />
     <ClCompile Include="NotesPropSheet.cpp" />
     <ClCompile Include="OrderPropPage.cpp" />
-    <ClCompile Include="Permissions.cpp">
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Async</ExceptionHandling>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</CompileAsManaged>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Async</ExceptionHandling>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Async</ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="POPropSheet.cpp" />
-    <ClCompile Include="Pricing.cpp">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">NotUsing</PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</CompileAsManaged>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExceptionHandling>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">false</ExceptionHandling>
-    </ClCompile>
     <ClCompile Include="..\Common\printer.cpp" />
     <ClCompile Include="PropPageReportIssueDescription.cpp" />
     <ClCompile Include="PropPageReportIssueStorePONumber.cpp" />
@@ -393,16 +374,15 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="..\Common\StatLink.cpp" />
     <ClCompile Include="TransactionDetailsDialog.cpp" />
     <ClCompile Include="DialogChecking.cpp">
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">false</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="DialogDatePicker.cpp" />
     <ClCompile Include="DialogInvoicing.cpp" />
@@ -418,16 +398,15 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="DialogSchedule.cpp" />
     <ClCompile Include="Dib.cpp" />
     <ClCompile Include="DlgActionReport.cpp">
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">false</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="DlgActivePOs.cpp" />
     <ClCompile Include="DlgActivityList.cpp" />
@@ -450,16 +429,15 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="DlgPayrollMessages.cpp" />
     <ClCompile Include="DlgPOEntry.cpp" />
     <ClCompile Include="DlgPONoteEntry.cpp">
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">false</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Sync</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="DlgPONotesList.cpp" />
     <ClCompile Include="DlgReportList.cpp" />
@@ -481,17 +459,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="DlgTransferPO.cpp" />
     <ClCompile Include="DlgUserAlerts.cpp" />
     <ClCompile Include="DlgUserSelect.cpp" />
-    <ClCompile Include="DlgWebService.cpp">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</CompileAsManaged>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExceptionHandling>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">false</ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="SelectMailRecipientsDlg.cpp" />
     <ClCompile Include="SeOrderCustomDetails.cpp" />
     <ClCompile Include="SetActionReport.cpp" />
@@ -633,9 +600,7 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClInclude Include="NotesPropPage.h" />
     <ClInclude Include="NotesPropSheet.h" />
     <ClInclude Include="OrderPropPage.h" />
-    <ClInclude Include="Permissions.h" />
     <ClInclude Include="POPropSheet.h" />
-    <ClInclude Include="Pricing.h" />
     <ClInclude Include="..\Common\Printer.h" />
     <ClInclude Include="PropPageReportIssueDescription.h" />
     <ClInclude Include="PropPageReportIssueStorePONumber.h" />
@@ -795,7 +760,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="DlgTransferPO.h" />
     <ClInclude Include="DlgUserAlerts.h" />
     <ClInclude Include="DlgUserSelect.h" />
-    <ClInclude Include="DlgWebService.h" />
     <ClInclude Include="SelectMailRecipientsDlg.h" />
     <ClInclude Include="SeOrderCustomDetails.h" />
     <ClInclude Include="SetActionReport.h" />

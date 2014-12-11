@@ -21,7 +21,6 @@
 #include "setoptions.h"
 #include "setstores.h"
 
-#include "pricing.h"
 #include "DlgSplitLineItem.h"
 #include "SetDiscrepancies.h"
 #include "Globals.h"
@@ -295,10 +294,9 @@ int CGridLabor::OnCellTypeNotify(long ControlID, int col, long row, long msg, lo
 
 			FilterBasicLabor(strMaterial) ;
 
-			CPricing clPricing;
 			double dCost;
 			double dPrice;
-			bool bPriceOK = clPricing.GetBasicPrices(m_setBasicLabor.m_BasicLaborID, m_datePO, m_datePOScheduleDate, m_iStoreID, dCost, dPrice);
+			bool bPriceOK = CGlobals::GetBasicPrices(m_setBasicLabor.m_BasicLaborID, m_datePO, m_datePOScheduleDate, m_iStoreID, dCost, dPrice);
 		
 			CString strCost = "0.00";
 			CString strPrice = "0.00";
@@ -324,10 +322,9 @@ int CGridLabor::OnCellTypeNotify(long ControlID, int col, long row, long msg, lo
 
 			FilterOptions(strOptionDescription) ;
 
-			CPricing clPricing;
 			double dCost;
 			double dPrice;
-			bool bPriceOK = clPricing.GetOptionPrices(m_setOptions.m_OptionID, m_datePO, m_datePOScheduleDate, m_iStoreID, dCost, dPrice);
+			bool bPriceOK = CGlobals::GetOptionPrices(m_setOptions.m_OptionID, m_datePO, m_datePOScheduleDate, m_iStoreID, dCost, dPrice);
 
 			CString strCost = "0.00";
 			CString strPrice = "0.00";
@@ -866,8 +863,7 @@ void CGridLabor::UpdateRecordSet(long lOrderID)
 						// if not-reviewed and dirty, update name/date
 						if ((bReviewed) || (bReviewedDirty && !bReviewed))
 						{
-							CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-							setBasicDetails.m_ReviewedBy = pApp->GetEmployeeID();
+							setBasicDetails.m_ReviewedBy = CGlobals::GetEmployeeID();
 							setBasicDetails.m_ReviewedDate = CGlobals::GetCurrentSystemTime();
 						}
 					}
@@ -966,8 +962,7 @@ void CGridLabor::UpdateRecordSet(long lOrderID)
 						setOptionsDetails.m_Reviewed = bReviewed;
 						if (bReviewed)
 						{
-							CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-							setOptionsDetails.m_ReviewedBy = pApp->GetEmployeeID();
+							setOptionsDetails.m_ReviewedBy = CGlobals::GetEmployeeID();
 							setOptionsDetails.m_ReviewedDate = CGlobals::GetCurrentSystemTime();
 						}
 					}
@@ -1072,8 +1067,7 @@ void CGridLabor::UpdateRecordSet(long lOrderID)
 						setCustomDetails.m_Reviewed = bReviewed;
 						if (bReviewed)
 						{
-							CFlooringApp* pApp = (CFlooringApp*) AfxGetApp();
-							setCustomDetails.m_ReviewedBy = pApp->GetEmployeeID();
+							setCustomDetails.m_ReviewedBy = CGlobals::GetEmployeeID();
 							setCustomDetails.m_ReviewedDate = CGlobals::GetCurrentSystemTime();
 						}
 					}
@@ -1124,9 +1118,8 @@ void CGridLabor::UpdateGrid()
 	long lDivisionID = setType.m_DivisionID ;
 	setType.Close() ;
 	
-	CPermissions perm;
-	m_bCanEditCustomCost = perm.HasPermission("CanEditCustomCost", lMarketID, lDivisionID) ;
-	m_bCanEditLaborCost = perm.HasPermission("CanEditLaborCost", lMarketID, lDivisionID);
+	m_bCanEditCustomCost = CGlobals::HasPermission("CanEditCustomCost", lMarketID, lDivisionID) ;
+	m_bCanEditLaborCost = CGlobals::HasPermission("CanEditLaborCost", lMarketID, lDivisionID);
 
 	Reset();
 
@@ -2156,11 +2149,9 @@ void CGridLabor::RefreshPrices()
 			ASSERT(!setBasicLabor.IsEOF());
 			if (!setBasicLabor.IsEOF())
 			{
-				CPricing clPricing;
-
 				double dCost;
 				double dPrice;
-				bool bPriceOK = clPricing.GetBasicPrices(setBasicLabor.m_BasicLaborID, m_datePO, m_datePOScheduleDate, m_iStoreID, dCost, dPrice);
+				bool bPriceOK = CGlobals::GetBasicPrices(setBasicLabor.m_BasicLaborID, m_datePO, m_datePOScheduleDate, m_iStoreID, dCost, dPrice);
 				
 				CString strCost = "0.00";
 
@@ -2182,10 +2173,9 @@ void CGridLabor::RefreshPrices()
 			ASSERT(!setOptions.IsEOF());
 			if (!setOptions.IsEOF())
 			{
-				CPricing clPricing;
 				double dCost;
 				double dPrice;
-				bool bPriceOK = clPricing.GetOptionPrices(setOptions.m_OptionID, m_datePO, m_datePOScheduleDate, m_iStoreID, dCost, dPrice);
+				bool bPriceOK = CGlobals::GetOptionPrices(setOptions.m_OptionID, m_datePO, m_datePOScheduleDate, m_iStoreID, dCost, dPrice);
 
 				CString strCost = "0.00";
 

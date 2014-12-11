@@ -24,7 +24,6 @@
 #include "DlgPONoteEntry.h"
 #include "DlgActionReport.h"
 #include "SetActionReport.h"
-#include "ViewInvoice.h"
 #include "SetVwPOPickList.h"
 
 
@@ -33,8 +32,6 @@ const UINT    wm_PO_SELECT = RegisterWindowMessage( "Purchase Order Select" ) ;
 class CPOPickList : public CCFGrid  
 {
 public:
-	enum PRINT_MODE {PM_INVOICE, PM_WORKORDER, PM_WAIVER, PM_DIAGRAMS, PM_STORE_PICKUP, PM_INSPECTION, PM_PO, PM_WOODWAIVER, PM_ALL} ;
-
 	virtual int OnEditStart(int col, long row, CWnd **edit);
 	virtual void OnKeyDown(UINT *vcKey, BOOL processed);
 	virtual void OnMenuCommand(int col,long row,int section,int item);
@@ -52,16 +49,15 @@ protected:
 	void NewReport(void);
 	void CalledList(void);
 	void NewCall(void);
-	bool IsNotPresent();
 
 	void InitSelectedPOs();
 
 	CMenu *m_pPrintMenu;
 	CMenu *m_pViewMenu;
 	CMenu *m_pModifyMenu;
-	void PrintPaperWork(PRINT_MODE enMode);
-	void ViewPaperWork(PRINT_MODE enMode);
-	bool InitPOList(PRINT_MODE enMode);
+	void PrintPaperWork(CGlobals::PRINT_MODE enMode);
+	void ViewPaperWork(CGlobals::PRINT_MODE enMode);
+	void InitPOList();
 	int GetSelectedPOs();
 	bool SwapPONumbers(int iOrderID1, int iOrderID2);
 	void NewPo();
