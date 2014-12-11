@@ -123,12 +123,6 @@ int CGridChecking::OnCellTypeNotify(long Id, int /* col */, long row, long msg, 
 			QuickSetNumber(AMOUNT, row, 0) ;
 
 			SetRowBackColor(row, RGB(192, 192, 192));
-			/*for (int iCol = 0; iCol < this->GetNumberCols(); iCol++)
-			{
-				GetCell(iCol, row, &cell) ;
-				cell.SetBackColor(RGB(192, 192, 192) ) ;
-				SetCell(iCol, row, &cell) ;
-			}*/
 		}
 		else
 		{
@@ -140,29 +134,11 @@ int CGridChecking::OnCellTypeNotify(long Id, int /* col */, long row, long msg, 
 			QuickSetReadOnly(PAID_AMOUNT, row, true) ;
 
 			SetRowBackColor(row, RGB(255,255,255));
-			/*for (int iCol = 0; iCol < this->GetNumberCols(); iCol++)
-			{
-				GetCell(iCol, row, &cell) ;
-				cell.SetBackColor(RGB(255,255,255) ) ;
-				SetCell(iCol, row, &cell) ;
-			}*/
 		}
 		UpdateTotals() ;
 		m_bDirty = true ;
 		this->RedrawRow(row) ;
 	}
-	// DKB commented out trying to integrate new grid from Dundas
-	// UGCT_EDIT is no longer defined...not sure exactly what the purpose
-	// of this code was.  Grid seems to work OK...
-	/*if ((msg == UGCT_EDIT))
-	{
-		QuickSetNumber(PAID_AMOUNT, row,QuickGetNumber(PAID_AMOUNT, row)) ;
-
-		UpdateTotals() ;
-		m_bDirty = true ;
-		this->RedrawRow(row) ;
-	}*/
-
 	return TRUE ;
 }
 
