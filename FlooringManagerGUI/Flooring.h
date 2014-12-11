@@ -209,6 +209,7 @@ public:
 	afx_msg void OnFinancialMaterialpricing();
 	afx_msg void OnMaintenanceSpndiscrepancies();
 	afx_msg void OnMaintenanceUnitTests();
+	afx_msg void OnUpdateMaintenanceUnitTests(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateReportsFinancialMaterialPricing(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateMaintenanceSpndiscrepancies(CCmdUI *pCmdUI);
 	afx_msg void OnViewUseralerts();

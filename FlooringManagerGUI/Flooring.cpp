@@ -153,6 +153,7 @@ BEGIN_MESSAGE_MAP(CFlooringApp, CWinApp)
 	ON_COMMAND(ID_REPORTS_FINANCIAL_MATERIAL_PRICING, OnFinancialMaterialpricing)
 	ON_COMMAND(ID_MAINTENANCE_SPNDISCREPANCIES, OnMaintenanceSpndiscrepancies)
 	ON_COMMAND(ID_MAINTENANCE_UNITTESTS, OnMaintenanceUnitTests)
+	ON_UPDATE_COMMAND_UI(ID_MAINTENANCE_UNITTESTS, OnUpdateMaintenanceUnitTests)
 	ON_UPDATE_COMMAND_UI(ID_REPORTS_FINANCIAL_MATERIAL_PRICING, OnUpdateReportsFinancialMaterialPricing)
 	ON_UPDATE_COMMAND_UI(ID_MAINTENANCE_SPNDISCREPANCIES, OnUpdateMaintenanceSpndiscrepancies)
 	ON_COMMAND(ID_VIEW_USERALERTS, OnViewUseralerts)
@@ -1268,12 +1269,12 @@ void CFlooringApp::OnMaintenanceUnitTests()
 	
 	bool result = tests.TestSendEmail();
 	p_dialogUnitTestResults->AddResults("TestSendEmail()", result);
-
-
-	//dialogUnitTestResults.DoModal();
 }
 
-
+void CFlooringApp::OnUpdateMaintenanceUnitTests(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(m_pperms->HasPermission("CanRunUnitTests"));
+}
 
 void CFlooringApp::OnUpdateReportsFinancialMaterialPricing(CCmdUI *pCmdUI)
 {
