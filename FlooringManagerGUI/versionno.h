@@ -20,12 +20,12 @@
 
 // set generic version info
 #define VINFO_HI_FILEVERSION 			03
-#define VINFO_LO_FILEVERSION 			19
+#define VINFO_LO_FILEVERSION 			20
 #define VINFO_HI_FILEBUILD   			00
 #define VINFO_LO_FILEBUILD   			300
 
 #define VINFO_HI_PRODUCTVERSION 		03
-#define VINFO_LO_PRODUCTVERSION 		19
+#define VINFO_LO_PRODUCTVERSION 		20
 #define VINFO_HI_PRODUCTBUILD   		00
 #define VINFO_LO_PRODUCTBUILD   		300
 
@@ -43,19 +43,19 @@
 // set version stuff according to debug
 	#ifdef _DEBUG
 		#ifdef _BETA
-			#define VINFO_STRING_FILEVERSION		"03.19 (Debug Beta Build 300)\000"
-			#define VINFO_STRING_PRODUCTVERSION		"03.19 (Debug Beta Build 300)\000"
+			#define VINFO_STRING_FILEVERSION		"3.20 (Debug Beta Build 300)\000"
+			#define VINFO_STRING_PRODUCTVERSION		"3.20 (Debug Beta Build 300)\000"
 		#else
-			#define VINFO_STRING_FILEVERSION		"03.19 (Debug Build 300)\000"
-			#define VINFO_STRING_PRODUCTVERSION		"03.19 (Debug Build 300)\000"
+			#define VINFO_STRING_FILEVERSION		"3.20 (Debug Build 300)\000"
+			#define VINFO_STRING_PRODUCTVERSION		"3.20 (Debug Build 300)\000"
 		#endif
 	#else
 		#ifdef _BETA
-			#define VINFO_STRING_FILEVERSION		"03.19 (Release Beta Build 300)\000"
-			#define VINFO_STRING_PRODUCTVERSION		"03.19 (Release Beta Build 300)\000"
+			#define VINFO_STRING_FILEVERSION		"3.20 (Release Beta Build 300)\000"
+			#define VINFO_STRING_PRODUCTVERSION		"3.20 (Release Beta Build 300)\000"
 		#else
-			#define VINFO_STRING_FILEVERSION		"03.19 (Release Build 300)\000"
-			#define VINFO_STRING_PRODUCTVERSION		"03.19 (Release Build 300)\000" 
+			#define VINFO_STRING_FILEVERSION		"3.20 (Release Build 300)\000"
+			#define VINFO_STRING_PRODUCTVERSION		"3.20 (Release Build 300)\000" 
 		#endif
 	#endif
 #endif
