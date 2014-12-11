@@ -80,16 +80,7 @@ void CDialogSchedule::OnOK()
 		{
 			// TODO - rar
 			iOrderID = m_grid.m_listSPNPOsWithModifiedSchedules.GetNext(pos);
-			strSQL.Format("EXEC up_QueueSPNAction %d, '%d'", CGlobals::iSPN_ACTION_SCHEDULE_PO, iOrderID);
-			TRY
-			{
-				g_dbFlooring.ExecuteSQL(strSQL);
-			}
-			CATCH(CDBException, e)
-			{
-				MessageBox(e->m_strError, "Error!");
-			}
-			END_CATCH
+			CGlobals::QueueSchedulePO(iOrderID);
 		}
 	}
 

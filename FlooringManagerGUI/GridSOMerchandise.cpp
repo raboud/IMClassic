@@ -573,9 +573,7 @@ void CGridSOMerchandise::UpdateRecordSet()
 							{
 								if (setDetails.m_MaterialStatusID == iMAT_STATUS_PRESENT)
 								{
-									CString strSQL = "";
-									strSQL.Format("EXEC up_QueueSPNAction %d, '%d'", CGlobals::iSPN_ACTION_VERIFY_PRODUCT_RECEIPT, setDetails.m_ID);
-									g_dbFlooring.ExecuteSQL(strSQL);
+									CGlobals::QueueProductReceipt(setDetails.m_ID);
 								}
 							}
 						}

@@ -346,8 +346,33 @@ bool CDlgPONoteEntry::Validate()
 	if ((m_bDirty) || (strTemp.GetLength() > 0))
 	{
 		// verify the Other field is filled in appropriately
+		bool bSchedule = m_btnScheduled.GetCheck() == BST_CHECKED ;
+		bool bUnschedule = m_btnUnscheduled.GetCheck() == BST_CHECKED ;
+		bool bScheduledAM = m_btnAM.GetCheck() == BST_CHECKED;
+		bool bCustomerToCall = m_btnCustCallback.GetCheck() == BST_CHECKED;
+		bool bAM = m_btnAM.GetCheck() == BST_CHECKED ;
+		bool bPM = m_btnPM.GetCheck() == BST_CHECKED ;
+
+		int iEnteredByUser = CGlobals::GetEmployeeID() ;
+		int iSpokeWithID = GetSpokeWithID();
+		int iNoteType = GetNoteTypeID() ;
+
 		CString strSpokeWith = "";
 		m_comboSpokeWith.GetLBText(m_comboSpokeWith.GetCurSel(), strSpokeWith);
+		CString strNotes ;
+		m_editNotes.GetWindowText(strNotes);
+		CString spokeWith ;
+		m_editSpokeWithOther.GetWindowText(spokeWith) ;
+		CString strAdditionalNotes;
+		m_editAddNotes.GetWindowText(strAdditionalNotes);
+
+		COleDateTime dateSchedStart ;
+		COleDateTime dateSchedEnd ;
+		m_dtScheduledDate.GetTime(dateSchedStart) ;
+		m_ScheduleEndDate.GetTime(dateSchedEnd);
+		dateSchedStart = COleDateTime(dateSchedStart.GetYear(), dateSchedStart.GetMonth(), dateSchedStart.GetDay(), 0, 0, 0) ;
+		dateSchedEnd = COleDateTime(dateSchedEnd.GetYear(), dateSchedEnd.GetMonth(), dateSchedEnd.GetDay(), 0, 0, 0) ;
+
 		if (strSpokeWith == "OTHER")
 		{
 			m_editSpokeWithOther.GetWindowText(strSpokeWith);
@@ -360,7 +385,6 @@ bool CDlgPONoteEntry::Validate()
 		}
 
 		// verify the Person Spoke with is valid based on the Note Type 
-		int iNoteType = GetNoteTypeID() ;
 		CSetNoteTypes setNoteType(&g_dbFlooring);
 		setNoteType.m_strFilter.Format("ID = '%d'", iNoteType);
 		setNoteType.Open();
@@ -383,15 +407,9 @@ bool CDlgPONoteEntry::Validate()
 		}
 		setNoteType.Close();
 
-		bool bSchedule = m_btnScheduled.GetCheck() == BST_CHECKED ;
-		bool bUnschedule = m_btnUnscheduled.GetCheck() == BST_CHECKED ;
-
 		// verify notes are correctly entered.
 		if (!bSchedule && (strSpokeWith != "Left Message") && (strSpokeWith != "No Answer"))
 		{
-			CString strNotes ;
-			m_editNotes.GetWindowText(strNotes);
-
 			if (strNotes.GetLength() < 10)
 			{
 				MessageBox("The appropriate comments must be entered.") ;
@@ -399,19 +417,18 @@ bool CDlgPONoteEntry::Validate()
 				return bValid;
 			}
 		}
+		if (bSchedule)
+		{
+			if (!bAM && !bPM)
+			{
+				MessageBox("Either AM or PM must be selected to schedule the installation.") ;
+				return bValid;
+			}
+		}
 
-		// get our recordset to do the updates
-
-		CString spokeWith ;
-		m_editSpokeWithOther.GetWindowText(spokeWith) ;
-
-		CString strNotes;
-		CString strAdditionalNotes;
 		CString strDateTime;
 		COleDateTime time = CGlobals::GetCurrentSystemTime();
 		strDateTime = time.Format("%m/%d/%Y %I:%M:%S %p");
-		m_editNotes.GetWindowText(strNotes); 
-		m_editAddNotes.GetWindowText(strAdditionalNotes);
 
 		// format the note text
 		if (strAdditionalNotes.GetLength() > 0)
@@ -426,30 +443,14 @@ bool CDlgPONoteEntry::Validate()
 			strNotes = strNotes.Left(CGlobals::iMAX_ORDER_NOTES);
 		}
 
-		BOOL bScheduledAM = m_btnAM.GetCheck() == BST_CHECKED;
-
-		CString strScheduleNote = "";
-
 		// go ahead and get the time filter string in case we need it below.
 		CString strTimeFilter = strDateTime;
 
-		int iSpokeWithID = GetSpokeWithID();
-		BOOL bCustomerToCall = m_btnCustCallback.GetCheck() == BST_CHECKED;
-		COleDateTime DateTimeEntered = COleDateTime(time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond()) ;
-		int iEnteredByUser = CGlobals::GetEmployeeID() ;
-
 		if (bSchedule || bUnschedule)
 		{
-			COleDateTime dateSchedStart ;
-			COleDateTime dateSchedEnd ;
-			m_dtScheduledDate.GetTime(dateSchedStart) ;
-			m_ScheduleEndDate.GetTime(dateSchedEnd);
-
-			dateSchedStart = COleDateTime(dateSchedStart.GetYear(), dateSchedStart.GetMonth(), dateSchedStart.GetDay(), 0, 0, 0) ;
-			dateSchedEnd = COleDateTime(dateSchedEnd.GetYear(), dateSchedEnd.GetMonth(), dateSchedEnd.GetDay(), 0, 0, 0) ;
-
 			if (m_bEditing == false)
 			{
+				CString strScheduleNote = "";
 				if (bSchedule)
 				{
 					strScheduleNote.Format("SCHEDULED FOR: %s %s\r\n", dateSchedStart.Format( "%Y/%m/%d" ), (bScheduledAM) ? "AM" : "PM");
@@ -458,22 +459,12 @@ bool CDlgPONoteEntry::Validate()
 				{
 					strScheduleNote = "UNSCHEDULED\r\n";
 				}
-			
 				strNotes = strScheduleNote + strNotes;
 			}
 
 			CDialogSchedule dlgSched;
 			if (bSchedule)
 			{
-
-				bool bAM = m_btnAM.GetCheck() == BST_CHECKED ;
-				bool bPM = m_btnPM.GetCheck() == BST_CHECKED ;
-				if (!bAM && !bPM)
-				{
-					MessageBox("Either AM or PM must be selected to schedule the installation.") ;
-					return bValid;
-				}
-
 				// Show the job list dialog box
 				dlgSched.SetScheduled(m_iCustomerID, m_iOrderID, dateSchedStart, dateSchedEnd, bAM) ;
 				if (dlgSched.DoModal() == IDCANCEL)
@@ -496,13 +487,13 @@ bool CDlgPONoteEntry::Validate()
 			while (pos)
 			{
 				int iOrderID = dlgSched.m_listPOsWithModifiedSchedules.GetNext(pos);
-				if (iOrderID != m_iOrderID)
+//				if (iOrderID != m_iOrderID)
 				{
 					CString strSQL = "";
 					CString strSQLSafeNotes = strNotes;
 					strSQLSafeNotes.Replace("'", "''");
 					strSQL.Format("EXEC AddPONote %d, %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d, '%s'", iOrderID, iNoteType,
-						iSpokeWithID, spokeWith, DateTimeEntered.Format("%m/%d/%Y %H:%M:%S" ), strSQLSafeNotes, iEnteredByUser,
+						iSpokeWithID, spokeWith, CGlobals::GetCurrentSystemTime().Format("%m/%d/%Y %H:%M:%S" ), strSQLSafeNotes, iEnteredByUser,
 						bCustomerToCall, bSchedule, bUnschedule, bScheduledAM, dateSchedStart.Format("%m/%d/%Y %H:%M:%S" ));
 					TRY
 					{
@@ -527,7 +518,7 @@ bool CDlgPONoteEntry::Validate()
 				set.AddNew();
 				set.m_OrderID = m_iOrderID ;
 				// set the date/time this note was entered.
-				set.m_DateTimeEntered = DateTimeEntered ;
+				set.m_DateTimeEntered = CGlobals::GetCurrentSystemTime() ;
 			}
 			else
 			{

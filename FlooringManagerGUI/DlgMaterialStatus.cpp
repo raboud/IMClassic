@@ -125,9 +125,7 @@ void CDlgMaterialStatus::OnOK()
 				{
 					if (StatusID == iMAT_STATUS_PRESENT)
 					{
-						CString strSQL = "";
-						strSQL.Format("EXEC up_QueueSPNAction %d, '%d'", CGlobals::iSPN_ACTION_VERIFY_PRODUCT_RECEIPT, m_setSOMerchandiseDetails.m_ID);
-						g_dbFlooring.ExecuteSQL(strSQL);
+						CGlobals::QueueProductReceipt(m_setSOMerchandiseDetails.m_ID);
 					}
 				}
 			}

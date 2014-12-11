@@ -844,24 +844,22 @@ CString CGlobals::GetBooleanString(bool BooleanValue)
 
 bool CGlobals::QueueNoteForExpeditor(int NoteID, bool CopyToSASM, bool CopyToExpeditorEmail)
 {
-	bool Success = true;
-
 	Logger::Instance().LogMessage("Entering CGlobals::QueueNoteForExpeditor()");
+	return SPNActionQueueBLL::QueueNoteToExpeditor(Singleton::Connection->Clone(), NoteID, CopyToSASM, CopyToExpeditorEmail); 
+}
 
-	CString strSQL = "";
-	strSQL.Format("EXEC up_QueueSPNAction %d, '%d', '%s', '%s'", CGlobals::iSPN_ACTION_ADD_EXPEDITOR_NOTE, NoteID, CGlobals::GetBooleanString(CopyToSASM), CGlobals::GetBooleanString(CopyToExpeditorEmail));
-	try
-	{
-		g_dbFlooring.ExecuteSQL(strSQL);
-	}
-	catch(CException* e)
-	{
-		TCHAR szError[255];
-		e->GetErrorMessage(szError, 255);
-		Logger::Instance().LogException(szError);
-	}
-	
-	return Success;
+bool CGlobals::QueueSchedulePO(int OrderID)
+{
+	return SPNActionQueueBLL::QueueSchedulePO(Singleton::Connection->Clone(), OrderID); 
+}
+
+bool CGlobals::QueueClosePO(int OrderID, COleDateTime date)
+{
+	return SPNActionQueueBLL::QueueClosePO(Singleton::Connection->Clone(), OrderID, System::DateTime::FromOADate(date)); 
+}
+bool CGlobals::QueueProductReceipt(int soID)
+{
+	return SPNActionQueueBLL::QueueProductReceipt(Singleton::Connection->Clone(), soID); 
 }
 
 bool CGlobals::SPNUpdatePO(CPoList* pListPOs)

@@ -253,14 +253,11 @@ void CGridInvoicing::UpdateRecordSet()
 
 					// we are going to first queue up a command to schedule the PO to ensure it has been scheduled
 					// then we queue up the close PO command with a 30 minute delay built in...
-					CString strSQL = "";
-					strSQL.Format("EXEC up_QueueSPNAction %d, '%d'", CGlobals::iSPN_ACTION_SCHEDULE_PO, iOrderID);
-					g_dbFlooring.ExecuteSQL(strSQL);
+					CGlobals::QueueSchedulePO(iOrderID);
 					COleDateTime datetime = CGlobals::GetCurrentSystemTime();
 					COleDateTimeSpan span = COleDateTimeSpan(0,0,30,0);
 					datetime = datetime + span;
-					strSQL.Format("EXEC up_QueueSPNAction %d, '%d', NULL, NULL, NULL, '%s'", CGlobals::iSPN_ACTION_CLOSE_PO, iOrderID, datetime.Format("%m/%d/%Y %H:%M:%S"));
-					g_dbFlooring.ExecuteSQL(strSQL);
+					CGlobals::QueueClosePO(iOrderID, datetime);
 					iNumSPNActions++;
 				}
 			}

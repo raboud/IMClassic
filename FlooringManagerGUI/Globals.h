@@ -19,13 +19,6 @@ public:
 	static const int iSOSI_VERIFY_PRODUCT_RECEIPT_DOC_ID = 22;
 	static const int iSOSI_MEASURE_RESCHEDULE_WITH_DATE_DOC_ID = 8;
 
-	static const int iSPN_ACTION_CLOSE_PO = 1;
-	static const int iSPN_ACTION_SCHEDULE_PO = 2;
-	static const int iSPN_ACTION_VERIFY_PRODUCT_RECEIPT = 3;
-	static const int iSPN_ACTION_ADD_EXPEDITOR_NOTE = 4;
-	//static const int iSPN_ACTION_SEND_NOTE_VIA_EMAIL = 5;
-	static const int iSPN_ACTION_PRINT_PO = 6;
-
 	static const COLORREF COLOR_BLUE					= RGB(  0,   0, 255) ;  // blue
 	static const COLORREF COLOR_BLACK					= RGB(0,     0,   0) ;  // black
 	static const COLORREF COLOR_WHITE					= RGB(255, 255, 255) ;  // white
@@ -154,6 +147,9 @@ public:
 	static bool RequiresWoodWaiver(int OrderID);
 
 	static bool QueueNoteForExpeditor(int NoteID, bool CopyToSASM, bool CopyToExpeditorEmail);
+	static bool QueueSchedulePO(int OrderID) ;
+    static bool QueueClosePO(int OrderID, COleDateTime date);
+    static bool QueueProductReceipt(int soID);
 
 // .Net Wrappers
 	static bool SPNUpdatePO(CPoList* pListPOs);
