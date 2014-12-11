@@ -80,7 +80,7 @@ bool CQuickBooks::BuildQuickBooksFile( )
 
 		while(!m_set.IsEOF())
 		{
-			if (strInstaller != m_set.m_Installer)
+			if (strInstaller != m_set.m_Installer.MakeUpper())
 			{
 				// about to switch installers
 				if (strInstaller != "")
@@ -111,8 +111,8 @@ bool CQuickBooks::BuildQuickBooksFile( )
 					fileOut.WriteString("ENDTRNS\n") ;
 				}
 
-				CString strLastName = m_set.m_Installer.Left(m_set.m_Installer.Find(',') );
-				CString strFirstName = m_set.m_Installer.Mid(m_set.m_Installer.Find(',') + 2);
+				CString strLastName = m_set.m_Installer.Left(m_set.m_Installer.Find(',') ).MakeUpper();
+				CString strFirstName = m_set.m_Installer.Mid(m_set.m_Installer.Find(',') + 2).MakeUpper();
 				setSub.m_strFilter.Format("[LastName] = '%s' AND [FirstName] = '%s'", strLastName, strFirstName) ;
 				setSub.Requery() ;
 				fRetainage = atof(setSub.m_RetainageRate) ;
@@ -124,7 +124,7 @@ bool CQuickBooks::BuildQuickBooksFile( )
 				dSubjectToRetainage = 0 ;
 				dPayAmount = 0 ;
 				strOutput = "" ;
-				strInstaller = m_set.m_Installer ;
+				strInstaller = m_set.m_Installer.MakeUpper() ;
 
 			}
 
@@ -380,7 +380,7 @@ CString CQuickBooks::ClassTrans(CString strClass)
 	CString strMarket;
 	CString strDivision;
 
-	if (GetMarketDivisionFromPO(m_set.m_PONumber, m_set.m_Installer, strClass, strMarket, strDivision))
+	if (GetMarketDivisionFromPO(m_set.m_PONumber, m_set.m_Installer.MakeUpper(), strClass, strMarket, strDivision))
 	{
 		strMarket.Trim();
 		strDivision.Trim();
@@ -446,7 +446,7 @@ bool CQuickBooks::ValidateDatabase( )
 
 		while (!m_set.IsEOF())
 		{
-			CString strInstaller = m_set.m_Installer ;
+			CString strInstaller = m_set.m_Installer.MakeUpper() ;
 			
 			if (strInstaller != strPrevSubName)
 			{
@@ -460,12 +460,12 @@ bool CQuickBooks::ValidateDatabase( )
 
 				if (setSub.IsEOF())
 				{
-					strMessage.Format("ERROR: %s is not in the SubContractors database.", m_set.m_Installer) ;
+					strMessage.Format("ERROR: %s is not in the SubContractors database.", m_set.m_Installer.MakeUpper()) ;
 					m_astrErrors.Add(strMessage);
 				}
 				else if (setSub.m_Status != 1)  // not active
 				{
-					strMessage.Format("ERROR: %s is not ACTIVE in the SubContractors database.", m_set.m_Installer) ;
+					strMessage.Format("ERROR: %s is not ACTIVE in the SubContractors database.", m_set.m_Installer.MakeUpper());
 					m_astrErrors.Add(strMessage);
 				}
 				else
@@ -533,7 +533,7 @@ bool CQuickBooks::ValidateDatabase( )
 				
 				if (setOrders.IsEOF())
 				{
-					strMessage.Format("ERROR: P.O. Number %s not found. Installer: %s, Cust. Name: %s", m_set.m_PONumber,m_set.m_Installer, m_set.m_Name);
+					strMessage.Format("ERROR: P.O. Number %s not found. Installer: %s, Cust. Name: %s", m_set.m_PONumber, m_set.m_Installer.MakeUpper(), m_set.m_Name);
 					m_astrErrors.Add(strMessage);
 				}
 			}
@@ -543,7 +543,7 @@ bool CQuickBooks::ValidateDatabase( )
 				setStores.Requery();
 				if (setStores.IsEOF())
 				{
-					strMessage.Format("ERROR: P.O. Number %s is not a valid Store Number.  Installer: %s, Cust. Name: %s", m_set.m_PONumber, m_set.m_Installer,m_set.m_Name );
+					strMessage.Format("ERROR: P.O. Number %s is not a valid Store Number.  Installer: %s, Cust. Name: %s", m_set.m_PONumber, m_set.m_Installer.MakeUpper(), m_set.m_Name);
 					m_astrErrors.Add(strMessage);
 				}
 				
@@ -551,11 +551,11 @@ bool CQuickBooks::ValidateDatabase( )
 				{
 					if (m_set.m_Class.GetLength() > 0)
 					{
-						strMessage.Format("ERROR: Class '%s' is wrong for P.O. Number %s (Only H or S  or K are valid).  Installer: %s, Cust. Name: %s", m_set.m_Class, m_set.m_PONumber, m_set.m_Installer,m_set.m_Name );
+						strMessage.Format("ERROR: Class '%s' is wrong for P.O. Number %s (Only H or S  or K are valid).  Installer: %s, Cust. Name: %s", m_set.m_Class, m_set.m_PONumber, m_set.m_Installer.MakeUpper(), m_set.m_Name);
 					}
 					else
 					{
-						strMessage.Format("ERROR: No Class specified for P.O. Number %s (Only H or S or K are valid).  Installer: %s, Cust. Name: %s", m_set.m_PONumber, m_set.m_Installer,m_set.m_Name );
+						strMessage.Format("ERROR: No Class specified for P.O. Number %s (Only H or S or K are valid).  Installer: %s, Cust. Name: %s", m_set.m_PONumber, m_set.m_Installer.MakeUpper(), m_set.m_Name);
 					}
 					m_astrErrors.Add(strMessage);
 				}
@@ -566,18 +566,18 @@ bool CQuickBooks::ValidateDatabase( )
 				{
 					if (m_set.m_Class.GetLength() > 0)
 					{
-						strMessage.Format("ERROR: Class '%s' is wrong for a blank P.O. Number (Only C or O are valid).  Installer: %s, Cust. Name: %s", m_set.m_Class, m_set.m_Installer,m_set.m_Name );
+						strMessage.Format("ERROR: Class '%s' is wrong for a blank P.O. Number (Only C or O are valid).  Installer: %s, Cust. Name: %s", m_set.m_Class, m_set.m_Installer.MakeUpper(), m_set.m_Name);
 					}
 					else
 					{
-						strMessage.Format("ERROR: No Class specified for blank P.O. Number (Only C or O are valid).  Installer: %s, Cust. Name: %s", m_set.m_Installer, m_set.m_Name );
+						strMessage.Format("ERROR: No Class specified for blank P.O. Number (Only C or O are valid).  Installer: %s, Cust. Name: %s", m_set.m_Installer.MakeUpper(), m_set.m_Name);
 					}
 					m_astrErrors.Add(strMessage);
 				}
 			}
 			else
 			{
-				strMessage.Format("ERROR: P.O. Number %s is invalid.  Installer: %s, Cust. Name: %s", m_set.m_PONumber, m_set.m_Installer,m_set.m_Name );
+				strMessage.Format("ERROR: P.O. Number %s is invalid.  Installer: %s, Cust. Name: %s", m_set.m_PONumber, m_set.m_Installer.MakeUpper(), m_set.m_Name);
 				m_astrErrors.Add(strMessage);
 			}
 			
@@ -592,7 +592,7 @@ bool CQuickBooks::ValidateDatabase( )
 		CString strMessage;
 		strMessage.Format("ERROR: Exception Thrown: %s", pDBException->m_strError);
 		m_astrErrors.Add(strMessage);
-		strMessage.Format("  Exception Details: Installer: %s, P.O. Number %s, Name: %s", m_set.m_Installer, m_set.m_PONumber, m_set.m_Name);
+		strMessage.Format("  Exception Details: Installer: %s, P.O. Number %s, Name: %s", m_set.m_Installer.MakeUpper(), m_set.m_PONumber, m_set.m_Name);
 		m_astrErrors.Add(strMessage);
 		pDBException->Delete();
 	}
