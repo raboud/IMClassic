@@ -496,16 +496,6 @@ bool CDlgPONoteEntry::Validate()
 				int iOrderID = dlgSched.m_listPOsWithModifiedSchedules.GetNext(pos);
 //				if (iOrderID != m_iOrderID)
 				{
-//					CString strSQL = "";
-//					CString strSQLSafeNotes = strNotes;
-//					strSQLSafeNotes.Replace("'", "''");
-//					strSQL.Format("EXEC AddPONote %d, %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d, '%s'", iOrderID, iNoteType,
-//						iSpokeWithID, spokeWith, CGlobals::GetCurrentSystemTime().Format("%m/%d/%Y %H:%M:%S" ), strSQLSafeNotes, iEnteredByUser,
-//						bCustomerToCall, bSchedule, bUnschedule, bScheduledAM, dateSchedStart.Format("%m/%d/%Y %H:%M:%S" ));
-
-					//					strSQL.Format("EXEC AddPONote %d, %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d, '%s'", ,
-//						, , , ,
-//						, , , bScheduledAM, dateSchedStart.Format("%m/%d/%Y %H:%M:%S" ));
 
 					set.m_strFilter = "ID = -1";
 
@@ -531,16 +521,6 @@ bool CDlgPONoteEntry::Validate()
 
 					// update the record - this moves the record ptr to the first one.
 					set.Update() ;
-
-//					TRY
-//					{
-////						g_dbFlooring.ExecuteSQL(strSQL);
-//					}
-//					CATCH(CDBException, e)
-//					{
-//						MessageBox(e->m_strError, "Error!");
-//					}
-//					END_CATCH
 				}
 			}
 		}

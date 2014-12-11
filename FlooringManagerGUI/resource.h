@@ -42,8 +42,6 @@
 #define IDD_ACTION_REPORT               149
 #define IDC_CURSOR2                     150
 #define IDD_CALLED_LIST                 152
-#define IDD_JOB_ASSIGNMENT              153
-#define IDD_INSPECTION                  155
 #define IDR_PO                          156
 #define IDD_STORE_SELECTION             157
 #define IDD_REPORT_CONFIG               167
@@ -105,7 +103,6 @@
 #define IDD_SCHEDULE_REASONCODE         231
 #define IDD_ACTIVE_POS                  232
 #define IDD_ACTIVITY_LIST               233
-#define IDD_DIALOG1                     234
 #define IDB_LARGE                       238
 #define IDB_SMALL                       240
 #define IDD_FINDCUSTOMER                241
@@ -251,9 +248,7 @@
 #define IDC_CALLED_STORE                1130
 #define IDC_GRID                        1131
 #define IDC_STORE_FAXED                 1131
-#define IDC_DATE                        1132
 #define IDC_FAXED_STORE                 1132
-#define IDC_JOBS                        1134
 #define IDC_INVOICE                     1135
 #define IDC_STYLE                       1137
 #define IDC_COLOR                       1138
@@ -533,7 +528,6 @@
 #define IDC_ACTIVITIES_DTP_START        1368
 #define IDC_ACTIVITIES_DTP_END          1369
 #define IDC_ACTIVITIES_SHOW_ONLY_OPEN_ACTIVITIES 1370
-#define IDC_CTRL1                       1371
 #define IDC_LEGENDGROUP                 1372
 #define IDC_CUSTOMERINFO_GROUP          1373
 #define IDC_DIRECTIONS_GROUP            1374
