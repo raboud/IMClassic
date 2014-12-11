@@ -480,8 +480,8 @@ void CFlooringApp::OnViewCustomerPo()
 
 void CFlooringApp::OnInvoicing() 
 {
-	CDlgSelectVendor dlgSelectVendor;
-	if ( dlgSelectVendor.DoModal() == IDOK )
+//	CDlgSelectVendor dlgSelectVendor;
+//	if ( dlgSelectVendor.DoModal() == IDOK )
 	{
 		CDialogInvoicing* pdlgInv = new CDialogInvoicing() ;
 		pdlgInv->Create(IDD_INVOICING) ;
