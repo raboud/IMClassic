@@ -826,6 +826,8 @@ bool CGlobals::SendEmail( CString ToAddress, CString FromAddress, CString Passwo
 {
 	CSetSettings setSettings(&g_dbFlooring);
 
+	Error = "";
+
 	CString Server = setSettings.GetSetting("SMTPServer");
 	int PortNumber = atoi(setSettings.GetSetting("SMTPPortNumber", "25"));
 	bool UseSSL = (setSettings.GetSetting("SMTPUseTLS", "0") == "1");

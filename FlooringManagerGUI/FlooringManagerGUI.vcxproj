@@ -235,6 +235,7 @@ copy Flooring.exe.config $(OutDir)</Command>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</CompileAsManaged>
       <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExceptionHandling>
     </ClCompile>
     <ClCompile Include="InstallerJobData.cpp" />
     <ClCompile Include="..\Common\JRSVersions.cpp" />
