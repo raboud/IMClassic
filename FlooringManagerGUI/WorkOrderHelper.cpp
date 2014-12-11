@@ -35,9 +35,12 @@ bool CWorkOrderHelper::SetPoList(CPoList* plistPOs)
 	CString strTemp;
 
 	bool bAlertsExist = false;
+	int iScheduled = 0;
+	int iTotal = 0;
 
 	while (!m_setOrders.IsEOF())
 	{
+		iTotal++;
 		if (m_strPOList != "")
 		{
 			m_strPOList += ", ";
@@ -46,6 +49,7 @@ bool CWorkOrderHelper::SetPoList(CPoList* plistPOs)
 		
 		if (m_setOrders.m_Scheduled)
 		{
+			iScheduled++;
 			if (!m_bScheduled)
 			{
 				m_bScheduled = m_setOrders.m_Scheduled == TRUE  ;
@@ -78,6 +82,16 @@ bool CWorkOrderHelper::SetPoList(CPoList* plistPOs)
 		m_setOrders.MoveNext() ;
 	}
 	m_setOrders.MoveFirst() ;
+
+	if (bOk && (iScheduled != iTotal))
+	{
+		int iResponse = AfxMessageBox("Not all POs are scheduled, would you like to schedule all?", MB_YESNO, NULL);
+		if (iResponse != IDYES)
+		{
+			bOk = false ;
+			m_strErrorMessage = "There is a schedule date mismatch in the selected P.O.s";
+		}
+	}
 
 	if (bOk && m_bScheduled)
 	{

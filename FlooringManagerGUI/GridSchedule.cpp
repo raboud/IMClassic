@@ -154,7 +154,7 @@ void CGridSchedule::SetUnscheduled(long lCustomerId, long lOrderId)
 	setMT.Open();
 	m_bIsMeasure = (setMT.m_HDType == "M");
 	setMT.Close();
-
+	m_dateScheduled = m_setOrders.m_ScheduleStartDate;
 	m_setOrders.m_strFilter.Format("CustomerID = '%d' and Scheduled = '1' and ScheduleStartDate = '%s' and Cancelled = '0' and Deleted = '0'", m_lCustomerId, m_setOrders.m_ScheduleStartDate.Format("%m/%d/%Y")) ;
 	m_setOrders.Requery() ;
 	Fill() ;
