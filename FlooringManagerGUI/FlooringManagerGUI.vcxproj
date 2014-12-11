@@ -86,6 +86,7 @@
       <CompileAs>Default</CompileAs>
       <CompileAsManaged>false</CompileAsManaged>
       <AdditionalOptions>/clr:nostdlib /AI "\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalUsingDirectories>C:\Windows\Microsoft.NET\Framework\v4.0.30319</AdditionalUsingDirectories>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -142,6 +143,7 @@ copy Flooring.exe.config $(OutDir)</Command>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
+      <AdditionalUsingDirectories>C:\Windows\Microsoft.NET\Framework\v4.0.30319</AdditionalUsingDirectories>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_AFXDLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -182,6 +184,9 @@ copy Flooring.exe.config $(OutDir)</Command>
       <Command>xcopy /y /s ..\Common\SSCE\runtime $(OutDir)
 copy Flooring.exe.config $(OutDir)</Command>
     </PostBuildEvent>
+    <ClCompile>
+      <AdditionalUsingDirectories>C:\Windows\Microsoft.NET\Framework\v4.0.30319</AdditionalUsingDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CFIFormView.cpp" />
@@ -234,6 +239,9 @@ copy Flooring.exe.config $(OutDir)</Command>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</CompileAsManaged>
       <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExceptionHandling>
       <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExceptionHandling>
+      <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Windows\Microsoft.NET\Framework\v4.0.30319</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Windows\Microsoft.NET\Framework\v4.0.30319</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">C:\Windows\Microsoft.NET\Framework\v4.0.30319</AdditionalUsingDirectories>
     </ClCompile>
     <ClCompile Include="InstallerJobData.cpp" />
     <ClCompile Include="..\Common\JRSVersions.cpp" />

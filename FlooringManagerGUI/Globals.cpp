@@ -23,7 +23,7 @@
 #include "DlgPassword.h"
 #include "Logger.h"
 
-#import "mailbee.dll" no_namespace
+//#import "mailbee.dll" no_namespace
 
 extern CDatabase g_dbFlooring;
 
