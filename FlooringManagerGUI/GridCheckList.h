@@ -19,7 +19,7 @@ public:
 
 protected:
 	enum {EDIT_CHECK = 2000, EDIT_CHECK_DETAILS, NEW_CHECK, PRINT_CHECK, VIEW_CHECK, ADD_QUICKBOOKS} ;
-	enum {ID = -1, CHECK_NUMBER, CHECK_DATE, CHECK_AMOUNT, VENDOR_ID, QBTXN_ID, LAST} ;
+	enum {ID = -1, CHECK_NUMBER, CHECK_DATE, CHECK_AMOUNT, /* VENDOR_ID, */ QBTXN_ID, LAST} ;
 
 	void EditCheck(long row) ;
 	void EditCheckDetail(long row) ;

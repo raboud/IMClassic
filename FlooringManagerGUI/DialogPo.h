@@ -37,7 +37,7 @@ public:
 
 	CPOPropSheet m_POPropSheet;
 	CNotesPropSheet m_NotesPropSheet;
-	DropTarget m_dropTarget;
+	DropTarget m_diagramDropTarget;
 	
 // Dialog Data
 	//{{AFX_DATA(CDialogPo)

@@ -152,7 +152,7 @@ BOOL CDlgPo::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	CWnd* pW = this->GetDlgItem(IDC_DRAWING_STATIC);
-	BOOL r = m_dropTarget.Register(pW);
+	m_diagramDropTarget.Register(pW);
 	ASSERT(((m_bAdding == false) && m_bConsolidatedView) || !m_bConsolidatedView);
 
 	// hide the diagram name static window by default
@@ -551,7 +551,7 @@ void CDlgPo::OnOK()
 			CloseChangeActivities(iOrderID);
 		}
 
-		m_dropTarget.Revoke();
+		m_diagramDropTarget.Revoke();
 		CDialog::OnOK();
 	}
 }
@@ -2277,13 +2277,13 @@ void CDlgPo::OnCancel()
 	{
 		if (IDYES == MessageBox("Discard Changes?", "Question", MB_ICONQUESTION | MB_YESNO))
 		{
-			m_dropTarget.Revoke();
+			m_diagramDropTarget.Revoke();
 			CDialog::OnCancel();
 		}
 	}
 	else
 	{
-		m_dropTarget.Revoke();
+		m_diagramDropTarget.Revoke();
 		CDialog::OnCancel();
 	}
 }

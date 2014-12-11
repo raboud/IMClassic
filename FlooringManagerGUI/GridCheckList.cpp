@@ -23,7 +23,7 @@ void CGridCheckList::OnSetup()
 	AddColumn(" Check Number ", CHECK_NUMBER);
 	AddColumn("     Date     ", CHECK_DATE);
 	AddColumn("     Amount     ", CHECK_AMOUNT);
-	AddColumn("     Vendor ID     ", VENDOR_ID);
+//	AddColumn("     Vendor ID     ", VENDOR_ID);
 	AddColumn("     QBTxnID     ", QBTXN_ID);
 
 	InitColumnHeadings();
@@ -55,8 +55,9 @@ void CGridCheckList::Update()
 		DeleteRow(0) ;
 	} ;
 
-	CSetVwChecksWithVendorInfo setCheck(&g_dbFlooring);
-	setCheck.m_strSort = "CheckDate DESC" ;
+//	CSetVwChecksWithVendorInfo setCheck(&g_dbFlooring);
+	CSetChecks setCheck(&g_dbFlooring);
+	setCheck.m_strSort = "CheckDate DESC";
 	setCheck.Open() ;
 	CString strTemp;
 	while (!setCheck.IsEOF())
@@ -73,8 +74,8 @@ void CGridCheckList::Update()
 		QuickSetText(CHECK_AMOUNT, lRow, setCheck.m_Amount) ; 
 		QuickSetText(CHECK_NUMBER, lRow, setCheck.m_CheckNumber) ; 
 
-		strTemp.Format("%s - %s", setCheck.m_Description, setCheck.m_VendorNumber);
-		QuickSetText(VENDOR_ID, lRow, strTemp);
+//		strTemp.Format("%s - %s", setCheck.m_Description, setCheck.m_VendorNumber);
+//		QuickSetText(VENDOR_ID, lRow, strTemp);
 		QuickSetText(QBTXN_ID, lRow, setCheck.m_QBTxnId);
 
 		setCheck.MoveNext() ;
