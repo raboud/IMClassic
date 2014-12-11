@@ -4,7 +4,7 @@
 #include ".\SetChecks.h"
 #include "DlgCheckNew.h"
 #include "DialogChecking.h"
-#include "SetVwChecksWithVendorInfo.h"
+#include "SetChecks.h"
 
 CGridCheckList::CGridCheckList(void)
 {
@@ -55,7 +55,6 @@ void CGridCheckList::Update()
 		DeleteRow(0) ;
 	} ;
 
-//	CSetVwChecksWithVendorInfo setCheck(&g_dbFlooring);
 	CSetChecks setCheck(&g_dbFlooring);
 	setCheck.m_strSort = "CheckDate DESC";
 	setCheck.Open() ;

@@ -511,7 +511,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetVwActivityList.cpp" />
     <ClCompile Include="SetvwChargeback.cpp" />
     <ClCompile Include="SetVwChargeBacksTaken.cpp" />
-    <ClCompile Include="SetVwChecksWithVendorInfo.cpp" />
     <ClCompile Include="SetVwDepartmentsContactTitles.cpp" />
     <ClCompile Include="SetVwDiscrepancies.cpp" />
     <ClCompile Include="SetVwMaterialTypesAndMarketsMapping.cpp" />
@@ -774,7 +773,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClInclude Include="SetVwActivityList.h" />
     <ClInclude Include="SetvwChargeback.h" />
     <ClInclude Include="SetVwChargeBacksTaken.h" />
-    <ClInclude Include="SetVwChecksWithVendorInfo.h" />
     <ClInclude Include="SetVwDepartmentsContactTitles.h" />
     <ClInclude Include="SetVwDiscrepancies.h" />
     <ClInclude Include="SetVwMaterialTypesAndMarketsMapping.h" />

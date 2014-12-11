@@ -717,9 +717,6 @@
     <ClCompile Include="SetVwChargeBacksTaken.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SetVwChecksWithVendorInfo.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SetVwDepartmentsContactTitles.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
@@ -1541,9 +1538,6 @@
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetVwChargeBacksTaken.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SetVwChecksWithVendorInfo.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetVwDepartmentsContactTitles.h">
