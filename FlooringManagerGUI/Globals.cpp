@@ -865,12 +865,12 @@ bool CGlobals::SPNUpdatePO(CPoList* pListPOs)
 			l->Add(pListPOs->GetNext(pos));
 		}
 
-		return FormSPN::SPNUpdatePO(l);
+		return FormSPN::SPNUpdatePO(Singleton::Connection, l);
 }
 
 bool CGlobals::SPNUpdatePO(CString strStoreNumber, CString strPONumber)
 {
-	return FormSPN::SPNUpdatePO(gcnew System::String(strStoreNumber), gcnew System::String(strPONumber));
+	return FormSPN::SPNUpdatePO(Singleton::Connection, gcnew System::String(strStoreNumber), gcnew System::String(strPONumber));
 }
 	
 void CGlobals::PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool printOnly)
