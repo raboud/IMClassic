@@ -46,14 +46,6 @@ END_MESSAGE_MAP()
 
 // CDlgWebService message handlers
 
-INT_PTR CDlgWebService::SPNPrintPO(CPoList* pListPOs)
-{
-	m_listPOs.AddHead(pListPOs) ;
-	m_enMode = CDlgWebService::EnCOMMAND_SPN_PRINT_PO;	
-
-	return DoModal();
-}
-
 INT_PTR CDlgWebService::SPNUpdatePO(CPoList* pListPOs)
 {
 	m_listPOs.AddHead(pListPOs) ;
@@ -66,15 +58,6 @@ INT_PTR CDlgWebService::SPNUpdatePO(CString strStoreNumber, CString strPONumber)
 	m_strStoreNumber = strStoreNumber;
 	m_strPONumber = strPONumber;
 	m_enMode = CDlgWebService::EnCOMMAND_SPN_SINGLE_PO;	
-	return DoModal();
-}
-
-INT_PTR CDlgWebService::SPNAddExpeditorNote(int iNoteID, bool bCopyToSASM, bool bCopyToExpeditorEmail)
-{
-	m_iNoteID = iNoteID;
-	m_bCopyToSASM = bCopyToSASM;
-	m_bCopyToExpeditorEmail = bCopyToExpeditorEmail;
-	m_enMode = CDlgWebService::EnCOMMAND_SPN_ADD_NOTE_FOR_EXPEDITOR;
 	return DoModal();
 }
 

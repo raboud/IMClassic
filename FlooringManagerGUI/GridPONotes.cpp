@@ -312,39 +312,6 @@ bool CGridPONotes::SentToExpeditor(long row)
 	return QuickGetBool(SENTVIAXML, row);
 }
 
-//void CGridPONotes::SendToExpeditor(int iNoteID, bool CopyToSASM, bool CopyToExpeditorEmail)
-//{
-//	Logger::Instance().LogMessage("Entering GridPONotes::SendToExpeditor()");	
-//
-//	try
-//	{
-//		CDlgWebService dlg;
-//		bool bInstall = false;
-//		if (CGlobals::IsInstall(m_iOrderId, bInstall))
-//		{
-//			Logger::Instance().LogMessage("Calling dlg.SPNAddExpeditorNote() in GridPONotes::SendToExpeditor()");
-//			dlg.SPNAddExpeditorNote(iNoteID, CopyToSASM, CopyToExpeditorEmail);
-//			Logger::Instance().LogMessage("After calling dlg.SPNAddExpeditorNote() in GridPONotes::SendToExpeditor()");
-//		}
-//
-//		Logger::Instance().LogMessage("Calling Update() in GridPONotes::SendToExpeditor()");
-//		Update();
-//	}
-//	catch (CMemoryException* e)
-//	{
-//		Logger::Instance().LogMessage("MemoryException thrown in GridPONotes::SendToExpeditor()");
-//	}
-//	catch (CFileException* e)
-//	{
-//		Logger::Instance().LogMessage("FileException thrown in GridPONotes::SendToExpeditor()");
-//	}
-//	catch (CException* e)
-//	{
-//		Logger::Instance().LogMessage("Exception thrown in GridPONotes::SendToExpeditor()");
-//	}	
-//
-//	Logger::Instance().LogMessage("Leaving GridPONotes::SendToExpeditor()");
-//}
 
 bool CGridPONotes::IsRowDirty(long lRow)
 {

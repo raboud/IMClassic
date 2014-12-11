@@ -876,7 +876,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetVwUserAlerts.h" />
     <ClInclude Include="vwPOMarketDivision.h" />
     <ClInclude Include="vwWorkOrderMaterialsChecklist.h" />
-    <ClInclude Include="SOSIWebService.h" />
     <ClInclude Include="SpnWebService.h" />
   </ItemGroup>
   <ItemGroup>
@@ -946,11 +945,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <CustomBuild Include="SpnWebService\SpnWebService.wsdl">
       <SubType>Designer</SubType>
     </CustomBuild>
-    <CustomBuild Include="SOSIWebService\results.discomap" />
-    <CustomBuild Include="SOSIWebService\SOSIWebService.disco">
-      <DeploymentContent>true</DeploymentContent>
-    </CustomBuild>
-    <CustomBuild Include="SOSIWebService\SOSIWebService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Common\Ssce\sdk\lib\SSCE5332.lib" />

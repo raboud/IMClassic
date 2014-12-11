@@ -429,24 +429,6 @@ int CGlobals::DivisionIDFromMaterialTypeID(int iMaterialTypeID)
 	return iDivisionID;
 }
 
-bool CGlobals::RefreshPrices( int /* iOrderID */)
-{
-	// this function calls a stored procedure up_RefreshPrices to retrieve the latest prices for all 
-	// items associated with this order id
-	bool bSuccess = true;
-
-	//CCFIDatabase db;
-	//db.OpenEx( _T( "DSN=Flooring"), CDatabase::noOdbcDialog);
-	//db.PrepareStoreProcedure("up_RefreshPrices");
-	//db.SetParam_Long(1, iOrderID);
-	//db.ExecuteSQL("{?=call up_RefreshPrices(?)}");
-	//long retcode = db.GetParam_Long(0);
-	//bSuccess = (retcode == 0);
-	//db.Close();
-
-    return bSuccess;
-}
-
 bool CGlobals::CustomerHasAlerts(int iCustomerID)
 {
 	if (iCustomerID == -1) return false;
@@ -816,95 +798,6 @@ bool CGlobals::SendEmail( CString ToAddress, CString FromAddress, CString Passwo
 	return sendSuccessful;
 }
 
-//bool CGlobals::SendEmail( CString strTo, CString strFrom, CString strPassword, CString strCC, CString strReplyToAddr, CString strSubject, CString strBody, CString &strError )
-//{
-//	bool Success = false;
-//
-//	try
-//	{
-//		//CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-//		CSetSettings setSettings(&g_dbFlooring);		
-//
-//		CString strServer = setSettings.GetSetting("SMTPServer");
-//		CString strPortNumber = setSettings.GetSetting("SMTPPortNumber", "25");
-//		CString strUseTLS = setSettings.GetSetting("SMTPUseTLS", "0");
-//		CString strSMTPAuthMethod = setSettings.GetSetting("SMTPAuthMethod", "0");		
-//		
-//		setSettings.Close();
-//
-//		ISMTPPtr pMailer("MailBee.SMTP");
-//		ISSLPtr pSSL("MailBee.SSL");
-//
-//		// Logging is useful for troubleshooting
-//		COleDateTime currentDate = CGlobals::GetCurrentSystemTime();
-//		CString currentDateString = currentDate.Format("%m%d%Y");
-//		CString emailLogFile = "";
-//		emailLogFile.Format("C:\\Temp\\IMC-Email-%s.log", currentDateString);
-//		pMailer->LogFilePath = emailLogFile.AllocSysString();
-//		pMailer->EnableLogging = TRUE;
-//		//pMailer->ClearLog();
-//
-//		pMailer->LicenseKey = "MBC600-8C8477E62A-3A51B6CED49D3706290496A96E4D900C";		
-//	
-//		if (strUseTLS == "1")
-//		{		
-//			pSSL->LicenseKey = "MBC600-8C8477E62A-3A51B6CED49D3706290496A96E4D900C";
-//			pSSL->UseStartTLS = TRUE;
-//			pMailer->SSL = pSSL;
-//		}				
-//	
-//		pMailer->PortNumber = atoi(strPortNumber);
-//
-//		pMailer->ServerName = strServer.AllocSysString();
-//							
-//		// Using authentication is required by most SMTP servers
-//		pMailer->AuthMethod = atoi(strSMTPAuthMethod);
-//		pMailer->UserName = strFrom.AllocSysString();
-//		pMailer->Password = strPassword.AllocSysString();
-//
-//		// Set e-mail values
-//		pMailer->FromAddr = strFrom.AllocSysString();
-//		pMailer->Message->ReplyToAddr = strReplyToAddr.AllocSysString();
-//		pMailer->ToAddr = strTo.AllocSysString();
-//		if (strCC.GetLength() > 0)
-//		{
-//			pMailer->CCAddr = strCC.AllocSysString();
-//		}
-//		pMailer->Subject = strSubject.AllocSysString();
-//		pMailer->BodyFormat = 0;
-//		pMailer->BodyText = strBody.AllocSysString();
-//		pMailer->Charset = "UTF-8";
-//
-//		Success = (pMailer->Send() == VARIANT_TRUE);
-//			
-//		if (pMailer->IsError)
-//		{
-//			long ErrorCode = pMailer->ErrCode;
-//			CString ErrorDesc = pMailer->ErrDesc.GetBSTR();
-//			CString ServerResponse = pMailer->ServerResponse.GetBSTR();
-//			strError.Format("Error Description: %s (Err. Code %lu).  Server Response: %s", ErrorDesc, ErrorCode, ServerResponse);
-//						
-//			if (strError.MakeUpper().Find("AUTHENTICATION FAILED") > 0)
-//			{
-//				strError = "Could not send the email.  Please verify that your password is correct.";
-//			}
-//		}
-//				
-//		pMailer->Disconnect();	
-//
-//	}
-//	catch(CException* pe)
-//	{
-//		TCHAR szError[1024];
-//		pe->GetErrorMessage(szError, sizeof(szError));
-//		strError = _T("Exception Thrown: ");
-//		strError += szError;
-//		pe->Delete();
-//	}
-//
-//	return Success;
-//}
-
 bool CGlobals::RequiresWoodWaiver(int OrderID)
 {
 	bool requiresWoodWaiver = false;
@@ -958,26 +851,26 @@ bool CGlobals::QueueNoteForExpeditor(int NoteID, bool CopyToSASM, bool CopyToExp
 	
 	return Success;
 }
-
-UINT CGlobals::SendEmailWorkerThread( LPVOID pParam )
-{
-	SendEmailParams* pEmailParams = (SendEmailParams*)pParam;
-
-	if (pEmailParams == NULL)
-	{
-		return 1;
-	}
-
-	CString strError = "";
-	bool Success = CGlobals::SendEmail(pEmailParams->strTo, pEmailParams->strFrom, pEmailParams->strPassword, pEmailParams->strCC, pEmailParams->strReplyToAddr, pEmailParams->strSubject, pEmailParams->strBody, strError);
-
-	if (!Success)
-	{
-		CString* s = new CString(strError);
-		::PostMessage(pEmailParams->parentWindowHandle, wm_SendEmailError, 0, (LPARAM)s);
-	}
-
-	delete pEmailParams;
-
-	return 0;
-}
+//
+//UINT CGlobals::SendEmailWorkerThread( LPVOID pParam )
+//{
+//	SendEmailParams* pEmailParams = (SendEmailParams*)pParam;
+//
+//	if (pEmailParams == NULL)
+//	{
+//		return 1;
+//	}
+//
+//	CString strError = "";
+//	bool Success = CGlobals::SendEmail(pEmailParams->strTo, pEmailParams->strFrom, pEmailParams->strPassword, pEmailParams->strCC, pEmailParams->strReplyToAddr, pEmailParams->strSubject, pEmailParams->strBody, strError);
+//
+//	if (!Success)
+//	{
+//		CString* s = new CString(strError);
+//		::PostMessage(pEmailParams->parentWindowHandle, wm_SendEmailError, 0, (LPARAM)s);
+//	}
+//
+//	delete pEmailParams;
+//
+//	return 0;
+//}

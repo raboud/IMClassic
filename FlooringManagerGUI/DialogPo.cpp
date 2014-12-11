@@ -1140,13 +1140,6 @@ void CDlgPo::OnEditEditponumber()
 			UpdateData(FALSE);
 			// update m_lStoreTypeID, m_lStoreID
 			SetStoreNumber(m_strStoreNumber);
-			if (dlgPOEntry.IsPriceUpdateNeeded())
-			{
-				if ( !CGlobals::RefreshPrices(iOrderID) )
-				{
-					MessageBox("An error occurred while trying to refresh the prices due to a PO Number change.", "Error");
-				}
-			}
 		}
 		UpdateTitleBar();
 	}

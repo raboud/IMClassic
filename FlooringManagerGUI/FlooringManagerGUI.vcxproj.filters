@@ -58,9 +58,6 @@
     <Filter Include="Generated Files">
       <UniqueIdentifier>{67DA6AC5-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SOSIWebService">
-      <UniqueIdentifier>http://localhost/SOSIWebService/SOSIWebService.asmx</UniqueIdentifier>
-    </Filter>
     <Filter Include="lex">
       <UniqueIdentifier>{3a879e9f-5da8-44d5-ba90-214de1378f82}</UniqueIdentifier>
     </Filter>
@@ -1636,9 +1633,6 @@
     <ClInclude Include="vwWorkOrderMaterialsChecklist.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SOSIWebService.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="SpnWebService.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -1772,15 +1766,6 @@
     </CustomBuild>
     <CustomBuild Include="SpnWebService\SpnWebService.wsdl">
       <Filter>SpnWebService</Filter>
-    </CustomBuild>
-    <CustomBuild Include="SOSIWebService\results.discomap">
-      <Filter>SOSIWebService</Filter>
-    </CustomBuild>
-    <CustomBuild Include="SOSIWebService\SOSIWebService.disco">
-      <Filter>SOSIWebService</Filter>
-    </CustomBuild>
-    <CustomBuild Include="SOSIWebService\SOSIWebService.wsdl">
-      <Filter>SOSIWebService</Filter>
     </CustomBuild>
     <CustomBuild Include="Resource.h">
       <Filter>Header Files</Filter>

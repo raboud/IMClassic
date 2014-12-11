@@ -2160,21 +2160,17 @@ void CGridLabor::RefreshPrices()
 
 				double dCost;
 				double dPrice;
-				//bool bPriceOK = clPricing.GetBasicPrices(setOrderBasicLaborDetails.m_BasicLaborID, m_datePO, m_iStoreID, dCost, dPrice, dRetail);
 				bool bPriceOK = clPricing.GetBasicPrices(setBasicLabor.m_BasicLaborID, m_datePO, m_datePOScheduleDate, m_iStoreID, dCost, dPrice);
 				
 				CString strCost = "0.00";
-				CString strPrice = "0.00";
 
 
 				if (bPriceOK)
 				{
 					strCost.Format("%4.2f", dCost);
-					strPrice.Format("%4.2f", dPrice);
 				}
 
 				QuickSetText(COST, lRow, strCost) ;
-				QuickSetText(PRICE, lRow, strPrice) ;
 			}
 		}
 		else if (IsRowType(lRow, (char*)szOPTIONAL_LABOR_PREFIX))
@@ -2192,16 +2188,13 @@ void CGridLabor::RefreshPrices()
 				bool bPriceOK = clPricing.GetOptionPrices(setOptions.m_OptionID, m_datePO, m_datePOScheduleDate, m_iStoreID, dCost, dPrice);
 
 				CString strCost = "0.00";
-				CString strPrice = "0.00";
 
 				if (bPriceOK)
 				{
 					strCost.Format("%4.2f", dCost);
-					strPrice.Format("%4.2f", dPrice);
 				}
 
 				QuickSetText(COST, lRow, strCost) ;
-				QuickSetText(PRICE, lRow, strPrice) ;
 			}
 		}
 		IsRowDirty(lRow) ;

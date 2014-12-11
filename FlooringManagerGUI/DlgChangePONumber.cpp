@@ -179,15 +179,6 @@ bool CDlgChangePONumber::ValidateAndChangePO()
 			return false;
 		}
 		setOrders.Close();
-
-		if (m_bChangingMarkets)
-		{
-			if ( !CGlobals::RefreshPrices(m_iOrderID) )
-			{
-				m_strErrorMessage = "An error occurred while refreshing the prices.";
-				return false;
-			}
-		}
 	}
 
 	return bValid;

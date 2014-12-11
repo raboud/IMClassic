@@ -1140,12 +1140,6 @@ void CPOPickList::NewCall()
 	}
 }
 
-//void CPOPickList::SendToExpeditor(int iNoteID, bool CopyToSASM, bool CopyToExpeditorEmail)
-//{
-//	CDlgWebService dlg;
-//	dlg.SPNAddExpeditorNote(iNoteID, CopyToSASM, CopyToExpeditorEmail);
-//}
-
 void CPOPickList::ReportList()
 {
 	if (GetSelectedPOs() == 1)
@@ -1271,11 +1265,6 @@ bool CPOPickList::SwapPONumbers(int iOrderID1, int iOrderID2)
 			setOrders.m_PurchaseOrderNumber = strPO2;
 			setOrders.Update();
 			setOrders.Close();
-			if (bRefreshPrices)
-			{
-				CGlobals::RefreshPrices(iOrderID1);
-				CGlobals::RefreshPrices(iOrderID2);
-			}
 			bSwapOK = true;
 		}
 	}

@@ -26,15 +26,8 @@ public:
 	afx_msg LRESULT OnError(WPARAM, LPARAM);
 	afx_msg LRESULT OnContinue(WPARAM, LPARAM);
 
-	INT_PTR SPNPrintPO(CPoList* pListPOs);
 	INT_PTR SPNUpdatePO(CPoList* pListPOs);
 	INT_PTR SPNUpdatePO(CString strStoreNumber, CString strPONumber);
-	
-	//INT_PTR SOSIInstallScheduleUpdate(int iOrderID, CString strReasonCode);
-	//INT_PTR SOSIMeasureNoteForExpeditor(int iNoteID);
-	//INT_PTR SOSIInstallNoteForExpeditor(int iNoteID);
-	
-	INT_PTR SPNAddExpeditorNote(int iNoteID, bool bCopyToSASM, bool bCopyToExpeditorEmail);
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support

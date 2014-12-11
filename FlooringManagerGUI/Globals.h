@@ -137,7 +137,6 @@ public:
 	static int StoreTypeIDFromStoreNumber(CString strStoreNumber);
 	static int MarketIDFromStoreNumber(CString strStoreNumber);
 	static long CustomerIDFromOrderID(int iOrderID);
-	static bool RefreshPrices( int iOrderID );
 	static bool POInUse(CString strPO, CString strStoreNumber);
 	static bool POInUse(CString strPO, CString strStoreNumber, int& iOrderID);
 	static bool MarketAndDivisionFromOrderID(int iOrderID, int& iMarketID, int& iDivisionID);
@@ -179,8 +178,6 @@ public:
 	static bool RequiresWoodWaiver(int OrderID);
 
 	static bool QueueNoteForExpeditor(int NoteID, bool CopyToSASM, bool CopyToExpeditorEmail);
-
-	static UINT SendEmailWorkerThread( LPVOID pParam );
 };
 
 #endif
