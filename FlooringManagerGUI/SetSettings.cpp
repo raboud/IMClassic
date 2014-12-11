@@ -66,7 +66,7 @@ CString CSetSettings::GetSetting(const CString& strSettingName, const CString& s
 	return strValue;
 }
 
-CString CSetSettings::GetSettings(const CString& strSettingName, char cSeparator/* = ';'*/)
+CString CSetSettings::GetSettings(const CString& strSettingName, char cSeparator/* = ','*/)
 {
 	List<String^> setting =   SettingsBLL::GetSettingsValues(CachedData::Context, gcnew System::String(strSettingName));
 

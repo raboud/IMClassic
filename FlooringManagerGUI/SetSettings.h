@@ -17,7 +17,7 @@ public:
 		void Close() {};
 	CString GetSetting(const CString& strSettingName, const CString& strDefault, int iUserID = -1);	// gets the value of the setting with passed in name
 	CString GetSetting(const CString& strSettingName, int iUserID = -1);	// gets the value of the setting with passed in name
-	CString GetSettings(const CString& strSettingName, char cSeparator = ';');	// gets a list of all settings with passed in
+	CString GetSettings(const CString& strSettingName, char cSeparator = ',');	// gets a list of all settings with passed in
 																	// name, separated by cSeparator
 	long GetValueLong(const CString& strSettingName, int iUserID = -1, long lDefault = 0);
 	CString GetValueString(const CString& strSettingName, int iUserID = -1, const CString& strDefault = "");
