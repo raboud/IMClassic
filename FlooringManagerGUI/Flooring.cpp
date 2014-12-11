@@ -228,7 +228,9 @@ BOOL CFlooringApp::InitInstance()
 
 	try
 	{
-		BOOL ConnectOK = g_dbFlooring.OpenEx( _T( "DSN=Flooring"), CDatabase::noOdbcDialog);		
+		CString t = CGlobals::InitDefaultContext();
+//		CString t = _T("DSN=Flooring");
+		BOOL ConnectOK = g_dbFlooring.OpenEx( t, CDatabase::noOdbcDialog);		
 
 		Logger& logger = Logger::Instance();
 		logger.LogMessage("Starting up...");
@@ -276,7 +278,6 @@ BOOL CFlooringApp::InitInstance()
 		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
 		RUNTIME_CLASS(CCustomerView));
 
-	CGlobals::InitDefaultContext();
 
 	CGlobals::SetEmployeeID() ;
 	// create main MDI Frame window
@@ -323,7 +324,7 @@ BOOL CFlooringApp::InitInstance()
 		
 	strValue = setSettings.GetSetting("SSCEMainLexPath");
 	SSCE_SetMainLexPath(strValue);
-    
+	
 	strValue = setSettings.GetSetting("SSCEMainLexFiles");
 	SSCE_SetMainLexFiles(strValue);
 
@@ -358,7 +359,7 @@ public:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
 
-    virtual HWND GetHWND() { return CDialog::GetSafeHwnd(); }    
+	virtual HWND GetHWND() { return CDialog::GetSafeHwnd(); }    
 
 // Implementation
 protected:
@@ -411,7 +412,7 @@ BOOL CAboutDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-    CJRSVersion clVersion;
+	CJRSVersion clVersion;
 	clVersion.RetrieveInfo();
 	m_strVersion = "Version " + clVersion.GetCompleteVersionInfo() ;
 	m_strTitle = clVersion.GetProductName() ;
@@ -420,7 +421,7 @@ BOOL CAboutDlg::OnInitDialog()
 	UpdateData(FALSE);
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
-	              // EXCEPTION: OCX Property Pages should return FALSE
+				  // EXCEPTION: OCX Property Pages should return FALSE
 }
 
 void CFlooringApp::OnViewStores() 
@@ -753,7 +754,7 @@ void CFlooringApp::OnViewUseralerts()
 	}
 	else
 	{
-        m_pDlgUserAlerts = new CDlgUserAlerts;
+		m_pDlgUserAlerts = new CDlgUserAlerts;
 		m_pDlgUserAlerts->Create(IDD_USER_ALERTS);
 		m_pDlgUserAlerts->ShowWindow(SW_SHOW);
 	}
@@ -820,7 +821,7 @@ void CFlooringApp::OnViewActivePOs()
 	}
 	else
 	{
-        m_pDlgActivePOs = new CDlgActivePOs;
+		m_pDlgActivePOs = new CDlgActivePOs;
 		m_pDlgActivePOs->Create(IDD_ACTIVE_POS);
 		m_pDlgActivePOs->ShowWindow(SW_SHOW);
 	}
@@ -854,7 +855,7 @@ void CFlooringApp::OnViewActivitylist()
 	}
 	else
 	{
-        m_pDlgActivityList = new CDlgActivityList;
+		m_pDlgActivityList = new CDlgActivityList;
 		m_pDlgActivityList->Create(IDD_ACTIVITY_LIST);
 		m_pDlgActivityList->ShowWindow(SW_SHOW);
 	}

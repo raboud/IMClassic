@@ -154,7 +154,7 @@ public:
 // .Net Wrappers
 	static bool SPNUpdatePO(CPoList* pListPOs);
 	static bool SPNUpdatePO(CString strStoreNumber, CString strPONumber);
-	static void InitDefaultContext();
+	static CString InitDefaultContext();
 
 	
 	static void PrintPONote(int iNoteID);

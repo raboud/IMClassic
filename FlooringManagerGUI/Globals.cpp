@@ -889,11 +889,12 @@ void CGlobals::PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool printO
 	ReportHelper::PreparePaperWork(GetPoList(listPOs), (CFI::InstallationManager::Reports::UI::POReport) enMode, printOnly ? Mode::Print : Mode::View);
 }
 
-void CGlobals::InitDefaultContext()
+CString CGlobals::InitDefaultContext()
 {
 	Singleton::Connection = DataConnection::Create("InstallationManager");
-
+	CString temp(Singleton::Connection->Context->ODBCConnestionString);
 	ReportHelper::Connection = Singleton::Connection->Clone();
+	return temp;
 }
 
 void CGlobals::OnStoreInfo() 
