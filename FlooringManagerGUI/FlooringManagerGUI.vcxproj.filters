@@ -52,9 +52,6 @@
     <Filter Include="Record Sets\Header Files">
       <UniqueIdentifier>{dbcb7cb1-6372-4557-8667-d66e6db1e46c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SpnWebService">
-      <UniqueIdentifier>http://localhost/SpnWebService/SpnWebService.asmx</UniqueIdentifier>
-    </Filter>
     <Filter Include="Generated Files">
       <UniqueIdentifier>{67DA6AC5-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
     </Filter>
@@ -1063,9 +1060,6 @@
     <ClInclude Include="WaiverHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WebService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WorkOrderHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1633,9 +1627,6 @@
     <ClInclude Include="vwWorkOrderMaterialsChecklist.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpnWebService.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTdtp.h">
       <Filter>Dundas</Filter>
     </ClInclude>
@@ -1758,15 +1749,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="SpnWebService\results.discomap">
-      <Filter>SpnWebService</Filter>
-    </CustomBuild>
-    <CustomBuild Include="SpnWebService\SpnWebService.disco">
-      <Filter>SpnWebService</Filter>
-    </CustomBuild>
-    <CustomBuild Include="SpnWebService\SpnWebService.wsdl">
-      <Filter>SpnWebService</Filter>
-    </CustomBuild>
     <CustomBuild Include="Resource.h">
       <Filter>Header Files</Filter>
     </CustomBuild>

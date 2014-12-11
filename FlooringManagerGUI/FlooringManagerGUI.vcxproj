@@ -481,7 +481,11 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="DlgTransferPO.cpp" />
     <ClCompile Include="DlgUserAlerts.cpp" />
     <ClCompile Include="DlgUserSelect.cpp" />
-    <ClCompile Include="DlgWebService.cpp" />
+    <ClCompile Include="DlgWebService.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="SelectMailRecipientsDlg.cpp" />
     <ClCompile Include="SeOrderCustomDetails.cpp" />
     <ClCompile Include="SetActionReport.cpp" />
@@ -685,7 +689,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="ViewInvoice.h" />
     <ClInclude Include="ViewStoreInfo.h" />
     <ClInclude Include="WaiverHelper.h" />
-    <ClInclude Include="WebService.h" />
     <ClInclude Include="WorkOrderHelper.h" />
     <ClInclude Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTdtp.h" />
     <ClInclude Include="CustomerPickList.h" />
@@ -876,7 +879,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetVwUserAlerts.h" />
     <ClInclude Include="vwPOMarketDivision.h" />
     <ClInclude Include="vwWorkOrderMaterialsChecklist.h" />
-    <ClInclude Include="SpnWebService.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Common\SSCE\runtime\lex\accent.tlx">
@@ -938,18 +940,12 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="SpnWebService\results.discomap" />
-    <CustomBuild Include="SpnWebService\SpnWebService.disco">
-      <DeploymentContent>true</DeploymentContent>
-    </CustomBuild>
-    <CustomBuild Include="SpnWebService\SpnWebService.wsdl">
-      <SubType>Designer</SubType>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
     <Library Include="..\Common\Ssce\sdk\lib\SSCE5332.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\InstallationManager\CFI.InstallationManager.SharedForms\CFI.InstallationManager.SharedForms.csproj">
+      <Project>{7ca94446-e002-4e7b-9a41-6f184f3c2853}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\InstallationManager\CFILogger\CFI.Utility.csproj">
       <Project>{feda5fad-7ab7-4b06-ba03-8c6559e38cd5}</Project>
     </ProjectReference>
@@ -965,6 +961,10 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ProjectReference Include="..\..\InstallationManager\TypesAndInterfaces\CFI.InstallationManager.TypesAndInterfaces.csproj">
       <Project>{4f5429bc-ed29-4e3c-8464-5b9cc738cc6b}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
