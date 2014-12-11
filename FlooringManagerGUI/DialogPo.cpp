@@ -1938,7 +1938,10 @@ void CDlgPo::InitNormal()
 		
 		// tell the labor grid the current store id
 		m_gridLabor.SetStoreID( m_lStoreId );
-
+		m_gridLabor.SetPOScheduleDate(COleDateTime::GetCurrentTime());
+		m_gridLabor.SetPODate(COleDateTime::GetCurrentTime());
+		this->m_editBillAmount.SetWindowText("0.00");
+		this->m_editTripCharge.SetWindowText("0.00");
 		if (m_strPOType == "Warranty")
 		{
 			// show all materialtypes incl. inactive ones

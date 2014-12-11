@@ -133,8 +133,8 @@ public:
 	static bool OrderIsDeleted(int iOrderID);
 	static CString CustomerNameFromCustomerID(int CustomerID);
 	static bool IsInstall(int iOrderID, bool &bIsInstall);
-	static bool HasStorePickup(CPoList* plistPOs);
-	static bool HasStorePickup(long lOrderID);
+	//static bool HasStorePickup(CPoList* plistPOs);
+	//static bool HasStorePickup(long lOrderID);
 
 	static CString GetTitleName(int iTitleID);
 
@@ -237,6 +237,7 @@ public:
 	enum PRINT_MODE {PM_INVOICE = 0, PM_WORKORDER, PM_WAIVER, PM_DIAGRAMS, PM_STORE_PICKUP, PM_INSPECTION, PM_PO, PM_WOODWAIVER, PM_INSTALLER_CHECKLIST, PM_REVIEW_CHECKLIST, PM_SCHEDULE_CHECKLIST, PM_MEASURE, PM_ALL10s, PM_ALL} ;
 	static void PreparePaperWork(int po, PRINT_MODE enMode, bool PrintOnly = false);
 	static void PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool PrintOnly = false);
+	static bool CanProcessPaperWork(CPoList* listPOs, PRINT_MODE enMode);
 };
 
 inline bool CGlobals::HasPermissionMarket(const CString strPermission, int iMarketID)

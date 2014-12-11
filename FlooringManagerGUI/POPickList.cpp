@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------
-	Copyright © 2001-2010 JRS Technology, Inc.
+Copyright © 2001-2010 JRS Technology, Inc.
 -----------------------------------------------------------------------*/
 
 // POPickList.cpp: implementation of the CPOPickList class.
@@ -36,13 +36,13 @@ static char THIS_FILE[]=__FILE__;
 //////////////////////////////////////////////////////////////////////
 
 CPOPickList::CPOPickList()
-: m_setOrders(&g_dbFlooring),
-  m_setPickList(&g_dbFlooring)
+	: m_setOrders(&g_dbFlooring),
+	m_setPickList(&g_dbFlooring)
 {
 	m_pPrintMenu = NULL ;
 	m_pViewMenu = NULL;
 	m_pModifyMenu = NULL;
-	
+
 	m_setOrders.m_strFilter = "OrderID = -1";
 	m_setOrders.Open() ;
 
@@ -160,7 +160,7 @@ void CPOPickList::OnSH_DClicked(int col,long row, RECT * /* rect */, POINT * /* 
 	{
 		m_listPOs.RemoveAll();
 		m_listPOs.AddTail(int(QuickGetNumber(-1, row)));
-		
+
 		CDlgPo dlgPo ;
 		dlgPo.SetPOList(&m_listPOs);
 
@@ -190,7 +190,7 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 		//** Add the Menu Items
 		if (CGlobals::HasPermission("CanAddPO"))
 		{
-            AddMenuItem(1000,"New PO");
+			AddMenuItem(1000,"New PO");
 		}
 
 		if ((row >= 0) && (row < this->GetNumberRows()))
@@ -221,7 +221,7 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			{
 				AddMenuItem(4003, "New Note") ;
 			}
-			
+
 			if (!m_setPickList.m_Cancelled)
 			{
 				AddMenuItem(4001, "Cancel PO") ;
@@ -253,43 +253,70 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			}
 			m_pViewMenu = new CMenu ;
 			m_pViewMenu->CreateMenu() ;			
-			
+
 			m_pPrintMenu->AppendMenu(MF_STRING, 3000, "All Paperwork") ;
 			if (iNumSelected == 1)
 			{
-				m_pPrintMenu->AppendMenu(MF_STRING, 3001, "Invoices") ;
-				m_pViewMenu->AppendMenu(MF_STRING, 3101, "Invoice") ;
-				m_pPrintMenu->AppendMenu(MF_STRING, 3007, "Review Checklist") ;
-				m_pViewMenu->AppendMenu(MF_STRING, 3107, "Review Checklist") ;
-				m_pPrintMenu->AppendMenu(MF_STRING, 3008, "Scheduling Checklist") ;
-				m_pViewMenu->AppendMenu(MF_STRING, 3108, "Scheduling Checklist") ;
-				m_pPrintMenu->AppendMenu(MF_STRING, 3009, "Installer Checklist") ;
-				m_pViewMenu->AppendMenu(MF_STRING, 3109, "Installer Checklist") ;
-				m_pViewMenu->AppendMenu(MF_STRING, 3106, "Selected PO") ;
-
-				m_pPrintMenu->AppendMenu(MF_STRING, 3011, "Measure Grid") ;
-				m_pViewMenu->AppendMenu(MF_STRING, 3111, "Measure Grid") ;
+				if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_INVOICE))
+				{
+					m_pPrintMenu->AppendMenu(MF_STRING, 3001, "Invoices") ;
+					m_pViewMenu->AppendMenu(MF_STRING, 3101, "Invoice") ;
+				}
+				if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_REVIEW_CHECKLIST))
+				{
+					m_pPrintMenu->AppendMenu(MF_STRING, 3007, "Review Checklist") ;
+					m_pViewMenu->AppendMenu(MF_STRING, 3107, "Review Checklist") ;
+				}
+				if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_SCHEDULE_CHECKLIST))
+				{
+					m_pPrintMenu->AppendMenu(MF_STRING, 3008, "Scheduling Checklist") ;
+					m_pViewMenu->AppendMenu(MF_STRING, 3108, "Scheduling Checklist") ;
+				}
+				if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_INSTALLER_CHECKLIST))
+				{
+					m_pPrintMenu->AppendMenu(MF_STRING, 3009, "Installer Checklist") ;
+					m_pViewMenu->AppendMenu(MF_STRING, 3109, "Installer Checklist") ;
+				}
+				if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_PO))
+				{
+					m_pViewMenu->AppendMenu(MF_STRING, 3106, "Selected PO") ;
+				}
+				if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_MEASURE))
+				{
+					m_pPrintMenu->AppendMenu(MF_STRING, 3011, "Measure Grid") ;
+					m_pViewMenu->AppendMenu(MF_STRING, 3111, "Measure Grid") ;
+				}
 			}
-			m_pPrintMenu->AppendMenu(MF_STRING, 3002, "Work Order") ;
-			m_pViewMenu->AppendMenu(MF_STRING, 3102, "Work Order") ;
-			m_pPrintMenu->AppendMenu(MF_STRING, 3003, "Release") ;
-			m_pViewMenu->AppendMenu(MF_STRING, 3103, "Release") ;
-
-			if (CGlobals::RequiresWoodWaiver((long)QuickGetNumber(ID, row)))
+			if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_WORKORDER))
+			{
+				m_pPrintMenu->AppendMenu(MF_STRING, 3002, "Work Order") ;
+				m_pViewMenu->AppendMenu(MF_STRING, 3102, "Work Order") ;
+			}
+			if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_WAIVER))
+			{
+				m_pPrintMenu->AppendMenu(MF_STRING, 3003, "Release") ;
+				m_pViewMenu->AppendMenu(MF_STRING, 3103, "Release") ;
+			}
+			if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_WOODWAIVER))
 			{
 				m_pPrintMenu->AppendMenu(MF_STRING, 3010, "F&&I Wood Waiver");
 				m_pViewMenu->AppendMenu(MF_STRING, 3110, "F&&I Wood Waiver") ;
-			}			
-			m_pPrintMenu->AppendMenu(MF_STRING, 3004, "Diagram") ;
-			m_pViewMenu->AppendMenu(MF_STRING, 3104, "Diagram") ;
-			if (!CGlobals::HasStorePickup((long)QuickGetNumber(ID, row)))
+			}
+			if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_DIAGRAMS))
+			{
+				m_pPrintMenu->AppendMenu(MF_STRING, 3004, "Diagram") ;
+				m_pViewMenu->AppendMenu(MF_STRING, 3104, "Diagram") ;
+			}
+			if (!CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_STORE_PICKUP))
 			{
 				nGrayed = 1;
 			}
 			m_pPrintMenu->AppendMenu(MF_STRING | nGrayed, 3005, "Store Pickup") ;
 			m_pViewMenu->AppendMenu(MF_STRING | nGrayed, 3105, "Store Pickup") ;
-			m_pPrintMenu->AppendMenu(MF_STRING, 3006, "Selected POs") ;
-		
+			if (CGlobals::CanProcessPaperWork(&m_listPOs, CGlobals::PM_PO))
+			{
+				m_pPrintMenu->AppendMenu(MF_STRING, 3006, "Selected POs") ;
+			}		
 			this->m_menu->AppendMenu(MF_POPUP, (UINT) m_pPrintMenu->m_hMenu, "Print") ;
 			this->m_menu->AppendMenu(MF_POPUP, (UINT) m_pViewMenu->m_hMenu, "View") ;
 
@@ -303,7 +330,7 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			if (iNumSelected == 1)
 			{
 				nGrayed = 0;
-				
+
 				nGrayed = (CGlobals::HasPermission("CanEditPONumber")) ? 0 : MF_GRAYED;
 				m_pModifyMenu->AppendMenu(MF_STRING | nGrayed, 3201, "Change PO Number") ;
 
@@ -320,7 +347,7 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			if (iNumSelected > 1)
 			{
 				nGrayed = 0;
-				
+
 				nGrayed = (CGlobals::HasPermission("CanDeletePO")) ? 0 : MF_GRAYED;
 				m_pModifyMenu->AppendMenu(MF_STRING | nGrayed, 3200, "Delete POs") ;
 
@@ -331,13 +358,13 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			if (iNumSelected == 2)
 			{
 				UINT nGrayed = 0;
-				
+
 				nGrayed = (CGlobals::HasPermission("CanSwapPONumbers")) ? 0 : MF_GRAYED;
 				m_pModifyMenu->AppendMenu(MF_STRING | nGrayed, 3203, "Swap PO Numbers") ;
 			}
 			m_menu->AppendMenu(MF_POPUP, (UINT) m_pModifyMenu->m_hMenu, "Modify") ;
 			m_menu->AppendMenu(MF_STRING, 3210, "Update PO from SPN") ;
-			
+
 			int iOrderID = atoi(QuickGetText(ID, row));
 			if (CGlobals::OrderIsReviewed(iOrderID) == true)
 			{
@@ -350,7 +377,7 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 		}
 		bShowMenu = TRUE;
 	}
-	
+
 	return bShowMenu ;
 }
 
@@ -360,124 +387,154 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 	{
 		switch (item)
 		{
-			case 1000 :
-				NewPo() ;
-				break ;
-		
-			case 3000:
-				PrintPaperWork(CGlobals::PM_ALL) ;
-				break ;
-		
-			case 3001:
-				PrintPaperWork(CGlobals::PM_INVOICE) ;
-				break ;
+		case 1000 :
+			NewPo() ;
+			break ;
 
-			case 3101:
-				ViewPaperWork(CGlobals::PM_INVOICE) ;
-				break ;
+		case 3000:
+			PrintPaperWork(CGlobals::PM_ALL) ;
+			break ;
 
-			case 3002 :
-				PrintPaperWork(CGlobals::PM_WORKORDER) ;
-				break ;
+		case 3001:
+			PrintPaperWork(CGlobals::PM_INVOICE) ;
+			break ;
 
-			case 3102:
-				ViewPaperWork(CGlobals::PM_WORKORDER);
-				break;
+		case 3101:
+			ViewPaperWork(CGlobals::PM_INVOICE) ;
+			break ;
 
-			case 3003:
-				PrintPaperWork(CGlobals::PM_WAIVER) ;
-				break ;
+		case 3002 :
+			PrintPaperWork(CGlobals::PM_WORKORDER) ;
+			break ;
 
-			case 3103:
-				ViewPaperWork(CGlobals::PM_WAIVER);
-				break;
+		case 3102:
+			ViewPaperWork(CGlobals::PM_WORKORDER);
+			break;
 
-			case 3004:
-				PrintPaperWork(CGlobals::PM_DIAGRAMS) ;
-				break ;
+		case 3003:
+			PrintPaperWork(CGlobals::PM_WAIVER) ;
+			break ;
 
-			case 3104:
-				ViewPaperWork(CGlobals::PM_DIAGRAMS) ;
-				break ;
+		case 3103:
+			ViewPaperWork(CGlobals::PM_WAIVER);
+			break;
 
-			case 3005:
-				PrintPaperWork(CGlobals::PM_STORE_PICKUP) ;
-				break ;
+		case 3004:
+			PrintPaperWork(CGlobals::PM_DIAGRAMS) ;
+			break ;
 
-			case 3105:
-				ViewPaperWork(CGlobals::PM_STORE_PICKUP) ;
-				break ;
+		case 3104:
+			ViewPaperWork(CGlobals::PM_DIAGRAMS) ;
+			break ;
 
-			case 3006:
-				PrintPaperWork(CGlobals::PM_PO) ;
-				break ;
+		case 3005:
+			PrintPaperWork(CGlobals::PM_STORE_PICKUP) ;
+			break ;
 
-			case 3106:
-				ViewPaperWork(CGlobals::PM_PO);
-				break;
+		case 3105:
+			ViewPaperWork(CGlobals::PM_STORE_PICKUP) ;
+			break ;
 
-			case 3007:
-				PrintPaperWork(CGlobals::PM_REVIEW_CHECKLIST);
-//				this->PrintReviewChecklist();
-				break;
+		case 3006:
+			PrintPaperWork(CGlobals::PM_PO) ;
+			break ;
 
-			case 3107:
-				ViewPaperWork(CGlobals::PM_REVIEW_CHECKLIST);
-//				this->PrintReviewChecklist();
-				break;
+		case 3106:
+			ViewPaperWork(CGlobals::PM_PO);
+			break;
 
-			case 3008:
-				PrintPaperWork(CGlobals::PM_SCHEDULE_CHECKLIST);
-//				this->PrintSchedulingChecklist();
-				break;
+		case 3007:
+			PrintPaperWork(CGlobals::PM_REVIEW_CHECKLIST);
+			//				this->PrintReviewChecklist();
+			break;
 
-			case 3108:
-				ViewPaperWork(CGlobals::PM_SCHEDULE_CHECKLIST);
-//				this->PrintSchedulingChecklist();
-				break;
+		case 3107:
+			ViewPaperWork(CGlobals::PM_REVIEW_CHECKLIST);
+			//				this->PrintReviewChecklist();
+			break;
 
-			case 3009:
-				PrintPaperWork(CGlobals::PM_INSTALLER_CHECKLIST);
-				break;
+		case 3008:
+			PrintPaperWork(CGlobals::PM_SCHEDULE_CHECKLIST);
+			//				this->PrintSchedulingChecklist();
+			break;
 
-			case 3109:
-				ViewPaperWork(CGlobals::PM_INSTALLER_CHECKLIST);
-				break;
+		case 3108:
+			ViewPaperWork(CGlobals::PM_SCHEDULE_CHECKLIST);
+			//				this->PrintSchedulingChecklist();
+			break;
+
+		case 3009:
+			PrintPaperWork(CGlobals::PM_INSTALLER_CHECKLIST);
+			break;
+
+		case 3109:
+			ViewPaperWork(CGlobals::PM_INSTALLER_CHECKLIST);
+			break;
 
 
-			case 3010:
-				PrintPaperWork(CGlobals::PM_WOODWAIVER);
-				break;
+		case 3010:
+			PrintPaperWork(CGlobals::PM_WOODWAIVER);
+			break;
 
-			case 3110:
-				ViewPaperWork(CGlobals::PM_WOODWAIVER);
-				break;
+		case 3110:
+			ViewPaperWork(CGlobals::PM_WOODWAIVER);
+			break;
 
-			case 3011:
-				PrintPaperWork(CGlobals::PM_MEASURE);
-				break;
+		case 3011:
+			PrintPaperWork(CGlobals::PM_MEASURE);
+			break;
 
-			case 3111:
-				ViewPaperWork(CGlobals::PM_MEASURE);
-				break;
+		case 3111:
+			ViewPaperWork(CGlobals::PM_MEASURE);
+			break;
 
-			case 3200:
+		case 3200:
+			{
+				// delete PO
+				bool bContinue = false;
+				int iNewCallNotesOrderID = -1;
+				int iNewActionReportsOrderID = -1;
+				CDlgDeletePOConfirm dlgDeletePO;
+				dlgDeletePO.SetPOList(&m_listPOs);
+				if (dlgDeletePO.CanDeletePO())
 				{
-					// delete PO
-					bool bContinue = false;
-					int iNewCallNotesOrderID = -1;
-					int iNewActionReportsOrderID = -1;
-					CDlgDeletePOConfirm dlgDeletePO;
-					dlgDeletePO.SetPOList(&m_listPOs);
-					if (dlgDeletePO.CanDeletePO())
+					if (HasNotes())
 					{
-						if (HasNotes())
+						int iResponse = MessageBox("There are call notes associated with the order(s) you wish to delete.\nDo you want to transfer these call notes to another order for the same customer?\n\nChoose 'Yes' to transfer the call notes, 'No' to delete the call notes, 'Cancel' to quit without any changes", "Info", MB_YESNOCANCEL);
+						if (iResponse == IDYES)
 						{
-							int iResponse = MessageBox("There are call notes associated with the order(s) you wish to delete.\nDo you want to transfer these call notes to another order for the same customer?\n\nChoose 'Yes' to transfer the call notes, 'No' to delete the call notes, 'Cancel' to quit without any changes", "Info", MB_YESNOCANCEL);
+							// try to get a valid order id to transfer to
+							if (GetOrderIDForTransfer(iNewCallNotesOrderID))
+							{
+								// got a valid order id, so we should continue
+								bContinue = true;
+							}
+							else
+							{
+								MessageBox("Delete cancelled.  No records were changed.", "Info", MB_OK);
+							}
+						}
+						else if (iResponse == IDNO)
+						{
+							// set flag so we can go ahead and delete
+							bContinue = true;
+						}
+					}
+					else
+					{
+						bContinue = true;
+					}
+
+					if (bContinue)
+					{
+						bContinue = false;
+						if (HasActionReports())
+						{
+							int iResponse = MessageBox("There are action reports associated with the order(s) you wish to delete.\nDo you want to transfer these action reports to another order for the same customer?\n\nChoose 'Yes' to transfer the action reports, 'No' to delete the action reports, 'Cancel' to quit without any changes", "Info", MB_YESNOCANCEL);
 							if (iResponse == IDYES)
 							{
 								// try to get a valid order id to transfer to
-								if (GetOrderIDForTransfer(iNewCallNotesOrderID))
+								if (GetOrderIDForTransfer(iNewActionReportsOrderID))
 								{
 									// got a valid order id, so we should continue
 									bContinue = true;
@@ -500,241 +557,211 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 
 						if (bContinue)
 						{
-							bContinue = false;
-							if (HasActionReports())
+							bool bTransactionCommitted = false;
+							if (g_dbFlooring.BeginTrans())
 							{
-								int iResponse = MessageBox("There are action reports associated with the order(s) you wish to delete.\nDo you want to transfer these action reports to another order for the same customer?\n\nChoose 'Yes' to transfer the action reports, 'No' to delete the action reports, 'Cancel' to quit without any changes", "Info", MB_YESNOCANCEL);
-								if (iResponse == IDYES)
+								if ( TransferCallNotes(iNewCallNotesOrderID) )
 								{
-									// try to get a valid order id to transfer to
-									if (GetOrderIDForTransfer(iNewActionReportsOrderID))
+									if ( TransferActionReports(iNewActionReportsOrderID) )
 									{
-										// got a valid order id, so we should continue
-										bContinue = true;
-									}
-									else
-									{
-										MessageBox("Delete cancelled.  No records were changed.", "Info", MB_OK);
-									}
-								}
-								else if (iResponse == IDNO)
-								{
-									// set flag so we can go ahead and delete
-									bContinue = true;
-								}
-							}
-							else
-							{
-								bContinue = true;
-							}
-
-							if (bContinue)
-							{
-								bool bTransactionCommitted = false;
-								if (g_dbFlooring.BeginTrans())
-								{
-									if ( TransferCallNotes(iNewCallNotesOrderID) )
-									{
-										if ( TransferActionReports(iNewActionReportsOrderID) )
+										// ok, any call notes / action reports were transferred
+										// successfully, so go ahead and try deleting the PO.
+										if ( dlgDeletePO.DoModal() == IDOK)
 										{
-											// ok, any call notes / action reports were transferred
-											// successfully, so go ahead and try deleting the PO.
-											if ( dlgDeletePO.DoModal() == IDOK)
+											// the PO was marked for deletion (i.e. we are in a transaction)
+
+											// commit the transaction we started above so the call
+											// notes and action reports get transferred properly
+											if ( g_dbFlooring.CommitTrans() )
 											{
-												// the PO was marked for deletion (i.e. we are in a transaction)
-
-												// commit the transaction we started above so the call
-												// notes and action reports get transferred properly
-												if ( g_dbFlooring.CommitTrans() )
-												{
-													bTransactionCommitted = true;
-												}
-												else
-												{
-													// at this point, all we know is the commit failed,
-													// below we will rollback the transaction 
-													MessageBox("There was an error committing the transaction for deleting these P.O.s.", "Notice");
-												}
-
-												// update the grid
-												Update(m_lCustomerId) ;
+												bTransactionCommitted = true;
 											}
-										}
-										else
-										{
-											MessageBox("There was an error transferring the action reports.  No records were changed.");
+											else
+											{
+												// at this point, all we know is the commit failed,
+												// below we will rollback the transaction 
+												MessageBox("There was an error committing the transaction for deleting these P.O.s.", "Notice");
+											}
+
+											// update the grid
+											Update(m_lCustomerId) ;
 										}
 									}
 									else
 									{
-										MessageBox("There was an error transferring the call notes.  No records were changed.");
+										MessageBox("There was an error transferring the action reports.  No records were changed.");
 									}
 								}
 								else
 								{
-									MessageBox("There was a transaction error while trying to delete the records.  No records were deleted.");
+									MessageBox("There was an error transferring the call notes.  No records were changed.");
 								}
-								
-								if (!bTransactionCommitted)
-								{
-									g_dbFlooring.Rollback();
-								}
+							}
+							else
+							{
+								MessageBox("There was a transaction error while trying to delete the records.  No records were deleted.");
+							}
+
+							if (!bTransactionCommitted)
+							{
+								g_dbFlooring.Rollback();
 							}
 						}
 					}
-					else
-					{
-						MessageBox("This PO cannot be deleted since it is either referenced by a check or a job.", "Notice");
-					}
 				}
-				break;
-			case 3201:
+				else
 				{
-					// Change PO Number
-					POSITION pos = m_listPOs.GetHeadPosition();
-					int iOrderID = m_listPOs.GetNext(pos);
-
-					CString strPONumber = CGlobals::POFromOrderID(iOrderID) ;
-					if (strPONumber.GetLength() == 0)
-					{
-						MessageBox("There was an error finding the selected PO in the database.", "Error!");
-						break;
-					}
-
-					CDlgChangePONumber dlgChangePO;
-					dlgChangePO.SetOrderID(iOrderID);
-					dlgChangePO.SetCurrentPONumber(strPONumber);
-
-					if (dlgChangePO.DoModal() == IDOK)
-					{
-						Update(m_lCustomerId) ;
-					}
+					MessageBox("This PO cannot be deleted since it is either referenced by a check or a job.", "Notice");
 				}
-				break;
-			case 3202:
+			}
+			break;
+		case 3201:
+			{
+				// Change PO Number
+				POSITION pos = m_listPOs.GetHeadPosition();
+				int iOrderID = m_listPOs.GetNext(pos);
+
+				CString strPONumber = CGlobals::POFromOrderID(iOrderID) ;
+				if (strPONumber.GetLength() == 0)
 				{
-					// transfer PO
-					CDlgTransferPO dlg;
-					CString strCustName = "";
-					CString strPONumber = "";
-
-					CSetCustomer setCustomer(&g_dbFlooring);
-					setCustomer.m_strFilter.Format("[CustomerID] = %d", m_lCustomerId);
-					setCustomer.Open();
-					if (!setCustomer.IsEOF())
-					{
-						strCustName = setCustomer.m_FirstName.MakeUpper() + " " + setCustomer.m_LastName.MakeUpper();
-					}
-					else
-					{
-						MessageBox("There was an error finding the current customer in the database.", "Error!");
-						break;
-					}
-
-					POSITION pos = m_listPOs.GetHeadPosition();
-					int iOrderID = m_listPOs.GetNext(pos);
-
-					strPONumber = CGlobals::POFromOrderID(iOrderID) ;
-					if (strPONumber.GetLength() == 0)
-					{
-						MessageBox("There was an error finding the selected PO in the database.", "Error!");
-						break;
-					}
-
-					dlg.SetInfo(strCustName, m_lCustomerId, &m_listPOs);
-					
-					if (dlg.DoModal() == IDOK)
-					{
-						Update(m_lCustomerId) ;
-					}
+					MessageBox("There was an error finding the selected PO in the database.", "Error!");
+					break;
 				}
-				break;
-			case 3203:
+
+				CDlgChangePONumber dlgChangePO;
+				dlgChangePO.SetOrderID(iOrderID);
+				dlgChangePO.SetCurrentPONumber(strPONumber);
+
+				if (dlgChangePO.DoModal() == IDOK)
 				{
-					// swap PO Numbers
-					POSITION pos = m_listPOs.GetHeadPosition();
-					int iOrderID1 = m_listPOs.GetNext(pos);
-					int iOrderID2 = m_listPOs.GetNext(pos);
-					if (SwapPONumbers(iOrderID1, iOrderID2))
-					{
-						Update(m_lCustomerId) ;
-					}
-				}
-				break;
-			case 3204:
-				{
-					UnInvoice(row);
-				}
-				break;
-			case 3205:
-				{
-					ViewConsolidatedPOs();
-				}
-				break;
-
-			case 3210:
-				UpdatePO() ;
-				break ;
-
-			case 4000: // uncancel PO
-			case 4001:
-				{
-					// Cancel PO
-					long lRow ;
-					int iCol ;
-					long lLastRow = -1 ;
-
-					EnumFirstSelected(&iCol, &lRow) ;
-					do
-					{
-						if (lRow != lLastRow)
-						{
-							CString strOrderId = QuickGetText(-1, lRow) ;
-
-							m_setOrders.m_strFilter.Format("[OrderID] = '%s'", strOrderId) ;
-							m_setOrders.Requery() ;
-
-							m_setOrders.Edit() ;
-							m_setOrders.m_Cancelled = (item == 4001) ;
-							m_setOrders.Update() ;
-						}
-						lLastRow = lRow ;
-					} while (this->EnumNextSelected(&iCol, &lRow) == UG_SUCCESS) ;
 					Update(m_lCustomerId) ;
 				}
-				break ;
+			}
+			break;
+		case 3202:
+			{
+				// transfer PO
+				CDlgTransferPO dlg;
+				CString strCustName = "";
+				CString strPONumber = "";
 
-			case 4002 :
-				CalledList() ;
-				break ;
-
-			case 4003:
-				NewCall() ;
-				break ;
-
-			case 4004 :
-				ReportList() ;
-				break ;
-
-			case 4005:
-				NewReport() ;
-				break ;
-
-			case 4006:
+				CSetCustomer setCustomer(&g_dbFlooring);
+				setCustomer.m_strFilter.Format("[CustomerID] = %d", m_lCustomerId);
+				setCustomer.Open();
+				if (!setCustomer.IsEOF())
 				{
-					int iCol;
-					long lRow;
-					EnumFirstSelected(&iCol, &lRow) ;
-					int iOrderID = atoi(QuickGetText(ID, lRow));
-					SetPOReviewed(iOrderID, false);
-					UpdateRowColor(lRow);
-					RedrawRow(lRow);
+					strCustName = setCustomer.m_FirstName.MakeUpper() + " " + setCustomer.m_LastName.MakeUpper();
+				}
+				else
+				{
+					MessageBox("There was an error finding the current customer in the database.", "Error!");
+					break;
 				}
 
-				break ;
+				POSITION pos = m_listPOs.GetHeadPosition();
+				int iOrderID = m_listPOs.GetNext(pos);
 
-			default :
-				break ;
+				strPONumber = CGlobals::POFromOrderID(iOrderID) ;
+				if (strPONumber.GetLength() == 0)
+				{
+					MessageBox("There was an error finding the selected PO in the database.", "Error!");
+					break;
+				}
+
+				dlg.SetInfo(strCustName, m_lCustomerId, &m_listPOs);
+
+				if (dlg.DoModal() == IDOK)
+				{
+					Update(m_lCustomerId) ;
+				}
+			}
+			break;
+		case 3203:
+			{
+				// swap PO Numbers
+				POSITION pos = m_listPOs.GetHeadPosition();
+				int iOrderID1 = m_listPOs.GetNext(pos);
+				int iOrderID2 = m_listPOs.GetNext(pos);
+				if (SwapPONumbers(iOrderID1, iOrderID2))
+				{
+					Update(m_lCustomerId) ;
+				}
+			}
+			break;
+		case 3204:
+			{
+				UnInvoice(row);
+			}
+			break;
+		case 3205:
+			{
+				ViewConsolidatedPOs();
+			}
+			break;
+
+		case 3210:
+			UpdatePO() ;
+			break ;
+
+		case 4000: // uncancel PO
+		case 4001:
+			{
+				// Cancel PO
+				long lRow ;
+				int iCol ;
+				long lLastRow = -1 ;
+
+				EnumFirstSelected(&iCol, &lRow) ;
+				do
+				{
+					if (lRow != lLastRow)
+					{
+						CString strOrderId = QuickGetText(-1, lRow) ;
+
+						m_setOrders.m_strFilter.Format("[OrderID] = '%s'", strOrderId) ;
+						m_setOrders.Requery() ;
+
+						m_setOrders.Edit() ;
+						m_setOrders.m_Cancelled = (item == 4001) ;
+						m_setOrders.Update() ;
+					}
+					lLastRow = lRow ;
+				} while (this->EnumNextSelected(&iCol, &lRow) == UG_SUCCESS) ;
+				Update(m_lCustomerId) ;
+			}
+			break ;
+
+		case 4002 :
+			CalledList() ;
+			break ;
+
+		case 4003:
+			NewCall() ;
+			break ;
+
+		case 4004 :
+			ReportList() ;
+			break ;
+
+		case 4005:
+			NewReport() ;
+			break ;
+
+		case 4006:
+			{
+				int iCol;
+				long lRow;
+				EnumFirstSelected(&iCol, &lRow) ;
+				int iOrderID = atoi(QuickGetText(ID, lRow));
+				SetPOReviewed(iOrderID, false);
+				UpdateRowColor(lRow);
+				RedrawRow(lRow);
+			}
+
+			break ;
+
+		default :
+			break ;
 		}
 
 	}
@@ -905,11 +932,11 @@ void CPOPickList::NewReport()
 int CPOPickList::GetSelectedPOs()
 {
 	m_listPOs.RemoveAll();
-	
+
 	int iCol ;
 	long lRow ;
 	long lLastRow = -1 ;
-	
+
 	EnumFirstSelected(&iCol, &lRow) ;
 	do
 	{
@@ -927,7 +954,7 @@ bool CPOPickList::SwapPONumbers(int iOrderID1, int iOrderID2)
 {
 	bool bSwapOK = false;
 	bool bRefreshPrices = false;
-	
+
 	int iStoreID1 = -1;
 	int iStoreID2 = -1;
 
@@ -961,7 +988,7 @@ bool CPOPickList::SwapPONumbers(int iOrderID1, int iOrderID2)
 				CSetStores setStores(&g_dbFlooring);
 				setStores.m_strFilter.Format("[StoreID] = %d OR [StoreID] = %d", iStoreID1, iStoreID2);
 				setStores.Open();
-				
+
 				int iStoreTypeID1 = setStores.m_StoreTypeID;
 				int iMarketID1 = setStores.m_MarketId;
 				setStores.MoveNext();
@@ -969,7 +996,7 @@ bool CPOPickList::SwapPONumbers(int iOrderID1, int iOrderID2)
 				int iMarketID2 = setStores.m_MarketId;
 				setStores.Close();
 
-                if ( iStoreTypeID1 == iStoreTypeID2 )
+				if ( iStoreTypeID1 == iStoreTypeID2 )
 				{
 					if (iMarketID1 != iMarketID2)
 					{
@@ -984,7 +1011,7 @@ bool CPOPickList::SwapPONumbers(int iOrderID1, int iOrderID2)
 					return false;
 				}
 			}
-			
+
 			setOrders.Edit();
 			setOrders.m_PurchaseOrderNumber = strPO1;
 			setOrders.Update();
@@ -1066,7 +1093,7 @@ bool CPOPickList::GetOrderIDForTransfer(int& iNewOrderID)
 	CDlgFind dlg(CDlgFind::EnFIND_TYPE_ORDERID, this) ;
 	dlg.SetCaption("Enter Order Number") ;
 	dlg.SetMaxChars(6);
-	
+
 	bool bContinue = true;
 	do
 	{
@@ -1092,7 +1119,7 @@ bool CPOPickList::GetOrderIDForTransfer(int& iNewOrderID)
 			}
 			else
 			{
-                // verify the order id entered isn't in the list to be deleted
+				// verify the order id entered isn't in the list to be deleted
 				POSITION pos = m_listPOs.GetHeadPosition();
 				bool bFoundDup = false;
 				while(pos)
@@ -1205,7 +1232,7 @@ int CPOPickList::GetLastColumnIndex()
 bool CPOPickList::IsInvoicedNotPaid(long row)
 {
 	int OrderID = atoi(QuickGetText(ID, row));
-    m_setOrders.m_strFilter.Format("[OrderID] = '%d'", OrderID) ;
+	m_setOrders.m_strFilter.Format("[OrderID] = '%d'", OrderID) ;
 	m_setOrders.Requery() ;
 
 	CSetPayments setPayments(&g_dbFlooring);
@@ -1225,11 +1252,11 @@ void CPOPickList::UnInvoice(long lRow)
 
 	m_setOrders.Edit();
 	m_setOrders.m_Billed = FALSE;
-//	m_setOrders.SetFieldNull(&m_setOrders.m_BilledAmount);
+	//	m_setOrders.SetFieldNull(&m_setOrders.m_BilledAmount);
 	m_setOrders.SetFieldNull(&m_setOrders.m_BilledDate);
 	m_setOrders.Update();
 	m_setOrders.Requery();
-	
+
 	m_setPickList.m_strFilter.Format("[OrderID] = '%d'", iOrderID) ;
 	m_setPickList.Requery();
 
@@ -1336,7 +1363,7 @@ void CPOPickList::ViewConsolidatedPOs()
 	InitSelectedPOs();
 	CDlgPo dlgPo ;
 	dlgPo.SetPOList(&m_listPOs);
-    
+
 	dlgPo.DoModal();
 }
 
@@ -1344,11 +1371,11 @@ void CPOPickList::SetPOReviewed(int iOrderID, bool bReviewed)
 {
 	int iReviewed = bReviewed ? 1 : 0;
 	int iUserID = CGlobals::GetEmployeeID();
-	
+
 	CString strSQL;
 	strSQL.Format("UPDATE Orders SET Reviewed = %d, ReviewedDate = '%s', ReviewedByID = %d WHERE OrderID = %d", iReviewed, CGlobals::GetCurrentSystemTime().Format(), iUserID, iOrderID);
 	g_dbFlooring.ExecuteSQL(strSQL);
-    
+
 }
 
 bool CPOPickList::IsRowDirty(long lRow)

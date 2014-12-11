@@ -61,12 +61,6 @@ CSetOrders::CSetOrders(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetOrders::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetOrders::GetDefaultSQL()
 {
 	return _T("[dbo].[Orders]");

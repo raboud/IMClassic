@@ -277,6 +277,9 @@ bool CDlgPOEntry::ValidateDataForAdd(void)
 				}
 			}
 		}
+		else if (isalpha( m_strStoreNumber.GetAt(0)))
+		{
+		}
 		else
 		{
 			MessageBox("A PO number must either be 4-digits or 8-digits.", "PO Entry Error");

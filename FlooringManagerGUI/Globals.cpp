@@ -639,51 +639,51 @@ bool CGlobals::IsInstall(int iOrderID, bool &bIsInstall)
 
 	return bOK;
 }
-
-bool CGlobals::HasStorePickup(long lOrderID)
-{
-	CPoList listPOs;
-	listPOs.AddHead(lOrderID);
-	return HasStorePickup(&listPOs);
-}
-
-bool CGlobals::HasStorePickup(CPoList* plistPOs)
-{
-	bool bOk = true ;
-	bool bOk2 = true ;
-
-	CSetViewOrderRegMerchandiseDetails set(&g_dbFlooring) ;
-	CSetViewOrderSOMerchandiseDetails set2(&g_dbFlooring) ;
-
-	CString strTemp ;
-	CString strFilter = "((" ;
-
-	POSITION pos = plistPOs->GetHeadPosition() ;
-	bool bFirst = true ;
-	while (pos)
-	{
-		strTemp.Format("[OrderID] = '%d'", plistPOs->GetNext(pos) ) ;
-		if (!bFirst)
-		{
-			strFilter += " OR " ;
-		}
-		bFirst = false ;
-		strFilter += strTemp ;
-	} 
-	strFilter += ") AND ([Status] = 'Store Pickup') AND (Deleted = '0') and (Quantity > 0))" ;
-
-	set.m_strFilter = strFilter;
-	set.Open() ;
-	bOk = !set.IsEOF() ;
-	set.Close() ;
-
-	set2.m_strFilter = strFilter;
-	set2.Open() ;
-	bOk2 = !set2.IsEOF() ;
-	set2.Close() ;
-
-	return bOk || bOk2 ;
-}
+//
+//bool CGlobals::HasStorePickup(long lOrderID)
+//{
+//	CPoList listPOs;
+//	listPOs.AddHead(lOrderID);
+//	return HasStorePickup(&listPOs);
+//}
+//
+//bool CGlobals::HasStorePickup(CPoList* plistPOs)
+//{
+//	bool bOk = true ;
+//	bool bOk2 = true ;
+//
+//	CSetViewOrderRegMerchandiseDetails set(&g_dbFlooring) ;
+//	CSetViewOrderSOMerchandiseDetails set2(&g_dbFlooring) ;
+//
+//	CString strTemp ;
+//	CString strFilter = "((" ;
+//
+//	POSITION pos = plistPOs->GetHeadPosition() ;
+//	bool bFirst = true ;
+//	while (pos)
+//	{
+//		strTemp.Format("[OrderID] = '%d'", plistPOs->GetNext(pos) ) ;
+//		if (!bFirst)
+//		{
+//			strFilter += " OR " ;
+//		}
+//		bFirst = false ;
+//		strFilter += strTemp ;
+//	} 
+//	strFilter += ") AND ([Status] = 'Store Pickup') AND (Deleted = '0') and (Quantity > 0))" ;
+//
+//	set.m_strFilter = strFilter;
+//	set.Open() ;
+//	bOk = !set.IsEOF() ;
+//	set.Close() ;
+//
+//	set2.m_strFilter = strFilter;
+//	set2.Open() ;
+//	bOk2 = !set2.IsEOF() ;
+//	set2.Close() ;
+//
+//	return bOk || bOk2 ;
+//}
 
 CString CGlobals::GetTitleName(int iTitleID)
 {
@@ -888,6 +888,12 @@ void CGlobals::PreparePaperWork(CPoList* listPOs, PRINT_MODE enMode, bool printO
 {
 	ReportHelper::PreparePaperWork(GetPoList(listPOs), (CFI::InstallationManager::Reports::UI::POReport) enMode, printOnly ? Mode::Print : Mode::View);
 }
+
+bool CGlobals::CanProcessPaperWork(CPoList* listPOs, PRINT_MODE enMode)
+{
+	return ReportHelper::CanProcessPaperWork(GetPoList(listPOs), (CFI::InstallationManager::Reports::UI::POReport) enMode);
+}
+
 
 CString CGlobals::InitDefaultContext()
 {
