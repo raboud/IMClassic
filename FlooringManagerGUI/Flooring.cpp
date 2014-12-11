@@ -21,7 +21,6 @@
 #include "SetCheckDetails.h"
 #include "oxshape.h"
 #include "DlgStoreSelection.h"
-#include "SetPadFix.h"
 
 #include "SetUser.h"
 #include "UpdateOptionCost.h"
