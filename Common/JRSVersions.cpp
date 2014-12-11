@@ -138,15 +138,11 @@ void CJRSVersion::RetrieveInfo ()
 								m_suInfo.bIsBeta = (0 != (vData->dwFileFlags & VS_FF_PRERELEASE));
 								usHiWord = (unsigned short)((vData->dwProductVersionMS & 0xFFFF0000) >> 16);
 								usLoWord = (unsigned short)(vData->dwProductVersionMS & 0x0000FFFF);
-								//m_suInfo.csProductVersion.Format("%02X.%02X",usHiWord, usLoWord);
 								m_suInfo.csProductVersion.Format("%02d.%02d",usHiWord, usLoWord);
 								
 								usHiWord = (unsigned short)((vData->dwProductVersionLS & 0xFFFF0000) >> 16);
 								usLoWord = (unsigned short)(vData->dwProductVersionLS & 0x0000FFFF);
 								m_suInfo.csProductBuild.Format("%05d - %02d",usHiWord, usLoWord);
-
-								//ulBuildNumber = (unsigned long)vData->dwProductVersionLS;
-								//m_suInfo.csProductBuild.Format("%04lu",ulBuildNumber);
 							}
 						}
 					}

@@ -42,7 +42,8 @@ CSetMaterialType::CSetMaterialType(CDatabase* pdb)
 	m_SKUDesc = _T("");
 	m_HDType = _T("");
 	m_AllowMaterialStatusUpdate = FALSE ;
-	m_nFields = 18;
+	m_WoodWaiver = FALSE;
+	m_nFields = 19;
 	//}}AFX_FIELD_INIT
 	m_nDefaultType = dynaset;
 }
@@ -84,7 +85,7 @@ void CSetMaterialType::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[SKUDesc]"), m_SKUDesc);
 	RFX_Text(pFX, _T("[HDType]"), m_HDType);
 	RFX_Bool(pFX, _T("[AllowMaterialStatusUpdate]"), m_AllowMaterialStatusUpdate) ;
-
+	RFX_Bool(pFX, _T("[WoodWaiver]"), m_WoodWaiver);
 	//}}AFX_FIELD_MAP
 }
 

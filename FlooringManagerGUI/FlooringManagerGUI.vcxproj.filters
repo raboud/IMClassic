@@ -180,16 +180,7 @@
     <ClCompile Include="ViewActivityList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ViewInvoice.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ViewStoreInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WaiverHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WorkOrderHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CustomerPickList.cpp">
@@ -705,9 +696,6 @@
     <ClCompile Include="SetUnpaid.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SetUser.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SetUserMarketDivisionAssignments.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
@@ -879,9 +867,6 @@
     <ClCompile Include="MiniVersion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SetVwMaterialsRequiringWoodWaiver.cpp">
-      <Filter>Record Sets</Filter>
-    </ClCompile>
     <ClCompile Include="UnitTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1036,16 +1021,7 @@
     <ClInclude Include="ViewActivityList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ViewInvoice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ViewStoreInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WaiverHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WorkOrderHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CustomerPickList.h">
@@ -1549,9 +1525,6 @@
     <ClInclude Include="SetUnpaid.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SetUser.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SetUserMarketDivisionAssignments.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
@@ -1623,9 +1596,6 @@
     </ClInclude>
     <ClInclude Include="MiniVersion.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SetVwMaterialsRequiringWoodWaiver.h">
-      <Filter>Record Sets</Filter>
     </ClInclude>
     <ClInclude Include="UnitTests.h">
       <Filter>Header Files</Filter>

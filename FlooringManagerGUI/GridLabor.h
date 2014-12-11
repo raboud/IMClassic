@@ -43,7 +43,7 @@ public:
 	int AppendRow(CString strType);
 	void SetOrderID (long lOrderID);
 	void UpdateRecordSet(long lOrderID);
-	void SetMaterialType(long lMaterialType, bool bShowActiveOnly = false);
+	void SetMaterialType(int lMaterialType, bool bShowActiveOnly = false);
 	double CalculatePrice(bool bOnlyBasicToMinimum);
 
 	void RecalculateRows();
@@ -65,7 +65,9 @@ protected:
 
 	void SelectMaterial (long lId);
 	void UpdateGrid ();
-	long m_lMaterialType;
+	int m_iMaterialType;
+	int m_iDivisionID ;
+
 	bool m_bShowActiveOnly;
 	CUGEdit m_editUpper;
 	CNumericEdit m_editNumeric;

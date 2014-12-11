@@ -13,7 +13,6 @@
 #include "CustomerView.h"
 #include "DlgStoresPickList.h"
 #include "DlgSubContractorsList.h"
-#include "ViewInvoice.h"
 #include "DialogInvoicing.h"
 #include "DlgCheckList.h"
 #include "DlgChargebackList.h"
@@ -22,7 +21,6 @@
 #include "oxshape.h"
 #include "DlgStoreSelection.h"
 
-#include "SetUser.h"
 #include "UpdateOptionCost.h"
 #include "UpdateMaterialCost.h"
 #include "SetMaterialType.h"
@@ -58,8 +56,6 @@ int CGlobals::m_iUserID;
 CString CGlobals::m_strUserName;
 bool CGlobals::m_bAdmin;		
 
-CMultiDocTemplate* g_pTemplateWorkOrder ;
-CMultiDocTemplate* g_pTemplateInvoice ;
 CMultiDocTemplate* g_pTemplateCustomerPO ;
 
 CDatabase g_dbFlooring;
@@ -284,12 +280,6 @@ BOOL CFlooringApp::InitInstance()
 		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
 		RUNTIME_CLASS(CCustomerView));
 
-	g_pTemplateInvoice = new CMultiDocTemplate(
-		IDR_REPORT,
-		NULL,						//		RUNTIME_CLASS(CFlooringDoc),
-		RUNTIME_CLASS(CMDIChildWnd), // custom MDI child frame
-		RUNTIME_CLASS(CViewInvoice));
-
 	CGlobals::InitDefaultContext();
 
 	CGlobals::SetEmployeeID() ;
@@ -446,7 +436,6 @@ void CFlooringApp::OnViewStores()
 int CFlooringApp::ExitInstance() 
 {
 	delete g_pTemplateCustomerPO ;
-	delete g_pTemplateInvoice ;
 
 	g_dbFlooring.Close() ;
 
@@ -467,14 +456,9 @@ void CFlooringApp::OnViewCustomerPo()
 
 void CFlooringApp::OnInvoicing() 
 {
-//	CDlgSelectVendor dlgSelectVendor;
-//	if ( dlgSelectVendor.DoModal() == IDOK )
-	{
-		CDialogInvoicing* pdlgInv = new CDialogInvoicing() ;
-		pdlgInv->Create(IDD_INVOICING) ;
-//		pdlgInv->SetVendorID(dlgSelectVendor.GetVendorID());
-		pdlgInv->ShowWindow(SW_SHOW) ;
-	}
+	CDialogInvoicing* pdlgInv = new CDialogInvoicing() ;
+	pdlgInv->Create(IDD_INVOICING) ;
+	pdlgInv->ShowWindow(SW_SHOW) ;
 }
 
 void CFlooringApp::OnBillingReceivecheck() 
@@ -512,8 +496,6 @@ void CFlooringApp::OnBillingChargebacks()
 	CDlgChargebackList dlg(this->GetMainWnd()) ;
 
 	dlg.DoModal() ;
-//	CFrameWnd* pFrame = m_pTemplateChargeBackView->CreateNewFrame(NULL,NULL) ;
-//	pFrame->InitialUpdateFrame(NULL, true) ;
 }
 
 void CFlooringApp::OnPayroll() 
@@ -982,59 +964,49 @@ void CFlooringApp::OnReportsWeeklyTotals()
 void CFlooringApp::OnReportsCompletedJobsNotPaid()
 {
 	CGlobals::OnReportsCompletedJobsNotPaid();
-//	ReportHelper::CompletedJobsNotPaid(Mode::View);
 }
 
 void CFlooringApp::OnReportsChargebacksByDate()
 {
 	CGlobals::OnReportsChargebacksByDate();
-//	ReportHelper::ChargebacksByDate(Mode::View);
 }
 
 void CFlooringApp::OnReportsWorkSummaryByWeek()
 {
 	CGlobals::OnReportsWorkSummaryByWeek();
-//	ReportHelper::WeeklyUnitsTotals(Mode::View);
 }
 
 void CFlooringApp::OnReportsSubPhonelist()
 {
 	CGlobals::OnReportsSubPhonelist();
-//	ReportHelper::SubContractorsPhoneList(Mode::View);
 }
 
 void CFlooringApp::OnBackgroundChecksAlphaByLastName()
 {
 	CGlobals::OnBackgroundChecksAlphaByLastName();
-//	ReportHelper::SubContractorsBackgroundCheckStatus(Mode::View);
 }
 
 void CFlooringApp::OnJobsAssignments()
 {
 	CGlobals::OnJobsAssignments();
-//	ReportHelper::InstallerAssignments(Mode::View);
 }
 
 void CFlooringApp::OnSubHelpers()
 {
 	CGlobals::OnSubHelpers();
-//	ReportHelper::HelperAssignments(Mode::View);
 }
 
 void CFlooringApp::OnWorkmansCompByDate()
 {
 	CGlobals::OnWorkmansCompByDate();
-//	ReportHelper::WorkmansCompByDate(Mode::View);
 }
 
 void CFlooringApp::OnLiabilityByDate()
 {
 	CGlobals::OnLiabilityByDate();
-//	ReportHelper::LiabilityByDate(Mode::View);
 }
 
 void CFlooringApp::OnMaterialsDamaged()
 {
 	CGlobals::OnMaterialsDamaged();
-//	ReportHelper::InventoryDamage(Mode::View);
 }

@@ -73,7 +73,7 @@ void CCustomerPickList::Update()
 	{
 		m_pSet->MoveFirst() ;
 		//Add the Row Heading to the grid
-		while (!m_pSet->IsEOF())
+		while (!m_pSet->IsEOF() && (iRow < 1000))
 		{
 //			InsertRow(iRow) ;
 			AppendRow() ;

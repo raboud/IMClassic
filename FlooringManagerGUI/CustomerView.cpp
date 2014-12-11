@@ -532,7 +532,7 @@ void CCustomerView::EnableCustomerEdit()
 
 	EnableControl(IDC_DIRECTIONS, true) ;
 	EnableControl(IDC_DIRECTIONS_LABLE, true) ;
-	ShowControl(IDC_DIRECTIONS, SW_SHOW) ;
+	ShowControl(IDC_DIRECTIONS, SW_SHOW);
 	ShowControl(IDC_DIRECTIONS_LABLE, SW_SHOW) ;
 	EnableControl(IDC_CUSTOMER_EDIT, false) ;
 	ShowControl(IDC_CUSTOMER_EDIT, SW_HIDE) ;

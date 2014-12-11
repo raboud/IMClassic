@@ -40,6 +40,7 @@ public:
 	CString m_SKUDesc;
 	CString m_HDType;
 	BOOL	m_AllowMaterialStatusUpdate ;
+	BOOL	m_WoodWaiver ;
 	//}}AFX_FIELD
 
 

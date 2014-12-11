@@ -26,7 +26,6 @@
 #include "SetActionReport.h"
 #include "SetVwPOPickList.h"
 
-
 const UINT    wm_PO_SELECT = RegisterWindowMessage( "Purchase Order Select" ) ;
 
 class CPOPickList : public CCFGrid  
@@ -85,8 +84,6 @@ protected:
 
 	CSetVwPOPickList m_setPickList;
 
-	void PrintPO() ;
-	void ViewPO() ;
 	void PrintReviewChecklist() ;
 	void PrintSchedulingChecklist() ;
 	void PrintWoodFlooringWaiver() ;
@@ -95,9 +92,6 @@ protected:
 
 	virtual bool IsRowDirty(long lRow);
 	virtual bool IsColumnDirty(int iCol, long lRow);
-
-	//void SendToExpeditor(int iNoteID, bool CopyToSASM, bool CopyToExpeditorEmail);
-
 };
 
 const CPOPickList::EnColorMode enMODE_SCHEDULED	= CCFGrid::EnColorMode_TEXT;

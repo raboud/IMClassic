@@ -264,7 +264,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="PropSheetReportIssueWizard.cpp" />
     <ClCompile Include="QuickBooks.cpp" />
     <ClCompile Include="RegMerchPropPage.cpp" />
-    <ClCompile Include="SetVwMaterialsRequiringWoodWaiver.cpp" />
     <ClCompile Include="SOMerchPropPage.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -275,10 +274,7 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="UpdateOptionCost.cpp" />
     <ClCompile Include="ViewActivePOs.cpp" />
     <ClCompile Include="ViewActivityList.cpp" />
-    <ClCompile Include="ViewInvoice.cpp" />
     <ClCompile Include="ViewStoreInfo.cpp" />
-    <ClCompile Include="WaiverHelper.cpp" />
-    <ClCompile Include="WorkOrderHelper.cpp" />
     <ClCompile Include="..\Common\DUNDAS\Ultimate Toolbox\source\OXAdvancedAssert.cpp" />
     <ClCompile Include="..\Common\DUNDAS\Ultimate Toolbox\source\OXAdvancedAssertMail.cpp" />
     <ClCompile Include="..\Common\Dundas\ug6mfc\EditControls\OXMaskedEdit.cpp" />
@@ -538,7 +534,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetTotalPayment.cpp" />
     <ClCompile Include="SetUintOfMeaser.cpp" />
     <ClCompile Include="SetUnpaid.cpp" />
-    <ClCompile Include="SetUser.cpp" />
     <ClCompile Include="SetUserMarketDivisionAssignments.cpp" />
     <ClCompile Include="SetVendorNumbers.cpp" />
     <ClCompile Include="SetViewOrderRegMerchandiseDetails.cpp" />
@@ -647,7 +642,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
 </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">hlp\$(TargetName).hm;%(Outputs)</Outputs>
     </CustomBuild>
-    <ClInclude Include="SetVwMaterialsRequiringWoodWaiver.h" />
     <ClInclude Include="SOMerchPropPage.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="TransactionDetailsDialog.h" />
@@ -657,10 +651,7 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="versionno.h" />
     <ClInclude Include="ViewActivePOs.h" />
     <ClInclude Include="ViewActivityList.h" />
-    <ClInclude Include="ViewInvoice.h" />
     <ClInclude Include="ViewStoreInfo.h" />
-    <ClInclude Include="WaiverHelper.h" />
-    <ClInclude Include="WorkOrderHelper.h" />
     <ClInclude Include="..\Common\Dundas\ug6mfc\CellTypes\UGCTdtp.h" />
     <ClInclude Include="CustomerPickList.h" />
     <ClInclude Include="GridActivePOs.h" />
@@ -829,7 +820,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetTotalPayment.h" />
     <ClInclude Include="SetUintOfMeaser.h" />
     <ClInclude Include="SetUnpaid.h" />
-    <ClInclude Include="SetUser.h" />
     <ClInclude Include="SetUserMarketDivisionAssignments.h" />
     <ClInclude Include="SetVendorNumbers.h" />
     <ClInclude Include="SetViewOrderRegMerchandiseDetails.h" />

@@ -2003,7 +2003,7 @@ void CDlgPo::OnBnClickedViewWorkorder()
 {
 	if (SaveData())
 	{
-		CGlobals::ViewWorkOrder(&m_listPOs);
+		CGlobals::PreparePaperWork(&m_listPOs, CGlobals::PM_WORKORDER, false);
 	}
 }
 

@@ -108,18 +108,11 @@ void CPOPickList::Update(long lCustomerID)
 	m_setPickList.m_strFilter.Format("[CustomerID] = '%d'", m_lCustomerId) ;
 	m_setPickList.m_strSort = "[OrderDate] DESC,[PurchaseOrderNumber]" ;
 	m_setPickList.Requery() ;
-//	m_setOrders.m_strFilter.Format("[CustomerID] = '%d' AND Deleted = 0", m_lCustomerId) ;
-//	m_setOrders.m_strSort = "[OrderDate] DESC,[PurchaseOrderNumber]" ;
-//	m_setOrders.Requery() ;
 
 	long lRow = 0;
 	SetNumberRows (0, false) ;
 
-//	CSetMaterialType setMT(&g_dbFlooring) ;
-//	setMT.Open() ;
-	
 	//Add the Row Heading to the grid
-	//while (!m_setOrders.IsEOF())
 	while (!m_setPickList.IsEOF())
 	{
 		AppendRow() ;
@@ -128,30 +121,18 @@ void CPOPickList::Update(long lCustomerID)
 		CString strTemp ;
 
 		strTemp.Format("%d", m_setPickList.m_OrderID);
-		/*setMT.m_strFilter.Format("[MaterialTypeID] = '%d'", m_setOrders.m_MaterialTypeID) ;
-		setMT.Requery() ;*/
 		QuickSetText(ID, lRow, strTemp);
 		QuickSetText(PO, lRow, m_setPickList.m_PurchaseOrderNumber) ;
 		QuickSetText(ORDER_DATE, lRow, m_setPickList.m_OrderDate.Format( "%Y/%m/%d" ));
 
 		if (m_setPickList.m_Scheduled)
-		//if (!m_setPickList.IsFieldNull(&m_setPickList.m_ScheduleStartDate))
 		{
 			strTemp.Format("%s %s", m_setPickList.m_ScheduleStartDate.Format( "%Y/%m/%d" ), (m_setPickList.m_ScheduledAM) ? "AM" : "PM");
 			QuickSetText(SCHED_START_DATE, lRow, strTemp );
-			
-			//strTemp.Format("%s", m_setPickList.m_ScheduleEndDate.Format( "%Y/%m/%d" ));
-			//QuickSetText(SCHED_END_DATE, lRow, strTemp );
 		}
 
-		//QuickSetText(MATERIAL_TYPE, lRow, setMT.m_ShortName ) ;
 		QuickSetText(MATERIAL_TYPE, lRow, m_setPickList.m_ShortName ) ;
 
-		//CUGCell cell ;
-		//GetCell(MAT_SIZE, lRow, &cell) ;
-		//cell.SetNumberDecimals(2) ;
-		//cell.SetNumber(fSize) ;
-		//SetCell(MAT_SIZE, lRow, &cell) ;
 		if (!m_setPickList.IsFieldNull(&m_setPickList.m_Total))
 		{
 			QuickSetNumber(MAT_SIZE, lRow, m_setPickList.m_Total);
@@ -163,12 +144,9 @@ void CPOPickList::Update(long lCustomerID)
 
 		UpdateRowColor(lRow);
 
-		//m_setOrders.MoveNext() ;
 		m_setPickList.MoveNext();
 
-		//lRow++ ;
 	}
-	//setMT.Close() ;
 
 	EnableUpdate(TRUE);
 	RedrawAll();
@@ -271,7 +249,10 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			m_pPrintMenu->CreateMenu() ;
 			
 			m_pPrintMenu->AppendMenu(MF_STRING, 3000, "All Paperwork") ;
-			m_pPrintMenu->AppendMenu(MF_STRING, 3001, "Invoices") ;
+			if (iNumSelected == 1)
+			{
+				m_pPrintMenu->AppendMenu(MF_STRING, 3001, "Invoices") ;
+			}
 			m_pPrintMenu->AppendMenu(MF_STRING, 3002, "Work Order") ;
 			m_pPrintMenu->AppendMenu(MF_STRING, 3003, "Release") ;
 			if (CGlobals::RequiresWoodWaiver((long)QuickGetNumber(ID, row)))
@@ -304,6 +285,7 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			
 			if (iNumSelected == 1)
 			{
+				m_pViewMenu->AppendMenu(MF_STRING, 3105, "Invoice") ;
 				m_pViewMenu->AppendMenu(MF_STRING, 3101, "Selected PO") ;
 			}
 			
@@ -314,11 +296,6 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 			{
 				m_pViewMenu->AppendMenu(MF_STRING, 3104, "F&&I Wood Waiver") ;
 			}						
-			
-			//if (iNumSelected > 1)
-			//{
-				//m_pViewMenu->AppendMenu(MF_STRING /*| nGrayed*/, 3205, "View Selected POs") ;
-			//}
 
 			this->m_menu->AppendMenu(MF_POPUP, (UINT) m_pViewMenu->m_hMenu, "View") ;
 
@@ -401,6 +378,10 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 				PrintPaperWork(CGlobals::PM_INVOICE) ;
 				break ;
 
+			case 3105:
+				ViewPaperWork(CGlobals::PM_INVOICE) ;
+				break ;
+
 			case 3002 :
 				PrintPaperWork(CGlobals::PM_WORKORDER) ;
 				break ;
@@ -418,7 +399,7 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 				break ;
 
 			case 3006:
-				this->PrintPO() ;
+				PrintPaperWork(CGlobals::PM_PO) ;
 				break ;
 
 			case 3007:
@@ -436,6 +417,7 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 			case 3101:
 				ViewPaperWork(CGlobals::PM_PO);
 				break;
+
 			case 3102:
 				ViewPaperWork(CGlobals::PM_WORKORDER);
 				break;
@@ -759,50 +741,15 @@ int CPOPickList::OnEditStart(int /* col */, long /* row */, CWnd ** /* edit */)
 	return FALSE ;
 }
 
-void CPOPickList::InitPOList()
-{
-	m_listPOs.RemoveAll();
-
-	//Add the Column Heading to the grid
-	int iCol ;
-	long lRow ;
-	long lLastRow = -1 ;
-
-	CWaitCursor curWait ;
-
-	EnumFirstSelected(&iCol, &lRow) ;
-	do
-	{
-		if (lRow != lLastRow)
-		{
-			m_listPOs.AddTail(int(QuickGetNumber(-1, lRow)));
-		}
-		lLastRow = lRow ;
-	} while (this->EnumNextSelected(&iCol, &lRow) == UG_SUCCESS) ;
-}
-
 void CPOPickList::ViewPaperWork(CGlobals::PRINT_MODE enMode)
 {
-	InitPOList();
-
+	GetSelectedPOs();
 	CGlobals::PreparePaperWork(&m_listPOs, enMode, false);
-}
-
-void CPOPickList::PrintPO()
-{
-	GetSelectedPOs() ;
-
-	POSITION pos = m_listPOs.GetHeadPosition() ;
-	while (pos)
-	{
-		CGlobals::PrintPO(m_listPOs.GetNext(pos));
-	}
-
-	Update(m_lCustomerId) ;
 }
 
 void CPOPickList::PrintReviewChecklist()
 {
+	GetSelectedPOs() ;
 	POSITION pos = m_listPOs.GetHeadPosition() ;
 	while (pos)
 	{
@@ -813,6 +760,7 @@ void CPOPickList::PrintReviewChecklist()
 
 void CPOPickList::PrintSchedulingChecklist()
 {
+	GetSelectedPOs() ;
 	POSITION pos = m_listPOs.GetHeadPosition() ;
 	while (pos)
 	{
@@ -823,12 +771,8 @@ void CPOPickList::PrintSchedulingChecklist()
 
 void CPOPickList::PrintWoodFlooringWaiver()
 {
-	POSITION pos = m_listPOs.GetHeadPosition() ;
-	while (pos)
-	{
-		int iOrderID = m_listPOs.GetNext(pos);
-		CGlobals::PrintWoodFlooringWaiver(iOrderID);
-	}		
+	GetSelectedPOs() ;
+	CGlobals::PreparePaperWork(&m_listPOs, CGlobals::PM_WOODWAIVER, true);
 }
 
 void CPOPickList::UpdatePO()
@@ -841,7 +785,7 @@ void CPOPickList::UpdatePO()
 
 void CPOPickList::PrintPaperWork(CGlobals::PRINT_MODE enMode)
 {
-	InitPOList();
+	GetSelectedPOs();
 	CGlobals::PreparePaperWork(&m_listPOs, enMode, true);
 	Update(m_lCustomerId) ;
 	RedrawAll() ;
