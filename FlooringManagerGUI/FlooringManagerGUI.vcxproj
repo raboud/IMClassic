@@ -111,7 +111,7 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /s ..\Common\SSCE\runtime $(OutDir)</Command>
+      <Command>xcopy /y /s ..\Common\SSCE\runtime $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
