@@ -178,9 +178,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Reference Include="CFI.InstallationManager.Reports, Version=1.0.4547.28362, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\InstallationManager\InstallationManager.Reports\bin\x86\Debug\CFI.InstallationManager.Reports.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
@@ -911,6 +908,11 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Common\Ssce\sdk\lib\SSCE5332.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\InstallationManager\InstallationManager.Reports\CFI.InstallationManager.Reports.csproj">
+      <Project>{e89320cf-9b6e-4336-a587-10c042779e5a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
