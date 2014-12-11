@@ -33,9 +33,9 @@ public:
 	long	m_CustomerID;
 	CString	m_Directions;
 	CString	m_Extension;
-	CString	m_FirstName;
+	CString	m_Name;
 	CString	m_InternalNotes;
-	CString	m_LastName;
+//	CString	m_Address;
 	long	m_MaterialTypeID;
 	BOOL	m_NoMinimum;
 	CString	m_Notes;

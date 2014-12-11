@@ -191,8 +191,7 @@ void CGridInvoicing::InitializeData()
 		QuickSetText(ID, lRow, strID) ;
 
 		CString strName ;
-		strName = setCombined.m_LastName + ", " + setCombined.m_FirstName ;
-		
+		strName = setCombined.m_Name;		
 
 		QuickSetText(NAME, lRow, strName) ;
 		QuickSetText(PO_NUMBER, lRow, setCombined.m_PurchaseOrderNumber) ;

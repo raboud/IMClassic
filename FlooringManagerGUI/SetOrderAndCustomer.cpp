@@ -34,9 +34,9 @@ CSetOrderAndCustomer::CSetOrderAndCustomer(CDatabase* pdb)
 	m_CustomerID = 0;
 	m_Directions = _T("");
 	m_Extension = _T("");
-	m_FirstName = _T("");
+	m_Name = _T("");
 	m_InternalNotes = _T("");
-	m_LastName = _T("");
+//	m_Address = _T("");
 	m_MaterialTypeID = 0;
 	m_NoMinimum = FALSE;
 	m_Notes = _T("");
@@ -64,7 +64,7 @@ CSetOrderAndCustomer::CSetOrderAndCustomer(CDatabase* pdb)
 	m_MarkBilledWhenPaid = FALSE;
 	m_XMLOrderCostAmount = _T("");
 	m_EntryMethodID = 0;
-	m_nFields = 43;
+	m_nFields = 42;
 	//}}AFX_FIELD_INIT
 	m_nDefaultType = dynaset;
 }
@@ -99,8 +99,8 @@ void CSetOrderAndCustomer::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Long(pFX, _T("[CustomerID]"), m_CustomerID);
 	RFX_Text(pFX, _T("[Directions]"), m_Directions, CGlobals::iMAX_CUSTOMER_DIRECTIONS);
 	RFX_Text(pFX, _T("[Extension]"), m_Extension);
-	RFX_Text(pFX, _T("[FirstName]"), m_FirstName);	
-	RFX_Text(pFX, _T("[LastName]"), m_LastName);
+	RFX_Text(pFX, _T("[Name]"), m_Name);	
+//	RFX_Text(pFX, _T("[Address]"), m_Address);
 	RFX_Long(pFX, _T("[MaterialTypeID]"), m_MaterialTypeID);
 	RFX_Bool(pFX, _T("[NoMinimum]"), m_NoMinimum);
 	RFX_Text(pFX, _T("[Notes]"), m_Notes, CGlobals::iMAX_ORDER_NOTES);
