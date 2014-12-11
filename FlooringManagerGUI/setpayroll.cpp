@@ -47,7 +47,7 @@ CString CSetPayroll::GetDefaultConnect()
     WORD cbBufMax = 2000;
     WORD cbBufOut;
     char *pszBuf = szBuf;
-    CString sDriver;
+    CString sDriver = "Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)";
     // Get the names of the installed drivers ("odbcinst.h" has to be included )
    if(!SQLGetInstalledDrivers(szBuf,cbBufMax,& cbBufOut))
         return "";
@@ -55,7 +55,7 @@ CString CSetPayroll::GetDefaultConnect()
     // Search for the driver...
     do
     {
-        if( strstr( pszBuf, "*.xlsx" ) != 0 )
+        if( strstr( pszBuf, "xlsx" ) != 0 )
         {
             // Found !
             sDriver = CString( pszBuf );
@@ -68,7 +68,7 @@ CString CSetPayroll::GetDefaultConnect()
 	CString sSql;
     CString sItem1, sItem2;
     CString sDsn;
-    CString sFile = "c:\\temp\\Sub-Contractors.xlsx";        // the file name. Could also be something like C:\\Sheets\\WhatDoIKnow.xls
+    CString sFile = "s:\\Sub-Contractors.xlsx";        // the file name. Could also be something like C:\\Sheets\\WhatDoIKnow.xls
     
     // Retrieve the name of the Excel driver. This is 
     // necessary because Microsoft tends to use language
@@ -83,7 +83,8 @@ CString CSetPayroll::GetDefaultConnect()
     
     // Create a pseudo DSN including the name of the Driver and the Excel file
     // so we don4t have to have an explicit DSN installed in our ODBC admin
-    sDsn.Format("ODBC;DRIVER={%s};DSN='';DBQ=%s",sDriver,sFile);
+//    sDsn.Format("ODBC;DRIVER={%s};DSN='';DBQ=%s;",sDriver,sFile);
+    sDsn.Format("DRIVER={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};DBQ=s:\\Sub-Contractors.xlsx;",sDriver,sFile);
 	return sDsn;
 //	return _T("ODBC;DSN=FlooringSub");
 }
