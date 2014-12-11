@@ -570,17 +570,20 @@ bool CInstallerJobData::GetDrawing(bool bPrint, CString strStoreNumber, CString 
 		if (dwRet == HTTP_STATUS_OK)
 		{
 			CFile filePDF ;
+			CFileException ex;
 			strFileName = FormatDrawingFilename(strStoreNumber, strInstallPO, strInstallOrderNumber, strMeasureNumber, CalcDate, iLineNumber, iStyle) ;
-			filePDF.Open(strFileName, CFile::modeCreate | CFile::modeWrite | CFile::typeBinary) ;
-
-			unsigned char b[2000] ;
-			UINT nCount = 0 ;
-			while ((nCount = pFile->Read(&b, sizeof(b))) != 0)
+			if (filePDF.Open(strFileName, CFile::modeCreate | CFile::modeWrite | CFile::typeBinary, &ex) == TRUE)
 			{
-				filePDF.Write(&b, nCount) ;
+
+				unsigned char b[2000];
+				UINT nCount = 0;
+				while ((nCount = pFile->Read(&b, sizeof(b))) != 0)
+				{
+					filePDF.Write(&b, nCount);
+				}
+				filePDF.Close();
+				bStatus = true;
 			}
-			filePDF.Close() ;
-			bStatus = true ;
 		}
 	}
 	catch (CInternetException *pEx)

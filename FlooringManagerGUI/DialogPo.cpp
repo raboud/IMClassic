@@ -142,6 +142,7 @@ BEGIN_MESSAGE_MAP(CDlgPo, CDialog)
 	ON_BN_CLICKED(IDC_BTN_ALERTS, OnBnClickedAlerts)
 	ON_BN_CLICKED(IDC_NOTES, OnBnClickedNotes)
 	ON_EN_CHANGE(IDC_DRAWING_NUMBER, OnEnChangeDrawingNumber)
+	ON_REGISTERED_MESSAGE(wm_FILES_DROPPED, OnFilesDropped)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -150,6 +151,8 @@ END_MESSAGE_MAP()
 BOOL CDlgPo::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
+	CWnd* pW = this->GetDlgItem(IDC_DRAWING_STATIC);
+	BOOL r = m_dropTarget.Register(pW);
 	ASSERT(((m_bAdding == false) && m_bConsolidatedView) || !m_bConsolidatedView);
 
 	// hide the diagram name static window by default
@@ -168,7 +171,7 @@ BOOL CDlgPo::OnInitDialog()
 		CString strDiagramName = GetDiagramName(false);
 		if (strDiagramName.GetLength() > 0)
 		{
-			m_stDiagramName.SetWindowText("SOSI ATTACHED...");
+			m_stDiagramName.SetWindowText("ATTACHED...");
 			m_stDiagramName.ShowWindow(SW_SHOW);
 			m_editDrawing.ShowWindow(SW_HIDE);
 			m_comboDrawingTime.ShowWindow(SW_HIDE);
@@ -217,6 +220,17 @@ BOOL CDlgPo::OnInitDialog()
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+
+LRESULT CDlgPo::OnFilesDropped(WPARAM, LPARAM)
+{
+	CFlooringApp* pApp = (CFlooringApp*)AfxGetApp();
+	if (pApp->m_pDlgUserAlerts != NULL)
+	{
+		pApp->m_pDlgUserAlerts->RefreshGrid();
+	}
+	return 0;
 }
 
 bool CDlgPo::SaveData()
@@ -2114,15 +2128,16 @@ void CDlgPo::OnDrawingView()
 		COleDateTime dt;
 		dt.ParseDateTime(str);
 
-		if ( !CInstallerJobData::GetDrawing(false, m_strStoreNumber, m_strPONumber, strInstallNumber, strMeasureNumber, dt) )
+		CString strFileName = CInstallerJobData::FormatDrawingFilename(m_strStoreNumber, m_strPONumber, strInstallNumber, strMeasureNumber, dt);
+		if (!::PathFileExists(strFileName))
 		{
-			MessageBox("Drawing Number or Calculation date is invalid", "Seaming Diagram", MB_OK) ;
+			if (!CInstallerJobData::GetDrawing(false, m_strStoreNumber, m_strPONumber, strInstallNumber, strMeasureNumber, dt))
+			{
+				MessageBox("Drawing Number or Calculation date is invalid", "Seaming Diagram", MB_OK);
+				return;
+			}
 		}
-		else
-		{
-			CString strFileName = CInstallerJobData::FormatDrawingFilename(m_strStoreNumber, m_strPONumber, strInstallNumber, strMeasureNumber, dt) ;
-			ShellExecute(NULL, "open", strFileName, NULL, NULL, 10 ) ;
-		}
+		ShellExecute(NULL, "open", strFileName, NULL, NULL, 10 ) ;
 	}
 }
 

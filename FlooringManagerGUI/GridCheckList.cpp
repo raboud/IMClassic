@@ -24,6 +24,7 @@ void CGridCheckList::OnSetup()
 	AddColumn("     Date     ", CHECK_DATE);
 	AddColumn("     Amount     ", CHECK_AMOUNT);
 	AddColumn("     Vendor ID     ", VENDOR_ID);
+	AddColumn("     QBTxnID     ", QBTXN_ID);
 
 	InitColumnHeadings();
 
@@ -74,6 +75,7 @@ void CGridCheckList::Update()
 
 		strTemp.Format("%s - %s", setCheck.m_Description, setCheck.m_VendorNumber);
 		QuickSetText(VENDOR_ID, lRow, strTemp);
+		QuickSetText(QBTXN_ID, lRow, setCheck.m_QBTxnId);
 
 		setCheck.MoveNext() ;
 	}
@@ -96,6 +98,8 @@ int CGridCheckList::OnMenuStart(int /* col */, long row, int section)
 			AddMenuItem(PRINT_CHECK, "Print Check Report") ;
 			AddMenuItem(VIEW_CHECK, "View Check Report") ;
 			AddMenuItem(NEW_CHECK, "New") ;
+			CString test = QuickGetText(QBTXN_ID, row);
+			AddMenuItem(ADD_QUICKBOOKS, "Add to Quickbooks", strlen(test) != 0);
 		}
 	}
 	return TRUE ;
@@ -125,6 +129,10 @@ void CGridCheckList::OnMenuCommand(int /* col */, long row, int section, int ite
 
 		case VIEW_CHECK:
 			ViewCheck(row);
+			break;
+
+		case ADD_QUICKBOOKS:
+			AddToQuickbooks(row);
 			break;
 
 		default:
@@ -179,6 +187,12 @@ void CGridCheckList::EditCheck(long row)
 		setCheck.Close() ;
 		this->RedrawRow(row) ;
 	}
+}
+void CGridCheckList::AddToQuickbooks(long row)
+{
+	CString strId = QuickGetText(ID, row);
+	int iId = atoi(strId);
+	CGlobals::AddCheckToQuickbooks(iId);
 }
 
 void CGridCheckList::EditCheckDetail(long row )

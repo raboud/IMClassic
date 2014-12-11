@@ -26,6 +26,7 @@ public:
 	CString	m_CheckNumber;
 	COleDateTime m_CheckDate;
 	CString	m_Amount;
+	CString m_QBTxnId;
 	long m_VendorID;
 	//}}AFX_FIELD
 

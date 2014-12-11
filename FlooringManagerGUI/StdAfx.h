@@ -18,6 +18,7 @@
 
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
+#include <afxole.h>
 #include <afxdisp.h>        // MFC Automation classes
 #include <afxdb.h>			// MFC ODBC database classes
 #include <afxdtctl.h>		// MFC support for Internet Explorer 4 Common Controls

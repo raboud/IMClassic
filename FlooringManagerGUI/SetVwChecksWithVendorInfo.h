@@ -26,6 +26,7 @@ public:
 	CString	m_Amount;
 	CString	m_VendorNumber;
 	CString	m_Description;
+	CString m_QBTxnId;
 	BOOL	m_PaySubWhenPaid;
 
 // Overrides

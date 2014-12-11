@@ -28,7 +28,8 @@ CSetChecks::CSetChecks(CDatabase* pdb)
 	m_CheckNumber = _T("");
 	m_Amount = _T("");
 	m_VendorID = 0;
-	m_nFields = 5;
+	m_QBTxnId = _T("");;
+	m_nFields = 6;
 	//}}AFX_FIELD_INIT
 	m_nDefaultType = dynaset;
 }
@@ -51,6 +52,7 @@ void CSetChecks::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Date(pFX, _T("[CheckDate]"), m_CheckDate);
 	RFX_Text(pFX, _T("[Amount]"), m_Amount);
 	RFX_Long(pFX, _T("[VendorID]"), m_VendorID);
+	RFX_Text(pFX, _T("[QBTxnId]"), m_QBTxnId);
 	//}}AFX_FIELD_MAP
 }
 

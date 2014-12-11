@@ -13,6 +13,7 @@
 #include "FloatEdit.h"
 #include "afxwin.h"
 #include "flooring.h"
+#include "DropTarget.h"
 
 #include "SetDiscrepancies.h"
 
@@ -36,6 +37,7 @@ public:
 
 	CPOPropSheet m_POPropSheet;
 	CNotesPropSheet m_NotesPropSheet;
+	DropTarget m_dropTarget;
 	
 // Dialog Data
 	//{{AFX_DATA(CDialogPo)
@@ -141,7 +143,8 @@ public:
 	void SetStoreNumber(CString strStoreNumber);
 	afx_msg void OnEditEditponumber();
 	void SetMaterialTypeShortName(CString strShortName);
-	
+	afx_msg LRESULT OnFilesDropped(WPARAM wParam, LPARAM lParam);
+
 	void SetPOList(CPoList* pListPOs);
 	void SetOrderId(int iOrderID);
 

@@ -867,6 +867,9 @@
     <ClCompile Include="DlgUnitTestResults.cpp">
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DropTarget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Flooring.rc">
@@ -1592,6 +1595,12 @@
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DropTarget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

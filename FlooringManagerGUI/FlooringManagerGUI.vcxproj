@@ -195,6 +195,7 @@ copy Flooring.exe.config $(OutDir)</Command>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
     </ClCompile>
     <ClCompile Include="DlgUnitTestResults.cpp" />
+    <ClCompile Include="DropTarget.cpp" />
     <ClCompile Include="ExceptionHandler.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -539,12 +540,14 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClInclude Include="ComboSpokeWith.h" />
     <ClInclude Include="ComboUsers.h" />
     <ClInclude Include="..\Common\CShellFileOp.h" />
+    <ClInclude Include="CPath.h" />
     <ClInclude Include="CrashFileNames.h" />
     <ClInclude Include="CustomerSatPropertyPage.h" />
     <ClInclude Include="CustomerView.h" />
     <ClInclude Include="..\Common\DataExchange.h" />
     <ClInclude Include="Dib.h" />
     <ClInclude Include="DlgUnitTestResults.h" />
+    <ClInclude Include="DropTarget.h" />
     <ClInclude Include="ExceptionHandler.h" />
     <ClInclude Include="FindCustomers.h" />
     <ClInclude Include="Flooring.h" />
@@ -900,6 +903,9 @@ copy Flooring.exe.config $(OutDir)</Command>
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\..\InstallationManager\Quickbooks\CFI.FinancialSoftware.Quickbooks.csproj">
+      <Project>{2a09e0a8-1f30-4f21-815d-3915eb96d578}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\InstallationManager\TypesAndInterfaces\CFI.InstallationManager.TypesAndInterfaces.csproj">
       <Project>{4f5429bc-ed29-4e3c-8464-5b9cc738cc6b}</Project>

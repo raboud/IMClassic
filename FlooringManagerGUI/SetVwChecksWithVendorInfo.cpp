@@ -20,7 +20,8 @@ CSetVwChecksWithVendorInfo::CSetVwChecksWithVendorInfo(CDatabase* pdb)
 	m_VendorNumber = L"";
 	m_Description = L"";
 	m_PaySubWhenPaid = FALSE;
-	m_nFields = 7;
+	m_QBTxnId = _T("");;
+	m_nFields = 8;
 	m_nDefaultType = dynaset;
 }
 
@@ -46,6 +47,7 @@ void CSetVwChecksWithVendorInfo::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[VendorNumber]"), m_VendorNumber);
 	RFX_Text(pFX, _T("[Description]"), m_Description);
 	RFX_Bool(pFX, _T("[PaySubWhenPaid]"), m_PaySubWhenPaid);
+	RFX_Text(pFX, _T("[QBTxnId]"), m_QBTxnId);
 
 }
 /////////////////////////////////////////////////////////////////////////////

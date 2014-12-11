@@ -186,7 +186,7 @@ LONG WINAPI ExcHandler(struct _EXCEPTION_POINTERS *ExceptionInfo)
 	::MessageBox(NULL, "Exception handler called.", "Error!", MB_OK);
 	RecordExceptionInfo(ExceptionInfo, _T("Flooring.cpp - Exception Handler"));
 	ExitProcess(0);
-	return EXCEPTION_CONTINUE_SEARCH;
+//	return EXCEPTION_CONTINUE_SEARCH;
 }
 
 int CFlooringApp::Run()

@@ -647,34 +647,17 @@ void CUGCTDateTimePicker::AdjustMonthCalPosition(RECT* pRect)
 		m_ctrl->GetTopLevelParent()->GetExStyle()&WS_EX_TOPMOST);
 
 	CRect rectDisplay;
-#if(WINVER >= 0x0500)
-	// if we use Win 98/NT5 we have to take into account multiple monitors
-	OSVERSIONINFO osvi={ sizeof(OSVERSIONINFO) };
-	VERIFY(::GetVersionEx(&osvi)!=0);
-	if(osvi.dwMajorVersion>4 || 
-		(osvi.dwMajorVersion==4 && osvi.dwMinorVersion>0))
-	{
-        CPoint pt;
-        ::GetCursorPos(&pt);
-		HMONITOR hMonitor=::MonitorFromPoint(pt,MONITOR_DEFAULTTONEAREST);
-		ASSERT(hMonitor!=NULL);
-		MONITORINFO monitorInfo={ sizeof(MONITORINFO) };
-		VERIFY(::GetMonitorInfo(hMonitor,&monitorInfo));
-		if(bTopMostParent)
-			rectDisplay=monitorInfo.rcMonitor;
-		else
-			rectDisplay=monitorInfo.rcWork;
-	}
+	// we have to take into account multiple monitors
+    CPoint pt;
+    ::GetCursorPos(&pt);
+	HMONITOR hMonitor=::MonitorFromPoint(pt,MONITOR_DEFAULTTONEAREST);
+	ASSERT(hMonitor!=NULL);
+	MONITORINFO monitorInfo={ sizeof(MONITORINFO) };
+	VERIFY(::GetMonitorInfo(hMonitor,&monitorInfo));
+	if(bTopMostParent)
+		rectDisplay=monitorInfo.rcMonitor;
 	else
-	{
-#endif
-		if(bTopMostParent)
-			CWnd::GetDesktopWindow()->GetWindowRect(rectDisplay);
-		else
-			::SystemParametersInfo(SPI_GETWORKAREA,NULL,&rectDisplay,NULL);
-#if(WINVER >= 0x0500)
-	}
-#endif
+		rectDisplay=monitorInfo.rcWork;
 
 	CRect rectIntersect;
 	if(rectIntersect.IntersectRect(rectDisplay,pRect) && 

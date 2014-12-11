@@ -35,6 +35,7 @@ using namespace CFI::InstallationManager::Reports::UI;
 using namespace CFI::InstallationManager::Shared::Forms;
 using namespace CFI::InstallationManager::Controls;
 using namespace CFI::InstallationManager;
+using namespace CFI::FinancialSoftware::Quickbooks;
 
 CGlobals::CGlobals(void)
 {
@@ -1083,6 +1084,11 @@ void CGlobals::PrintCheck(int iCheckID)
 void CGlobals::ViewCheck(int iCheckID)
 {
 	ReportHelper::Check(iCheckID, Mode::View);
+}
+
+void CGlobals::AddCheckToQuickbooks(int iCheckID)
+{
+	Quickbooks::CreateInvoice(Singleton::Connection, iCheckID);
 }
 
 void CGlobals::PrintCustSatReport(int iReportID)
