@@ -228,9 +228,6 @@
     <ClCompile Include="GridInvoicing.cpp">
       <Filter>Grids\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GridJobAssignment.cpp">
-      <Filter>Grids\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GridLabor.cpp">
       <Filter>Grids\Source Files</Filter>
     </ClCompile>
@@ -516,9 +513,6 @@
     <ClCompile Include="DlgWebService.cpp">
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="JobAssignment.cpp">
-      <Filter>Dialogs\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SelectMailRecipientsDlg.cpp">
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
@@ -532,9 +526,6 @@
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetActivityTypes.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SetAdmins.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetBasicLabor.cpp">
@@ -606,9 +597,6 @@
     <ClCompile Include="SetIssueTypes.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SetJobAssignmentDetailed.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SetMarket.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
@@ -664,9 +652,6 @@
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetOrderSOMerchandiseDetails.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SetPadFix.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetPayments.cpp">
@@ -742,9 +727,6 @@
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetVendorNumbers.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SetVersion.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetViewOrderRegMerchandiseDetails.cpp">
@@ -1114,9 +1096,6 @@
     <ClInclude Include="GridInvoicing.h">
       <Filter>Grids\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GridJobAssignment.h">
-      <Filter>Grids\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GridLabor.h">
       <Filter>Grids\Header Files</Filter>
     </ClInclude>
@@ -1390,9 +1369,6 @@
     <ClInclude Include="DlgWebService.h">
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="JobAssignment.h">
-      <Filter>Dialogs\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SelectMailRecipientsDlg.h">
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
@@ -1406,9 +1382,6 @@
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetActivityTypes.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SetAdmins.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetBasicLabor.h">
@@ -1480,9 +1453,6 @@
     <ClInclude Include="SetIssueTypes.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SetJobAssignmentDetailed.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SetMarket.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
@@ -1538,9 +1508,6 @@
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetOrderSOMerchandiseDetails.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SetPadFix.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetPayments.h">
@@ -1616,9 +1583,6 @@
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetVendorNumbers.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SetVersion.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetViewOrderRegMerchandiseDetails.h">

@@ -343,7 +343,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="GridCheckList.cpp" />
     <ClCompile Include="GridDiscrepancies.cpp" />
     <ClCompile Include="GridInvoicing.cpp" />
-    <ClCompile Include="GridJobAssignment.cpp" />
     <ClCompile Include="GridLabor.cpp" />
     <ClCompile Include="GridPayrollMessages.cpp" />
     <ClCompile Include="GridPOBase.cpp" />
@@ -483,13 +482,11 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="DlgUserAlerts.cpp" />
     <ClCompile Include="DlgUserSelect.cpp" />
     <ClCompile Include="DlgWebService.cpp" />
-    <ClCompile Include="JobAssignment.cpp" />
     <ClCompile Include="SelectMailRecipientsDlg.cpp" />
     <ClCompile Include="SeOrderCustomDetails.cpp" />
     <ClCompile Include="SetActionReport.cpp" />
     <ClCompile Include="SetActionReportWithName.cpp" />
     <ClCompile Include="SetActivityTypes.cpp" />
-    <ClCompile Include="SetAdmins.cpp" />
     <ClCompile Include="SetBasicLabor.cpp" />
     <ClCompile Include="SetChargeBacks.cpp" />
     <ClCompile Include="SetCheckCBDetails.cpp" />
@@ -513,7 +510,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetIssues.cpp" />
     <ClCompile Include="SetIssueStatus.cpp" />
     <ClCompile Include="SetIssueTypes.cpp" />
-    <ClCompile Include="SetJobAssignmentDetailed.cpp" />
     <ClCompile Include="SetMarket.cpp" />
     <ClCompile Include="SetMaterial.cpp" />
     <ClCompile Include="SetMaterialType.cpp" />
@@ -533,7 +529,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetOrderRegMerchandiseDetails.cpp" />
     <ClCompile Include="SetOrders.cpp" />
     <ClCompile Include="SetOrderSOMerchandiseDetails.cpp" />
-    <ClCompile Include="SetPadFix.cpp" />
     <ClCompile Include="SetPayments.cpp" />
     <ClCompile Include="setpayroll.cpp" />
     <ClCompile Include="SetPayrollMessages.cpp" />
@@ -569,7 +564,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetUser.cpp" />
     <ClCompile Include="SetUserMarketDivisionAssignments.cpp" />
     <ClCompile Include="SetVendorNumbers.cpp" />
-    <ClCompile Include="SetVersion.cpp" />
     <ClCompile Include="SetViewOrderRegMerchandiseDetails.cpp" />
     <ClCompile Include="SetViewOrderSOMerchandiseDetails.cpp" />
     <ClCompile Include="SetViewStoreContacts.cpp" />
@@ -702,7 +696,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="GridCheckList.h" />
     <ClInclude Include="GridDiscrepancies.h" />
     <ClInclude Include="GridInvoicing.h" />
-    <ClInclude Include="GridJobAssignment.h" />
     <ClInclude Include="GridLabor.h" />
     <ClInclude Include="GridPayrollMessages.h" />
     <ClInclude Include="GridPOBase.h" />
@@ -794,13 +787,11 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="DlgUserAlerts.h" />
     <ClInclude Include="DlgUserSelect.h" />
     <ClInclude Include="DlgWebService.h" />
-    <ClInclude Include="JobAssignment.h" />
     <ClInclude Include="SelectMailRecipientsDlg.h" />
     <ClInclude Include="SeOrderCustomDetails.h" />
     <ClInclude Include="SetActionReport.h" />
     <ClInclude Include="SetActionReportWithName.h" />
     <ClInclude Include="SetActivityTypes.h" />
-    <ClInclude Include="SetAdmins.h" />
     <ClInclude Include="SetBasicLabor.h" />
     <ClInclude Include="SetChargeBacks.h" />
     <ClInclude Include="SetCheckCBDetails.h" />
@@ -824,7 +815,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetIssues.h" />
     <ClInclude Include="SetIssueStatus.h" />
     <ClInclude Include="SetIssueTypes.h" />
-    <ClInclude Include="SetJobAssignmentDetailed.h" />
     <ClInclude Include="SetMarket.h" />
     <ClInclude Include="SetMaterial.h" />
     <ClInclude Include="SetMaterialType.h" />
@@ -844,7 +834,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetOrderRegMerchandiseDetails.h" />
     <ClInclude Include="SetOrders.h" />
     <ClInclude Include="SetOrderSOMerchandiseDetails.h" />
-    <ClInclude Include="SetPadFix.h" />
     <ClInclude Include="SetPayments.h" />
     <ClInclude Include="setpayroll.h" />
     <ClInclude Include="SetPayrollMessages.h" />
@@ -870,7 +859,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetUser.h" />
     <ClInclude Include="SetUserMarketDivisionAssignments.h" />
     <ClInclude Include="SetVendorNumbers.h" />
-    <ClInclude Include="SetVersion.h" />
     <ClInclude Include="SetViewOrderRegMerchandiseDetails.h" />
     <ClInclude Include="SetViewOrderSOMerchandiseDetails.h" />
     <ClInclude Include="SetViewStoreContacts.h" />

@@ -698,46 +698,14 @@ CString CGlobals::GetTitleName(int iTitleID)
 
 CString CGlobals::GetCurrentUserSMTPEmailAddress()
 {
-	CString strEmail = "";
-
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	int iUserID = pApp->GetEmployeeID();
-
-	CSetEmployees setEmployees(&g_dbFlooring);
-	setEmployees.m_strFilter.Format("ID = %d", iUserID);
-	setEmployees.Open();
-	if (!setEmployees.IsEOF())
-	{
-		if (!setEmployees.IsFieldNull(&setEmployees.m_SMTPEmail))
-		{
-			strEmail = setEmployees.m_SMTPEmail;
-		}
-	}
-	setEmployees.Close();
-
-	return strEmail;
+	UserBLL^ userBll = CachedData::CurrentUser;
+	return userBll->EmailAddress;	
 }
 
 CString CGlobals::GetCurrentUserReplyToEmailAddress()
 {
-	CString strEmail = "";
-
-	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
-	int iUserID = pApp->GetEmployeeID();
-
-	CSetEmployees setEmployees(&g_dbFlooring);
-	setEmployees.m_strFilter.Format("ID = %d", iUserID);
-	setEmployees.Open();
-	if (!setEmployees.IsEOF())
-	{
-		if (!setEmployees.IsFieldNull(&setEmployees.m_Email))
-		{
-			strEmail = setEmployees.m_Email;
-		}
-	}
-	setEmployees.Close();
-
-	return strEmail;
+	UserBLL^ userBll = CachedData::CurrentUser;
+	return userBll->ReplyToEmailAddress;	
 }
 
 bool CGlobals::IsSOSI(int iOrderID)

@@ -21,7 +21,6 @@
 #include "SetChecks.h"
 #include "SetCheckDetails.h"
 #include "oxshape.h"
-#include "JobAssignment.h"
 #include "DlgStoreSelection.h"
 #include "SetPadFix.h"
 
@@ -102,7 +101,6 @@ BEGIN_MESSAGE_MAP(CFlooringApp, CWinApp)
 	ON_COMMAND(ID_CRIMINAL_CHECK_NAME, OnCriminalCheckName)
 	ON_COMMAND(ID_REPORTS_BILLING, OnReportsBilling)
 	ON_COMMAND(ID_MATERIALS_CHANGESTATUS, OnMaterialsChangestatus)
-	//ON_COMMAND(ID_VIEW_JOBASSIGNMENT, OnViewJobassignment)
 	ON_COMMAND(ID_REPORTS_STATUS, OnReportsStatus)
 	ON_COMMAND(ID_WARRANTY_SCHED, OnWarrantySched)
 	ON_COMMAND(ID_WARRANTY_OPEN, OnWarrantyOpen)
@@ -878,15 +876,9 @@ void CFlooringApp::OnInventory()
 
 void CFlooringApp::SetAdmin()
 {
-	m_bAdmin = false;
-	CSetAdmins setAdmins(&g_dbFlooring) ;
-	setAdmins.m_strFilter.Format("name = '%s'", this->m_strUserName);
-	setAdmins.Open() ;
-	if (!setAdmins.IsEOF())
-	{
-		m_bAdmin = true;
-	}
-	setAdmins.Close();	
+	GetEmployeeID();
+	UserBLL^ userBll = gcnew UserBLL(m_iUserID, CachedData::Context);
+	m_bAdmin = userBll->IsAdmin;
 }
 
 void CFlooringApp::OnCriminalCheckName() 
@@ -906,59 +898,21 @@ void CFlooringApp::OnMaterialsChangestatus()
 	dlg.DoModal() ;
 }
 
-void CFlooringApp::OnViewJobassignment() 
-{
-	CDlgJobAssignment dlg ;
-	dlg.DoModal() ;
-}
-
 void CFlooringApp::SetEmployeeID(int ID)
 {
 	if (ID != -1)
 	{
-		CachedData::ImpersonateUser(ID);
-		CSetEmployees set(&g_dbFlooring);
-		set.m_strFilter.Format("ID = %d", ID);
-		set.Open() ;
-		if (!set.IsEOF())
-		{
-			m_iUserID = ID;
-			m_strUserName = set.m_UserName;
-		}
-		set.Close();
-
-	}
-	else
-	{
-		SetEmployeeID();
+		CachedData::ImpersonateUser(ID);						
 	}
 
-	SetAdmin();
+	SetEmployeeID();
 }
-
 
 void CFlooringApp::SetEmployeeID()
 {
-	_TCHAR auName[200] ;
-	unsigned long lLength = sizeof(auName) / sizeof(auName[0]) ;
-
-	//CSetUser set(&g_dbFlooring) ;
-	CSetEmployees set(&g_dbFlooring);
-	set.Open() ;
-
-	GetUserName(auName, &lLength) ;
-
-	while (!set.IsEOF())
-	{
-		if (set.m_UserName.CompareNoCase(auName) == 0)
-		{
-			m_iUserID = set.m_ID;
-			m_strUserName = set.m_UserName;
-			break ;
-		}
-		set.MoveNext() ;
-	}
-	set.Close() ;
+	UserBLL^ userBll = CachedData::CurrentUser;
+	m_iUserID = userBll->UserID;
+	m_strUserName = userBll->UserName;
 
 	SetAdmin();
 }
@@ -994,17 +948,9 @@ CString CFlooringApp::GetCFUserName()
 
 CString CFlooringApp::GetUserFirstAndLastName()
 {
-	CString strName = m_strUserName;
+	UserBLL^ userBll = CachedData::CurrentUser;
 
-	CSetEmployees setEmployees(&g_dbFlooring);
-	setEmployees.m_strFilter.Format("UserName = '%s'", m_strUserName);
-	setEmployees.Open();
-	if (!setEmployees.IsEOF())
-	{
-		strName.Format(_T("%s %s"), setEmployees.m_FirstName, setEmployees.m_LastName); 
-	}
-
-	return strName;
+	return userBll->FullName;	
 }
 
 void CFlooringApp::OnWarrantySched() 
@@ -1211,11 +1157,11 @@ BOOL CFlooringApp::ValidateMinimumVersion( CString strVersion )
 		setSettings.SetSetting("IMClassicVersion", ComputerAndVersionValue, m_iUserID);
 	}
 
-	CSetVersion setVersion(&g_dbFlooring);
-	setVersion.Open();
-	if ( (iMinimumVersionMajorSW > setVersion.m_MinimumVersionMajor) ||
-		 ((iMinimumVersionMajorSW == setVersion.m_MinimumVersionMajor) &&
-		 (iMinimumVersionMinorSW >= setVersion.m_MinimumVersionMinor))
+	VersionBLL^ versionBll = gcnew VersionBLL(CachedData::Context);
+
+	if ( (iMinimumVersionMajorSW > versionBll->IMClassicMinimumVersionMajor) ||
+		 ((iMinimumVersionMajorSW == versionBll->IMClassicMinimumVersionMajor) &&
+		 (iMinimumVersionMinorSW >= versionBll->IMClassicMinimumVersionMinor))
 	   )
 	{
 		bValid = TRUE;
@@ -1223,7 +1169,7 @@ BOOL CFlooringApp::ValidateMinimumVersion( CString strVersion )
 	else
 	{
 		CString strReqVersion;
-		strReqVersion.Format("%d.%d", setVersion.m_MinimumVersionMajor, setVersion.m_MinimumVersionMinor);
+		strReqVersion.Format("%d.%d", versionBll->IMClassicMinimumVersionMajor, versionBll->IMClassicMinimumVersionMinor);
 		CString strMessage;
 		strMessage.Format("This version of Installation Manager (%s) and is too old to run against the database.  You must run Flooring version %s or higher.",
 			strVersion, strReqVersion);

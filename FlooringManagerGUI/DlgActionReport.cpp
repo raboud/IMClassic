@@ -13,7 +13,6 @@
 #include "SetOrders.h"
 #include "SetCustomer.h"
 #include "SetActionReport.h"
-#include "SetEmployees.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -386,18 +385,13 @@ void CDlgActionReport::UpdateCurrentRecord()
 		
 		// used to id the new record
 		int iUID = set.m_LastEditedBy;
-		COleDateTime dt = set.m_LastEditedDate;
+		COleDateTime dt = set.m_LastEditedDate;		
 
-		CSetEmployees setEmp(&g_dbFlooring);
-		setEmp.m_strFilter.Format("ID = %d", iUID);
-		setEmp.Open();
+		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;	
 
-		CString strName = "Unknown";
+		CString strName = "";
 
-		if (!setEmp.IsEOF())
-		{
-			strName.Format(_T("Entered By: %s %s on %s"), setEmp.m_FirstName, setEmp.m_LastName, dt.Format("%m/%d/%Y %I:%M:%S %p"));
-		}
+		strName.Format(_T("Entered By: %s on %s"), pApp->GetUserFirstAndLastName(), dt.Format("%m/%d/%Y %I:%M:%S %p"));
 
 		CString strRTFText = "";
 

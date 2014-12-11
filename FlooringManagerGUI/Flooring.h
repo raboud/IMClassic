@@ -79,8 +79,7 @@ public:
 	void SetAdmin();
 
 	BOOL ValidateMinimumVersion( CString strVersion );
-	int GetDBVersion();
-	void UpdateDBVersion();
+
 	CString GetEmailPassword();
 	void SetEmailPassword(CString strPassword);
 
@@ -141,7 +140,6 @@ public:
 	afx_msg void OnReportsBilling();
 	afx_msg void OnUpdateReportsBilling(CCmdUI* pCmdUI);
 	afx_msg void OnMaterialsChangestatus();
-	afx_msg void OnViewJobassignment();
 	afx_msg void OnReportsStatus();
 	afx_msg void OnWarrantySched();
 	afx_msg void OnWarrantyOpen();
@@ -221,20 +219,6 @@ public:
 	afx_msg void OnMaterialsDamaged();
 	afx_msg void OnFileSetEmailPassword();
 };
-
-inline int CFlooringApp::GetDBVersion()
-{
-	return m_iDBVersion;
-}
-
-inline void CFlooringApp::UpdateDBVersion()
-{
-	CSetVersion setVersion(&g_dbFlooring);
-	setVersion.Open();
-	m_iDBVersion = setVersion.m_VersionNo;
-	setVersion.Close();
-}
-
 
 int DownloadDrawing(CString strNumber, CString strTimeStamp) ;
 DWORD GetPage(CHttpConnection* pConnection, CString strUrl, CString strHeaders, CString strFormData, CString &buffer, HANDLE heMail = NULL) ;
