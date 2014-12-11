@@ -1869,112 +1869,115 @@ END
 // Menu
 //
 
-IDR_MAINFRAME MENUEX
+IDR_MAINFRAME MENU
 BEGIN
-    POPUP "&File",                          65535,MFT_STRING,MFS_ENABLED
+    POPUP "&File"
     BEGIN
-        MENUITEM "P&rint Setup...",             57606,MFT_STRING,MFS_ENABLED
-        MENUITEM "Set Email &Password...",      ID_FILE_SETEMAILPASSWORD,MFT_STRING,MFS_ENABLED
-        POPUP "&Maintenance",                   65535,MFT_STRING,MFS_ENABLED
+        MENUITEM "P&rint Setup...",             57606
+        MENUITEM "Set Email &Password...",      ID_FILE_SETEMAILPASSWORD
+        POPUP "&Maintenance"
         BEGIN
-            MENUITEM "SPN Discrepancies",           ID_MAINTENANCE_SPNDISCREPANCIES,MFT_STRING,MFS_ENABLED
-            MENUITEM "Unit Tests",                  ID_MAINTENANCE_UNITTESTS,MFT_STRING,MFS_ENABLED
+            MENUITEM "SPN Discrepancies",           ID_MAINTENANCE_SPNDISCREPANCIES
+            MENUITEM "Unit Tests",                  ID_MAINTENANCE_UNITTESTS
         END
-        MENUITEM MFT_SEPARATOR
-        MENUITEM "E&xit",                       57665,MFT_STRING,MFS_ENABLED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       57665
     END
-    POPUP "&View",                          65535,MFT_STRING,MFS_ENABLED
+    POPUP "&View"
     BEGIN
-        MENUITEM "&Customer",                   ID_VIEW_CUSTOMER_PO,MFT_STRING,MFS_ENABLED
-        MENUITEM "Sto&res",                     ID_VIEW_STORES,MFT_STRING,MFS_ENABLED
-        MENUITEM "&Sub-Contractors",            ID_VIEW_SUBCONTRACTORS,MFT_STRING,MFS_ENABLED
-        MENUITEM "&Job Assignment",             ID_VIEW_JOBASSIGN,MFT_STRING,MFS_ENABLED
-        MENUITEM "&Active POs",                 ID_VIEW_ACTIVEPOS,MFT_STRING,MFS_ENABLED
-        MENUITEM "Activity &List",              ID_VIEW_ACTIVITYLIST,MFT_STRING,MFS_ENABLED
-        MENUITEM MFT_SEPARATOR
-        MENUITEM "&Toolbar",                    59392,MFT_STRING,MFS_ENABLED
-        MENUITEM "&Status Bar",                 59393,MFT_STRING,MFS_ENABLED
+        MENUITEM "&Customer",                   ID_VIEW_CUSTOMER_PO
+        MENUITEM "Sto&res",                     ID_VIEW_STORES
+        MENUITEM "&Sub-Contractors",            ID_VIEW_SUBCONTRACTORS
+        MENUITEM "&Job Assignment",             ID_VIEW_JOBASSIGN
+        MENUITEM "&Active POs",                 ID_VIEW_ACTIVEPOS
+        MENUITEM "Activity &List",              ID_VIEW_ACTIVITYLIST
+        MENUITEM SEPARATOR
+        MENUITEM "&Toolbar",                    59392
+        MENUITEM "&Status Bar",                 59393
     END
-    POPUP "&Materials",                     65535,MFT_STRING,MFS_ENABLED
+    POPUP "&Materials"
     BEGIN
-        MENUITEM "&Change Status...",           32805,MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
+        MENUITEM "&Change Status...",           32805
     END
-    POPUP "&Reports",                       65535,MFT_STRING,MFS_ENABLED
+    POPUP "&Reports"
     BEGIN
-        POPUP "&Stores",                        65535,MFT_STRING,MFS_ENABLED
+        POPUP "&Stores"
         BEGIN
-            MENUITEM "Store &Info",                 ID_STORE_INFO,MFT_STRING,MFS_ENABLED
+            MENUITEM "Store &Info",                 ID_STORE_INFO
         END
-        POPUP "Sub-&Contractors",               65535,MFT_STRING,MFS_ENABLED
+        POPUP "Sub-&Contractors"
         BEGIN
-            POPUP "&Background Checks",             65535,MFT_STRING,MFS_ENABLED
+            POPUP "&Background Checks"
             BEGIN
-                MENUITEM "&Alpha By Last Name",         ID_BACKGROUNDCHECKS_ALPHABYLASTNAME,MFT_STRING,MFS_ENABLED
+                MENUITEM "&Alpha By Last Name",         ID_BACKGROUNDCHECKS_ALPHABYLASTNAME
             END
-            POPUP "&Insurance",                     65535,MFT_STRING,MFS_ENABLED
+            POPUP "&Insurance"
             BEGIN
-                MENUITEM "&Workmans Comp By Date",      32858,MFT_STRING,MFS_ENABLED
-                MENUITEM "&Liability By Date",          32857,MFT_STRING,MFS_ENABLED
+                MENUITEM "&Workmans Comp By Date",      32858
+                MENUITEM "&Liability By Date",          32857
             END
-            MENUITEM "&Phone List",                 32828,MFT_STRING,MFS_ENABLED
-            MENUITEM "Helpers",                     32844,MFT_STRING,MFS_ENABLED
+            MENUITEM "&Phone List",                 32828
+            MENUITEM "Helpers",                     32844
         END
-        POPUP "&Jobs",                          65535,MFT_STRING,MFS_ENABLED
+        POPUP "&Jobs"
         BEGIN
-            MENUITEM "&Assignments...",             32832,MFT_STRING,MFS_ENABLED
-            MENUITEM "&Pull List...",               168,MFT_STRING,MFS_ENABLED
-            POPUP "HD Job &Status",                 65535,MFT_STRING,MFS_ENABLED
+            MENUITEM "&Assignments...",             32832
+            MENUITEM "&Billing Cover",              ID_JOBS_BILLINGCOVER
+            MENUITEM "&Pull List...",               168
+            POPUP "HD Job &Status"
             BEGIN
-                MENUITEM "&All Stores",                 32814,MFT_STRING,MFS_ENABLED
-                MENUITEM "&Single Store...",            32823,MFT_STRING,MFS_ENABLED
+                MENUITEM "&All Stores",                 32814
+                MENUITEM "&Single Store...",            32823
             END
-            POPUP "&Warranties",                    65535,MFT_STRING,MFS_ENABLED
+            MENUITEM "&Schedule",                   ID_JOBS_SCHEDULE
+            POPUP "&Warranties"
             BEGIN
-                MENUITEM "&Open...",                    32815,MFT_STRING,MFS_ENABLED
-                MENUITEM "&Scheduled / Not Closed...",  32816,MFT_STRING,MFS_ENABLED
+                MENUITEM "&Open...",                    32815
+                MENUITEM "&Scheduled / Not Closed...",  32816
             END
-            MENUITEM "Weekly &Totals",              169,MFT_STRING,MFS_ENABLED
+            MENUITEM "Weekly &Totals",              169
         END
-        POPUP "&Materials",                     65535,MFT_STRING,MFS_ENABLED
+        POPUP "&Materials"
         BEGIN
-            MENUITEM "&Inventory...",               32792,MFT_STRING,MFS_ENABLED
-            MENUITEM "&Not Received Yet...",        32818,MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
-            MENUITEM "&Waiting On RA...",           32817,MFT_STRING,MFS_ENABLED
-            MENUITEM "&Damaged...",                 ID_MATERIALS_DAMAGED,MFT_STRING,MFS_ENABLED
+            MENUITEM "&Inventory...",               32792
+            MENUITEM "&Not Received Yet...",        32818
+            MENUITEM "&Waiting On RA...",           32817
+            MENUITEM "&Damaged...",                 ID_MATERIALS_DAMAGED
+            MENUITEM "&F && I Consuption...",       ID_MATERIALS_FICONSUPTION
         END
-        POPUP "&Financial",                     65535,MFT_STRING,MFS_ENABLED
+        POPUP "&Financial"
         BEGIN
-            MENUITEM "&Billing Daily Summary",      32804,MFT_STRING,MFS_ENABLED
-            MENUITEM "C&hargebacks By Date",        173,MFT_STRING,MFS_ENABLED
-            MENUITEM "Completed &Jobs Not Paid",    174,MFT_STRING,MFS_ENABLED
-            MENUITEM "&Overdue Invoices",           32787,MFT_STRING,MFS_ENABLED
-            MENUITEM "Not Bi&lled",                 32791,MFT_STRING,MFS_ENABLED
-            MENUITEM "Open &Invoice Requests",      32813,MFT_STRING,MFS_ENABLED
-            MENUITEM "P&ending Invoices",           32790,MFT_STRING,MFS_ENABLED
-            MENUITEM "Wor&k Summary By Week",       175,MFT_STRING,MFS_ENABLED
+            MENUITEM "&Billing Daily Summary",      32804
+            MENUITEM "C&hargebacks By Date",        173
+            MENUITEM "Completed &Jobs Not Paid",    174
+            MENUITEM "&Overdue Invoices",           32787
+            MENUITEM "Not Bi&lled",                 32791
+            MENUITEM "Open &Invoice Requests",      32813
+            MENUITEM "P&ending Invoices",           32790
+            MENUITEM "Wor&k Summary By Week",       175
         END
     END
-    POPUP "&Billing",                       65535,MFT_STRING,MFS_ENABLED
+    POPUP "&Billing"
     BEGIN
-        MENUITEM "&Invoicing...",               32780,MFT_STRING,MFS_ENABLED
-        MENUITEM "&Receive Check...",           32781,MFT_STRING,MFS_ENABLED
-        MENUITEM "&Charge Backs...",            32785,MFT_STRING,MFS_ENABLED
-        POPUP "&Payroll",                       65535,MFT_STRING,MFS_ENABLED
+        MENUITEM "&Invoicing...",               32780
+        MENUITEM "&Receive Check...",           32781
+        MENUITEM "&Charge Backs...",            32785
+        POPUP "&Payroll"
         BEGIN
-            MENUITEM "&Payroll",                    32788,MFT_STRING,MFS_ENABLED
-            MENUITEM "Process &Workorders",         32808,MFT_STRING | MFT_RIGHTJUSTIFY,MFS_ENABLED
-            MENUITEM "Process &Bills",              32809,MFT_STRING,MFS_ENABLED
-            MENUITEM "Generate &Checks",            32810,MFT_STRING,MFS_ENABLED
-            MENUITEM "&Messages",                   32843,MFT_STRING,MFS_ENABLED
+            MENUITEM "&Payroll",                    32788
+            MENUITEM "Process &Workorders",         32808
+            MENUITEM "Process &Bills",              32809
+            MENUITEM "Generate &Checks",            32810
+            MENUITEM "&Messages",                   32843
         END
     END
-    POPUP "&Help",                          65535,MFT_STRING,MFS_ENABLED
+    POPUP "&Help"
     BEGIN
-        MENUITEM "&Help Topics",                57667,MFT_STRING,MFS_ENABLED
-        MENUITEM MFT_SEPARATOR
-        MENUITEM "&Report Issue...",            32859,MFT_STRING,MFS_ENABLED
-        MENUITEM MFT_SEPARATOR
-        MENUITEM "&About Installation Manager", 57664,MFT_STRING,MFS_ENABLED
+        MENUITEM "&Help Topics",                57667
+        MENUITEM SEPARATOR
+        MENUITEM "&Report Issue...",            32859
+        MENUITEM SEPARATOR
+        MENUITEM "&About Installation Manager", 57664
     END
 END
 

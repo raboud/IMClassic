@@ -187,6 +187,9 @@ public:
 	static void OnReportsPulllist();
 	static void OnReportsCompletedJobsNotPaid();
 	static void OnReportsChargebacksByDate();
+	static void OnReportsFIConsumption();
+	static void OnReportsBillingCover();
+	static void OnReportSchedule();
 	static void OnSubHelpers();
 	static void OnViewUseralerts();	
 	static void OnWorkmansCompByDate();

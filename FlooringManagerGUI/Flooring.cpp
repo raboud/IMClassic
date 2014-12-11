@@ -108,6 +108,9 @@ BEGIN_MESSAGE_MAP(CFlooringApp, CWinApp)
 	ON_COMMAND(ID_REPORTS_WEEKLYTOTALS, OnReportsWeeklyTotals)	
 	ON_COMMAND(ID_REPORTS_COMPLETEDJOBSNOTPAID, OnReportsCompletedJobsNotPaid)
 	ON_COMMAND(ID_REPORTS_CHARGEBACKSBYDATE, OnReportsChargebacksByDate)
+	ON_COMMAND(ID_MATERIALS_FICONSUPTION, OnReportsFIConsuption)
+	ON_COMMAND(ID_JOBS_BILLINGCOVER, OnReportBillingCover)
+	ON_COMMAND(ID_JOBS_SCHEDULE, OnReportSchedule)
 	ON_COMMAND(ID_REPORTS_WORKSUMMARYBYWEEK, OnReportsWorkSummaryByWeek)
 	ON_UPDATE_COMMAND_UI(ID_REPORTS_WORKSUMMARYBYWEEK, OnUpdateReportsWorkSummaryByWeek)
 	ON_UPDATE_COMMAND_UI(ID_REPORTS_PENDING, OnUpdateReportsPending)
@@ -967,6 +970,21 @@ void CFlooringApp::OnReportsCompletedJobsNotPaid()
 void CFlooringApp::OnReportsChargebacksByDate()
 {
 	CGlobals::OnReportsChargebacksByDate();
+}
+
+void CFlooringApp::OnReportsFIConsuption()
+{
+	CGlobals::OnReportsFIConsumption();
+}
+
+void CFlooringApp::OnReportSchedule()
+{
+	CGlobals::OnReportSchedule();
+}
+
+void CFlooringApp::OnReportBillingCover()
+{
+	CGlobals::OnReportsBillingCover();
 }
 
 void CFlooringApp::OnReportsWorkSummaryByWeek()

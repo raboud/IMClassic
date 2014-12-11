@@ -1009,6 +1009,21 @@ void CGlobals::OnReportsChargebacksByDate()
 	ReportHelper::ChargebacksByDate(Mode::View);
 }
 
+void CGlobals::OnReportSchedule()
+{
+	ReportHelper::Schedule(Mode::View);
+}
+
+void CGlobals::OnReportsBillingCover()
+{
+	ReportHelper::BillingCover(Mode::View);
+}
+
+void CGlobals::OnReportsFIConsumption()
+{
+	ReportHelper::FIConsumption(Mode::View);
+}
+
 void CGlobals::OnReportsWorkSummaryByWeek()
 {
 	ReportHelper::WeeklyUnitsTotals(Mode::View);

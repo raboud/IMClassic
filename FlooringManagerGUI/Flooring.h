@@ -158,6 +158,9 @@ public:
 	afx_msg void OnReportsPulllist();
 	afx_msg void OnReportsCompletedJobsNotPaid();
 	afx_msg void OnReportsChargebacksByDate();
+	afx_msg void OnReportsFIConsuption();
+	afx_msg void OnReportSchedule();
+	afx_msg void OnReportBillingCover();
 	afx_msg void OnSubHelpers();
 	afx_msg void OnViewUseralerts();	
 	afx_msg void OnWorkmansCompByDate();
