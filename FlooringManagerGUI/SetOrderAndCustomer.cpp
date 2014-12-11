@@ -99,8 +99,7 @@ void CSetOrderAndCustomer::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Long(pFX, _T("[CustomerID]"), m_CustomerID);
 	RFX_Text(pFX, _T("[Directions]"), m_Directions, CGlobals::iMAX_CUSTOMER_DIRECTIONS);
 	RFX_Text(pFX, _T("[Extension]"), m_Extension);
-	RFX_Text(pFX, _T("[FirstName]"), m_FirstName);
-	RFX_Text(pFX, _T("[InternalNotes]"), m_InternalNotes, CGlobals::iMAX_ORDER_NOTES);
+	RFX_Text(pFX, _T("[FirstName]"), m_FirstName);	
 	RFX_Text(pFX, _T("[LastName]"), m_LastName);
 	RFX_Long(pFX, _T("[MaterialTypeID]"), m_MaterialTypeID);
 	RFX_Bool(pFX, _T("[NoMinimum]"), m_NoMinimum);

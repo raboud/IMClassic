@@ -101,8 +101,7 @@ void CSetOrders::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[TripCharge]"), m_TripCharge);
 	RFX_Bool(pFX, _T("[ScheduledAM]"), m_ScheduledAM);
 	RFX_Bool(pFX, _T("[Cancelled]"), m_Cancelled);
-	RFX_Bool(pFX, _T("[Warrenty]"), m_Warrenty);
-	RFX_Text(pFX, _T("[InternalNotes]"), m_InternalNotes, CGlobals::iMAX_ORDER_NOTES);
+	RFX_Bool(pFX, _T("[Warrenty]"), m_Warrenty);	
 	RFX_Long(pFX, _T("[StoreID]"), m_StoreID);
 	RFX_Bool(pFX, _T("[SevenDay]"), m_SevenDay);
 	RFX_Date(pFX, _T("[DrawingDate]"), m_drawingDate);

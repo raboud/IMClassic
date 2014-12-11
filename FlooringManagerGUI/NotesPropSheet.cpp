@@ -33,12 +33,8 @@ CNotesPropSheet::CNotesPropSheet(CWnd* pParentWnd, UINT iSelectPage)
 	m_SPNNotesPropPage.m_psp.dwFlags |= PSP_USETITLE;
 	m_SPNNotesPropPage.m_psp.pszTitle = szSPN_NOTES;
 
-	//m_InternalNotesPropPage.m_psp.dwFlags |= PSP_USETITLE;
-	//m_InternalNotesPropPage.m_psp.pszTitle = szINTERNAL_NOTES;
-
 	AddPage(&m_WONotesPropPage);
 	AddPage(&m_SPNNotesPropPage);
-	//AddPage(&m_InternalNotesPropPage);
 
 	m_strRecordSetFilter = "";
 }
@@ -58,7 +54,7 @@ void CNotesPropSheet::SetPOList(CPoList* pListPOs, bool bUpdate)
 {
 	m_WONotesPropPage.SetPOList(pListPOs, bUpdate);
 	m_SPNNotesPropPage.SetPOList(pListPOs, bUpdate);
-//	m_InternalNotesPropPage.SetPOList(pListPOs, bUpdate);
+
 	m_listPOs.RemoveAll();
 	m_listPOs.AddHead(pListPOs);
 	
@@ -80,7 +76,7 @@ void CNotesPropSheet::UpdateRecordSet()
 {
 	// get the notes from all three windows and do one update to the record set
 	CString strWONotes = m_WONotesPropPage.GetNote();
-//	CString strInternalNotes = m_InternalNotesPropPage.GetNote();
+
 	if (m_listPOs.GetCount() == 1)
 	{
 		CSetOrders setOrders(&g_dbFlooring);
@@ -90,7 +86,6 @@ void CNotesPropSheet::UpdateRecordSet()
 		{
 			setOrders.Edit();
 			setOrders.m_Notes = strWONotes;
-//			setOrders.m_InternalNotes = strInternalNotes;
 			setOrders.Update();
 		}
 	}
@@ -99,21 +94,18 @@ void CNotesPropSheet::UpdateRecordSet()
 void CNotesPropSheet::SetReadOnly(bool bReadOnly)
 {
 	m_WONotesPropPage.SetReadOnly(bReadOnly);
-//	m_InternalNotesPropPage.SetReadOnly(bReadOnly);
 }
 
 void CNotesPropSheet::AdjustControls()
 {
 	m_WONotesPropPage.AdjustControls();
 	m_SPNNotesPropPage.AdjustControls();
-//	m_InternalNotesPropPage.AdjustControls();
 }
 
 BOOL CNotesPropSheet::OnInitDialog()
 {
 	BOOL bResult = CPropertySheet::OnInitDialog();
 
-	// TODO:  Add your specialized code here
 	m_colorTabCtrl.SubclassWindow(GetTabControl()->m_hWnd);
 	m_colorTabCtrl.ModifyStyle(0, TCS_OWNERDRAWFIXED);
 

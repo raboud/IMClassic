@@ -114,15 +114,7 @@ void CNotesPropPage::InitEditField()
 						m_bReadOnly = true;
 						m_editNotes.SetSel(-1, 0);
 					}
-					break;
-				case INTERNAL_NOTES:
-					{
-						m_editNotes.SetWindowText(m_pSetOrders->m_InternalNotes);
-						m_editNotes.SetReadOnly();
-						m_bReadOnly = true;
-						m_editNotes.SetSel(-1, 0);
-					}
-					break;
+					break;				
 				default:
 					break;
 			}
@@ -158,15 +150,6 @@ BOOL CNotesPropPage::OnInitDialog()
 		m_editNotes.SetReadOnly();
 		m_bReadOnly = true;
 	}
-	/*else if (strTitle == szINTERNAL_NOTES)
-	{
-		m_iPageType = INTERNAL_NOTES;
-		m_editNotes.SetShowAddNote(true);
-		CPermissions perm;
-		m_editNotes.SetCanAddNote(perm.HasPermission("CanAddInternalNote") && !m_bReadOnly);
-		m_editNotes.SetReadOnly();
-		m_bReadOnly = true;
-	}*/
 	else
 	{
 		ASSERT(FALSE);
