@@ -1034,6 +1034,11 @@ int CGridSOMerchandise::OnMenuStart(int /* col */, long row, int section)
 					}
 				}
 			}
+			if (!QuickGetBool(DELETED, row))
+			{
+				AddMenuItem(9999, "Print Label");
+			}
+
 		}
 	}
 	return TRUE ;
@@ -1051,6 +1056,10 @@ void CGridSOMerchandise::OnMenuCommand(int /* col */, long row, int section, int
 		else if (item == 1003)
 		{
 			SplitLineItem(row);
+		}
+		else if (item == 9999)
+		{
+			PrintLabels();
 		}
 		else if (item == 2000)
 		{
@@ -1269,6 +1278,28 @@ bool CGridSOMerchandise::SplitLineItem(long row)
 	}
 
 	return bSplitOK;
+}
+
+bool CGridSOMerchandise::PrintLabels()
+{
+	// this function adds to a master list the entries to be deleted. it makes no changes
+	// to the database - in case the user later cancels the changes, we don't end up with
+	// a db out of whack.  If CommitChanges() is called, then that is when the db is updated.
+	bool bTransferOK = true;
+
+	// init the list of selected rows
+	GetSelectedRows();
+
+	// get the current orderid
+	POSITION pos = m_listPOs.GetHeadPosition();
+	while (pos)
+	{
+		long lOrderID = m_listPOs.GetNext(pos);
+		bTransferOK &= CGlobals::PrintSOLabel(lOrderID);
+	}
+
+
+	return bTransferOK;
 }
 
 bool CGridSOMerchandise::TransferMaterials()

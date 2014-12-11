@@ -69,7 +69,7 @@ protected:
 
 	bool SplitLineItem(long row);
 	bool TransferMaterials();
-
+	bool PrintLabels();
 	long m_BasicLaborID;
 	CUGEdit m_editUpper;
 	CNumericEdit m_editNumeric;
