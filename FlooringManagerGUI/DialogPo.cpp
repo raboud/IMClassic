@@ -433,12 +433,6 @@ bool CDlgPo::SaveData()
 						m_comboDrawingTime.GetWindowText(str) ;
 						str.TrimLeft() ;
 						str.TrimRight() ;
-						int nYear = atoi(str.Mid(6,4));
-						int nMonth = atoi(str.Mid(0,2));
-						int nDay = atoi(str.Mid(3,2)) ;
-						int nHour = atoi(str.Mid(11,2)) ;
-						int nMin = atoi(str.Mid(14,2)) ;
-						int nSec = atoi(str.Mid(17,2)) ;
 						setOrderDiagrams.m_DiagramDateTime.ParseDateTime(str);
 					}
 					else
@@ -2113,20 +2107,16 @@ void CDlgPo::OnDrawingView()
 		m_comboDrawingTime.GetWindowText(str) ;
 		str.TrimLeft() ;
 		str.TrimRight() ;
-		int nYear = atoi(str.Mid(6,4));
-		int nMonth = atoi(str.Mid(0,2));
-		int nDay = atoi(str.Mid(3,2)) ;
-		int nHour = atoi(str.Mid(11,2)) ;
-		int nMin = atoi(str.Mid(14,2)) ;
-		int nSec = atoi(str.Mid(17,2)) ;
+		COleDateTime dt;
+		dt.ParseDateTime(str);
 
-		if ( !CInstallerJobData::GetDrawing(false, m_strStoreNumber, m_strPONumber, strInstallNumber, strMeasureNumber, COleDateTime(nYear , nMonth, nDay, nHour, nMin, nSec )) )
+		if ( !CInstallerJobData::GetDrawing(false, m_strStoreNumber, m_strPONumber, strInstallNumber, strMeasureNumber, dt) )
 		{
 			MessageBox("Drawing Number or Calculation date is invalid", "Seaming Diagram", MB_OK) ;
 		}
 		else
 		{
-			CString strFileName = CInstallerJobData::FormatDrawingFilename(m_strStoreNumber, m_strPONumber, strInstallNumber, strMeasureNumber, COleDateTime(nYear , nMonth, nDay, nHour, nMin, nSec)) ;
+			CString strFileName = CInstallerJobData::FormatDrawingFilename(m_strStoreNumber, m_strPONumber, strInstallNumber, strMeasureNumber, dt) ;
 			ShellExecute(NULL, "open", strFileName, NULL, NULL, 10 ) ;
 		}
 	}
