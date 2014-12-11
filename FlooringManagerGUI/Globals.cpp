@@ -1014,6 +1014,11 @@ void CGlobals::OnReportsCompletedJobsNotPaid()
 	ReportHelper::CompletedJobsNotPaid(Mode::View);
 }
 
+void CGlobals::OnReportsChargebacksIssued()
+{
+	ReportHelper::ChargebacksIssued(Mode::View);
+}
+
 void CGlobals::OnReportsChargebacksByDate()
 {
 	ReportHelper::ChargebacksByDate(Mode::View);

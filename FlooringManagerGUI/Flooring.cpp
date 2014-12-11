@@ -107,6 +107,7 @@ BEGIN_MESSAGE_MAP(CFlooringApp, CWinApp)
 	ON_COMMAND(ID_REPORTS_WEEKLYTOTALS, OnReportsWeeklyTotals)	
 	ON_COMMAND(ID_REPORTS_COMPLETEDJOBSNOTPAID, OnReportsCompletedJobsNotPaid)
 	ON_COMMAND(ID_REPORTS_CHARGEBACKSBYDATE, OnReportsChargebacksByDate)
+	ON_COMMAND(ID_REPORTS_CHARGEBACKSISSUED, OnReportsChargebacksIssued)
 	ON_COMMAND(ID_MATERIALS_FICONSUPTION, OnReportsFIConsuption)
 	ON_COMMAND(ID_JOBS_BILLINGCOVER, OnReportBillingCover)
 	ON_COMMAND(ID_JOBS_SCHEDULE, OnReportSchedule)
@@ -119,6 +120,7 @@ BEGIN_MESSAGE_MAP(CFlooringApp, CWinApp)
 	ON_UPDATE_COMMAND_UI(ID_OVERDUE_INVOICES, OnUpdateOverdueInvoices)
 	ON_UPDATE_COMMAND_UI(ID_REPORTS_PULLLIST, OnUpdateReportsPulllist)
 	ON_UPDATE_COMMAND_UI(ID_REPORTS_CHARGEBACKSBYDATE, OnUpdateReportsChargebacksbydate)
+	ON_UPDATE_COMMAND_UI(ID_REPORTS_CHARGEBACKSISSUED, OnUpdateReportsChargebacksIssued)
 	ON_UPDATE_COMMAND_UI(ID_REPORTS_COMPLETEDJOBSNOTPAID, OnUpdateReportsCompletedjobsnotpaid)
 	ON_UPDATE_COMMAND_UI(ID_REPORTS_STATUS, OnUpdateReportsStatus)
 	ON_UPDATE_COMMAND_UI(ID_REPORTS_STATUS_SINGLE, OnUpdateReportsStatusSingle)
@@ -619,6 +621,10 @@ void CFlooringApp::OnUpdateReportsPulllist(CCmdUI *pCmdUI)
 {
 	pCmdUI->Enable(CGlobals::HasPermission("ViewReportPullList") == true) ;
 }
+void CFlooringApp::OnUpdateReportsChargebacksIssued(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(CGlobals::HasPermission("ViewReportChargeBacksByDate") == true);
+}
 
 void CFlooringApp::OnUpdateReportsChargebacksbydate(CCmdUI *pCmdUI)
 {
@@ -963,6 +969,11 @@ void CFlooringApp::OnReportsWeeklyTotals()
 void CFlooringApp::OnReportsCompletedJobsNotPaid()
 {
 	CGlobals::OnReportsCompletedJobsNotPaid();
+}
+
+void CFlooringApp::OnReportsChargebacksIssued()
+{
+	CGlobals::OnReportsChargebacksIssued();
 }
 
 void CFlooringApp::OnReportsChargebacksByDate()

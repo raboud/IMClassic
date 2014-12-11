@@ -670,7 +670,7 @@ BEGIN
     LTEXT           "Type",IDC_STATIC,88,13,17,8
     COMBOBOX        IDC_STORES_STORETYPE,109,10,84,56,CBS_DROPDOWNLIST | CBS_SORT | CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
 	CONTROL         IDB_EXPOBITMAP, IDC_DEPOT, "Static", SS_BITMAP, 201, 10, 89, 28
-    CONTROL         "Active",IDC_STORES_ACTIVE_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,487,7,34,10
+	CONTROL         "Active", IDC_STORES_ACTIVE_CHECK, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 487, 7, 34, 10
     LTEXT           "Market",IDC_STATIC,83,32,25,8
     COMBOBOX        IDC_STORES_MARKET,109,29,84,56,CBS_DROPDOWNLIST | CBS_SORT | CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Address",IDC_STATIC,7,60,28,8
@@ -1894,7 +1894,8 @@ BEGIN
         POPUP "&Financial"
         BEGIN
             MENUITEM "&Billing Daily Summary",      32804
-            MENUITEM "C&hargebacks By Date",        173
+            MENUITEM "Chargebacks Issued",          32890
+            MENUITEM "C&hargebacks Taken By Date",  173
             MENUITEM "Completed &Jobs Not Paid",    174
             MENUITEM "&Overdue Invoices",           32787
             MENUITEM "Not Bi&lled",                 32791
@@ -2026,7 +2027,7 @@ BEGIN
     END
     POPUP "Find"
     BEGIN
-        MENUITEM "By PO Number",     ID_FIND_BY_PO
+        MENUITEM "By PO Number",                ID_FIND_BY_PO
         MENUITEM "By Customer Number",          ID_FIND_BY_CUSTOMER_NUMBER
         MENUITEM "By Internal Order Number",    ID_FIND_BY_ORDER_NUMBER
         MENUITEM "By SO Number",                ID_FIND_BY_SPECIAL_ORDER

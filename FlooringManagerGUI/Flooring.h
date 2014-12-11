@@ -126,6 +126,7 @@ public:
 	afx_msg void OnUpdateOverdueInvoices(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateReportsPulllist(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateReportsChargebacksbydate(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateReportsChargebacksIssued(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateReportsCompletedjobsnotpaid(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateReportsStatus(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateReportsStatusSingle(CCmdUI *pCmdUI);
@@ -158,6 +159,7 @@ public:
 	afx_msg void OnReportsPulllist();
 	afx_msg void OnReportsCompletedJobsNotPaid();
 	afx_msg void OnReportsChargebacksByDate();
+	afx_msg void OnReportsChargebacksIssued();
 	afx_msg void OnReportsFIConsuption();
 	afx_msg void OnReportSchedule();
 	afx_msg void OnReportBillingCover();

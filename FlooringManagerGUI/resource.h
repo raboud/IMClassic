@@ -630,6 +630,7 @@
 #define ID_MATERIALS_FICONSUPTION       32887
 #define ID_JOBS_SCHEDULE                32888
 #define ID_JOBS_BILLINGCOVER            32889
+#define ID_REPORTS_CHARGEBACKSISSUED    32890
 
 // Next default values for new objects
 // 
@@ -637,7 +638,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        245
-#define _APS_NEXT_COMMAND_VALUE         32890
+#define _APS_NEXT_COMMAND_VALUE         32891
 #define _APS_NEXT_CONTROL_VALUE         1386
 #define _APS_NEXT_SYMED_VALUE           123
 #endif
