@@ -60,6 +60,7 @@ public:
 	CEdit	m_editBadgeStatus;
 	CDateTimeCtrl m_dtpBackgroundChkDateApproved;
 	
+	long assingedTo;
 	
 	CEdit m_editNotes;
 

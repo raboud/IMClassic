@@ -49,7 +49,6 @@ CSetSubContractor::CSetSubContractor(CDatabase* pdb)
 	m_Helper = FALSE;
 	m_InsuranceRate = _T("");
 	m_BackgroundRptRequested = FALSE;
-	m_AssignedTo = -1;
 	m_MarketId = -1;
 	m_Status = -1;
 	m_PictureFilename = _T("");

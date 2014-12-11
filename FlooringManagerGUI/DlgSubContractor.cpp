@@ -26,6 +26,7 @@ CDlgSubContractor::CDlgSubContractor(bool bAdding, CWnd* pParent /*=NULL*/)
 	m_pSet = new CSetSubContractor(&g_dbFlooring);
 	m_pSet->Open();
 	m_iSubContractorID = -1;
+	this->assingedTo = -1;
 }
 
 CDlgSubContractor::~CDlgSubContractor()
@@ -85,7 +86,6 @@ void CDlgSubContractor::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SUBCONTRACTOR_DIVISIONS, m_lbDivisions);
 	DDX_Control(pDX, IDC_STATUS_COMBO, m_comboInstallerStatus);
 
-	DDX_ComboBoxData(pDX, IDC_SUBCONTRACTOR_ASSIGNEDTO, m_pSet->m_AssignedTo);
 	DDX_ComboBoxData(pDX, IDC_SUBCONTRACTOR_BRANCHOFFICE, m_pSet->m_MarketId);
 
 	DDX_FieldText(pDX, IDC_FIRST_NAME, m_pSet->m_FirstName, m_pSet);
@@ -107,6 +107,7 @@ void CDlgSubContractor::DoDataExchange(CDataExchange* pDX)
 	DDX_FieldCheck(pDX, IDC_WORKMANSCOMP_INSURANCE_OK, m_pSet->m_WorkmansCompInsuranceOK, m_pSet);
 	DDX_FieldCheck(pDX, IDC_LIABILITY_INSURANCE_OK, m_pSet->m_LiabilityInsuranceOK, m_pSet);
 
+	DDX_ComboBoxData(pDX, IDC_SUBCONTRACTOR_ASSIGNEDTO, this->assingedTo);
 
 	DDX_FieldCheck(pDX, IDC_SUBCONTRACTOR_BACKGND_CHECK_PASSED, m_pSet->m_BackgroundCheckPassed, m_pSet);
 	DDX_FieldCheck(pDX, IDC_SUBCONTRACTOR_BACKGND_RPT_REQ, m_pSet->m_BackgroundRptRequested, m_pSet);
@@ -212,6 +213,15 @@ BOOL CDlgSubContractor::OnInitDialog()
 	m_editCellNumber.SetMask(_T("(###) ###-####"));
 	m_editPager.SetMask(_T("(###) ###-####"));
 
+	if (m_pSet->IsFieldNull(&(m_pSet->m_AssignedTo)))
+	{
+		assingedTo = -1;
+	}
+	else
+	{
+		assingedTo = m_pSet->m_AssignedTo;
+	}
+
 	UpdateData(FALSE);
 
 	OnBnClickedHelper();
@@ -243,6 +253,15 @@ void CDlgSubContractor::SetSubContractorID(int iSubContractorID)
 void CDlgSubContractor::OnOK()
 {
 	UpdateData();
+	if ((this->assingedTo == -1) || (!m_pSet->m_Helper))
+	{
+		m_pSet->SetFieldNull(&m_pSet->m_AssignedTo, TRUE);
+	}
+	else
+	{
+		m_pSet->m_AssignedTo = this->assingedTo;
+	}
+
 	if (ValidateInsurance())
 	{
 		if (m_btnHelper.GetCheck() == BST_UNCHECKED)
@@ -613,8 +632,16 @@ bool CDlgSubContractor::ValidateHelper(void)
 	if ( m_btnHelper.GetCheck() )
 	{
 		CString strName;
-		m_comboAssignedTo.GetLBText(m_comboAssignedTo.GetCurSel(), strName);
-		if (strName == "N/A")
+		int index = m_comboAssignedTo.GetCurSel();
+		if (index != -1)
+		{
+			m_comboAssignedTo.GetLBText(index, strName);
+			if (strName == "N/A")
+			{
+				bOK = false;
+			}
+		}
+		else
 		{
 			bOK = false;
 		}
