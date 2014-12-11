@@ -119,6 +119,7 @@ public:
 	static void GetUserSetting(const CString& strSetting, CString& strValue, const CString& strDefault = "") ;
 	static void SetUserSetting(const CString& strSetting, bool bValue) ;
 	static void SetUserSetting(const CString& strSetting, const CString& strValue) ;
+	static bool PrintSOLabel(int iSOid);
 
 	static COleDateTime GetCurrentSystemTime();
 

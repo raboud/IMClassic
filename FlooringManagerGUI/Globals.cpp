@@ -874,7 +874,10 @@ bool CGlobals::SPNUpdatePO(CPoList* pListPOs)
 
 		return FormSPN::SPNUpdatePO(Singleton::Connection->Clone(), l);
 }
-
+bool CGlobals::PrintSOLabel(int iSOid)
+{
+	return SOMerchandiseDetailBLL::PrintLabel(Singleton::Connection, iSOid);
+}
 bool CGlobals::SPNUpdatePO(CString strStoreNumber, CString strPONumber)
 {
 	return FormSPN::SPNUpdatePO(Singleton::Connection->Clone(), gcnew System::String(strStoreNumber), gcnew System::String(strPONumber));
