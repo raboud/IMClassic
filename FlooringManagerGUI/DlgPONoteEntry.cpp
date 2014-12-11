@@ -483,6 +483,8 @@ bool CDlgPONoteEntry::Validate()
 			}
 			// we need to update the other POs that had their schedules modified with a note
 			// saying what happened.
+			CSetPONotes set(&g_dbFlooring) ;
+			set.Open() ;
 			POSITION pos = dlgSched.m_listPOsWithModifiedSchedules.GetHeadPosition();
 			while (pos)
 			{
@@ -499,24 +501,13 @@ bool CDlgPONoteEntry::Validate()
 					//					strSQL.Format("EXEC AddPONote %d, %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d, '%s'", ,
 //						, , , ,
 //						, , , bScheduledAM, dateSchedStart.Format("%m/%d/%Y %H:%M:%S" ));
-					CSetPONotes set(&g_dbFlooring) ;
+
 					set.m_strFilter = "ID = -1";
 
-					if (m_iId == -1)
-					{
-						set.Open() ;
-						set.AddNew();
-						set.m_OrderID = m_iOrderID ;
-						// set the date/time this note was entered.
-						set.m_DateTimeEntered = time ;
-					}
-					else
-					{
-						set.m_strFilter.Format("ID = '%d'", m_iId) ;
-						set.Open() ;
-						set.MoveFirst() ;
-						set.Edit() ;
-					}
+					set.AddNew();
+					set.m_OrderID = iOrderID ;
+					// set the date/time this note was entered.
+					set.m_DateTimeEntered = time ;
 					// update the database
 					set.m_NoteText = strNotes;
 					set.m_EnteredByUserID = iEnteredByUser;
@@ -547,18 +538,18 @@ bool CDlgPONoteEntry::Validate()
 						ASSERT( set.GetRecordCount() == 1 );
 						m_iId = set.m_ID;
 					}
-					set.Close() ;
-					TRY
-					{
-//						g_dbFlooring.ExecuteSQL(strSQL);
-					}
-					CATCH(CDBException, e)
-					{
-						MessageBox(e->m_strError, "Error!");
-					}
-					END_CATCH
+//					TRY
+//					{
+////						g_dbFlooring.ExecuteSQL(strSQL);
+//					}
+//					CATCH(CDBException, e)
+//					{
+//						MessageBox(e->m_strError, "Error!");
+//					}
+//					END_CATCH
 				}
 			}
+			set.Close() ;
 		}
 		else
 		{
