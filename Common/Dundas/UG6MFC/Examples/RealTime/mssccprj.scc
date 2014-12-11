@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[Ex6.dsp]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/RealTime", RBFAAAAA
+
+[Ex6.dsw]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/RealTime", RBFAAAAA

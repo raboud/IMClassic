@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[Ex7.dsp]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/GetCellIndrct", GREAAAAA
+
+[Ex7.dsw]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/GetCellIndrct", GREAAAAA

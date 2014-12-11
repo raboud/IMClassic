@@ -1,0 +1,17 @@
+SCC = This is a Source Code Control file
+
+[clstencil.sln]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/ATL/source/CLStencil", SGMAAAAA
+
+[clstencil.vcproj]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/ATL/source/CLStencil", SGMAAAAA
+
+[clstencilui.mak]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/ATL/source/CLStencil", SGMAAAAA
+
+[clstencilui.vcproj]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/ATL/source/CLStencil", SGMAAAAA

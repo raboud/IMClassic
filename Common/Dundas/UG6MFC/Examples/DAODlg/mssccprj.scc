@@ -1,0 +1,13 @@
+SCC = This is a Source Code Control file
+
+[dao2.dsp]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/DAODlg", KPEAAAAA
+
+[dao2.mak]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/DAODlg", KPEAAAAA
+
+[dao2.mdp]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/DAODlg", KPEAAAAA

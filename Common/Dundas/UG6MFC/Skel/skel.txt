@@ -1,0 +1,8 @@
+Ultimate Grid for MFC
+
+This directory contains the sleletal derived classes
+for you to use in deriving your grid control class.
+
+MyCUG.cpp and MyCUG.h form the main skeleton files.
+MyCUGDebug.cpp has added trace statements to each notification.
+

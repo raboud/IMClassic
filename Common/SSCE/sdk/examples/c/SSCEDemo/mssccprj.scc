@@ -1,0 +1,5 @@
+SCC = This is a Source Code Control file
+
+[sscedemo.dsp]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/SSCE/sdk/examples/c/SSCEDemo", EOCAAAAA

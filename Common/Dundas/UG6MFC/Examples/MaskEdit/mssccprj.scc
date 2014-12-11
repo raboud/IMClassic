@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[Code3.dsp]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/MaskEdit", CUEAAAAA
+
+[Code3.dsw]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/MaskEdit", CUEAAAAA

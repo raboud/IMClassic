@@ -1,0 +1,64 @@
+<SCRIPT LANGUAGE="VBSCript" RUNAT="Server">
+
+' Sentry Spelling Checker Engine
+' global.asa: Code common to all ASP examples
+'
+' Copyright © 2000 Wintertree Software Inc.
+' http://www.wintertree-software.com
+'
+' $Id: global.asa,v 5.14 2000/06/28 18:02:04 wsi Exp wsi $
+
+Sub Application_OnStart
+	' Open and initialize a Sentry session.
+	Dim spellChecker, sid, lexPath, i, lexId, licenseKey
+	Set spellChecker = Server.CreateObject("SentryASC.SpellChecker")
+
+	''''''''''''''''' NOTE ''''''''''''''''
+	' You must set licenseKey to your Sentry license key, provided by
+	' Wintertree Software, or the example won't run! Enter your license
+	' key like this:
+	'  licenseKey = &H1234ABCD
+	licenseKey = SET_YOUR_LICENSE_KEY_HERE
+	Call spellChecker.SetKey(CLng(licenseKey))
+
+	' Open a Sentry session. Note that we don't use GetSid because of
+	' the risk of concurrent access from other applications.
+	sid = spellChecker.OpenSession
+	If (sid < 0) Then
+		Application("SSCESid") = sid
+		Set spellChecker = Nothing
+		Exit Sub
+	End If
+
+	' Open the American English dictionaries. Modify this code to
+	' open dictionaries in other languages.
+	' Modify the next statement to open the dictioaries in other directories.
+	lexPath = "c:\Program Files\Common Files\Wintertree\Spelling\"
+	lexId = spellChecker.OpenLex(CInt(sid), CStr(lexPath & "ssceam.tlx"), 0)
+	lexId = spellChecker.OpenLex(CInt(sid), CStr(lexPath & "ssceam2.clx"), 0)
+
+	' We don't need to save the lexIds. The Sentry session will be closed
+	' in the Application_OnEnd event, and Sentry will automatically close
+	' all open lexicons at that time.
+
+	' At this point, you could set any Sentry options that deviate from
+	' the defaults. We'll accept the defaults, so nothing needs to be done.
+
+	' Save the Sentry session id as an application variable.
+	Application("SSCESid") = sid
+	Set spellChecker = Nothing
+End Sub
+
+Sub Application_OnEnd
+   ' Close the Sentry session if there is one.
+   Dim spellChecker, sid
+   If (Application("SSCESid") <> Empty) Then
+       sid = Application("SSCESid")
+       Set spellChecker = Server.CreateObject("SentryASC.SpellChecker")
+       spellChecker.CloseSession(CInt(sid))
+       Set spellChecker = Nothing
+   End If
+   Application("SSCESid") = -1
+End Sub
+</SCRIPT>
+

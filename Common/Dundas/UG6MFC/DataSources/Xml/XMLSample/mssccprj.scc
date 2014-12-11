@@ -1,0 +1,5 @@
+SCC = This is a Source Code Control file
+
+[XMLSample.dsp]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/DataSources/Xml/XMLSample", PPDAAAAA

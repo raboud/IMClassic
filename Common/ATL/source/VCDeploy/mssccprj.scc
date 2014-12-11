@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[vcdeploy.sln]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/ATL/source/VCDeploy", WTMAAAAA
+
+[vcdeploy.vcproj]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/ATL/source/VCDeploy", WTMAAAAA

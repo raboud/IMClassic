@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[CBase1.dsp]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/DataSources/CodeBase/CBase1", FFDAAAAA
+
+[CBase1.dsw]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/DataSources/CodeBase/CBase1", FFDAAAAA

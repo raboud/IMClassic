@@ -1,0 +1,13 @@
+SCC = This is a Source Code Control file
+
+[sproxy.mak]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/ATL/source/SProxy", UIMAAAAA
+
+[sproxy.sln]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/ATL/source/SProxy", UIMAAAAA
+
+[sproxy.vcproj]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/ATL/source/SProxy", UIMAAAAA

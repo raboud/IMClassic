@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="sproxy">
+</Property><Property Name="Solution File" Value="C:\Dev\ATL Server Library\ATL_Server_Source_and_Headers_9_0_70425_Alpha\source\SProxy\sproxy.sln">
+</Property><Property Name="Date" Value="Wednesday, November 11, 2009">
+</Property><Property Name="Time" Value="16:19 PM">
+</Property></Properties><Event ErrorLevel="2" Project="sproxy" Source="sproxy.vcproj" Description="The project file 'C:\Dev\ATL Server Library\ATL_Server_Source_and_Headers_9_0_70425_Alpha\source\SProxy\sproxy.vcproj' cannot be updated to this Visual Studio 2008 version format because it is read-only on disk. Please set the permissions on the project file and re-open it to migrate the project.">
+</Event><Event ErrorLevel="2" Project="" Source="sproxy.sln" Description="Solution file 'C:\Dev\ATL Server Library\ATL_Server_Source_and_Headers_9_0_70425_Alpha\source\SProxy\sproxy.sln' cannot be converted because it is read-only on disk. To convert the solution, change the permissions on the solution file to allow modification and re-open it.">
+</Event><Event ErrorLevel="3" Project="" Source="sproxy.sln" Description="Not Converted">
+</Event></UpgradeLog>

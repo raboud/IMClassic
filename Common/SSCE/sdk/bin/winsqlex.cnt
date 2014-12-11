@@ -1,0 +1,14 @@
+:Base winsqlex.hlp>Main
+1 WinSqLex User's Guide
+2 WinSqLex=WinSqLex@winsqlex.hlp>Main
+2 Preparing word files=Preparingwordfiles@winsqlex.hlp>Main
+2 Preparing suffix files=Preparingsuffixfiles@winsqlex.hlp>Main
+2 Creating a new lexicon project=Creatinganewlexiconproject@winsqlex.hlp>Main
+2 Opening an existing lexicon project=Openinganexistinglexiconproject@winsqlex.hlp>Main
+2 Compressing a lexicon=Compressingalexicon@winsqlex.hlp>Main
+2 Removing a word file from a project=Removingawordfilefromaproject@winsqlex.hlp>Main
+2 Word Files list=WordFileslist@winsqlex.hlp>Main
+2 Language Id=LanguageId@winsqlex.hlp>Main
+2 Suffix File=SuffixFile@winsqlex.hlp>Main
+2 Output Lexicon File=OutputLexiconFile@winsqlex.hlp>Main
+2 Error Messages=ErrorMessages@winsqlex.hlp>Main

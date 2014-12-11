@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[VBNetExample.sln]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/SSCE/sdk/examples/vb.net", ASCAAAAA
+
+[VBNetExample.vbproj]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/SSCE/sdk/examples/vb.net", ASCAAAAA

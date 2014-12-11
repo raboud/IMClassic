@@ -1,0 +1,9 @@
+SCC = This is a Source Code Control file
+
+[Checklist.dsp]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/Checklist", MNEAAAAA
+
+[Checklist.dsw]
+SCC_Aux_Path = "\\fusion-dc-03\flooringdata\flooringvss"
+SCC_Project_Name = "$/dev/DUNDAS/UG6MFC/Examples/Checklist", MNEAAAAA
