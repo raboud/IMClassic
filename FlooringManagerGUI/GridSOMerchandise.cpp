@@ -1291,10 +1291,12 @@ bool CGridSOMerchandise::PrintLabels()
 	GetSelectedRows();
 
 	// get the current orderid
-	POSITION pos = m_listPOs.GetHeadPosition();
+	POSITION pos = m_listRows.GetHeadPosition();
 	while (pos)
 	{
-		long lOrderID = m_listPOs.GetNext(pos);
+		long row = m_listRows.GetNext(pos);
+		long lOrderID = GetDetailID(row);
+
 		bTransferOK &= CGlobals::PrintSOLabel(lOrderID);
 	}
 
