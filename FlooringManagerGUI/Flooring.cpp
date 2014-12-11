@@ -485,7 +485,7 @@ void CFlooringApp::OnInvoicing()
 	{
 		CDialogInvoicing* pdlgInv = new CDialogInvoicing() ;
 		pdlgInv->Create(IDD_INVOICING) ;
-		pdlgInv->SetVendorID(dlgSelectVendor.GetVendorID());
+//		pdlgInv->SetVendorID(dlgSelectVendor.GetVendorID());
 		pdlgInv->ShowWindow(SW_SHOW) ;
 	}
 }
