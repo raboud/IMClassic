@@ -13,6 +13,7 @@
 #include "SelectMailRecipientsDlg.h"
 #include "DlgSendNote.h"
 #include "Globals.h"
+#include "Logger.h"
 
 const int iMANAGER_ACTION_ID = 15;
 
@@ -34,7 +35,6 @@ CDlgPONoteEntry::CDlgPONoteEntry(CWnd* pParent /*=NULL*/)
 	m_strStoreNumber = "";
 	m_bCanSchedule = true;
 	m_bAskToSend = false;
-	m_bSendToExpeditor = false;
 	
 	VERIFY(m_fontPhoneNumbers.CreatePointFont(12, "Courier"));
 }
@@ -318,9 +318,18 @@ void CDlgPONoteEntry::OnOK()
 
 				if (dlgSendNote.DoModal() == IDOK)
 				{
-					m_bSendToExpeditor = true;
-					m_bCopyToSASM = (dlgSendNote.m_CopyNoteToSASM == TRUE);
-					m_bCopyToExpeditorEmail = (dlgSendNote.m_CopyNoteToExpeditorEmail == TRUE);
+					Logger::Instance().LogMessage("Before Calling SendToExpeditor()");
+					
+					bool QueuedOK = CGlobals::QueueNoteForExpeditor(m_iId, dlgSendNote.m_CopyNoteToSASM == TRUE, dlgSendNote.m_CopyNoteToExpeditorEmail == TRUE);
+					if (QueuedOK)
+					{
+						MessageBox("The note was added to outgoing messages list.\r\nIt will be sent by the SPN service as soon as possible.", "Information");
+					}
+					else
+					{
+						MessageBox("The note WAS NOT added to the outgoing messages list.  Please contact your support team for assistance.", "Error!");
+					}
+					Logger::Instance().LogMessage("After Calling SendToExpeditor()");
 				}
 			}
 		}
@@ -391,78 +400,11 @@ bool CDlgPONoteEntry::Validate()
 			}
 		}
 
-		COleDateTime dateSchedStart ;
-		COleDateTime dateSchedEnd ;
-		CDialogSchedule dlgSched;
-		if (bSchedule)
-		{
-			m_dtScheduledDate.GetTime(dateSchedStart) ;
-			m_ScheduleEndDate.GetTime(dateSchedEnd);
-
-			dateSchedStart = COleDateTime(dateSchedStart.GetYear(), dateSchedStart.GetMonth(), dateSchedStart.GetDay(), 0, 0, 0) ;
-			dateSchedEnd = COleDateTime(dateSchedEnd.GetYear(), dateSchedEnd.GetMonth(), dateSchedEnd.GetDay(), 0, 0, 0) ;
-
-			bool bAM = m_btnAM.GetCheck() == BST_CHECKED ;
-			bool bPM = m_btnPM.GetCheck() == BST_CHECKED ;
-			if (!bAM && !bPM)
-			{
-				MessageBox("Either AM or PM must be selected to schedule the installation.") ;
-				return bValid;
-			}
-
-			// Show the job list dialog box
-			dlgSched.SetScheduled(m_iCustomerID, m_iOrderID, dateSchedStart, dateSchedEnd, bAM) ;
-			if (dlgSched.DoModal() == IDCANCEL)
-			{
-				return bValid;
-			}
-		}
-
-		if (bUnschedule)
-		{
-			dlgSched.SetUnschedled(m_iCustomerID, m_iOrderID) ;
-			if (dlgSched.DoModal() == IDCANCEL)
-			{
-				return bValid;
-			}
-		}
-
 		// get our recordset to do the updates
-		
-		CSetPONotes set(&g_dbFlooring) ;
-		set.m_strFilter = "ID = -1";
 
-		if (m_iId == -1)
-		{
-			set.Open() ;
-			set.AddNew();
-			set.m_OrderID = m_iOrderID ;
-		}
-		else
-		{
-			set.m_strFilter.Format("ID = '%d'", m_iId) ;
-			set.Open() ;
-			set.MoveFirst() ;
-			set.Edit() ;
-		}
+		CString spokeWith ;
+		m_editSpokeWithOther.GetWindowText(spokeWith) ;
 
-		// update the database
-		set.m_EnteredByUserID = CGlobals::GetEmployeeID() ;
-
-		set.m_Scheduled = bSchedule;
-		set.m_UnScheduled = bUnschedule;
-
-        if (bSchedule)
-		{
-			set.m_ScheduledDate = dateSchedStart;
-			set.m_ScheduledAM = m_btnAM.GetCheck() == BST_CHECKED ;
-		}
-		
-		set.m_NoteTypeID = GetNoteTypeID() ;
-		set.m_SpokeWithID = GetSpokeWithID();
-		m_editSpokeWithOther.GetWindowText(set.m_ContactName) ;
-		
-		set.m_CustomerToCallBack = m_btnCustCallback.GetCheck() == BST_CHECKED;
 		CString strNotes;
 		CString strAdditionalNotes;
 		CString strDateTime;
@@ -484,78 +426,146 @@ bool CDlgPONoteEntry::Validate()
 			strNotes = strNotes.Left(CGlobals::iMAX_ORDER_NOTES);
 		}
 
+		BOOL bScheduledAM = m_btnAM.GetCheck() == BST_CHECKED;
+
 		CString strScheduleNote = "";
-		if (m_bEditing == false)
-		{
-			if (bSchedule)
-			{
-				strScheduleNote.Format("SCHEDULED FOR: %s %s\r\n", set.m_ScheduledDate.Format( "%Y/%m/%d" ), (set.m_ScheduledAM) ? "AM" : "PM");
-			}
-			else if (bUnschedule)
-			{
-				strScheduleNote = "UNSCHEDULED\r\n";
-			}
-			
-			strNotes = strScheduleNote + strNotes;
-		}
-
-		set.m_NoteText = strNotes;
-
-		// set the date/time this note was entered.
-		if (m_bNewNote)
-		{
-			set.m_DateTimeEntered = COleDateTime(time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond()) ;
-		}
 
 		// go ahead and get the time filter string in case we need it below.
 		CString strTimeFilter = strDateTime;
 
-		set.m_SentViaXML = 0;
-		set.SetFieldNull(&set.m_DateTimeSent);
-		set.m_Deleted = 0;
+		int iSpokeWithID = GetSpokeWithID();
+		BOOL bCustomerToCall = m_btnCustCallback.GetCheck() == BST_CHECKED;
+		COleDateTime DateTimeEntered = COleDateTime(time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond()) ;
+		int iEnteredByUser = CGlobals::GetEmployeeID() ;
 
-		// update the record - this moves the record ptr to the first one.
-		set.Update() ;
-
-		if ( m_iId == -1 )
+		if (bSchedule || bUnschedule)
 		{
-			// we just added a new record and do not know what the m_iId is, so the next few lines
-			// requery the recordset to find the record that was just added.  This is done by filtering
-			// on the user id and date/time.
-			
-			set.m_strFilter.Format("OrderId = %d AND DateTimeEntered = '%s'", m_iOrderID, strTimeFilter);
-			set.Requery();
-			ASSERT( set.GetRecordCount() == 1 );
-			m_iId = set.m_ID;
-		}
+			COleDateTime dateSchedStart ;
+			COleDateTime dateSchedEnd ;
+			m_dtScheduledDate.GetTime(dateSchedStart) ;
+			m_ScheduleEndDate.GetTime(dateSchedEnd);
 
-		// we need to update the other POs that had their schedules modified with a note
-		// saying what happened.
-		POSITION pos = dlgSched.m_listPOsWithModifiedSchedules.GetHeadPosition();
-		while (pos)
-		{
-			int iOrderID = dlgSched.m_listPOsWithModifiedSchedules.GetNext(pos);
-			if (iOrderID != m_iOrderID)
+			dateSchedStart = COleDateTime(dateSchedStart.GetYear(), dateSchedStart.GetMonth(), dateSchedStart.GetDay(), 0, 0, 0) ;
+			dateSchedEnd = COleDateTime(dateSchedEnd.GetYear(), dateSchedEnd.GetMonth(), dateSchedEnd.GetDay(), 0, 0, 0) ;
+
+			if (m_bEditing == false)
 			{
-				CString strSQL = "";
-				CString strSQLSafeNotes = set.m_NoteText;
-				strSQLSafeNotes.Replace("'", "''");
-				strSQL.Format("EXEC AddPONote %d, %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d, '%s'", iOrderID, set.m_NoteTypeID,
-					set.m_SpokeWithID, set.m_ContactName, set.m_DateTimeEntered.Format("%m/%d/%Y %H:%M:%S" ), strSQLSafeNotes, set.m_EnteredByUserID,
-					set.m_CustomerToCallBack, set.m_Scheduled, set.m_UnScheduled, set.m_ScheduledAM, set.m_ScheduledDate.Format("%m/%d/%Y %H:%M:%S" ));
-				TRY
+				if (bSchedule)
 				{
-					g_dbFlooring.ExecuteSQL(strSQL);
+					strScheduleNote.Format("SCHEDULED FOR: %s %s\r\n", dateSchedStart.Format( "%Y/%m/%d" ), (bScheduledAM) ? "AM" : "PM");
 				}
-				CATCH(CDBException, e)
+				else if (bUnschedule)
 				{
-					MessageBox(e->m_strError, "Error!");
+					strScheduleNote = "UNSCHEDULED\r\n";
 				}
-				END_CATCH
+			
+				strNotes = strScheduleNote + strNotes;
+			}
+
+			CDialogSchedule dlgSched;
+			if (bSchedule)
+			{
+
+				bool bAM = m_btnAM.GetCheck() == BST_CHECKED ;
+				bool bPM = m_btnPM.GetCheck() == BST_CHECKED ;
+				if (!bAM && !bPM)
+				{
+					MessageBox("Either AM or PM must be selected to schedule the installation.") ;
+					return bValid;
+				}
+
+				// Show the job list dialog box
+				dlgSched.SetScheduled(m_iCustomerID, m_iOrderID, dateSchedStart, dateSchedEnd, bAM) ;
+				if (dlgSched.DoModal() == IDCANCEL)
+				{
+					return bValid;
+				}
+			}
+
+			if (bUnschedule)
+			{
+				dlgSched.SetUnschedled(m_iCustomerID, m_iOrderID) ;
+				if (dlgSched.DoModal() == IDCANCEL)
+				{
+					return bValid;
+				}
+			}
+			// we need to update the other POs that had their schedules modified with a note
+			// saying what happened.
+			POSITION pos = dlgSched.m_listPOsWithModifiedSchedules.GetHeadPosition();
+			while (pos)
+			{
+				int iOrderID = dlgSched.m_listPOsWithModifiedSchedules.GetNext(pos);
+				if (iOrderID != m_iOrderID)
+				{
+					CString strSQL = "";
+					CString strSQLSafeNotes = strNotes;
+					strSQLSafeNotes.Replace("'", "''");
+					strSQL.Format("EXEC AddPONote %d, %d, %d, '%s', '%s', '%s', %d, %d, %d, %d, %d, '%s'", iOrderID, iNoteType,
+						iSpokeWithID, spokeWith, DateTimeEntered.Format("%m/%d/%Y %H:%M:%S" ), strSQLSafeNotes, iEnteredByUser,
+						bCustomerToCall, bSchedule, bUnschedule, bScheduledAM, dateSchedStart.Format("%m/%d/%Y %H:%M:%S" ));
+					TRY
+					{
+						g_dbFlooring.ExecuteSQL(strSQL);
+					}
+					CATCH(CDBException, e)
+					{
+						MessageBox(e->m_strError, "Error!");
+					}
+					END_CATCH
+				}
 			}
 		}
-	
-		set.Close() ;
+		else
+		{
+			CSetPONotes set(&g_dbFlooring) ;
+			set.m_strFilter = "ID = -1";
+
+			if (m_iId == -1)
+			{
+				set.Open() ;
+				set.AddNew();
+				set.m_OrderID = m_iOrderID ;
+				// set the date/time this note was entered.
+				set.m_DateTimeEntered = DateTimeEntered ;
+			}
+			else
+			{
+				set.m_strFilter.Format("ID = '%d'", m_iId) ;
+				set.Open() ;
+				set.MoveFirst() ;
+				set.Edit() ;
+			}
+			// update the database
+			set.m_NoteText = strNotes;
+			set.m_EnteredByUserID = iEnteredByUser;
+			set.m_Scheduled = bSchedule;
+			set.m_UnScheduled = bUnschedule;
+			set.m_CustomerToCallBack = bCustomerToCall;
+		
+			set.m_NoteTypeID = (long) iNoteType ;
+			set.m_SpokeWithID = iSpokeWithID;
+			set.m_ContactName = spokeWith;
+			set.m_SentViaXML = 0;
+			set.SetFieldNull(&set.m_DateTimeSent);
+			set.m_Deleted = 0;
+
+			// update the record - this moves the record ptr to the first one.
+			set.Update() ;
+
+			if ( m_iId == -1 )
+			{
+				// we just added a new record and do not know what the m_iId is, so the next few lines
+				// requery the recordset to find the record that was just added.  This is done by filtering
+				// on the user id and date/time.
+			
+				set.m_strFilter.Format("OrderId = %d AND DateTimeEntered = '%s'", m_iOrderID, strTimeFilter);
+				set.Requery();
+				ASSERT( set.GetRecordCount() == 1 );
+				m_iId = set.m_ID;
+			}
+			set.Close() ;
+		}
 
 		CSetCustomer setCustomer(&g_dbFlooring) ;
 		setCustomer.m_strFilter.Format("CustomerID = '%d'", m_iCustomerID) ;
@@ -912,9 +922,18 @@ void CDlgPONoteEntry::OnBnClickedPonoteSaveandemailButton()
 
 			if (dlgSendNote.DoModal() == IDOK)
 			{
-				m_bSendToExpeditor = true;
-				m_bCopyToSASM = (dlgSendNote.m_CopyNoteToSASM == TRUE);
-				m_bCopyToExpeditorEmail = (dlgSendNote.m_CopyNoteToExpeditorEmail == TRUE);
+				Logger::Instance().LogMessage("Before Calling SendToExpeditor()");
+					
+				bool QueuedOK = CGlobals::QueueNoteForExpeditor(m_iId, dlgSendNote.m_CopyNoteToSASM == TRUE, dlgSendNote.m_CopyNoteToExpeditorEmail == TRUE);
+				if (QueuedOK)
+				{
+					MessageBox("The note was added to outgoing messages list.\r\nIt will be sent by the SPN service as soon as possible.", "Information");
+				}
+				else
+				{
+					MessageBox("The note WAS NOT added to the outgoing messages list.  Please contact your support team for assistance.", "Error!");
+				}
+				Logger::Instance().LogMessage("After Calling SendToExpeditor()");
 			}
 		}
 

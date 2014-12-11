@@ -245,8 +245,6 @@ copy Flooring.exe.config $(OutDir)</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="UnitTests.cpp" />
-    <ClCompile Include="UpdateMaterialCost.cpp" />
-    <ClCompile Include="UpdateOptionCost.cpp" />
     <ClCompile Include="ViewActivePOs.cpp" />
     <ClCompile Include="ViewActivityList.cpp" />
     <ClCompile Include="ViewStoreInfo.cpp" />
@@ -607,8 +605,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="TransactionDetailsDialog.h" />
     <ClInclude Include="UnitTests.h" />
-    <ClInclude Include="UpdateMaterialCost.h" />
-    <ClInclude Include="UpdateOptionCost.h" />
     <ClInclude Include="versionno.h" />
     <ClInclude Include="ViewActivePOs.h" />
     <ClInclude Include="ViewActivityList.h" />

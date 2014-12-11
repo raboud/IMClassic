@@ -817,11 +817,6 @@ void CPOPickList::NewCall()
 		dlg.SetOrderID(iOrderID) ;
 		if (dlg.DoModal() == IDOK)
 		{
-			if (dlg.m_bSendToExpeditor)
-			{
-				//SendToExpeditor(dlg.GetNoteID(), dlg.m_bCopyToSASM, dlg.m_bCopyToExpeditorEmail);
-				CGlobals::QueueNoteForExpeditor(dlg.GetNoteID(), dlg.m_bCopyToSASM, dlg.m_bCopyToExpeditorEmail);
-			}
 			Update(m_lCustomerId) ;
 		}
 	}

@@ -130,15 +130,6 @@ void CGridPONotes::OnMenuCommand(int /* col */, long row, int section, int item)
 			if (dlg.DoModal() == IDOK)
 			{
 				Logger::Instance().LogMessage("Added new note.");
-				if (dlg.m_bSendToExpeditor)
-				{
-					Logger::Instance().LogMessage("Before Calling SendToExpeditor()");
-					
-					//SendToExpeditor(dlg.GetNoteID(), dlg.m_bCopyToSASM, dlg.m_bCopyToExpeditorEmail);
-					QueueNoteForExpeditor(dlg.GetNoteID(), dlg.m_bCopyToSASM, dlg.m_bCopyToExpeditorEmail);					
-					
-					Logger::Instance().LogMessage("After Calling SendToExpeditor()");
-				}
 				Logger::Instance().LogMessage("Calling Update() after adding new note.");
 				Update() ;
 				Logger::Instance().LogMessage("After calling Update()");

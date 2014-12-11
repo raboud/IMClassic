@@ -71,8 +71,8 @@ public:
 	CFlooringApp();
 	~CFlooringApp();
 
-	CString GetEmailPassword();
-	void SetEmailPassword(CString strPassword);
+//	CString GetEmailPassword();
+//	void SetEmailPassword(CString strPassword);
 
 	CDlgUserAlerts* m_pDlgUserAlerts;
 	CDlgActivePOs* m_pDlgActivePOs;
@@ -114,7 +114,6 @@ public:
 
 protected:
 	int m_iDBVersion;
-	CString m_strEmailPassword;
 
 	CMultiDocTemplate* m_pTemplateCustomerPO;
 

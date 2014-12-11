@@ -21,8 +21,6 @@
 #include "oxshape.h"
 #include "DlgStoreSelection.h"
 
-#include "UpdateOptionCost.h"
-#include "UpdateMaterialCost.h"
 #include "SetMaterialType.h"
 #include "SetMaterial.h"
 #include "SetOptions.h"
@@ -167,8 +165,6 @@ CFlooringApp::CFlooringApp()
 	m_pDlgUserAlerts = NULL;
 	m_pDlgActivePOs = NULL;
 	m_pDlgActivityList = NULL;
-	m_strEmailPassword = "";
-	m_strEmailPassword = "";
 }
 
 CFlooringApp::~CFlooringApp()
@@ -470,16 +466,6 @@ void CFlooringApp::OnBillingReceivecheck()
 #include "SetOrders.h"
 #include <math.h>
 #include ".\flooring.h"
-
-CString CFlooringApp::GetEmailPassword()
-{
-	return m_strEmailPassword;
-}
-
-void CFlooringApp::SetEmailPassword(CString strPassword)
-{
-	m_strEmailPassword = strPassword;
-}
 
 void CFlooringApp::OnUpdateBillingReceivecheck(CCmdUI* pCmdUI) 
 {

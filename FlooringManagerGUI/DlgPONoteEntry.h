@@ -136,9 +136,6 @@ public:
 	CStatic m_stScheduleGroup;
 	CStatic m_stScheduleText;
 
-	bool m_bSendToExpeditor;
-	bool m_bCopyToSASM;
-	bool m_bCopyToExpeditorEmail;
 	CStatic m_stCurrentScheduleDate;
 	CDateTimeCtrl m_ScheduleEndDate;
 	CStatic m_stScheduleStart;

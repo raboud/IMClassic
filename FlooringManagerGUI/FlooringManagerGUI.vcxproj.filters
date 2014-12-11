@@ -168,12 +168,6 @@
     <ClCompile Include="StdAfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UpdateMaterialCost.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UpdateOptionCost.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ViewActivePOs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1004,12 +998,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TransactionDetailsDialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UpdateMaterialCost.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UpdateOptionCost.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="versionno.h">
