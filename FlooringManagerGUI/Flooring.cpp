@@ -466,7 +466,7 @@ int CFlooringApp::ExitInstance()
 
 void CFlooringApp::OnStoreInfo() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::Stores(false);
+	::CFI::InstallationManager::Reports::ReportHelper::Stores(false);
 }
 
 void CFlooringApp::OnViewSubcontractors() 
@@ -539,12 +539,12 @@ void CFlooringApp::OnBillingChargebacks()
 
 void CFlooringApp::OnOverdueInvoices() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::Stores(false);
+	::CFI::InstallationManager::Reports::ReportHelper::Stores(false);
 }
 
 void CFlooringApp::OnOpenInvoices() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::OpenInvoices(false);
+	::CFI::InstallationManager::Reports::ReportHelper::OpenInvoices(false);
 }
 
 void CFlooringApp::OnPayroll() 
@@ -595,7 +595,7 @@ void CFlooringApp::OnPayroll()
 		// from today.
 		COleDateTime timeWE = clQB.GetWeekEnding();
 
-		::CFI::InstallationManager::Reports::ReportHandler::PayrollReport(gcnew System::String(strGrandTotal), System::DateTime::FromOADate(timeWE), false);
+		::CFI::InstallationManager::Reports::ReportHelper::PayrollReport(gcnew System::String(strGrandTotal), System::DateTime::FromOADate(timeWE), false);
 	}
 	else
 	{
@@ -625,7 +625,7 @@ void CFlooringApp::OnUpdatePayroll(CCmdUI* pCmdUI)
 
 void CFlooringApp::OnReportsPending() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::PendingInvoices(false);
+	::CFI::InstallationManager::Reports::ReportHelper::PendingInvoices(false);
 }
 
 //int DownloadDrawingList(CString strNumber, CString& strTimeStamp)
@@ -867,12 +867,12 @@ void CFlooringApp::OnReportsPending()
 
 void CFlooringApp::OnNotBilled() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::NotBilled(false);
+	::CFI::InstallationManager::Reports::ReportHelper::NotBilled(false);
 }
 
 void CFlooringApp::OnInventory() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::Inventory(false);
+	::CFI::InstallationManager::Reports::ReportHelper::Inventory(false);
 }
 
 void CFlooringApp::SetAdmin()
@@ -896,7 +896,7 @@ void CFlooringApp::OnCriminalCheckName()
 
 void CFlooringApp::OnReportsBilling() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::Billing(false);
+	::CFI::InstallationManager::Reports::ReportHelper::Billing(false);
 }
 
 void CFlooringApp::OnMaterialsChangestatus() 
@@ -1006,22 +1006,22 @@ CString CFlooringApp::GetUserFirstAndLastName()
 
 void CFlooringApp::OnWarrantySched() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::ScheduledWarranties(false);
+	::CFI::InstallationManager::Reports::ReportHelper::ScheduledWarranties(false);
 }
 
 void CFlooringApp::OnWarrantyOpen() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::OpenWarranties(false);
+	::CFI::InstallationManager::Reports::ReportHelper::OpenWarranties(false);
 }
 
 void CFlooringApp::OnMaterialRa() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::InventoryWaitingOnRA(false);
+	::CFI::InstallationManager::Reports::ReportHelper::InventoryWaitingOnRA(false);
 }
 
 void CFlooringApp::OnMaterialsNotreceivedyet() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::InventoryNotPresent(false);
+	::CFI::InstallationManager::Reports::ReportHelper::InventoryNotPresent(false);
 }
 
 void CFlooringApp::OnReportsStatus() 
@@ -1032,7 +1032,7 @@ void CFlooringApp::OnReportsStatus()
 
 	if (iResponse == IDOK)
 	{
-	::CFI::InstallationManager::Reports::ReportHandler::DetailedStatus(false);
+	::CFI::InstallationManager::Reports::ReportHelper::DetailedStatus(false);
 	}
 }
 
@@ -1042,33 +1042,33 @@ void CFlooringApp::OnReportsStatusSingle()
 
 	if (dlgStore.DoModal() == IDOK)
 	{
-		::CFI::InstallationManager::Reports::ReportHandler::DetailedStatus(gcnew System::String(dlgStore.GetStoreNumber()), false);
+		::CFI::InstallationManager::Reports::ReportHelper::DetailedStatus(gcnew System::String(dlgStore.GetStoreNumber()), false);
 	}
 }
 
 void CFlooringApp::OnReportsPulllist()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::PullList(false);
+	::CFI::InstallationManager::Reports::ReportHelper::PullList(false);
 }
 
 void CFlooringApp::OnReportsWeeklyTotals() 
 {
-	::CFI::InstallationManager::Reports::ReportHandler::WeeklyTotals(false);
+	::CFI::InstallationManager::Reports::ReportHelper::WeeklyTotals(false);
 }
 
 void CFlooringApp::OnReportsCompletedJobsNotPaid()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::CompletedJobsNotPaid(false);
+	::CFI::InstallationManager::Reports::ReportHelper::CompletedJobsNotPaid(false);
 }
 
 void CFlooringApp::OnReportsChargebacksByDate()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::ChargebacksByDate(false);
+	::CFI::InstallationManager::Reports::ReportHelper::ChargebacksByDate(false);
 }
 
 void CFlooringApp::OnReportsWorkSummaryByWeek()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::WeeklyUnitsTotals(false);
+	::CFI::InstallationManager::Reports::ReportHelper::WeeklyUnitsTotals(false);
 }
 
 void CFlooringApp::OnUpdateReportsWorkSummaryByWeek(CCmdUI* pCmdUI) 
@@ -1163,7 +1163,7 @@ void CFlooringApp::OnUpdateBillingChargebacks(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnReportsSubPhonelist()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::SubContractorsPhoneList(false);
+	::CFI::InstallationManager::Reports::ReportHelper::SubContractorsPhoneList(false);
 }
 
 void CFlooringApp::OnUpdateReportsSubPhonelist(CCmdUI *pCmdUI)
@@ -1173,7 +1173,7 @@ void CFlooringApp::OnUpdateReportsSubPhonelist(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnBackgroundChecksAlphaByLastName()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::SubContractorsBackgroundCheckStatus(false);
+	::CFI::InstallationManager::Reports::ReportHelper::SubContractorsBackgroundCheckStatus(false);
 }
 
 void CFlooringApp::OnUpdateBackgroundChecksAlphaByLastName(CCmdUI *pCmdUI)
@@ -1183,7 +1183,7 @@ void CFlooringApp::OnUpdateBackgroundChecksAlphaByLastName(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnJobsAssignments()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::InstallerAssignments(false);
+	::CFI::InstallationManager::Reports::ReportHelper::InstallerAssignments(false);
 }
 
 void CFlooringApp::OnUpdateJobsAssignments(CCmdUI *pCmdUI)
@@ -1243,12 +1243,12 @@ void CFlooringApp::OnUpdatePayrollMessages(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnSubHelpers()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::HelperAssignments(false);
+	::CFI::InstallationManager::Reports::ReportHelper::HelperAssignments(false);
 }
 
 void CFlooringApp::OnFinancialMaterialpricing()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::Pricing(false);
+	::CFI::InstallationManager::Reports::ReportHelper::Pricing(false);
 }
 
 void CFlooringApp::OnMaintenanceSpndiscrepancies()
@@ -1313,12 +1313,12 @@ void CFlooringApp::OnViewUseralerts()
 
 void CFlooringApp::OnWorkmansCompByDate()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::WorkmansCompByDate(false);
+	::CFI::InstallationManager::Reports::ReportHelper::WorkmansCompByDate(false);
 }
 
 void CFlooringApp::OnLiabilityByDate()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::LiabilityByDate(false);
+	::CFI::InstallationManager::Reports::ReportHelper::LiabilityByDate(false);
 }
 
 void CFlooringApp::OnUpdateWorkmansCompByDate(CCmdUI *pCmdUI)
@@ -1424,32 +1424,32 @@ void CFlooringApp::OnViewActivitylist()
 
 void CFlooringApp::OnMaterialsDamaged()
 {
-	::CFI::InstallationManager::Reports::ReportHandler::MaterialsDamaged(true);
+	::CFI::InstallationManager::Reports::ReportHelper::MaterialsDamaged(true);
 }
 
 void CFlooringApp::PrintPONote(int iNoteID)
 {
-	::CFI::InstallationManager::Reports::ReportHandler::PONote(iNoteID, true);
+	::CFI::InstallationManager::Reports::ReportHelper::PONote(iNoteID, true);
 }
 
 void CFlooringApp::PrintCustSatReport(int iReportID)
 {
-	::CFI::InstallationManager::Reports::ReportHandler::CustSatReport(iReportID, true);
+	::CFI::InstallationManager::Reports::ReportHelper::CustSatReport(iReportID, true);
 }
 
 void CFlooringApp::PrintPO(int iOrderID)
 {
-	::CFI::InstallationManager::Reports::ReportHandler::PO(iOrderID, true);
+	::CFI::InstallationManager::Reports::ReportHelper::PO(iOrderID, true);
 }
 
 void CFlooringApp::ViewPO(int iOrderID)
 {
-	::CFI::InstallationManager::Reports::ReportHandler::PO(iOrderID, false);
+	::CFI::InstallationManager::Reports::ReportHelper::PO(iOrderID, false);
 }
 
 void CFlooringApp::PrintStorePickup(int iOrderID)
 {
-	::CFI::InstallationManager::Reports::ReportHandler::StorePickup(iOrderID, true);
+	::CFI::InstallationManager::Reports::ReportHelper::StorePickup(iOrderID, true);
 }
 
 ::System::Collections::Generic::List<int>^ GetPoList(CPoList* listPOs)
@@ -1468,7 +1468,7 @@ void CFlooringApp::ViewWorkOrder(CPoList* listPOs, bool PrintOnly)
 	CWorkOrderHelper WorkOrderHelper;
 	if (WorkOrderHelper.SetPoList(listPOs))
 	{
-		::CFI::InstallationManager::Reports::ReportHandler::WorkOrder(GetPoList(listPOs), PrintOnly);
+		::CFI::InstallationManager::Reports::ReportHelper::WorkOrder(GetPoList(listPOs), PrintOnly);
 	}
 	else
 	{
@@ -1489,7 +1489,7 @@ void CFlooringApp::ViewWaiver(CPoList* listPOs, bool PrintOnly)
 	CWaiverHelper WaiverHelper;
 	if (WaiverHelper.SetPoList(listPOs))
 	{
-		::CFI::InstallationManager::Reports::ReportHandler::Waiver(GetPoList(listPOs), PrintOnly);
+		::CFI::InstallationManager::Reports::ReportHelper::Waiver(GetPoList(listPOs), PrintOnly);
 	}
 	else
 	{
@@ -1507,17 +1507,17 @@ void CFlooringApp::PrintWaiver(CPoList* listPOs)
 
 void CFlooringApp::PrintReviewChecklist(int OrderID)
 {
-	::CFI::InstallationManager::Reports::ReportHandler::ReviewChecklist(OrderID, true);
+	::CFI::InstallationManager::Reports::ReportHelper::ReviewChecklist(OrderID, true);
 }
 
 void CFlooringApp::PrintSchedulingChecklist(int OrderID)
 {
-	::CFI::InstallationManager::Reports::ReportHandler::SchedulingChecklist(OrderID, true);
+	::CFI::InstallationManager::Reports::ReportHelper::SchedulingChecklist(OrderID, true);
 }
 
 void CFlooringApp::ViewWoodFlooringWaiver(int OrderID, bool PrintOnly)
 {
-	::CFI::InstallationManager::Reports::ReportHandler::WoodFlooringWaiver(OrderID, PrintOnly);
+	::CFI::InstallationManager::Reports::ReportHelper::WoodFlooringWaiver(OrderID, PrintOnly);
 }
 
 void CFlooringApp::PrintWoodFlooringWaiver(int OrderID)

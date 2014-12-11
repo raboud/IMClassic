@@ -98,7 +98,7 @@ void CDialogChecking::OnOK()
 
 	if (MessageBox("Do you wish to print the check report?", "Check Report", MB_YESNO) == IDYES)
 	{
-		::CFI::InstallationManager::Reports::ReportHandler::PONote(m_iCheckID, true);
+		::CFI::InstallationManager::Reports::ReportHelper::PONote(m_iCheckID, true);
 	}
 
 	CDialog::OnOK();

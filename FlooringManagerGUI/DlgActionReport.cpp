@@ -334,7 +334,7 @@ void CDlgActionReport::OnBnClickedActionReportViewprintreportButton()
 	UpdateCurrentRecord();
 
 	ASSERT(m_iId != -1);
-	::CFI::InstallationManager::Reports::ReportHandler::CustomerSatisfactionConcern(m_iId, false);
+	::CFI::InstallationManager::Reports::ReportHelper::CustomerSatisfactionConcern(m_iId, false);
 }
 
 void CDlgActionReport::UpdateCurrentRecord()
