@@ -96,7 +96,10 @@ int CGridReports::OnMenuStart(int /* col */, long row, int section)
 		{
 			AddMenuItem(1001, "Edit") ;
 			AddMenuItem(1002, "Print") ;
-			AddMenuItem(1003, "Email to COS");
+			if (CGlobals::IsAdmin())
+			{
+				AddMenuItem(1003, "Email to COS");
+			}
 		}
 	}
 	return TRUE ;
@@ -139,10 +142,12 @@ void CGridReports::OnMenuCommand(int /* col */, long row, int section, int item)
 		}
 		if (item == 1002)
 		{
+			CWaitCursor curWait;
 			CGlobals::PrintCustSatReport(int(QuickGetNumber(ID, row)));
 		}
 		if (item == 1003)
 		{
+			CWaitCursor curWait;
 			CGlobals::EmailCosCustSatReport(int(QuickGetNumber(ID, row)));
 		}
 	}

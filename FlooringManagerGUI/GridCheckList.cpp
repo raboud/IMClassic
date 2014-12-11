@@ -190,6 +190,8 @@ void CGridCheckList::EditCheck(long row)
 }
 void CGridCheckList::AddToQuickbooks(long row)
 {
+	CWaitCursor curWait;
+
 	CString strId = QuickGetText(ID, row);
 	int iId = atoi(strId);
 	if (CGlobals::AddCheckToQuickbooks(iId))
