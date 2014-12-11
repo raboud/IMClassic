@@ -17,7 +17,7 @@
 
 CQuickBooks::CQuickBooks(void)
 {
-	m_set.m_strSort = "[Installer], [Date]" ;
+//	m_set.m_strSort = "[Installer], [Date]" ;
 	m_set.Open() ;
 	m_fGrandTotal = 0.0 ;
 }
