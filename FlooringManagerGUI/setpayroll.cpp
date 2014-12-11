@@ -68,7 +68,7 @@ CString CSetPayroll::GetDefaultConnect()
 	CString sSql;
     CString sItem1, sItem2;
     CString sDsn;
-    CString sFile = "s:\\Sub-Contractors.xlsx";        // the file name. Could also be something like C:\\Sheets\\WhatDoIKnow.xls
+    CString sFile = "\\\\flooring.local\\cfi\\common\\Sub-Contractors.xlsx";        // the file name. Could also be something like C:\\Sheets\\WhatDoIKnow.xls
     
     // Retrieve the name of the Excel driver. This is 
     // necessary because Microsoft tends to use language
