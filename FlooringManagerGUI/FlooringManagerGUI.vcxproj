@@ -17,7 +17,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}</ProjectGuid>
     <RootNamespace>FlooringManagerGUI</RootNamespace>
-    <SccProjectName>$/InstallationManagerClassic/Main/Src/FlooringManagerGUI</SccProjectName>
+    <SccProjectName>$/Installation Manager Classic (Scrum)/Main/Src/FlooringManagerGUI</SccProjectName>
     <SccAuxPath>http://fusion-tfs:8084/tfs/cficollection</SccAuxPath>
     <SccLocalPath>.</SccLocalPath>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
@@ -178,8 +178,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Reference Include="CFI.InstallationManager.Reports, Version=1.0.4485.18342, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\InstallationManagerMain\InstallationManager.Reports\bin\x86\Release\CFI.InstallationManager.Reports.dll</HintPath>
+    <Reference Include="CFI.InstallationManager.Reports, Version=1.0.4489.40249, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\InstallationManagerScrum\InstallationManager.Reports\bin\x86\Debug\CFI.InstallationManager.Reports.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
