@@ -21,6 +21,8 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace CFI::InstallationManager::Reports::UI;
+
 /////////////////////////////////////////////////////////////////////////////
 // CDlgActionReport dialog
 
@@ -334,7 +336,7 @@ void CDlgActionReport::OnBnClickedActionReportViewprintreportButton()
 	UpdateCurrentRecord();
 
 	ASSERT(m_iId != -1);
-	::CFI::InstallationManager::Reports::ReportHelper::CustomerSatisfactionConcern(m_iId, false);
+	ReportHelper::CustomerSatisfactionConcern(m_iId, Mode::View);
 }
 
 void CDlgActionReport::UpdateCurrentRecord()

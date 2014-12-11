@@ -68,13 +68,15 @@ CMultiDocTemplate* g_pTemplateCustomerPO ;
 
 CDatabase g_dbFlooring;
 CString g_strSPNWebServiceURL;
-CString g_strSOSIWebServiceURL;
+//CString g_strSOSIWebServiceURL;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
+
+using namespace CFI::InstallationManager::Reports::UI;
 
 /////////////////////////////////////////////////////////////////////////////
 // CFlooringApp
@@ -296,6 +298,7 @@ BOOL CFlooringApp::InitInstance()
 		RUNTIME_CLASS(CMDIChildWnd), // custom MDI child frame
 		RUNTIME_CLASS(CViewInvoice));
 
+	ReportHelper::InitDefaultContext();
 	//CMaintenance maintenance;
 	//maintenance.Update();
 
@@ -356,7 +359,7 @@ BOOL CFlooringApp::InitInstance()
 	SSCE_SetUserLexFiles(strValue);
 
 	g_strSPNWebServiceURL.Format("http://%s/SpnWebService/SpnWebService.asmx", setSettings.GetSetting("SPNWebServiceServerName") );
-	g_strSOSIWebServiceURL.Format("http://%s/SOSIWebService/SOSIWebService.asmx", setSettings.GetSetting("SOSIWebServiceServerName") );
+//	g_strSOSIWebServiceURL.Format("http://%s/SOSIWebService/SOSIWebService.asmx", setSettings.GetSetting("SOSIWebServiceServerName") );
 
 	m_pperms = new CPermissions();
 
@@ -466,7 +469,7 @@ int CFlooringApp::ExitInstance()
 
 void CFlooringApp::OnStoreInfo() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::Stores(false);
+	ReportHelper::Stores(Mode::View);
 }
 
 void CFlooringApp::OnViewSubcontractors() 
@@ -539,12 +542,12 @@ void CFlooringApp::OnBillingChargebacks()
 
 void CFlooringApp::OnOverdueInvoices() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::Stores(false);
+	ReportHelper::OverdueInvoices(Mode::View);
 }
 
 void CFlooringApp::OnOpenInvoices() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::OpenInvoices(false);
+	ReportHelper::OpenInvoices(Mode::View);
 }
 
 void CFlooringApp::OnPayroll() 
@@ -595,7 +598,7 @@ void CFlooringApp::OnPayroll()
 		// from today.
 		COleDateTime timeWE = clQB.GetWeekEnding();
 
-		::CFI::InstallationManager::Reports::ReportHelper::PayrollReport(gcnew System::String(strGrandTotal), System::DateTime::FromOADate(timeWE), false);
+		ReportHelper::PayrollReport(gcnew System::String(strGrandTotal), System::DateTime::FromOADate(timeWE), Mode::View);
 	}
 	else
 	{
@@ -622,10 +625,9 @@ void CFlooringApp::OnUpdatePayroll(CCmdUI* pCmdUI)
 }
 
 
-
 void CFlooringApp::OnReportsPending() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::PendingInvoices(false);
+	ReportHelper::PendingInvoices(Mode::View);
 }
 
 //int DownloadDrawingList(CString strNumber, CString& strTimeStamp)
@@ -867,12 +869,12 @@ void CFlooringApp::OnReportsPending()
 
 void CFlooringApp::OnNotBilled() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::NotBilled(false);
+	ReportHelper::NotBilled(Mode::View);
 }
 
 void CFlooringApp::OnInventory() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::Inventory(false);
+	ReportHelper::Inventory(Mode::View);
 }
 
 void CFlooringApp::SetAdmin()
@@ -896,7 +898,7 @@ void CFlooringApp::OnCriminalCheckName()
 
 void CFlooringApp::OnReportsBilling() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::Billing(false);
+	ReportHelper::Billing(Mode::View);
 }
 
 void CFlooringApp::OnMaterialsChangestatus() 
@@ -1006,22 +1008,22 @@ CString CFlooringApp::GetUserFirstAndLastName()
 
 void CFlooringApp::OnWarrantySched() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::ScheduledWarranties(false);
+	ReportHelper::ScheduledWarranties(Mode::View);
 }
 
 void CFlooringApp::OnWarrantyOpen() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::OpenWarranties(false);
+	ReportHelper::OpenWarranties(Mode::View);
 }
 
 void CFlooringApp::OnMaterialRa() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::InventoryWaitingOnRA(false);
+	ReportHelper::InventoryWaitingOnRA(Mode::View);
 }
 
 void CFlooringApp::OnMaterialsNotreceivedyet() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::InventoryNotPresent(false);
+	ReportHelper::InventoryNotPresent(Mode::View);
 }
 
 void CFlooringApp::OnReportsStatus() 
@@ -1032,7 +1034,7 @@ void CFlooringApp::OnReportsStatus()
 
 	if (iResponse == IDOK)
 	{
-	::CFI::InstallationManager::Reports::ReportHelper::DetailedStatus(false);
+		ReportHelper::DetailedStatus(Mode::View);
 	}
 }
 
@@ -1042,33 +1044,33 @@ void CFlooringApp::OnReportsStatusSingle()
 
 	if (dlgStore.DoModal() == IDOK)
 	{
-		::CFI::InstallationManager::Reports::ReportHelper::DetailedStatus(gcnew System::String(dlgStore.GetStoreNumber()), false);
+		ReportHelper::DetailedStatusByStore(gcnew System::String(dlgStore.GetStoreNumber()), Mode::View);
 	}
 }
 
 void CFlooringApp::OnReportsPulllist()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::PullList(false);
+	ReportHelper::PullList(Mode::View);
 }
 
 void CFlooringApp::OnReportsWeeklyTotals() 
 {
-	::CFI::InstallationManager::Reports::ReportHelper::WeeklyTotals(false);
+	ReportHelper::WeeklyTotals(Mode::View);
 }
 
 void CFlooringApp::OnReportsCompletedJobsNotPaid()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::CompletedJobsNotPaid(false);
+	ReportHelper::CompletedJobsNotPaid(Mode::View);
 }
 
 void CFlooringApp::OnReportsChargebacksByDate()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::ChargebacksByDate(false);
+	ReportHelper::ChargebacksByDate(Mode::View);
 }
 
 void CFlooringApp::OnReportsWorkSummaryByWeek()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::WeeklyUnitsTotals(false);
+	ReportHelper::WeeklyUnitsTotals(Mode::View);
 }
 
 void CFlooringApp::OnUpdateReportsWorkSummaryByWeek(CCmdUI* pCmdUI) 
@@ -1163,7 +1165,7 @@ void CFlooringApp::OnUpdateBillingChargebacks(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnReportsSubPhonelist()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::SubContractorsPhoneList(false);
+	ReportHelper::SubContractorsPhoneList(Mode::View);
 }
 
 void CFlooringApp::OnUpdateReportsSubPhonelist(CCmdUI *pCmdUI)
@@ -1173,7 +1175,7 @@ void CFlooringApp::OnUpdateReportsSubPhonelist(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnBackgroundChecksAlphaByLastName()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::SubContractorsBackgroundCheckStatus(false);
+	ReportHelper::SubContractorsBackgroundCheckStatus(Mode::View);
 }
 
 void CFlooringApp::OnUpdateBackgroundChecksAlphaByLastName(CCmdUI *pCmdUI)
@@ -1183,7 +1185,7 @@ void CFlooringApp::OnUpdateBackgroundChecksAlphaByLastName(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnJobsAssignments()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::InstallerAssignments(false);
+	ReportHelper::InstallerAssignments(Mode::View);
 }
 
 void CFlooringApp::OnUpdateJobsAssignments(CCmdUI *pCmdUI)
@@ -1243,12 +1245,12 @@ void CFlooringApp::OnUpdatePayrollMessages(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnSubHelpers()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::HelperAssignments(false);
+	ReportHelper::HelperAssignments(Mode::View);
 }
 
 void CFlooringApp::OnFinancialMaterialpricing()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::Pricing(false);
+	ReportHelper::Pricing(Mode::View);
 }
 
 void CFlooringApp::OnMaintenanceSpndiscrepancies()
@@ -1313,12 +1315,12 @@ void CFlooringApp::OnViewUseralerts()
 
 void CFlooringApp::OnWorkmansCompByDate()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::WorkmansCompByDate(false);
+	ReportHelper::WorkmansCompByDate(Mode::View);
 }
 
 void CFlooringApp::OnLiabilityByDate()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::LiabilityByDate(false);
+	ReportHelper::LiabilityByDate(Mode::View);
 }
 
 void CFlooringApp::OnUpdateWorkmansCompByDate(CCmdUI *pCmdUI)
@@ -1424,32 +1426,32 @@ void CFlooringApp::OnViewActivitylist()
 
 void CFlooringApp::OnMaterialsDamaged()
 {
-	::CFI::InstallationManager::Reports::ReportHelper::MaterialsDamaged(true);
+	ReportHelper::InventoryDamage(Mode::View);
 }
 
 void CFlooringApp::PrintPONote(int iNoteID)
 {
-	::CFI::InstallationManager::Reports::ReportHelper::PONote(iNoteID, true);
+	ReportHelper::PONote(iNoteID, Mode::Print);
 }
 
 void CFlooringApp::PrintCustSatReport(int iReportID)
 {
-	::CFI::InstallationManager::Reports::ReportHelper::CustSatReport(iReportID, true);
+	ReportHelper::CustomerSatisfactionConcern(iReportID, Mode::Print);
 }
 
 void CFlooringApp::PrintPO(int iOrderID)
 {
-	::CFI::InstallationManager::Reports::ReportHelper::PO(iOrderID, true);
+	ReportHelper::PO(iOrderID, Mode::Print);
 }
 
 void CFlooringApp::ViewPO(int iOrderID)
 {
-	::CFI::InstallationManager::Reports::ReportHelper::PO(iOrderID, false);
+	ReportHelper::PO(iOrderID, Mode::View);
 }
 
 void CFlooringApp::PrintStorePickup(int iOrderID)
 {
-	::CFI::InstallationManager::Reports::ReportHelper::StorePickup(iOrderID, true);
+	ReportHelper::StorePickup(iOrderID, Mode::Print);
 }
 
 ::System::Collections::Generic::List<int>^ GetPoList(CPoList* listPOs)
@@ -1468,7 +1470,14 @@ void CFlooringApp::ViewWorkOrder(CPoList* listPOs, bool PrintOnly)
 	CWorkOrderHelper WorkOrderHelper;
 	if (WorkOrderHelper.SetPoList(listPOs))
 	{
-		::CFI::InstallationManager::Reports::ReportHelper::WorkOrder(GetPoList(listPOs), PrintOnly);
+		if (PrintOnly)
+		{
+			ReportHelper::WorkOrder(GetPoList(listPOs), Mode::Print);
+		}
+		else
+		{
+			ReportHelper::WorkOrder(GetPoList(listPOs), Mode::View);
+		}
 	}
 	else
 	{
@@ -1489,7 +1498,14 @@ void CFlooringApp::ViewWaiver(CPoList* listPOs, bool PrintOnly)
 	CWaiverHelper WaiverHelper;
 	if (WaiverHelper.SetPoList(listPOs))
 	{
-		::CFI::InstallationManager::Reports::ReportHelper::Waiver(GetPoList(listPOs), PrintOnly);
+		if (PrintOnly)
+		{
+			ReportHelper::Waiver(GetPoList(listPOs), Mode::Print);
+		}
+		else
+		{
+			ReportHelper::Waiver(GetPoList(listPOs), Mode::View);
+		}
 	}
 	else
 	{
@@ -1507,17 +1523,24 @@ void CFlooringApp::PrintWaiver(CPoList* listPOs)
 
 void CFlooringApp::PrintReviewChecklist(int OrderID)
 {
-	::CFI::InstallationManager::Reports::ReportHelper::ReviewChecklist(OrderID, true);
+	ReportHelper::ReviewChecklist(OrderID, Mode::Print);
 }
 
 void CFlooringApp::PrintSchedulingChecklist(int OrderID)
 {
-	::CFI::InstallationManager::Reports::ReportHelper::SchedulingChecklist(OrderID, true);
+	ReportHelper::SchedulingChecklist(OrderID, Mode::Print);
 }
 
 void CFlooringApp::ViewWoodFlooringWaiver(int OrderID, bool PrintOnly)
 {
-	::CFI::InstallationManager::Reports::ReportHelper::WoodFlooringWaiver(OrderID, PrintOnly);
+	if (PrintOnly)
+	{
+		ReportHelper::WoodFlooringWaiver(OrderID, Mode::Print);
+	}
+	else
+	{
+		ReportHelper::WoodFlooringWaiver(OrderID, Mode::View);
+	}
 }
 
 void CFlooringApp::PrintWoodFlooringWaiver(int OrderID)

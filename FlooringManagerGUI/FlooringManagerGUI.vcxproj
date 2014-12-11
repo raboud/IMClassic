@@ -936,8 +936,11 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <Library Include="..\Common\Ssce\sdk\lib\SSCE5332.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\InstallationManager\InstallationManager.Reports\CFI.InstallationManager.Reports.csproj">
-      <Project>{e89320cf-9b6e-4336-a587-10c042779e5a}</Project>
+    <ProjectReference Include="..\..\InstallationManager\InstallationManager.ReportsUI\Reports.UI.csproj">
+      <Project>{a16da113-dfa3-4724-b6cc-65d4c59c8527}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\InstallationManager\TypesAndInterfaces\CFI.InstallationManager.TypesAndInterfaces.csproj">
+      <Project>{4f5429bc-ed29-4e3c-8464-5b9cc738cc6b}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
