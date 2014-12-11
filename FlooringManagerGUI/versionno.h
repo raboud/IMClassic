@@ -1,17 +1,17 @@
 /*----------------------------------------------------------------------
-	Copyright © 2001-2012 R & R Engineering Technology, Inc.
+	Copyright © 2001-2013 R & R Engineering Technology, Inc.
 -----------------------------------------------------------------------*/
 #ifndef _VERSIONNO_H
 #define _VERSIONNO_H
 
 // set generic version info
 #define VINFO_HI_FILEVERSION 			03
-#define VINFO_LO_FILEVERSION 			38
+#define VINFO_LO_FILEVERSION 			39
 #define VINFO_HI_FILEBUILD   			00
 #define VINFO_LO_FILEBUILD   			00
 
 #define VINFO_HI_PRODUCTVERSION 		03
-#define VINFO_LO_PRODUCTVERSION 		38
+#define VINFO_LO_PRODUCTVERSION 		39
 #define VINFO_HI_PRODUCTBUILD   		00
 #define VINFO_LO_PRODUCTBUILD   		00
 
