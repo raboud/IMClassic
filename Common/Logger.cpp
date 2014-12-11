@@ -41,7 +41,7 @@ bool Logger::Log(CString messageToLog)
 			CreateDirectory(pathName, NULL);
 		}
 		COleDateTime dt = COleDateTime::GetCurrentTime();
-		fileName.Format("%s\\IMClassic_%s.log", pathName, dt.Format("%m%d%Y"));
+		fileName.Format("%s\\IMClassic_%s.log", pathName, dt.Format("%Y-%m-%d"));
 		CStdioFile fileOut(fileName, CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite | CFile::typeText) ;
 		fileOut.SeekToEnd();
 
