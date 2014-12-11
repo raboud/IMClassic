@@ -211,6 +211,9 @@ bool CInstallerJobData::ParseInstallerJob(MSXML2::IXMLDOMNode *pJobNode)
 
 	HRESULT hr = pJobNode->selectNodes(CComBSTR("Calculation"), &pCalcNodes) ;
 
+	long iCount ;
+	pCalcNodes->get_length(&iCount) ;
+
 	MSXML2::IXMLDOMNamedNodeMap *pAttribs ;
 	MSXML2::IXMLDOMNode *pAttrib=NULL;
 
@@ -348,10 +351,12 @@ bool CInstallerJobData::ParseInstallerJob(MSXML2::IXMLDOMNode *pJobNode)
 	if (hr == S_OK) hr = pAttrib->get_nodeValue(&vt) ;
 	if (hr == S_OK) m_strMetalColor = vt.bstrVal ;
 
+	if (hr == S_OK) hr = pAttribs->getNamedItem(CComBSTR("Email"), &pAttrib) ;
+	if (hr == S_OK && pAttrib != NULL) hr = pAttrib->get_nodeValue(&vt) ;
+	if (hr == S_OK && pAttrib != NULL) this->m_strEmailAddress = vt.bstrVal ;
+
 	if (hr == S_OK)
 	{
-		long iCount ;
-		pCalcNodes->get_length(&iCount) ;
 		for (int i = 0; i < iCount; i++)
 		{
 			hr = pCalcNodes->nextNode(&pCalcNode) ;

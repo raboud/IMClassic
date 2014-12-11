@@ -29,7 +29,7 @@ public:
 	CString	m_CrossStreet1;
 	CString	m_CrossStreetDir2;
 	CString	m_CrossStreet2;
-
+	CString	m_EmailAddress;
 // Overrides
 	// Wizard generated virtual function overrides
 	public:

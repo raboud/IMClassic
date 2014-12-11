@@ -879,8 +879,24 @@ void CDlgPo::OnKillfocusDrawingNumber()
 				setMCCust.m_CrossStreetDir1 = jobData.m_strCrossStreetDir1.MakeUpper();
 				setMCCust.m_CrossStreet2 = jobData.m_strCrossStreet2.MakeUpper();
 				setMCCust.m_CrossStreetDir2 = jobData.m_strCrossStreetDir2.MakeUpper();
+				
+				// handle email
+				setMCCust.m_EmailAddress = jobData.m_strEmailAddress;
+
+				CSetCustomer setCustomer(&g_dbFlooring) ;
+				setCustomer.m_strFilter.Format("[CustomerID] = '%d'", m_lCustomerId) ;
+				setCustomer.Open() ;
+				if (setCustomer.m_EmailAddress == "")
+				{
+					setCustomer.Edit();
+					setCustomer.m_EmailAddress = setMCCust.m_EmailAddress;
+					setCustomer.Update();
+				}
+				setCustomer.Close();
+
 				setMCCust.Update();
 				setMCCust.Close();
+
 
 				// update order info
 				setMCOrder.m_strFilter.Format("OrderID = %d", iOrderID);

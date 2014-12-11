@@ -73,6 +73,7 @@ public:
 	CString m_strAccess ;
 	CString m_strSiteType ;
 	CString m_strMetalColor ;
+	CString m_strEmailAddress ;
 
 	class CCalculation
 	{

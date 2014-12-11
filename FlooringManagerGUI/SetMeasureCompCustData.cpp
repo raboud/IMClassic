@@ -30,7 +30,8 @@ CSetMeasureCompCustData::CSetMeasureCompCustData(CDatabase* pdb)
 	m_CrossStreet1 = "";
 	m_CrossStreetDir2 = "";
 	m_CrossStreet2 = "";
-	m_nFields = 17;
+	this->m_EmailAddress = "";
+	m_nFields = 18;
 	m_nDefaultType = dynaset;
 }
 
@@ -71,6 +72,7 @@ void CSetMeasureCompCustData::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[CrossStreet1]"), m_CrossStreet1);
 	RFX_Text(pFX, _T("[CrossStreetDir2]"), m_CrossStreetDir2);
 	RFX_Text(pFX, _T("[CrossStreet2]"), m_CrossStreet2);
+	RFX_Text(pFX, _T("[EmailAddress]"), this->m_EmailAddress);
 
 }
 /////////////////////////////////////////////////////////////////////////////
