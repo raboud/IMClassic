@@ -825,7 +825,7 @@ bool CGlobals::SendEmail( CString strTo, CString strFrom, CString strPassword, C
 
 	try
 	{
-		CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
+		//CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
 		CSetSettings setSettings(&g_dbFlooring);		
 
 		CString strServer = setSettings.GetSetting("SMTPServer");

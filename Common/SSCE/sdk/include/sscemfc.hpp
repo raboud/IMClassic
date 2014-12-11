@@ -41,7 +41,7 @@ public:
 		SSCE_S32 bfrSz = str.GetLength() + growth;
 		SSCE_S32 rv = SSCE_CheckBlockDlgTmplt(parentWnd->GetSafeHwnd(),
 		  (SSCE_CHAR *)str.GetBuffer(bfrSz), (SSCE_S32)str.GetLength(),
-		  bfrSz, showContext, clientInst, spellDlgTmplt, dictDlgTmplt,
+		  bfrSz, (short)showContext, clientInst, spellDlgTmplt, dictDlgTmplt,
 		  optDlgTmplt, newLexDlgTmplt);
 		str.ReleaseBuffer();
 		return (rv);
@@ -55,7 +55,7 @@ public:
 	  const TCHAR *spellDlgTmplt = 0, const TCHAR *dictDlgTmplt = 0,
 	  const TCHAR *optDlgTmplt = 0, const TCHAR *newLexDlgTmplt = 0) {
 	  	return (SSCE_CheckBlockDlgTmplt(parentWnd->GetSafeHwnd(), block, blkLen,
-	  	  blkSz, showContext, clientInst, spellDlgTmplt, dictDlgTmplt,
+	  	  blkSz, (short)showContext, clientInst, spellDlgTmplt, dictDlgTmplt,
 	  	  optDlgTmplt, newLexDlgTmplt));
 	}
 #pragma warning(default:4244)
@@ -67,7 +67,7 @@ public:
 	  const TCHAR *dictDlgTmplt = 0, const TCHAR *optDlgTmplt = 0,
 	  const TCHAR *newLexDlgTmplt = 0) {
 		return (SSCE_CheckCtrlDlgTmplt(parentWnd->GetSafeHwnd(),
-		  control->m_hWnd, checkSelectedOnly, clientInst, spellDlgTmplt,
+		  control->m_hWnd, (short)checkSelectedOnly, clientInst, spellDlgTmplt,
 		  dictDlgTmplt, optDlgTmplt, newLexDlgTmplt));
 	}
 #pragma warning(default:4244)
@@ -79,7 +79,7 @@ public:
 	  const TCHAR *dictDlgTmplt = 0, const TCHAR *optDlgTmplt = 0,
 	  const TCHAR *newLexDlgTmplt = 0) {
 		return (SSCE_CheckCtrlDlgTmplt(parentWnd->GetSafeHwnd(),
-		  ctrlWin, checkSelectedOnly, clientInst, spellDlgTmplt,
+		  ctrlWin, (short)checkSelectedOnly, clientInst, spellDlgTmplt,
 		  dictDlgTmplt, optDlgTmplt, newLexDlgTmplt));
 	}
 #pragma warning(default:4244)

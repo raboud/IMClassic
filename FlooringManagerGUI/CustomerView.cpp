@@ -804,7 +804,7 @@ HBRUSH CCustomerView::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 void CCustomerView::OnFindBySpecialOrder() 
 {
-	int iCustomerID;
+	int iCustomerID = -1;
 	CDlgFind dlg(CDlgFind::EnFIND_TYPE_SO, this) ;
 	dlg.SetCaption("Find by Special Order Number") ;
 

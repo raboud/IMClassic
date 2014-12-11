@@ -201,7 +201,7 @@ LONG WINAPI ExcHandler(struct _EXCEPTION_POINTERS *ExceptionInfo)
 
 int CFlooringApp::Run()
 {
-	BOOL bRun;
+	BOOL bRun = FALSE;
 	BOOL bExit = FALSE;
 
 	while(!bExit)
