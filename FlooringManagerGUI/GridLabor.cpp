@@ -17,6 +17,10 @@
 #include "SetOrderOptionsDetails.h"
 #include "SeOrderCustomDetails.h"
 #include "SetMatStatus.h"
+#include "setbasiclabor.h"
+#include "setoptions.h"
+#include "setstores.h"
+
 #include "pricing.h"
 #include "DlgSplitLineItem.h"
 #include "SetDiscrepancies.h"

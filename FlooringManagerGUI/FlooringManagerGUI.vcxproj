@@ -258,7 +258,17 @@ copy Flooring.exe.config $(OutDir)</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="POPropSheet.cpp" />
-    <ClCompile Include="Pricing.cpp" />
+    <ClCompile Include="Pricing.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExceptionHandling>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</CompileAsManaged>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExceptionHandling>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">false</ExceptionHandling>
+    </ClCompile>
     <ClCompile Include="..\Common\printer.cpp" />
     <ClCompile Include="PropPageReportIssueDescription.cpp" />
     <ClCompile Include="PropPageReportIssueStorePONumber.cpp" />
@@ -469,8 +479,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="DlgWebService.cpp" />
     <ClCompile Include="JobAssignment.cpp" />
     <ClCompile Include="SelectMailRecipientsDlg.cpp" />
-    <ClCompile Include="BasicPricing.cpp" />
-    <ClCompile Include="OptionPricing.cpp" />
     <ClCompile Include="SeOrderCustomDetails.cpp" />
     <ClCompile Include="SetActionReport.cpp" />
     <ClCompile Include="SetActionReportWithName.cpp" />
@@ -783,8 +791,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="DlgWebService.h" />
     <ClInclude Include="JobAssignment.h" />
     <ClInclude Include="SelectMailRecipientsDlg.h" />
-    <ClInclude Include="BasicPricing.h" />
-    <ClInclude Include="OptionPricing.h" />
     <ClInclude Include="SeOrderCustomDetails.h" />
     <ClInclude Include="SetActionReport.h" />
     <ClInclude Include="SetActionReportWithName.h" />

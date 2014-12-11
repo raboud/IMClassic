@@ -4,12 +4,6 @@
 
 #pragma once
 
-#include "setbasiclabor.h"
-#include "setoptions.h"
-#include "basicpricing.h"
-#include "optionpricing.h"
-#include "setstores.h"
-
 class CPricing
 {
 public:
@@ -20,13 +14,4 @@ public:
 	bool GetOptionPrices(int iOptionID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice);
 
 protected:
-
-	CSetBasicLabor m_setBasicLabor;
-	CSetOptions m_setOptions;
-
-	CBasicPricing m_setBasicPricing;
-	COptionPricing m_setOptionPricing;
-
-	CSetStores m_setStores;
-
 };

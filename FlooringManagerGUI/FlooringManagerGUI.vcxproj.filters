@@ -522,12 +522,6 @@
     <ClCompile Include="SelectMailRecipientsDlg.cpp">
       <Filter>Dialogs\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasicPricing.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OptionPricing.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SeOrderCustomDetails.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
@@ -1404,12 +1398,6 @@
     </ClInclude>
     <ClInclude Include="SelectMailRecipientsDlg.h">
       <Filter>Dialogs\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicPricing.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OptionPricing.h">
-      <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SeOrderCustomDetails.h">
       <Filter>Record Sets\Header Files</Filter>
