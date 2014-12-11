@@ -51,13 +51,11 @@ protected:
 	afx_msg LRESULT OnActivePOsDlgDestroyed(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnActivityListDlgDestroyed(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnUpdateUserAlerts(WPARAM wParam, LPARAM lParam);
-	afx_msg LRESULT OnCheckForIMUpdates(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSendEmailError(WPARAM, LPARAM);
 	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 	virtual void OnUpdateFrameTitle(BOOL bAddToTitle);
-	void DoRunUpdater(CString aCommandLine);
 
 public:
 	CString m_strFrameTitle;
@@ -65,11 +63,8 @@ public:
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
-	afx_msg void OnTimer(UINT nIDEvent);
 
 	void OnUpdateUserName(CCmdUI* pCmdUI);
-	afx_msg void OnHelpCheckforupdates();
-	afx_msg void OnHelpUpdateOptions();
 };
 
 /////////////////////////////////////////////////////////////////////////////

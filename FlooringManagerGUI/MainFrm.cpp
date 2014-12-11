@@ -41,14 +41,11 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWnd)
 	ON_MESSAGE(CGlobals::WM_USER_USER_ALERTS_DLG_DESTROYED, OnUserAlertsDlgDestroyed)
 	ON_MESSAGE(CGlobals::WM_USER_ACTIVE_POS_DLG_DESTROYED, OnActivePOsDlgDestroyed)
 	ON_MESSAGE(CGlobals::WM_ACTIVITY_LIST_DLG_DESTROYED, OnActivityListDlgDestroyed)
-	ON_MESSAGE(CGlobals::WM_CHECK_FOR_IM_UPDATES, OnCheckForIMUpdates)
 	ON_REGISTERED_MESSAGE( wm_UPDATE_USER_ALERTS, OnUpdateUserAlerts)
 	ON_UPDATE_COMMAND_UI(ID_INDICATOR_USERNAME, OnUpdateUserName)	
 	ON_REGISTERED_MESSAGE( wm_SendEmailError, OnSendEmailError)
-	ON_WM_TIMER()
 
-	ON_COMMAND(ID_HELP_CHECKFORUPDATES, &CMainFrame::OnHelpCheckforupdates)
-	ON_COMMAND(ID_HELP_UPDATEOPTIONS, &CMainFrame::OnHelpUpdateOptions)
+
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -226,59 +223,3 @@ void CMainFrame::OnUpdateUserName(CCmdUI* pCmdUI)
 	CString strText = "User: " + pApp->GetCFUserName();
 	pCmdUI->SetText(strText);
 }
-
-void CMainFrame::OnTimer(UINT nIDEvent)
-{
-	KillTimer(TIMER_ID);
-
-	OnCheckForIMUpdates(NULL,NULL);
-
-	CMDIFrameWnd::OnTimer(nIDEvent);
-}
-
-LRESULT CMainFrame::OnCheckForIMUpdates( WPARAM wParam, LPARAM lParam )
-{
-	UNREFERENCED_PARAMETER(wParam);
-	UNREFERENCED_PARAMETER(lParam);
-
-	DoRunUpdater(UPDATER_COMMAND_LINE_SILENT);
-
-	return 0;
-}
-
-void CMainFrame::OnHelpCheckforupdates()
-{	
-	DoRunUpdater(UPDATER_COMMAND_LINE_CHECKNOW);
-}
-
-void CMainFrame::OnHelpUpdateOptions()
-{
-	CString commandLine;
-	commandLine.Format(UPDATER_COMMAND_LINE_OPTIONS, m_hWnd);    
-	DoRunUpdater(commandLine);
-}
-
-void CMainFrame::DoRunUpdater(CString aCommandLine) 
-{
-	TCHAR path[MAX_PATH];
-	::GetModuleFileName(NULL, path, MAX_PATH);
-
-	CString updaterPath(path);
-	int ind = updaterPath.ReverseFind(_T('\\'));
-	if (ind > 0)
-		updaterPath = updaterPath.Left(ind);
-	if (updaterPath[updaterPath.GetLength() - 1] != _T('\\'))
-		updaterPath += _T('\\');
-	updaterPath += UPDATER_NAME;
-
-	STARTUPINFO si;
-	PROCESS_INFORMATION pi;
-
-	ZeroMemory( &si, sizeof(si) );
-	si.cb = sizeof(si);
-	ZeroMemory( &pi, sizeof(pi) );
-
-	::CreateProcess(updaterPath, const_cast<LPSTR>((LPCTSTR)aCommandLine), 
-		NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
-}
-
