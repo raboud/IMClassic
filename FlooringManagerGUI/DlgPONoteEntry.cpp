@@ -28,15 +28,11 @@ CDlgPONoteEntry::CDlgPONoteEntry(CWnd* pParent /*=NULL*/)
 {
 	m_iOrderID = -1;
 	m_iCustomerID = -1;
-	//m_strCustName = "";
 	m_iId = -1 ;
 	m_bNewNote = true;
 	m_strEmailBody = "";
 	m_strPONumber = "";
 	m_strStoreNumber = "";
-	//m_strCustPhone1 = "";
-	//m_strCustPhone2 = "";
-	//m_strCustPhone3 = "";
 	m_bCanSchedule = true;
 	m_bAskToSend = false;
 	m_bSendToExpeditor = false;
@@ -64,9 +60,6 @@ void CDlgPONoteEntry::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PONOTES_NOTESADD, m_editAddNotes);
 	DDX_Control(pDX, IDC_STATIC_ADDNOTES, m_stAddNotes);
 	DDX_Control(pDX, IDC_STATIC_PHONEGROUP, m_stPhoneGroup);
-	//DDX_Control(pDX, IDC_STATIC_PHONEFIELD1, m_stPhoneField1);
-	//DDX_Control(pDX, IDC_STATIC_PHONEFIELD2, m_stPhoneField2);
-	//DDX_Control(pDX, IDC_STATIC_PHONEFIELD3, m_stPhoneField3);
 	DDX_Control(pDX, IDC_PONOTE_SAVEANDEMAIL_BUTTON, m_btnSaveAndEmail);
 	DDX_Control(pDX, IDOK, m_btnOK);
 	DDX_Control(pDX, IDC_SCHEDULE_GROUPBOX, m_stScheduleGroup);
@@ -109,169 +102,29 @@ BOOL CDlgPONoteEntry::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	// assume we are adding a new note - only fields that should be enabled first is NoteType combo and 
-	// the main edit box
-	m_comboNoteType.EnableWindow();
-	m_editNotes.SetReadOnly(FALSE);
-	m_comboSpokeWith.EnableWindow(FALSE);
-	m_editSpokeWithOther.EnableWindow(FALSE) ;
-	m_editNotes.SetLimitText(CGlobals::iMAX_ORDER_NOTES) ;
-	m_editAddNotes.SetReadOnly();
-	m_btnCustCallback.EnableWindow(FALSE);
-	m_btnOK.EnableWindow(FALSE);
-	m_btnSaveAndEmail.EnableWindow(FALSE);
-	m_stScheduleText.ShowWindow(SW_HIDE);
-
-	//m_stPhoneField1.SetFont(&m_fontPhoneNumbers);
-	//m_stPhoneField2.SetFont(&m_fontPhoneNumbers);
-	//m_stPhoneField3.SetFont(&m_fontPhoneNumbers);
-
-	m_editSpokeWithOther.SetLimitText(50);   // no more characters than are allowed in the DB.
-	m_editNotes.SetLimitText(CGlobals::iMAX_ORDER_NOTES);
-	
-	CSetPONotes setNotes(&g_dbFlooring);
-	setNotes.m_strFilter.Format("ID = '%d'", m_iId);
-	setNotes.Open();
+	InitializeControlsForNewNote();	
 
 	CSetOrders setOrders(&g_dbFlooring);
 	setOrders.m_strFilter.Format("OrderID = '%d'", m_iOrderID);
 	setOrders.Open();
 
-	// init customer id if not already done
-	if (m_iCustomerID == -1)
-	{
-		if (!setOrders.IsEOF())
-		{
-			m_iCustomerID = setOrders.m_CustomerID;
-			m_strPONumber = setOrders.m_PurchaseOrderNumber;
-			m_strStoreNumber = CGlobals::StoreNumberFromStoreID(setOrders.m_StoreID);
-		}
-	}
+	InitializeCustomerAndPOFields(setOrders);
 
 	try
 	{
-		// set up title bar of dialog
-		CSetCustomer setCustomer(&g_dbFlooring) ;
-		setCustomer.m_strFilter.Format("CustomerID = '%d'", m_iCustomerID) ;
-		setCustomer.Open() ;
-		
-		CString strTemp;
-		m_strCustomerName.Format("%s, %s", setCustomer.m_LastName, setCustomer.m_FirstName) ;
-		strTemp.Format("Notes - %s -- P.O. %s / %s", m_strCustomerName, m_strStoreNumber, m_strPONumber);
-		SetWindowText(strTemp) ;		
+		InitializeCustomerDetails();
 
-		m_strSiteAddress.Format("%s\r\n%s, %s  %s", setCustomer.m_Address, setCustomer.m_City, setCustomer.m_State, setCustomer.m_ZipCode) ;
-
-		//m_strCustPhone1 = "  Home: " + setCustomer.m_PhoneNumber;
-		//m_strCustPhone2 = "  Work: " + setCustomer.m_WorkNumber;
-		//m_strCustPhone3 = "Mobile: " + setCustomer.m_MobileNumber;
-		
-		m_editPhoneHome.SetMask(_T("(###)###-####")) ;		
-		m_editPhoneHome.SetPromptSymbol(' ');
-		m_editPhoneHome.SetWindowText(setCustomer.m_PhoneNumber);
-		
-		m_editPhoneWork.SetMask(_T("(###)###-#### Ext. #####")) ;
-		m_editPhoneWork.SetPromptSymbol(' ');
-		m_editPhoneWork.SetWindowText(setCustomer.m_WorkNumber);
-		
-		m_editPhoneMobile.SetMask(_T("(###)###-####")) ;
-		m_editPhoneMobile.SetPromptSymbol(' ');
-		m_editPhoneMobile.SetWindowText(setCustomer.m_MobileNumber);
-
-		m_editEmailAddress.SetLimitText(255);
-		m_editEmailAddress.SetWindowText(setCustomer.m_EmailAddress);
-
-		UpdateData(FALSE);
-
-		setCustomer.Close() ;
-
-		//m_stPhoneField1.SetWindowText(m_strCustPhone1);
-		//m_stPhoneField2.SetWindowText(m_strCustPhone2);
-		//m_stPhoneField3.SetWindowText(m_strCustPhone3);
-
-
-		if (setOrders.m_Scheduled)
-		{
-			strTemp.Format("%s %s", setOrders.m_ScheduleStartDate.Format( "%Y/%m/%d" ), (setOrders.m_ScheduledAM) ? "AM" : "PM");
-		}
-		else
-		{
-			strTemp = "NOT SCHEDULED";
-		}
-		m_stCurrentScheduleDate.SetWindowText(strTemp);
+		InitializeScheduleDateField(setOrders);
 
 		// if we are editing an existing note, initialize the fields...
 		if (false == m_bNewNote)
 		{
-			// show all items in the list since we are editing a note
-			m_comboNoteType.PopulateList(true);
-
-			// need to disable the note type dropdown
-			m_comboNoteType.EnableWindow(FALSE);
-			
-			if(!setNotes.IsEOF())
-			{
-				// set Note Type combo box
-				int iNumEntries = m_comboNoteType.GetCount();
-				int iIndex = 0;
-				for (iIndex = 0; iIndex < iNumEntries; iIndex++)
-				{
-					if ((DWORD)setNotes.m_NoteTypeID == m_comboNoteType.GetItemData(iIndex))
-					{
-						m_comboNoteType.SetCurSel(iIndex);
-						break;
-					}
-				}
-
-				m_comboSpokeWith.PopulateList(setNotes.m_NoteTypeID);
-
-				// set SpokeWith combo box
-				iNumEntries = m_comboSpokeWith.GetCount();
-				bool bFound = false;
-				for (iIndex = 0; iIndex < iNumEntries; iIndex++)
-				{
-					if ((DWORD)setNotes.m_SpokeWithID == m_comboSpokeWith.GetItemData(iIndex))
-					{
-						bFound = true;
-						m_comboSpokeWith.SetCurSel(iIndex);
-						m_comboSpokeWith.GetLBText(iIndex, strTemp);
-						if (strTemp.MakeUpper().Find("OTHER") != -1)
-						{
-							m_editSpokeWithOther.SetWindowText(setNotes.m_ContactName);
-						}
-						break;
-					}
-				}
-
-				if (!bFound)
-				{
-					m_comboSpokeWith.SetCurSel(m_comboSpokeWith.FindStringExact(1,"N/A"));
-				}
-
-				//SetSchedulingInfo(setNotes.m_ScheduledDate, setNotes.m_Scheduled, setNotes.m_UnScheduled, setNotes.m_ScheduledAM);
-				EnableScheduleBox(false);
-
-				m_editNotes.SetWindowText(setNotes.m_NoteText);
-				
-				if (setNotes.m_CustomerToCallBack)
-				{
-					m_btnCustCallback.SetCheck(BST_CHECKED);
-				}
-				else
-				{
-					m_btnCustCallback.SetCheck(BST_UNCHECKED);
-				}
-
-				EnableButtons(GetNoteTypeID());
-			}
+			InitializeFieldsForExistingNote();
 		}
 		else
 		{
 			m_comboNoteType.PopulateList(false);
-			if (setOrders.m_Scheduled)
-			{
-				//SetSchedulingInfo(setOrders.m_ScheduleStartDate, TRUE, FALSE, setOrders.m_ScheduledAM);
-			}
+			
 			ShowScheduleBox(false);
 		}
 	}
@@ -282,6 +135,18 @@ BOOL CDlgPONoteEntry::OnInitDialog()
 
 	setOrders.Close();
 
+	ConfigureNoteEditFields();
+
+	ConfigureSchedulingControls();
+
+	m_bDirty = false ;
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+	// EXCEPTION: OCX Property Pages should return FALSE
+}
+
+void CDlgPONoteEntry::ConfigureNoteEditFields() 
+{
 	CFlooringApp* pApp = (CFlooringApp*) AfxGetApp() ;
 	if (pApp)
 	{
@@ -306,7 +171,7 @@ BOOL CDlgPONoteEntry::OnInitDialog()
 				MessageBox("This note is already at maximum size.  No more text can be entered.", "Note!");
 				m_editAddNotes.SetReadOnly();
 			}
-			
+
 			m_editNotes.SetReadOnly();
 
 			CString strTemp = "";
@@ -342,21 +207,6 @@ BOOL CDlgPONoteEntry::OnInitDialog()
 			}
 		}
 	}
-
-	// if there are alerts and we are not allowing scheduling with alerts, then disable the scheduled checkbox
-	// to disallow scheduling
-	if (HasAlerts() && (false == AllowSchedulingWithAlerts()))
-	{
-		m_bCanSchedule = false;
-		ShowScheduleBox(false);
-		m_stScheduleText.SetWindowText("Cannot schedule - PO has alerts!");
-		m_stScheduleText.ShowWindow(SW_SHOW);
-	}
-
-	m_bDirty = false ;
-
-	return TRUE;  // return TRUE unless you set the focus to a control
-	// EXCEPTION: OCX Property Pages should return FALSE
 }
 
 void CDlgPONoteEntry::OnCbnSelchangePonoteComboNotetype()
@@ -367,6 +217,7 @@ void CDlgPONoteEntry::OnCbnSelchangePonoteComboNotetype()
 	EnableSpokeWith(iNoteTypeID);
 	ShowScheduleControlsByNoteType();
 	EnableButtons(iNoteTypeID);
+	ConfigureNoteEditFields();
 }
 
 void CDlgPONoteEntry::EnableSpokeWith(int iNoteTypeID)
@@ -444,46 +295,6 @@ void CDlgPONoteEntry::ShowScheduleControlsByNoteType()
 		}
 	}
 }
-
-//void CDlgPONoteEntry::SetSchedulingInfo(COleDateTime dtScheduledDate, BOOL bScheduled, BOOL bUnscheduled, BOOL bScheduledAM)
-//{
-//	m_dtScheduledDate.SetTime(dtScheduledDate);
-//	
-//	if (bScheduled)
-//	{
-//		m_btnScheduled.SetCheck(BST_CHECKED);
-//		m_dtScheduledDate.ShowWindow(SW_SHOW);
-//		
-//		if (bScheduledAM) 
-//		{
-//			m_btnAM.SetCheck(BST_CHECKED);
-//			m_btnPM.SetCheck(BST_UNCHECKED);
-//		}
-//		else
-//		{
-//			m_btnAM.SetCheck(BST_UNCHECKED);
-//			m_btnPM.SetCheck(BST_CHECKED);
-//		}
-//	}
-//	else if (bUnscheduled)
-//	{
-//		m_btnUnscheduled.SetCheck(BST_CHECKED);
-//		m_btnScheduled.SetCheck(BST_UNCHECKED);
-//		ShowScheduleControls(false);
-//	}
-//	else
-//	{
-//		m_btnUnscheduled.SetCheck(BST_UNCHECKED);
-//		m_btnScheduled.SetCheck(BST_UNCHECKED);
-//		ShowScheduleControls(true);
-//	}
-//
-//	if (bScheduledAM) 
-//	{
-//		m_btnAM.SetCheck(BST_CHECKED);
-//		m_btnPM.SetCheck(BST_UNCHECKED);
-//	}
-//}
 
 void CDlgPONoteEntry::OnOK()
 {
@@ -804,11 +615,11 @@ bool CDlgPONoteEntry::FormatEmailBody()
 
 	ASSERT(m_iId != -1);
 
-	CSetPONotes set(&g_dbFlooring);
-	set.m_strFilter.Format("Id = '%d'", m_iId) ;
-	set.Open() ;
+	CSetPONotes setNote(&g_dbFlooring);
+	setNote.m_strFilter.Format("Id = '%d'", m_iId) ;
+	setNote.Open() ;
 	
-	ASSERT( set.GetRecordCount() == 1 );
+	ASSERT( setNote.GetRecordCount() == 1 );
 	
 	CString strTemp;
 	if (GetNoteTypeID() == iMANAGER_ACTION_ID)
@@ -822,11 +633,11 @@ bool CDlgPONoteEntry::FormatEmailBody()
 	m_strEmailBody += "Customer: " + m_strCustomerName + "\n";
 	strTemp.Format("Store/PO - %s / %s (Internal Order Number = %d)\n", m_strStoreNumber, m_strPONumber, m_iOrderID);
 	m_strEmailBody += strTemp;
-	strTemp.Format("Note Entered: %s\n\n", set.m_DateTimeEntered.Format("%m/%d/%y %H:%M:%S"));
+	strTemp.Format("Note Entered: %s\n\n", setNote.m_DateTimeEntered.Format("%m/%d/%y %H:%M:%S"));
 	m_strEmailBody += strTemp;
 
 	m_strEmailBody += "Comments:\n\n";
-	m_strEmailBody += set.m_NoteText;
+	m_strEmailBody += setNote.m_NoteText;
 
 	return bFormatOK;
 }
@@ -1074,33 +885,16 @@ void CDlgPONoteEntry::OnBnClickedPonoteSaveandemailButton()
 			{
 				CWaitCursor cursor;
 				bSendOK = CGlobals::SendEmail(strTo, strFrom, strPassword, strFrom, strReplyToAddr, strSubject, m_strEmailBody, strError);
-				
-				// DKB Commenting this out because we were having issues with the ODBC connection and multiple threads
-				// 
-				/*SendEmailParams* pParams = new SendEmailParams;
-				pParams->parentWindowHandle = AfxGetApp()->m_pMainWnd->m_hWnd;
-				pParams->strTo = strTo;
-				pParams->strFrom = strFrom;
-				pParams->strPassword = strPassword;
-				pParams->strReplyToAddr = strReplyToAddr;
-				pParams->strSubject = strSubject;
-				pParams->strBody = m_strEmailBody;
-
-				AfxBeginThread(CGlobals::SendEmailWorkerThread, pParams);
-				bSendOK = true;*/
 			}
 
 			if ( bSendOK )
 			{
 				bOK = true;
-				//MessageBox("Email sent successfully!", "Info");
 			}
 			else
 			{
 				if (strError.GetLength() > 0)
 				{
-					//CString strMessage = "";
-					//strMessage.Format("Email could not be sent.  The error was: %s.\r\nContact an administrator for help.", strError);
 					MessageBox(strError, "Error!");
 				}				
 			}
@@ -1167,4 +961,177 @@ void CDlgPONoteEntry::OnEnMobilePhoneChange()
 void CDlgPONoteEntry::OnEnEmailAddressChange()
 {
 	OnChange();
+}
+
+void CDlgPONoteEntry::ConfigureSchedulingControls()
+{
+	// if there are alerts and we are not allowing scheduling with alerts, then disable the scheduled checkbox
+	// to disallow scheduling
+	if (HasAlerts() && (false == AllowSchedulingWithAlerts()))
+	{
+		m_bCanSchedule = false;
+		ShowScheduleBox(false);
+		m_stScheduleText.SetWindowText("Cannot schedule - PO has alerts!");
+		m_stScheduleText.ShowWindow(SW_SHOW);
+	}
+}
+
+void CDlgPONoteEntry::InitializeCustomerDetails()
+{
+	CSetCustomer setCustomer(&g_dbFlooring) ;
+	setCustomer.m_strFilter.Format("CustomerID = '%d'", m_iCustomerID) ;
+	setCustomer.Open() ;
+
+	ConfigureTitleBar(setCustomer);
+	InitializeCustomerContactFields(setCustomer);
+
+	UpdateData(FALSE);
+	setCustomer.Close() ;
+}
+
+void CDlgPONoteEntry::ConfigureTitleBar(CSetCustomer &setCustomer)
+{
+	// set up title bar of dialog	
+	CString strTemp;
+	m_strCustomerName.Format("%s, %s", setCustomer.m_LastName, setCustomer.m_FirstName) ;
+	strTemp.Format("Notes - %s -- P.O. %s / %s", m_strCustomerName, m_strStoreNumber, m_strPONumber);
+	SetWindowText(strTemp) ;
+}
+
+void CDlgPONoteEntry::InitializeCustomerContactFields(CSetCustomer &setCustomer)
+{
+	m_strSiteAddress.Format("%s\r\n%s, %s  %s", setCustomer.m_Address, setCustomer.m_City, setCustomer.m_State, setCustomer.m_ZipCode) ;
+
+	m_editPhoneHome.SetMask(_T("(###)###-####")) ;		
+	m_editPhoneHome.SetPromptSymbol(' ');
+	m_editPhoneHome.SetWindowText(setCustomer.m_PhoneNumber);
+
+	m_editPhoneWork.SetMask(_T("(###)###-#### Ext. #####")) ;
+	m_editPhoneWork.SetPromptSymbol(' ');
+	m_editPhoneWork.SetWindowText(setCustomer.m_WorkNumber);
+
+	m_editPhoneMobile.SetMask(_T("(###)###-####")) ;
+	m_editPhoneMobile.SetPromptSymbol(' ');
+	m_editPhoneMobile.SetWindowText(setCustomer.m_MobileNumber);
+
+	m_editEmailAddress.SetLimitText(255);
+	m_editEmailAddress.SetWindowText(setCustomer.m_EmailAddress);
+}
+
+void CDlgPONoteEntry::InitializeControlsForNewNote()
+{
+	// assume we are adding a new note - only fields that should be enabled first is NoteType combo and 
+	// the main edit box
+	m_comboNoteType.EnableWindow();
+	m_editNotes.SetReadOnly(FALSE);
+	m_comboSpokeWith.EnableWindow(FALSE);
+	m_editSpokeWithOther.EnableWindow(FALSE) ;
+	m_editNotes.SetLimitText(CGlobals::iMAX_ORDER_NOTES) ;
+	m_editAddNotes.SetReadOnly();
+	m_btnCustCallback.EnableWindow(FALSE);
+	m_btnOK.EnableWindow(FALSE);
+	m_btnSaveAndEmail.EnableWindow(FALSE);
+	m_stScheduleText.ShowWindow(SW_HIDE);
+
+	m_editSpokeWithOther.SetLimitText(50);   // no more characters than are allowed in the DB.
+	m_editNotes.SetLimitText(CGlobals::iMAX_ORDER_NOTES);
+}
+
+void CDlgPONoteEntry::InitializeCustomerAndPOFields( CSetOrders &setOrders )
+{
+	// init customer id if not already done
+	if (m_iCustomerID == -1)
+	{
+		if (!setOrders.IsEOF())
+		{
+			m_iCustomerID = setOrders.m_CustomerID;
+			m_strPONumber = setOrders.m_PurchaseOrderNumber;
+			m_strStoreNumber = CGlobals::StoreNumberFromStoreID(setOrders.m_StoreID);
+		}
+	}
+}
+
+void CDlgPONoteEntry::InitializeScheduleDateField( CSetOrders &setOrders )
+{
+	CString strTemp;
+	if (setOrders.m_Scheduled)
+	{
+		strTemp.Format("%s %s", setOrders.m_ScheduleStartDate.Format( "%Y/%m/%d" ), (setOrders.m_ScheduledAM) ? "AM" : "PM");
+	}
+	else
+	{
+		strTemp = "NOT SCHEDULED";
+	}
+	m_stCurrentScheduleDate.SetWindowText(strTemp);
+}
+
+void CDlgPONoteEntry::InitializeFieldsForExistingNote()
+{
+	CSetPONotes setNotes(&g_dbFlooring);
+	setNotes.m_strFilter.Format("ID = '%d'", m_iId);
+	setNotes.Open();
+
+	// show all items in the list since we are editing a note
+	m_comboNoteType.PopulateList(true);
+
+	// need to disable the note type dropdown
+	m_comboNoteType.EnableWindow(FALSE);
+
+	if(!setNotes.IsEOF())
+	{
+		// set Note Type combo box
+		int iNumEntries = m_comboNoteType.GetCount();
+		int iIndex = 0;
+		for (iIndex = 0; iIndex < iNumEntries; iIndex++)
+		{
+			if ((DWORD)setNotes.m_NoteTypeID == m_comboNoteType.GetItemData(iIndex))
+			{
+				m_comboNoteType.SetCurSel(iIndex);
+				break;
+			}
+		}
+
+		m_comboSpokeWith.PopulateList(setNotes.m_NoteTypeID);
+
+		// set SpokeWith combo box
+		iNumEntries = m_comboSpokeWith.GetCount();
+		bool bFound = false;
+		for (iIndex = 0; iIndex < iNumEntries; iIndex++)
+		{
+			if ((DWORD)setNotes.m_SpokeWithID == m_comboSpokeWith.GetItemData(iIndex))
+			{
+				bFound = true;
+				m_comboSpokeWith.SetCurSel(iIndex);
+				CString strTemp;
+				m_comboSpokeWith.GetLBText(iIndex, strTemp);
+				if (strTemp.MakeUpper().Find("OTHER") != -1)
+				{
+					m_editSpokeWithOther.SetWindowText(setNotes.m_ContactName);
+				}
+				break;
+			}
+		}
+
+		if (!bFound)
+		{
+			m_comboSpokeWith.SetCurSel(m_comboSpokeWith.FindStringExact(1,"N/A"));
+		}
+
+		EnableScheduleBox(false);
+
+		m_editNotes.SetWindowText(setNotes.m_NoteText);
+
+		if (setNotes.m_CustomerToCallBack)
+		{
+			m_btnCustCallback.SetCheck(BST_CHECKED);
+		}
+		else
+		{
+			m_btnCustCallback.SetCheck(BST_UNCHECKED);
+		}
+
+		EnableButtons(GetNoteTypeID());
+	}
+
+	setNotes.Close();
 }

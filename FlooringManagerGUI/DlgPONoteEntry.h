@@ -9,6 +9,8 @@
 #include "afxdtctl.h"
 #include "SetPONotes.h"
 #include "CFIMaskedEdit.h"
+#include "SetOrders.h"
+#include "SetCustomer.h"
 
 
 // CDlgPONoteEntry dialog
@@ -71,6 +73,24 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	virtual BOOL OnInitDialog();
+
+	void InitializeFieldsForExistingNote();
+
+	void InitializeScheduleDateField( CSetOrders &setOrders );
+
+	void InitializeCustomerAndPOFields( CSetOrders &setOrders );
+
+	void InitializeControlsForNewNote();
+
+	void InitializeCustomerDetails();
+
+	void InitializeCustomerContactFields(CSetCustomer &setCustomer);
+
+	void ConfigureTitleBar(CSetCustomer &setCustomer);
+
+	void ConfigureSchedulingControls();
+
+	void ConfigureNoteEditFields();
 
 	void SetOrderID(int iOrderID);
 	void SetCustomerID(int iCustomerID);
