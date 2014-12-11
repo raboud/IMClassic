@@ -1263,7 +1263,7 @@ bool CPOPickList::IsMaterialPresent(int iOrderID)
 	bool bPresent = true ;
 	CSetViewOrderSOMerchandiseDetails setSODetails(&g_dbFlooring);
 
-	setSODetails.m_strFilter.Format("(([OrderID] = '%d') AND (Deleted = 0) and (Quantity > 0))", iOrderID);
+	setSODetails.m_strFilter.Format("(([OrderID] = '%d') AND (Deleted = 0) and (Quantity > 0) and [NotNeeded] = 0)", iOrderID);
 	setSODetails.Open();
 	while (!setSODetails.IsEOF())
 	{

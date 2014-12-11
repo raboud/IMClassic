@@ -39,7 +39,8 @@ CSetOrderSOMerchandiseDetails::CSetOrderSOMerchandiseDetails(CDatabase* pdb)
 	m_ReviewedBy = -1;
 	m_ReviewedDate;
 	m_OriginalOrderID = 0;
-	m_nFields = 24;
+	m_NotNeeded = FALSE;
+	m_nFields = 25;
 	m_nDefaultType = dynaset;
 }
 
@@ -86,6 +87,8 @@ void CSetOrderSOMerchandiseDetails::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Long(pFX, _T("[ReviewedByID]"), m_ReviewedBy);
 	RFX_Date(pFX, _T("[ReviewedDate]"), m_ReviewedDate);
 	RFX_Long(pFX, _T("[OriginalOrderID]"), m_OriginalOrderID);
+	RFX_Bool(pFX, _T("[NotNeeded]"), m_NotNeeded);
+	
 
 	RFX_Text(pFX, _T("@@IDENTITY"), m_Identity);
 }

@@ -53,7 +53,8 @@ CSetViewOrderSOMerchandiseDetails::CSetViewOrderSOMerchandiseDetails(CDatabase* 
 	m_OriginalID = 0;
 	m_PreSplitQty = 0.0;
 	m_Reviewed = FALSE;
-	m_nFields = 38;
+	m_NotNeeded = FALSE;
+	m_nFields = 39;
 	m_nDefaultType = dynaset;
 }
 
@@ -115,6 +116,7 @@ void CSetViewOrderSOMerchandiseDetails::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Long(pFX, _T("[OriginalID]"), m_OriginalID) ;
 	RFX_Double(pFX, _T("[PreSplitQty]"), m_PreSplitQty);
 	RFX_Bool(pFX, _T("[Reviewed]"), m_Reviewed);
+	RFX_Bool(pFX, _T("[NotNeeded]"), m_NotNeeded);
 
 }
 /////////////////////////////////////////////////////////////////////////////

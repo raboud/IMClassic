@@ -87,6 +87,8 @@ void CGridSOMerchandise::OnSetup()
 	AddColumn("SO MER LINE NUMBER",                         SO_MER_LINE_NUMBER,		-1);
 	AddColumn("ORIGINAL ID",                                ORIGINAL_ID,			-1);
 	AddColumn("PRESPLIT_QTY",                               PRESPLIT_QTY,			-1);
+	AddColumn("NOT NEEDED",									NOT_NEEDED,             -1);
+	AddColumn("NOT NEEDED",									ORG_NOT_NEEDED,         -1);
 
 	SetTH_NumberRows(1);
 	SetTH_Height(24);
@@ -157,6 +159,14 @@ void CGridSOMerchandise::OnSetup()
 	SetColDefault(REVIEWED, &cell);
 	SetColDefault(ORG_REVIEWED, &cell);
 
+	GetColDefault(NOT_NEEDED, &cell) ;
+	cell.SetCellType( UGCT_CHECKBOX );
+	cell.SetCellTypeEx( UGCT_CHECKBOXCHECKMARK|UGCT_CHECKBOXUSEALIGN );
+	cell.SetAlignment( UG_ALIGNCENTER|UG_ALIGNTOP );
+	cell.SetReadOnly(FALSE) ;
+	SetColDefault(NOT_NEEDED, &cell);
+	SetColDefault(ORG_NOT_NEEDED, &cell);
+
 	HideColumn(ENTRY_METHOD_ID);
 	HideColumn(DELETED);
 
@@ -185,6 +195,7 @@ void CGridSOMerchandise::OnSetup()
 	HideColumn(PRESPLIT_QTY);
 	HideColumn(REVIEWED) ;
 	HideColumn(ORG_REVIEWED) ;
+	HideColumn(ORG_NOT_NEEDED) ;
 }
 
 void CGridSOMerchandise::OnCellChange(int oldcol, int newcol, long oldrow, long newrow)
@@ -494,6 +505,12 @@ void CGridSOMerchandise::UpdateRecordSet()
 					setDetails.m_Deleted = QuickGetBool(DELETED, lRow);
 				}
 
+
+				if (IsColumnDirty(NOT_NEEDED, lRow) || bNew)
+				{
+					setDetails.m_NotNeeded = QuickGetBool(NOT_NEEDED, lRow);
+				}
+
 				bool bReviewedDirty = IsColumnDirty(REVIEWED, lRow);
 				if ( bReviewedDirty || bNew)
 				{
@@ -712,6 +729,9 @@ void CGridSOMerchandise::UpdateGrid()
 
 			QuickSetBool(REVIEWED, lRow, (m_setViewOrderSOMerchandiseDetails.m_Reviewed == TRUE));
 			QuickSetBool(ORG_REVIEWED, lRow, (m_setViewOrderSOMerchandiseDetails.m_Reviewed == TRUE));
+
+			QuickSetBool(NOT_NEEDED, lRow, (m_setViewOrderSOMerchandiseDetails.m_NotNeeded == TRUE));
+			QuickSetBool(ORG_NOT_NEEDED, lRow, (m_setViewOrderSOMerchandiseDetails.m_NotNeeded == TRUE));
 
 			QuickSetNumber(BASIC_LABOR_ID,lRow, m_setViewOrderSOMerchandiseDetails.m_BasicLaborID);
 			QuickSetText(SHORT_DESCRIPTION,lRow, m_setViewOrderSOMerchandiseDetails.m_ShortDescription);
@@ -1411,7 +1431,7 @@ bool CGridSOMerchandise::IsColumnDirty(int iCol, long lRow)
 		break ;
 
 	default:
-		assert(0) ;
+		bDirty = QuickGetBool(NOT_NEEDED, lRow) != QuickGetBool(ORG_NOT_NEEDED, lRow) ; 
 		break ;
 	}
 
@@ -1447,6 +1467,7 @@ bool CGridSOMerchandise::IsRowDirty(long lRow)
 	if (!bDirty) bDirty = IsColumnDirty(ENTRY_METHOD_ID, lRow) ;
 	if (!bDirty) bDirty = IsColumnDirty(DELETED, lRow) ;
 	if (!bDirty) bDirty = IsColumnDirty(REVIEWED, lRow) ;
+	if (!bDirty) bDirty = IsColumnDirty(NOT_NEEDED, lRow) ;
 
 	CString strId ;
 	QuickGetText(ID, lRow, &strId) ;

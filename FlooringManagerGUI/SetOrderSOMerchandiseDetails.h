@@ -44,6 +44,7 @@ public:
 	COleDateTime   m_ReviewedDate ;
 	CString m_Identity;
 	long    m_OriginalOrderID;
+	BOOL	m_NotNeeded;
 
 // Overrides
 	// Wizard generated virtual function overrides

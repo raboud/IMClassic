@@ -58,6 +58,7 @@ public:
 	long    m_OriginalID;
 	double  m_PreSplitQty;
 	BOOL    m_Reviewed;
+	BOOL	m_NotNeeded;
 
 // Overrides
 	// Wizard generated virtual function overrides
