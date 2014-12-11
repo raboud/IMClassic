@@ -18,18 +18,18 @@
 CQuickBooks::CQuickBooks(void)
 {
 //	m_set.m_strSort = "[Installer], [Date]" ;
-	m_set.Open() ;
-	m_fGrandTotal = 0.0 ;
 }
 
 CQuickBooks::~CQuickBooks(void)
 {
-	m_set.Close() ;
+//	m_set.Close() ;
 }
 
 bool CQuickBooks::BuildQuickBooksFile( )
 {
+	m_fGrandTotal = 0.0 ;
 	CWaitCursor wait;
+	m_set.Open() ;
 	bool bSuccess = ValidateDatabase( );
 	wait.Restore();
 
@@ -171,6 +171,8 @@ bool CQuickBooks::BuildQuickBooksFile( )
 
 			m_set.MoveNext() ;
 		}
+
+		m_set.Close() ;
 
 		if (bInstallersOk)
 		{
