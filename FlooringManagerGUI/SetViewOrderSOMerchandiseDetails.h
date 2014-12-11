@@ -26,8 +26,8 @@ public:
 	CString	m_PurchaseOrderNumber;
 	COleDateTime	m_OrderDate;
 	long	m_CustomerID;
-	CString	m_FirstName;
-	CString	m_LastName;
+//	CString	m_FirstName;
+//	CString	m_LastName;
 	CString	m_SONumber;
 	long    m_SOLineNumber;
 	long    m_SOMerLineNumber;

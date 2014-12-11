@@ -21,8 +21,8 @@ CSetViewOrderSOMerchandiseDetails::CSetViewOrderSOMerchandiseDetails(CDatabase* 
 	m_PurchaseOrderNumber = "";
 	m_OrderDate;
 	m_CustomerID = 0;
-	m_FirstName = "";
-	m_LastName = "";
+//	m_FirstName = "";
+//	m_LastName = "";
 	m_SONumber = "";
 	m_SKUNumber = "";
 	m_Description = "";
@@ -54,7 +54,7 @@ CSetViewOrderSOMerchandiseDetails::CSetViewOrderSOMerchandiseDetails(CDatabase* 
 	m_PreSplitQty = 0.0;
 	m_Reviewed = FALSE;
 	m_NotNeeded = FALSE;
-	m_nFields = 39;
+	m_nFields = 37;
 	m_nDefaultType = dynaset;
 }
 
@@ -84,8 +84,8 @@ void CSetViewOrderSOMerchandiseDetails::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[PurchaseOrderNumber]"), m_PurchaseOrderNumber);
 	RFX_Date(pFX, _T("[OrderDate]"), m_OrderDate);
 	RFX_Long(pFX, _T("[CustomerID]"), m_CustomerID);
-	RFX_Text(pFX, _T("[FirstName]"), m_FirstName);
-	RFX_Text(pFX, _T("[LastName]"), m_LastName);
+//	RFX_Text(pFX, _T("[FirstName]"), m_FirstName);
+//	RFX_Text(pFX, _T("[LastName]"), m_LastName);
 	RFX_Text(pFX, _T("[SONumber]"), m_SONumber);
 	RFX_Text(pFX, _T("[SKUNumber]"), m_SKUNumber);
 	RFX_Text(pFX, _T("[Description]"), m_Description, iMAX_DESCRIPTION_LENGTH);
