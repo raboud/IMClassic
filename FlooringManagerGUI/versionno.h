@@ -22,12 +22,12 @@
 #define VINFO_HI_FILEVERSION 			03
 #define VINFO_LO_FILEVERSION 			16
 #define VINFO_HI_FILEBUILD   			00
-#define VINFO_LO_FILEBUILD   			200
+#define VINFO_LO_FILEBUILD   			300
 
 #define VINFO_HI_PRODUCTVERSION 		03
 #define VINFO_LO_PRODUCTVERSION 		16
 #define VINFO_HI_PRODUCTBUILD   		00
-#define VINFO_LO_PRODUCTBUILD   		200
+#define VINFO_LO_PRODUCTBUILD   		300
 
 #define VINFO_STRING_COMMENTS			"Installation Manager Classic\000"
 #define VINFO_STRING_COMPANYNAME		"Custom Installations, Inc.\000"
@@ -43,19 +43,19 @@
 // set version stuff according to debug
 	#ifdef _DEBUG
 		#ifdef _BETA
-			#define VINFO_STRING_FILEVERSION		"03.16 (Debug Beta Build 200)\000"
-			#define VINFO_STRING_PRODUCTVERSION		"03.16 (Debug Beta Build 200)\000"
+			#define VINFO_STRING_FILEVERSION		"03.16 (Debug Beta Build 300)\000"
+			#define VINFO_STRING_PRODUCTVERSION		"03.16 (Debug Beta Build 300)\000"
 		#else
-			#define VINFO_STRING_FILEVERSION		"03.16 (Debug Build 200)\000"
-			#define VINFO_STRING_PRODUCTVERSION		"03.16 (Debug Build 200)\000"
+			#define VINFO_STRING_FILEVERSION		"03.16 (Debug Build 300)\000"
+			#define VINFO_STRING_PRODUCTVERSION		"03.16 (Debug Build 300)\000"
 		#endif
 	#else
 		#ifdef _BETA
-			#define VINFO_STRING_FILEVERSION		"03.16 (Release Beta Build 200)\000"
-			#define VINFO_STRING_PRODUCTVERSION		"03.16 (Release Beta Build 200)\000"
+			#define VINFO_STRING_FILEVERSION		"03.16 (Release Beta Build 300)\000"
+			#define VINFO_STRING_PRODUCTVERSION		"03.16 (Release Beta Build 300)\000"
 		#else
-			#define VINFO_STRING_FILEVERSION		"03.16 (Release Build 200)\000"
-			#define VINFO_STRING_PRODUCTVERSION		"03.16 (Release Build 200)\000" 
+			#define VINFO_STRING_FILEVERSION		"03.16 (Release Build 300)\000"
+			#define VINFO_STRING_PRODUCTVERSION		"03.16 (Release Build 300)\000" 
 		#endif
 	#endif
 #endif
