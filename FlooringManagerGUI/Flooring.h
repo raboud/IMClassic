@@ -12,7 +12,6 @@
 
 #include <afxinet.h>
 #include "Permissions.h"
-#include "SetVersion.h"
 #include "resource.h"       // main symbols
 
 #include "DlgUserAlerts.h"
