@@ -7,12 +7,12 @@
 // set generic version info
 #define VINFO_HI_FILEVERSION 			03
 #define VINFO_LO_FILEVERSION 			41
-#define VINFO_HI_FILEBUILD   			00
+#define VINFO_HI_FILEBUILD   			01
 #define VINFO_LO_FILEBUILD   			00
 
 #define VINFO_HI_PRODUCTVERSION 		03
 #define VINFO_LO_PRODUCTVERSION 		41
-#define VINFO_HI_PRODUCTBUILD   		00
+#define VINFO_HI_PRODUCTBUILD   		01
 #define VINFO_LO_PRODUCTBUILD   		00
 
 #define VINFO_STRING_COMMENTS			"Installation Manager Classic\000"

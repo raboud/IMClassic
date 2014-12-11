@@ -439,7 +439,7 @@ bool CDlgPo::SaveData()
 						int nHour = atoi(str.Mid(11,2)) ;
 						int nMin = atoi(str.Mid(14,2)) ;
 						int nSec = atoi(str.Mid(17,2)) ;
-						setOrderDiagrams.m_DiagramDateTime = COleDateTime(nYear , nMonth, nDay, nHour, nMin, nSec );
+						setOrderDiagrams.m_DiagramDateTime.ParseDateTime(str);
 					}
 					else
 					{

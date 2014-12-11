@@ -179,8 +179,11 @@ void CGridSchedule::SetScheduled(long lCustomerId, long lOrderId, COleDateTime d
 	setMT.Close();
 
 	COleDateTime timeScheduleDate;
-	timeScheduleDate.ParseDateTime(m_setOrders.m_ScheduleStartDate);
-	m_setOrders.m_strFilter.Format("(CustomerID = '%d' and Scheduled = '0' and Cancelled = '0' and Deleted = '0') or (CustomerID = '%d' and Billed = '0' and Scheduled = '1' and Cancelled = '0' and Deleted = '0' and ScheduleStartDate = '%s') or (OrderId = '%d')", m_lCustomerId, m_lCustomerId, timeScheduleDate.Format("%m/%d/%Y"), m_lOrderId) ;
+	if (m_setOrders.m_Scheduled == TRUE)
+	{
+		timeScheduleDate.ParseDateTime(m_setOrders.m_ScheduleStartDate);
+	}
+	m_setOrders.m_strFilter.Format("(CustomerID = '%d' and Scheduled = '0' and Cancelled = '0' and Deleted = '0') or (CustomerID = '%d' and Billed = '0' and Scheduled = '1' and Cancelled = '0' and Deleted = '0' and ScheduleStartDate = '%s') or (OrderId = '%d')", m_lCustomerId, m_lCustomerId, timeScheduleDate.Format("%Y-%m-%d"), m_lOrderId) ;
 	m_setOrders.Requery() ;
 	Fill() ;
 }
