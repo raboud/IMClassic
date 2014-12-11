@@ -1,0 +1,1 @@
+c:\dev\ATL\source\SProxy\Release\sproxy.exe /wsdl /out:C:\Code\CFI\FlooringManager\FlooringManagerGUI\SpnWebService.h C:\Code\CFI\FlooringManager\FlooringManagerGUI\SpnWebService\SpnWebService.wsdl
