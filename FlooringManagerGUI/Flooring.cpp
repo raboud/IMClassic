@@ -151,11 +151,9 @@ BEGIN_MESSAGE_MAP(CFlooringApp, CWinApp)
 	ON_UPDATE_COMMAND_UI(ID_PAYROLL_MESSAGES, OnUpdatePayrollMessages)
 	ON_COMMAND(ID_SUB_HELPERS, OnSubHelpers)
 	ON_UPDATE_COMMAND_UI(ID_SUB_HELPERS, OnUpdateSubHelpers)
-	ON_COMMAND(ID_REPORTS_FINANCIAL_MATERIAL_PRICING, OnFinancialMaterialpricing)
 	ON_COMMAND(ID_MAINTENANCE_SPNDISCREPANCIES, OnMaintenanceSpndiscrepancies)
 	ON_COMMAND(ID_MAINTENANCE_UNITTESTS, OnMaintenanceUnitTests)
 	ON_UPDATE_COMMAND_UI(ID_MAINTENANCE_UNITTESTS, OnUpdateMaintenanceUnitTests)
-	ON_UPDATE_COMMAND_UI(ID_REPORTS_FINANCIAL_MATERIAL_PRICING, OnUpdateReportsFinancialMaterialPricing)
 	ON_UPDATE_COMMAND_UI(ID_MAINTENANCE_SPNDISCREPANCIES, OnUpdateMaintenanceSpndiscrepancies)
 	ON_COMMAND(ID_VIEW_USERALERTS, OnViewUseralerts)
 	ON_COMMAND(ID_WORKMANS_COMP_BY_DATE, OnWorkmansCompByDate)
@@ -1251,11 +1249,6 @@ void CFlooringApp::OnSubHelpers()
 	ReportHelper::HelperAssignments(Mode::View);
 }
 
-void CFlooringApp::OnFinancialMaterialpricing()
-{
-	ReportHelper::Pricing(Mode::View);
-}
-
 void CFlooringApp::OnMaintenanceSpndiscrepancies()
 {
 	CDlgDiscrepancies dlg;
@@ -1277,11 +1270,6 @@ void CFlooringApp::OnMaintenanceUnitTests()
 void CFlooringApp::OnUpdateMaintenanceUnitTests(CCmdUI *pCmdUI)
 {
 	pCmdUI->Enable(m_pperms->HasPermission("CanRunUnitTests"));
-}
-
-void CFlooringApp::OnUpdateReportsFinancialMaterialPricing(CCmdUI *pCmdUI)
-{
-	pCmdUI->Enable(m_pperms->HasPermission("ViewReportMaterialPricing"));	
 }
 
 void CFlooringApp::OnUpdateMaintenanceSpndiscrepancies(CCmdUI *pCmdUI)

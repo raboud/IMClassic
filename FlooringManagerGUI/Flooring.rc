@@ -1957,7 +1957,6 @@ BEGIN
             MENUITEM "Open &Invoice Requests",      32813,MFT_STRING,MFS_ENABLED
             MENUITEM "P&ending Invoices",           32790,MFT_STRING,MFS_ENABLED
             MENUITEM "Wor&k Summary By Week",       175,MFT_STRING,MFS_ENABLED
-            MENUITEM "Material Pricing",            32850,MFT_STRING,MFS_ENABLED
         END
     END
     POPUP "&Billing",                       65535,MFT_STRING,MFS_ENABLED

@@ -206,14 +206,11 @@ public:
 	afx_msg void OnPayrollMessages();
 	afx_msg void OnUpdatePayrollMessages(CCmdUI *pCmdUI);
 	afx_msg void OnSubHelpers();
-	afx_msg void OnFinancialMaterialpricing();
 	afx_msg void OnMaintenanceSpndiscrepancies();
 	afx_msg void OnMaintenanceUnitTests();
 	afx_msg void OnUpdateMaintenanceUnitTests(CCmdUI *pCmdUI);
-	afx_msg void OnUpdateReportsFinancialMaterialPricing(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateMaintenanceSpndiscrepancies(CCmdUI *pCmdUI);
-	afx_msg void OnViewUseralerts();
-	
+	afx_msg void OnViewUseralerts();	
 	afx_msg void OnWorkmansCompByDate();
 	afx_msg void OnLiabilityByDate();
 	afx_msg void OnUpdateWorkmansCompByDate(CCmdUI *pCmdUI);
