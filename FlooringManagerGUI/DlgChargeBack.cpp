@@ -29,7 +29,7 @@ CDlgChargeBack::CDlgChargeBack(CWnd* pParent /*=NULL*/, long lCBId /* =-1*/)
 		m_setCB.AddNew() ;
 		m_setCB.m_ApprovalNumber = 0 ;
 		m_setCB.m_Approved = FALSE ;
-		m_setCB.m_IssueDate = COleDateTime(COleDateTime::GetCurrentTime().GetYear(), COleDateTime::GetCurrentTime().GetMonth(), COleDateTime::GetCurrentTime().GetDay(), 0, 0, 0) ;
+		m_setCB.m_IssueDate = COleDateTime::GetCurrentTime().Format("%Y-%m-%d");
 		m_bNew = true ;
 	}
 	else

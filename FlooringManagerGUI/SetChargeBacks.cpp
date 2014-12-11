@@ -38,7 +38,7 @@ CSetChargeBacks::CSetChargeBacks(CDatabase* pdb)
 //	m_MarketID = 0;
 	m_CostAdjustment = FALSE ;
 	m_Approved = FALSE ;
-	m_IssueDate = COleDateTime(CGlobals::GetCurrentSystemTime());
+	m_IssueDate = CGlobals::GetCurrentSystemTime().Format("%Y - %m - %d");
 //	m_CheckDate = COleDateTime(CGlobals::GetCurrentSystemTime());
 	m_OrderID = 0;
 	m_ApprovalNumber = 0 ;
@@ -68,7 +68,7 @@ void CSetChargeBacks::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[Number]"), m_Number);
 	RFX_Text(pFX, _T("[Name]"), m_Name);
 //	RFX_Date(pFX, _T("[CheckDate]"), m_CheckDate);
-	RFX_Date(pFX, _T("[IssueDate]"), m_IssueDate);
+	RFX_Text(pFX, _T("[IssueDate]"), m_IssueDate);
 	RFX_Text(pFX, _T("[OriginalPO]"), m_OriginalPO);
 	//}}AFX_FIELD_MAP
 	RFX_Text(pFX, _T("[Amount]"), m_Amount, 255, SQL_DECIMAL, 2);

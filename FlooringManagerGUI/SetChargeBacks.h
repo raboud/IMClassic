@@ -23,7 +23,7 @@ public:
 	CString	m_Number;
 	CString	m_Name;
 	CString	m_Reason;
-	COleDateTime m_IssueDate;
+	CString m_IssueDate;
 	CString	m_OriginalPO;
 	long    m_OrderID ;
 	BOOL    m_CostAdjustment;

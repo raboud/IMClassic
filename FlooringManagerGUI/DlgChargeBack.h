@@ -61,7 +61,7 @@ protected:
 	CString			m_OriginalNumber;
 	CString			m_OriginalName;
 	CString			m_OriginalReason;
-	COleDateTime	m_OriginalIssueDate;
+	CString			m_OriginalIssueDate;
 	CString			m_OriginalOriginalPO;
 	CString			m_OriginalStoreNumber;
 	long			m_OriginalOrderID ;
