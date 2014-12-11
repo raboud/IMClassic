@@ -178,8 +178,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Reference Include="CFI.InstallationManager.Reports, Version=1.0.4489.40249, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\InstallationManagerScrum\InstallationManager.Reports\bin\x86\Debug\CFI.InstallationManager.Reports.dll</HintPath>
+    <Reference Include="CFI.InstallationManager.Reports, Version=1.0.4506.23206, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\InstallationManager\InstallationManagerApp\bin\x86\Release\CFI.InstallationManager.Reports.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>

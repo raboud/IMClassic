@@ -13,16 +13,30 @@ Global
 		SccLocalPath1 = FlooringManagerGUI
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		DanDebug|Any CPU = DanDebug|Any CPU
+		DanDebug|Mixed Platforms = DanDebug|Mixed Platforms
+		DanDebug|Win32 = DanDebug|Win32
+		DanDebug|x86 = DanDebug|x86
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
 		Debug|x86 = Debug|x86
+		ProductionRelease|Any CPU = ProductionRelease|Any CPU
+		ProductionRelease|Mixed Platforms = ProductionRelease|Mixed Platforms
+		ProductionRelease|Win32 = ProductionRelease|Win32
+		ProductionRelease|x86 = ProductionRelease|x86
 		Release|Any CPU = Release|Any CPU
 		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|Win32 = Release|Win32
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.DanDebug|Any CPU.ActiveCfg = Debug|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.DanDebug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.DanDebug|Mixed Platforms.Build.0 = Debug|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.DanDebug|Win32.ActiveCfg = Debug|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.DanDebug|Win32.Build.0 = Debug|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.DanDebug|x86.ActiveCfg = Debug|Win32
 		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.Debug|Any CPU.Build.0 = Debug|Win32
 		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
@@ -31,6 +45,12 @@ Global
 		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.Debug|Win32.Build.0 = Debug|Win32
 		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.Debug|x86.ActiveCfg = Debug|Win32
 		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.Debug|x86.Build.0 = Debug|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.ProductionRelease|Any CPU.ActiveCfg = Release|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.ProductionRelease|Mixed Platforms.ActiveCfg = Release|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.ProductionRelease|Mixed Platforms.Build.0 = Release|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.ProductionRelease|Win32.ActiveCfg = Release|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.ProductionRelease|Win32.Build.0 = Release|Win32
+		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.ProductionRelease|x86.ActiveCfg = Release|Win32
 		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.Release|Any CPU.ActiveCfg = Release|Win32
 		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.Release|Any CPU.Build.0 = Release|Win32
 		{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}.Release|Mixed Platforms.ActiveCfg = Release|Win32

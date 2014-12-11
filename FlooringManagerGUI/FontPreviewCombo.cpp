@@ -53,7 +53,8 @@ CFontPreviewCombo::CFontPreviewCombo()
 	m_iFontHeight = 16;
 	m_iMaxNameWidth = 0;
    m_iMaxSampleWidth = 0;
-	m_style = NAME_THEN_SAMPLE;
+	//m_style = NAME_THEN_SAMPLE;
+   m_style = NAME_ONLY;
 	m_csSample = "abcdeABCDE";
 	m_clrSample = GetSysColor(COLOR_WINDOWTEXT);
 	m_clrSample = RGB(60,0,0);
@@ -291,12 +292,13 @@ void CFontPreviewCombo::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct)
 
 		// measure sample in cur font
 		hf = (HFONT)dc.SelectObject(cf);
-      if (hf)
-      {
-		   sz = dc.GetTextExtent(m_csSample);
-		   m_iMaxSampleWidth = max(m_iMaxSampleWidth, sz.cx);
-		   dc.SelectObject(hf);
-      }
+		
+		if (hf)
+		{
+			sz = dc.GetTextExtent(m_csSample);
+			m_iMaxSampleWidth = max(m_iMaxSampleWidth, sz.cx);
+			dc.SelectObject(hf);
+		}
 	}
 
 	lpMeasureItemStruct->itemHeight = lf.lfHeight + 4;
