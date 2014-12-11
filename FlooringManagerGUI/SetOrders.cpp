@@ -87,8 +87,8 @@ void CSetOrders::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[OriginalPO]"), m_OriginalPO) ;
 	RFX_Text(pFX, _T("[CustomerOrderNumber]"), m_CustOrderNo) ;
 	RFX_Text(pFX, _T("[Notes]"), m_Notes, CGlobals::iMAX_ORDER_NOTES);
-	RFX_Date(pFX, _T("[ScheduleStartDate]"), m_ScheduleStartDate);
-	RFX_Date(pFX, _T("[ScheduleEndDate]"), m_ScheduleEndDate);
+	RFX_Text(pFX, _T("[ScheduleStartDate]"), m_ScheduleStartDate);
+	RFX_Text(pFX, _T("[ScheduleEndDate]"), m_ScheduleEndDate);
 	RFX_Date(pFX, _T("[BilledDate]"), m_BilledDate);
 	RFX_Bool(pFX, _T("[Scheduled]"), m_Scheduled);
 	RFX_Bool(pFX, _T("[Billed]"), m_Billed);

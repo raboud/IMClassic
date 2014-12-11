@@ -1105,7 +1105,7 @@ void CDlgPONoteEntry::InitializeScheduleDateField( CSetOrders &setOrders )
 	CString strTemp;
 	if (setOrders.m_Scheduled)
 	{
-		strTemp.Format("%s %s", setOrders.m_ScheduleStartDate.Format( "%Y/%m/%d" ), (setOrders.m_ScheduledAM) ? "AM" : "PM");
+		strTemp.Format("%s %s", setOrders.m_ScheduleStartDate, (setOrders.m_ScheduledAM) ? "AM" : "PM");
 	}
 	else
 	{

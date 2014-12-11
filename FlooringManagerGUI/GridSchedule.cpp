@@ -83,7 +83,7 @@ void CGridSchedule::Update()
 
 		BOOL bScheduling = QuickGetBool(SCHEDULE, lRow) ;
 		//bool bScheduleDateChanged = ((m_setOrders.m_ScheduleStartDate != m_dateScheduled) && (m_dateScheduled.GetTime() != 0));
-		bool bScheduleDateChanged = (m_setOrders.m_ScheduleStartDate != m_dateScheduled);
+		bool bScheduleDateChanged = (m_setOrders.m_ScheduleStartDate != m_dateScheduled.Format());
 		bool bAMPMChanged = ((m_setOrders.m_ScheduledAM != (m_bAM == true)) && m_bSchedule);
 
 		// Are we changing the schedule date/time, or are we unscheduling a previously scheduled job?
@@ -115,8 +115,8 @@ void CGridSchedule::Update()
 			if (bScheduling && m_bSchedule)
 			{
 				m_setOrders.m_ScheduledAM = m_bAM ;
-				m_setOrders.m_ScheduleStartDate = m_dateScheduled ;
-				m_setOrders.m_ScheduleEndDate = m_dateScheduledEnd;
+				m_setOrders.m_ScheduleStartDate = m_dateScheduled.Format("%Y-%m-%d") ;
+				m_setOrders.m_ScheduleEndDate = m_dateScheduledEnd.Format("%Y-%m-%d");
 			}
 		}
 
@@ -128,8 +128,8 @@ void CGridSchedule::Update()
 				COleDateTime time = CGlobals::GetCurrentSystemTime();
 				COleDateTimeSpan ts = COleDateTimeSpan(30, 0, 0, 0);
 				time += ts;
-				m_setOrders.m_ScheduleStartDate = time;
-				m_setOrders.m_ScheduleEndDate = time;
+				m_setOrders.m_ScheduleStartDate = time.Format("%Y-%m-%d");
+				m_setOrders.m_ScheduleEndDate = time.Format("%Y-%m-%d");
 			}
 		}
 		
@@ -154,8 +154,8 @@ void CGridSchedule::SetUnscheduled(long lCustomerId, long lOrderId)
 	setMT.Open();
 	m_bIsMeasure = (setMT.m_HDType == "M");
 	setMT.Close();
-	m_dateScheduled = m_setOrders.m_ScheduleStartDate;
-	m_setOrders.m_strFilter.Format("CustomerID = '%d' and Scheduled = '1' and ScheduleStartDate = '%s' and Cancelled = '0' and Deleted = '0'", m_lCustomerId, m_setOrders.m_ScheduleStartDate.Format("%m/%d/%Y")) ;
+	m_dateScheduled.ParseDateTime(m_setOrders.m_ScheduleStartDate);
+	m_setOrders.m_strFilter.Format("CustomerID = '%d' and Scheduled = '1' and ScheduleStartDate = '%s' and Cancelled = '0' and Deleted = '0'", m_lCustomerId, m_setOrders.m_ScheduleStartDate) ;
 	m_setOrders.Requery() ;
 	Fill() ;
 }
@@ -178,7 +178,8 @@ void CGridSchedule::SetScheduled(long lCustomerId, long lOrderId, COleDateTime d
 	m_bIsMeasure = (setMT.m_HDType == "M");
 	setMT.Close();
 
-	COleDateTime timeScheduleDate = m_setOrders.m_ScheduleStartDate;
+	COleDateTime timeScheduleDate;
+	timeScheduleDate.ParseDateTime(m_setOrders.m_ScheduleStartDate);
 	m_setOrders.m_strFilter.Format("(CustomerID = '%d' and Scheduled = '0' and Cancelled = '0' and Deleted = '0') or (CustomerID = '%d' and Billed = '0' and Scheduled = '1' and Cancelled = '0' and Deleted = '0' and ScheduleStartDate = '%s') or (OrderId = '%d')", m_lCustomerId, m_lCustomerId, timeScheduleDate.Format("%m/%d/%Y"), m_lOrderId) ;
 	m_setOrders.Requery() ;
 	Fill() ;

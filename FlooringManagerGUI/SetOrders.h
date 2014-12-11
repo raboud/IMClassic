@@ -10,6 +10,9 @@
 // CSetOrders recordset
 class CSetOrders : public CRecordset
 {
+private:
+	TIMESTAMP_STRUCT	m_ScheduleStartDate2;
+	TIMESTAMP_STRUCT	m_ScheduleEndDate2;
 public:
 	CSetOrders(CDatabase* pDatabase = NULL);
 	DECLARE_DYNAMIC(CSetOrders)
@@ -23,8 +26,8 @@ public:
 	CString			m_OriginalPO;
 	CString			m_CustOrderNo;
 	CString			m_Notes;
-	COleDateTime	m_ScheduleStartDate;
-	COleDateTime	m_ScheduleEndDate;
+	CString			m_ScheduleStartDate;
+	CString			m_ScheduleEndDate;
 	COleDateTime	m_BilledDate;
 	BOOL			m_Scheduled;
 	BOOL			m_Billed;

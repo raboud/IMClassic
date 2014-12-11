@@ -326,7 +326,7 @@ bool CDlgPo::SaveData()
 			// list...
 			if (m_listPOs.GetCount() == 0)
 			{
-				setOrders.m_strFilter.Format("PurchaseOrderNumber = '%s' AND StoreID = %d AND EnteredByID = %d and DateEntered = '%s'", m_strPONumber, m_lStoreId, CGlobals::GetEmployeeID(), current.Format("%m/%d/%y %H:%M:%S") );
+				setOrders.m_strFilter.Format("PurchaseOrderNumber = '%s' AND StoreID = %d AND EnteredByID = %d and DateEntered = '%s'", m_strPONumber, m_lStoreId, CGlobals::GetEmployeeID(), current.Format("%Y-%m-%d %H:%M:%S") );
 				setOrders.Requery();
 				while (!setOrders.IsEOF())
 				{
@@ -809,8 +809,8 @@ void CDlgPo::OnKillfocusDrawingNumber()
 					{
 						if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramDateTime))
 						{
-							CString strDrawingDateString = setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%Y %H:%M:%S");
-							CString strDrawingDateStringOld = setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%Y %H:%M");
+							CString strDrawingDateString = setOrderDiagrams.m_DiagramDateTime.Format("%Y-%m-%d %H:%M:%S");
+							CString strDrawingDateStringOld = setOrderDiagrams.m_DiagramDateTime.Format("%Y-%m-%d %H:%M");
 							if (m_comboDrawingTime.GetCount() > 0)
 							{
 								if (m_comboDrawingTime.FindStringExact(-1, strDrawingDateString) != CB_ERR)
@@ -1021,7 +1021,7 @@ void CDlgPo::OnKillfocusDrawingNumber()
 				{
 					if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramDateTime))
 					{
-						m_comboDrawingTime.AddString(setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%Y %H:%M:%S")) ;
+						m_comboDrawingTime.AddString(setOrderDiagrams.m_DiagramDateTime.Format("%Y-%m-%d %H:%M:%S")) ;
 						m_comboDrawingTime.SetCurSel(0) ;
 					}
 				}
@@ -1550,7 +1550,7 @@ void CDlgPo::InitForConsolidatedView()
 		// Set Scheduled Status
 		if(setOrders.m_Scheduled)
 		{
-			strTemp.Format("PO %s scheduled %s - ", setOrders.m_PurchaseOrderNumber, setOrders.m_ScheduleStartDate.Format("%m/%d/%y")) ;
+			strTemp.Format("PO %s scheduled %s - ", setOrders.m_PurchaseOrderNumber, setOrders.m_ScheduleStartDate) ;
 			if (setOrders.m_ScheduledAM)
 			{
 				strTemp += "AM" ;
@@ -1573,11 +1573,11 @@ void CDlgPo::InitForConsolidatedView()
 			double fAmount = atof(setOrders.m_BilledAmount) ;
 			if (this->m_bConsolidatedView)
 			{
-				strTemp.Format("PO %s Billed    %s - $%.2f", setOrders.m_PurchaseOrderNumber, setOrders.m_BilledDate.Format("%m/%d/%y"), fAmount) ;
+				strTemp.Format("PO %s Billed    %s - $%.2f", setOrders.m_PurchaseOrderNumber, setOrders.m_BilledDate.Format("%Y-%m-%d"), fAmount) ;
 			}
 			else
 			{
-				strTemp.Format("Billed    %s - $%.2f", setOrders.m_BilledDate.Format("%m/%d/%y"), fAmount) ;
+				strTemp.Format("Billed    %s - $%.2f", setOrders.m_BilledDate.Format("%Y-%m-%d"), fAmount) ;
 			}
 		}
 		else
@@ -1607,7 +1607,7 @@ void CDlgPo::InitForConsolidatedView()
 		{
 			if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramDateTime))
 			{
-				m_comboDrawingTime.AddString(setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%Y %H:%M:%S")) ;
+				m_comboDrawingTime.AddString(setOrderDiagrams.m_DiagramDateTime.Format("%Y-%m-%d %H:%M:%S")) ;
 				m_comboDrawingTime.SetCurSel(0) ;
 				m_comboDrawingTime.EnableWindow(FALSE) ;
 				m_editDrawing.EnableWindow(FALSE) ;
@@ -1645,7 +1645,7 @@ void CDlgPo::InitForConsolidatedView()
 			while (!setPayments.IsEOF())
 			{
 				CString strCheck ;
-				strCheck.Format("P.O. %s %s - CK# %7s - %s\r\n", setOrders.m_PurchaseOrderNumber, setPayments.m_CheckDate.Format("%m/%d/%Y"), setPayments.m_CheckNumber, setPayments.m_Amount) ;
+				strCheck.Format("P.O. %s %s - CK# %7s - %s\r\n", setOrders.m_PurchaseOrderNumber, setPayments.m_CheckDate.Format("%Y-%m-%d"), setPayments.m_CheckNumber, setPayments.m_Amount) ;
 				strCheckInfo += strCheck;
 				setPayments.MoveNext() ;
 			}
@@ -1719,7 +1719,8 @@ void CDlgPo::InitNormal()
 		CString strBillingInfo = "";
 		CString strNotes = "";
 		CString strTemp;
-		COleDateTime timeScheduled = setOrders.m_ScheduleStartDate;
+		COleDateTime timeScheduled;
+		timeScheduled.ParseDateTime(setOrders.m_ScheduleStartDate);
 
 		// init the Order date 
 		m_dateOrder.SetTime(setOrders.m_OrderDate) ;
@@ -1730,7 +1731,7 @@ void CDlgPo::InitNormal()
 		// Set Scheduled Status
 		if(setOrders.m_Scheduled)
 		{
-			strScheduledInfo.Format("Scheduled %s - ", setOrders.m_ScheduleStartDate.Format("%m/%d/%y")) ;
+			strScheduledInfo.Format("Scheduled %s - ", setOrders.m_ScheduleStartDate) ;
 			if (setOrders.m_ScheduledAM)
 			{
 				strScheduledInfo += "AM" ;
@@ -1741,7 +1742,7 @@ void CDlgPo::InitNormal()
 			}
 
 			// update schedule date for grid
-			m_gridLabor.SetPOScheduleDate( setOrders.m_ScheduleStartDate );
+			m_gridLabor.SetPOScheduleDate( timeScheduled );
 		}
 		else
 		{
@@ -1768,7 +1769,7 @@ void CDlgPo::InitNormal()
 			while (!setPayments.IsEOF())
 			{
 				CString strCheck ;
-				strCheck.Format("%s - CK# %7s - %s", setPayments.m_CheckDate.Format("%m/%d/%Y"), setPayments.m_CheckNumber, setPayments.m_Amount) ;
+				strCheck.Format("%s - CK# %7s - %s", setPayments.m_CheckDate.Format("%Y-%m-%d"), setPayments.m_CheckNumber, setPayments.m_Amount) ;
 				m_listCheck.AddString(strCheck) ;
 				setPayments.MoveNext() ;
 			}
@@ -1782,12 +1783,12 @@ void CDlgPo::InitNormal()
 			double fAmount = atof(setOrders.m_BilledAmount) ;
 			if (m_bConsolidatedView)
 			{
-				strTemp.Format("PO %s Billed    %s - $%.2f", setOrders.m_PurchaseOrderNumber, setOrders.m_BilledDate.Format("%m/%d/%y"), fAmount) ;
+				strTemp.Format("PO %s Billed    %s - $%.2f", setOrders.m_PurchaseOrderNumber, setOrders.m_BilledDate.Format("%Y-%m-%d"), fAmount) ;
                 strBillingInfo += strTemp + "\n";
 			}
 			else
 			{
-				strBillingInfo.Format("Billed    %s - $%.2f", setOrders.m_BilledDate.Format("%m/%d/%y"), fAmount) ;
+				strBillingInfo.Format("Billed    %s - $%.2f", setOrders.m_BilledDate.Format("%Y-%m-%d"), fAmount) ;
 			}
 		}
 		else
@@ -1817,7 +1818,7 @@ void CDlgPo::InitNormal()
 
 			if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramDateTime))
 			{
-				m_comboDrawingTime.AddString(setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%Y %H:%M:%S")) ;
+				m_comboDrawingTime.AddString(setOrderDiagrams.m_DiagramDateTime.Format("%Y-%m-%d %H:%M:%S")) ;
 				m_comboDrawingTime.SetCurSel(0) ;
 				m_comboDrawingTime.EnableWindow(FALSE) ;
 				m_editDrawing.EnableWindow(FALSE) ;
@@ -2292,7 +2293,7 @@ void CDlgPo::CloseCancelActivities( int iOrderID)
 {
 	try
 	{
-		CString strDateTime = CGlobals::GetCurrentSystemTime().Format("%m/%d/%Y %H:%M:%S");
+		CString strDateTime = CGlobals::GetCurrentSystemTime().Format("%Y-%m-%d %H:%M:%S");
 		CString strSQL;
 		strSQL.Format("UPDATE ActivityList SET ClosedByID = %d, ClosedDate = '%s' WHERE OrderID = %d AND ActivityTypeID = %d AND ClosedByID IS NULL", CGlobals::GetEmployeeID(), strDateTime, iOrderID, CGlobals::ACTIVITY_CANCELLED_PO_RECEIVED);
 		g_dbFlooring.ExecuteSQL(strSQL);
@@ -2309,7 +2310,7 @@ void CDlgPo::CloseChangeActivities( int iOrderID)
 {
 	try
 	{
-		CString strDateTime = CGlobals::GetCurrentSystemTime().Format("%m/%d/%Y %H:%M:%S");
+		CString strDateTime = CGlobals::GetCurrentSystemTime().Format("%Y-%m-%d %H:%M:%S");
 		CString strSQL;
 		strSQL.Format("UPDATE ActivityList SET ClosedByID = %d, ClosedDate = '%s' WHERE OrderID = %d AND ActivityTypeID = %d AND ClosedByID IS NULL", CGlobals::GetEmployeeID(), strDateTime, iOrderID, CGlobals::ACTIVITY_CHANGED_PO_RECEIVED);
 		g_dbFlooring.ExecuteSQL(strSQL);
