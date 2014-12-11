@@ -893,7 +893,7 @@ CString CGlobals::InitDefaultContext()
 {
 	Singleton::Connection = DataConnection::Create("InstallationManager");
 	CString temp(Singleton::Connection->Context->ODBCConnestionString);
-	ReportHelper::Connection = Singleton::Connection->Clone();
+	ReportHelper::Connection = Singleton::Connection;
 	return temp;
 }
 
