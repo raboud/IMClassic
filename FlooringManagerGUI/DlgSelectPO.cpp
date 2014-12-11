@@ -45,7 +45,7 @@ void CDlgSelectPO::FillPOCombo(void)
 	m_comboPO.ResetContent();
 	CSetOrderAndCustomer setOrders(&g_dbFlooring);
 
-	setOrders.m_strFilter.Format("[OrderID] <> %d AND [CustomerID] = %d AND [Invoice] = 0 AND [Warrenty] = 0 AND [Cancelled] = 0 AND [StoreTypeID] = %d", m_lOrderID, m_lCustomerID, iStoreTypeID);
+	setOrders.m_strFilter.Format("[OrderID] <> %d AND [CustomerID] = %d AND [Invoice] = 0 AND Len([PurchaseOrderNumber]) = 8 AND [Cancelled] = 0 AND [StoreTypeID] = %d", m_lOrderID, m_lCustomerID, iStoreTypeID);
 
 	setOrders.Open();
 	while (!setOrders.IsEOF())
