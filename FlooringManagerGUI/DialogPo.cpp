@@ -223,13 +223,10 @@ BOOL CDlgPo::OnInitDialog()
 }
 
 
-LRESULT CDlgPo::OnFilesDropped(WPARAM, LPARAM)
+LRESULT CDlgPo::OnFilesDropped(WPARAM, LPARAM lp)
 {
-	CFlooringApp* pApp = (CFlooringApp*)AfxGetApp();
-	if (pApp->m_pDlgUserAlerts != NULL)
-	{
-		pApp->m_pDlgUserAlerts->RefreshGrid();
-	}
+	DropTarget* pDrop = (DropTarget *)lp;
+
 	return 0;
 }
 
@@ -554,6 +551,7 @@ void CDlgPo::OnOK()
 			CloseChangeActivities(iOrderID);
 		}
 
+		m_dropTarget.Revoke();
 		CDialog::OnOK();
 	}
 }
@@ -2270,6 +2268,7 @@ CString CDlgPo::GetDiagramName(bool bFullPath)
 
 void CDlgPo::OnCancel()
 {
+
 	m_bDirty = m_bDirty || m_gridLabor.IsDirty();
 	m_bDirty = m_bDirty || m_POPropSheet.IsDirty();
 	m_bDirty = m_bDirty || m_NotesPropSheet.IsDirty();
@@ -2278,11 +2277,13 @@ void CDlgPo::OnCancel()
 	{
 		if (IDYES == MessageBox("Discard Changes?", "Question", MB_ICONQUESTION | MB_YESNO))
 		{
+			m_dropTarget.Revoke();
 			CDialog::OnCancel();
 		}
 	}
 	else
 	{
+		m_dropTarget.Revoke();
 		CDialog::OnCancel();
 	}
 }
