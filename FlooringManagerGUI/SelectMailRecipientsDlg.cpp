@@ -247,14 +247,18 @@ bool CSelectMailRecipientsDlg::RemoveMailRecipient(int iIndexToMove)
 // // returns a string with comma separated list of email addresses
 CString CSelectMailRecipientsDlg::GetRecipientAddresses(void)
 {
-	CString strAddresses = "";
-	int iCount = m_astrRecipientEmailAddresses.GetCount();
-	for (int iIndex = 0; iIndex < iCount; iIndex++)
-	{
-		strAddresses += m_astrRecipientEmailAddresses[iIndex];
-		strAddresses += ",";
+	CString commaSeparatedAddresses = "";
+	int numAddresses = m_astrRecipientEmailAddresses.GetCount();	
+	
+	for (int index = 0; index < numAddresses; index++)
+	{	
+		if ((commaSeparatedAddresses.GetLength() > 0) && (m_astrRecipientEmailAddresses[index]))
+		{
+			commaSeparatedAddresses += ",";
+		}
+		commaSeparatedAddresses += m_astrRecipientEmailAddresses[index];
 	}
-	return strAddresses;
+	return commaSeparatedAddresses;
 }
 
 void CSelectMailRecipientsDlg::CreateRecipientsList(void)
