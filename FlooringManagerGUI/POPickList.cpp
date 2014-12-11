@@ -278,6 +278,7 @@ int CPOPickList::OnMenuStart(int col, long row, int section)
 				m_pViewMenu->AppendMenu(MF_STRING, 3110, "F&&I Wood Waiver") ;
 			}			
 			m_pPrintMenu->AppendMenu(MF_STRING, 3004, "Diagram") ;
+			m_pViewMenu->AppendMenu(MF_STRING, 3104, "Diagram") ;
 			if (!CGlobals::HasStorePickup((long)QuickGetNumber(ID, row)))
 			{
 				nGrayed = 1;
@@ -390,6 +391,10 @@ void CPOPickList::OnMenuCommand(int /* col */, long row, int section, int item)
 
 			case 3004:
 				PrintPaperWork(CGlobals::PM_DIAGRAMS) ;
+				break ;
+
+			case 3104:
+				ViewPaperWork(CGlobals::PM_DIAGRAMS) ;
 				break ;
 
 			case 3005:
