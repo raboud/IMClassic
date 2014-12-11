@@ -15,8 +15,6 @@
 #include "SetActionReport.h"
 #include "SetEmployees.h"
 
-#include "ReportDialogWF.h"
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -336,14 +334,7 @@ void CDlgActionReport::OnBnClickedActionReportViewprintreportButton()
 	UpdateCurrentRecord();
 
 	ASSERT(m_iId != -1);
-
-	CReportDialogWF dlg;
-	dlg.ReportName = "CustomerSatisfactionConcern";
-	dlg.WindowTitle = "Customer Satisfaction Concern Report";
-	CString strID;
-	strID.Format("%d", m_iId);
-	dlg.AddParameter("paramReportID", strID);
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::CustomerSatisfactionConcern(m_iId, false);
 }
 
 void CDlgActionReport::UpdateCurrentRecord()

@@ -13,7 +13,6 @@
 #include "SelectMailRecipientsDlg.h"
 #include "DlgWebService.h"
 #include "DlgSendNote.h"
-#include "ReportDialogWF.h"
 #include "Globals.h"
 
 const int iMANAGER_ACTION_ID = 15;

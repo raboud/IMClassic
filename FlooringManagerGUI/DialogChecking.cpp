@@ -9,7 +9,6 @@
 #include "Flooring.h"
 #include "DialogChecking.h"
 #include "SetChecks.h"
-#include "ReportDialogWF.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -99,14 +98,7 @@ void CDialogChecking::OnOK()
 
 	if (MessageBox("Do you wish to print the check report?", "Check Report", MB_YESNO) == IDYES)
 	{
-		CReportDialogWF dlg;
-		dlg.ReportName = "Check";
-		dlg.WindowTitle = "Check Report";
-		dlg.PrintOnly = true;
-		CString strCheckID;
-		strCheckID.Format("%d", this->m_iCheckID);
-		dlg.AddParameter("CheckID", strCheckID);
-		dlg.DoModal();
+		::CFI::InstallationManager::Reports::ReportHandler::PONote(m_iCheckID, true);
 	}
 
 	CDialog::OnOK();

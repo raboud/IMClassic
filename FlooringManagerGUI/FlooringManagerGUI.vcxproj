@@ -168,7 +168,7 @@ copy Flooring.exe.config $(OutDir)</Command>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /s ..\Common\SSCE\runtime $(OutDir)</Command>
+      <Command>xcopy /s /Y ..\Common\SSCE\runtime $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
@@ -177,7 +177,7 @@ copy Flooring.exe.config $(OutDir)</Command>
       <AdditionalOptions>/MACHINE:I386 /ignore:4254 </AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /s ..\Common\SSCE\runtime $(OutDir)</Command>
+      <Command>xcopy /s /Y ..\Common\SSCE\runtime $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -249,18 +249,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="PropSheetReportIssueWizard.cpp" />
     <ClCompile Include="QuickBooks.cpp" />
     <ClCompile Include="RegMerchPropPage.cpp" />
-    <ClCompile Include="ReportDialogWF.cpp">
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </ExceptionHandling>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
-    </ClCompile>
     <ClCompile Include="SetVwMaterialsRequiringWoodWaiver.cpp" />
     <ClCompile Include="SOMerchPropPage.cpp" />
     <ClCompile Include="StdAfx.cpp">
@@ -610,7 +598,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClInclude Include="PropSheetReportIssueWizard.h" />
     <ClInclude Include="QuickBooks.h" />
     <ClInclude Include="RegMerchPropPage.h" />
-    <ClInclude Include="ReportDialogWF.h" />
     <CustomBuild Include="Resource.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Making help include file...</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">echo. &gt;"hlp\$(TargetName).hm"

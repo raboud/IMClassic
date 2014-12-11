@@ -171,9 +171,6 @@
     <ClCompile Include="RegMerchPropPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReportDialogWF.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SOMerchPropPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1070,9 +1067,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RegMerchPropPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ReportDialogWF.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SOMerchPropPage.h">

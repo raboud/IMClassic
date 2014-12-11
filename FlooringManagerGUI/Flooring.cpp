@@ -53,7 +53,6 @@
 #include "PropSheetReportIssueWizard.h"
 #include "DlgPassword.h"
 #include "DlgUserSelect.h"
-#include "ReportDialogWF.h"
 #include "WorkOrderHelper.h"
 #include "WaiverHelper.h"
 
@@ -467,10 +466,7 @@ int CFlooringApp::ExitInstance()
 
 void CFlooringApp::OnStoreInfo() 
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "Stores";
-	dlg.WindowTitle = "Stores Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::Stores(false);
 }
 
 void CFlooringApp::OnViewSubcontractors() 
@@ -543,19 +539,12 @@ void CFlooringApp::OnBillingChargebacks()
 
 void CFlooringApp::OnOverdueInvoices() 
 {
-
-	CReportDialogWF dlg;
-	dlg.ReportName = "OverdueInvoices";
-	dlg.WindowTitle = "Overdue Invoices Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::Stores(false);
 }
 
 void CFlooringApp::OnOpenInvoices() 
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "OpenInvoices";
-	dlg.WindowTitle = "Open Invoices Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::OpenInvoices(false);
 }
 
 void CFlooringApp::OnPayroll() 
@@ -606,13 +595,7 @@ void CFlooringApp::OnPayroll()
 		// from today.
 		COleDateTime timeWE = clQB.GetWeekEnding();
 
-
-		CReportDialogWF dlg;
-		dlg.ReportName = "PayrollReport";
-		dlg.WindowTitle = "Payroll Report";
-		dlg.AddParameter("Weekending", timeWE.Format("%m/%d/%Y"));
-		dlg.AddParameter("GrandTotal", strGrandTotal);
-		dlg.DoModal();
+		::CFI::InstallationManager::Reports::ReportHandler::PayrollReport(gcnew System::String(strGrandTotal), System::DateTime::FromOADate(timeWE), false);
 	}
 	else
 	{
@@ -642,11 +625,7 @@ void CFlooringApp::OnUpdatePayroll(CCmdUI* pCmdUI)
 
 void CFlooringApp::OnReportsPending() 
 {
-
-	CReportDialogWF dlg;
-	dlg.ReportName = "PendingInvoices";
-	dlg.WindowTitle = "Pending Invoices Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::PendingInvoices(false);
 }
 
 //int DownloadDrawingList(CString strNumber, CString& strTimeStamp)
@@ -888,18 +867,12 @@ void CFlooringApp::OnReportsPending()
 
 void CFlooringApp::OnNotBilled() 
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "NotBilled";
-	dlg.WindowTitle = "Not Billed Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::NotBilled(false);
 }
 
 void CFlooringApp::OnInventory() 
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "Inventory";
-	dlg.WindowTitle = "Inventory Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::Inventory(false);
 }
 
 void CFlooringApp::SetAdmin()
@@ -923,10 +896,7 @@ void CFlooringApp::OnCriminalCheckName()
 
 void CFlooringApp::OnReportsBilling() 
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "Billing";
-	dlg.WindowTitle = "Billing Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::Billing(false);
 }
 
 void CFlooringApp::OnMaterialsChangestatus() 
@@ -1036,34 +1006,22 @@ CString CFlooringApp::GetUserFirstAndLastName()
 
 void CFlooringApp::OnWarrantySched() 
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "ScheduledWarranties";
-	dlg.WindowTitle = "Scheduled Warranties Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::ScheduledWarranties(false);
 }
 
 void CFlooringApp::OnWarrantyOpen() 
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "OpenWarranties";
-	dlg.WindowTitle = "Open Warranties Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::OpenWarranties(false);
 }
 
 void CFlooringApp::OnMaterialRa() 
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "InventoryWaitingOnRA";
-	dlg.WindowTitle = "Waiting On RA Report";
-	dlg.DoModal();   
+	::CFI::InstallationManager::Reports::ReportHandler::InventoryWaitingOnRA(false);
 }
 
 void CFlooringApp::OnMaterialsNotreceivedyet() 
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "InventoryNotPresent";
-	dlg.WindowTitle = "Materials Not Present Report";
-	dlg.DoModal();	    
+	::CFI::InstallationManager::Reports::ReportHandler::InventoryNotPresent(false);
 }
 
 void CFlooringApp::OnReportsStatus() 
@@ -1074,21 +1032,7 @@ void CFlooringApp::OnReportsStatus()
 
 	if (iResponse == IDOK)
 	{
-		CReportDialogWF dlg;
-		dlg.ReportName = "DetailedStatus";
-		dlg.WindowTitle = "Detailed Status Report";
-		
-
-		//CReportDialog dlg;
-
-		// add braces here so our wait cursor destructs itself below
-		{
-			CWaitCursor wait;
-			CString strSQL = "EXEC createstatusdetails";
-			g_dbFlooring.ExecuteSQL(strSQL);
-		}
-
-		dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::DetailedStatus(false);
 	}
 }
 
@@ -1098,61 +1042,33 @@ void CFlooringApp::OnReportsStatusSingle()
 
 	if (dlgStore.DoModal() == IDOK)
 	{
-		CReportDialogWF dlg;
-		dlg.ReportName = "DetailedStatus";
-		dlg.WindowTitle = "Detailed Status Report";
-
-		// add braces here so our wait cursor destructs itself below
-		{
-			CWaitCursor wait;
-			CString strSQL;
-			strSQL.Format("EXEC createstatusdetails '%s'", dlgStore.GetStoreNumber());
-			g_dbFlooring.ExecuteSQL(strSQL);
-		}
-
-		dlg.DoModal();
-
+		::CFI::InstallationManager::Reports::ReportHandler::DetailedStatus(gcnew System::String(dlgStore.GetStoreNumber()), false);
 	}
 }
 
 void CFlooringApp::OnReportsPulllist()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "PullList";
-	dlg.WindowTitle = "Pull List Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::PullList(false);
 }
 
 void CFlooringApp::OnReportsWeeklyTotals() 
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "WeeklyTotals";
-	dlg.WindowTitle = "Weekly Totals Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::WeeklyTotals(false);
 }
 
 void CFlooringApp::OnReportsCompletedJobsNotPaid()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "CompletedJobsNotPaid";
-	dlg.WindowTitle = "Completed Jobs Not Paid Report";
-	dlg.DoModal();	
+	::CFI::InstallationManager::Reports::ReportHandler::CompletedJobsNotPaid(false);
 }
 
 void CFlooringApp::OnReportsChargebacksByDate()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "ChargebacksByDate";
-	dlg.WindowTitle = "Chargebacks By Date Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::ChargebacksByDate(false);
 }
 
 void CFlooringApp::OnReportsWorkSummaryByWeek()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "WeeklyUnitsTotals";
-	dlg.WindowTitle = "Weekly Work Summary Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::WeeklyUnitsTotals(false);
 }
 
 void CFlooringApp::OnUpdateReportsWorkSummaryByWeek(CCmdUI* pCmdUI) 
@@ -1247,10 +1163,7 @@ void CFlooringApp::OnUpdateBillingChargebacks(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnReportsSubPhonelist()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "SubContractorsPhoneList";
-	dlg.WindowTitle = "Subcontractors Phone List Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::SubContractorsPhoneList(false);
 }
 
 void CFlooringApp::OnUpdateReportsSubPhonelist(CCmdUI *pCmdUI)
@@ -1260,10 +1173,7 @@ void CFlooringApp::OnUpdateReportsSubPhonelist(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnBackgroundChecksAlphaByLastName()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "SubContractorsBackgroundCheckStatus";
-	dlg.WindowTitle = "Subcontractors Background Check Status Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::SubContractorsBackgroundCheckStatus(false);
 }
 
 void CFlooringApp::OnUpdateBackgroundChecksAlphaByLastName(CCmdUI *pCmdUI)
@@ -1273,11 +1183,7 @@ void CFlooringApp::OnUpdateBackgroundChecksAlphaByLastName(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnJobsAssignments()
 {
-
-	CReportDialogWF dlg;
-	dlg.ReportName = "InstallerAssignments";
-	dlg.WindowTitle = "Installer Assignments Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::InstallerAssignments(false);
 }
 
 void CFlooringApp::OnUpdateJobsAssignments(CCmdUI *pCmdUI)
@@ -1337,18 +1243,12 @@ void CFlooringApp::OnUpdatePayrollMessages(CCmdUI *pCmdUI)
 
 void CFlooringApp::OnSubHelpers()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "HelperAssignments";
-	dlg.WindowTitle = "Helper Assignments Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::HelperAssignments(false);
 }
 
 void CFlooringApp::OnFinancialMaterialpricing()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "Pricing";
-	dlg.WindowTitle = "Pricing Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::Pricing(false);
 }
 
 void CFlooringApp::OnMaintenanceSpndiscrepancies()
@@ -1413,18 +1313,12 @@ void CFlooringApp::OnViewUseralerts()
 
 void CFlooringApp::OnWorkmansCompByDate()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "WorkmansCompByDate";
-	dlg.WindowTitle = "Workman's Comp Insurance Status Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::WorkmansCompByDate(false);
 }
 
 void CFlooringApp::OnLiabilityByDate()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "LiabilityByDate";
-	dlg.WindowTitle = "Liability Insurance Status Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::LiabilityByDate(false);
 }
 
 void CFlooringApp::OnUpdateWorkmansCompByDate(CCmdUI *pCmdUI)
@@ -1530,72 +1424,43 @@ void CFlooringApp::OnViewActivitylist()
 
 void CFlooringApp::OnMaterialsDamaged()
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "InventoryDamaged";
-	dlg.WindowTitle = "Damaged Inventory Report";
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::MaterialsDamaged(true);
 }
 
 void CFlooringApp::PrintPONote(int iNoteID)
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "PONote";
-	dlg.WindowTitle = "PO Note Report";
-	dlg.PrintOnly = true;
-	CString strID;
-	strID.Format("%d", iNoteID);
-	dlg.AddParameter("NoteID", strID);
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::PONote(iNoteID, true);
 }
 
 void CFlooringApp::PrintCustSatReport(int iReportID)
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "CustomerSatisfactionConcern";
-	dlg.WindowTitle = "Customer Satisfaction Concern Report";
-	dlg.PrintOnly = true;
-	CString strID;
-	strID.Format("%d", iReportID);
-	dlg.AddParameter("paramReportID", strID);
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::CustSatReport(iReportID, true);
 }
 
 void CFlooringApp::PrintPO(int iOrderID)
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "PurchaseOrder";
-	dlg.WindowTitle = "Purchase Order Report";
-	dlg.PrintOnly = true;
-	CString strID;
-	strID.Format("%d", iOrderID);
-	dlg.AddParameter("OrderID", strID);
-	dlg.AddParameter("Changed", "false");
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::PO(iOrderID, true);
 }
 
 void CFlooringApp::ViewPO(int iOrderID)
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "PurchaseOrder";
-	dlg.WindowTitle = "Purchase Order";
-	dlg.PrintOnly = false;
-	CString strID;
-	strID.Format("%d", iOrderID);
-	dlg.AddParameter("OrderID", strID);
-	dlg.AddParameter("Changed", "false");
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::PO(iOrderID, false);
 }
 
 void CFlooringApp::PrintStorePickup(int iOrderID)
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "StorePickup";
-	dlg.WindowTitle = "Store Pickup Report";
-	dlg.PrintOnly = true;
-	CString strID;
-	strID.Format("%d", iOrderID);
-	dlg.AddParameter("OrderIDFilter", strID);
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::StorePickup(iOrderID, true);
+}
+
+::System::Collections::Generic::List<int>^ GetPoList(CPoList* listPOs)
+{
+	::System::Collections::Generic::List<int>^ l = gcnew ::System::Collections::Generic::List<int>();
+		POSITION pos = listPOs->GetHeadPosition() ;
+		while (pos)
+		{
+			l->Add(listPOs->GetNext(pos));
+		}
+	return l;
 }
 
 void CFlooringApp::ViewWorkOrder(CPoList* listPOs, bool PrintOnly)
@@ -1603,25 +1468,7 @@ void CFlooringApp::ViewWorkOrder(CPoList* listPOs, bool PrintOnly)
 	CWorkOrderHelper WorkOrderHelper;
 	if (WorkOrderHelper.SetPoList(listPOs))
 	{
-		CReportDialogWF dlg;
-		dlg.ReportName = "WorkOrder";
-		dlg.WindowTitle = "Work Order Report";
-		dlg.PrintOnly = PrintOnly;
-		CString strID;
-			
-		POSITION pos = listPOs->GetHeadPosition() ;
-		while (pos)
-		{
-			strID.Format("%d", listPOs->GetNext(pos));
-			dlg.AddParameter("OrderIDFilter", strID);
-		}
-
-		dlg.AddParameter("CustomerID", WorkOrderHelper.GetCustomerID());
-		dlg.AddParameter("ScheduledDate", WorkOrderHelper.GetScheduledDate());
-		dlg.AddParameter("PurchaseOrders", WorkOrderHelper.GetPOList());
-		dlg.AddParameter("ShowStorePickup", WorkOrderHelper.GetShowStorePickup());
-				
-		dlg.DoModal();
+		::CFI::InstallationManager::Reports::ReportHandler::WorkOrder(GetPoList(listPOs), PrintOnly);
 	}
 	else
 	{
@@ -1642,24 +1489,7 @@ void CFlooringApp::ViewWaiver(CPoList* listPOs, bool PrintOnly)
 	CWaiverHelper WaiverHelper;
 	if (WaiverHelper.SetPoList(listPOs))
 	{
-		CReportDialogWF dlg;
-		dlg.ReportName = "Waiver";
-		dlg.WindowTitle = "Waiver Report";
-		dlg.PrintOnly = PrintOnly;
-		CString strID;
-			
-		POSITION pos = listPOs->GetHeadPosition() ;
-		while (pos)
-		{
-			strID.Format("%d", listPOs->GetNext(pos));
-			dlg.AddParameter("OrderIDs", strID);
-		}
-
-		dlg.AddParameter("ScheduledAM", WaiverHelper.GetScheduledAM());
-		dlg.AddParameter("ScheduledDate", WaiverHelper.GetScheduledDate());
-		dlg.AddParameter("ShowAMPM", WaiverHelper.GetShowAMPM());
-				
-		dlg.DoModal();
+		::CFI::InstallationManager::Reports::ReportHandler::Waiver(GetPoList(listPOs), PrintOnly);
 	}
 	else
 	{
@@ -1677,38 +1507,17 @@ void CFlooringApp::PrintWaiver(CPoList* listPOs)
 
 void CFlooringApp::PrintReviewChecklist(int OrderID)
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "ReviewChecklist";
-	dlg.WindowTitle = "Review Checklist";
-	dlg.PrintOnly = true;
-	CString strID;
-	strID.Format("%d", OrderID);
-	dlg.AddParameter("OrderID", strID);	
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::ReviewChecklist(OrderID, true);
 }
 
 void CFlooringApp::PrintSchedulingChecklist(int OrderID)
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "SchedulingChecklist";
-	dlg.WindowTitle = "Scheduling Checklist";
-	dlg.PrintOnly = true;
-	CString strID;
-	strID.Format("%d", OrderID);
-	dlg.AddParameter("OrderID", strID);	
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::SchedulingChecklist(OrderID, true);
 }
 
 void CFlooringApp::ViewWoodFlooringWaiver(int OrderID, bool PrintOnly)
 {
-	CReportDialogWF dlg;
-	dlg.ReportName = "WoodFlooringWaiver";
-	dlg.WindowTitle = "Wood Flooring Waiver";
-	dlg.PrintOnly = PrintOnly;
-	CString strID;
-	strID.Format("%d", OrderID);
-	dlg.AddParameter("OrderID", strID);	
-	dlg.DoModal();
+	::CFI::InstallationManager::Reports::ReportHandler::WoodFlooringWaiver(OrderID, PrintOnly);
 }
 
 void CFlooringApp::PrintWoodFlooringWaiver(int OrderID)
