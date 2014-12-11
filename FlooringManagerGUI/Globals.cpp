@@ -1150,6 +1150,11 @@ bool CGlobals::CanViewJobAssign()
 	return CFI::InstallationManager::Shared::Forms::FormWorkorders::CanView(Singleton::Cache->CurrentUser);
 }
 
+void CGlobals::ChangMaterialStatus()
+{
+	CFI::InstallationManager::Shared::Forms::MaterialStatusForm::Open(Singleton::Connection->Clone());
+}
+
 void CGlobals::ViewJobAssign()
 {
 	CFI::InstallationManager::Shared::Forms::FormWorkorders::Open(Singleton::Connection->Clone());

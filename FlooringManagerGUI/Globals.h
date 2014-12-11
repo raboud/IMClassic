@@ -177,6 +177,7 @@ public:
 	static void SetEmployeeID();
 	static void SetEmployeeID(int ID);
 	static void ViewJobAssign();
+	static void ChangMaterialStatus();
 	static bool CanViewJobAssign();
 	static bool IsAdmin() ;
 	static CString GetUserFirstAndLastName();

@@ -573,8 +573,7 @@ void CFlooringApp::OnCriminalCheckName()
 
 void CFlooringApp::OnMaterialsChangestatus() 
 {
-	CDlgMaterialStatus dlg ;
-	dlg.DoModal() ;
+	CGlobals::ChangMaterialStatus();
 }
 
 CString CFlooringApp::GetCFUserName()
