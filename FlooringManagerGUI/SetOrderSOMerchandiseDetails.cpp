@@ -68,7 +68,7 @@ void CSetOrderSOMerchandiseDetails::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Text(pFX, _T("[Description]"), m_Description, iMAX_DESCRIPTION_LENGTH);
 	RFX_Double(pFX, _T("[Quantity]"), m_Quantity);
 	RFX_Long(pFX, _T("[UOMId]"), m_UOMId);
-	RFX_Date(pFX, _T("[ExpectedArrivalDate]"), m_ExpectedArrivalDate);
+	RFX_Text(pFX, _T("[ExpectedArrivalDate]"), m_ExpectedArrivalDate);
 	RFX_Long(pFX, _T("[SOLineNumber]"), m_SOLineNumber);
 	RFX_Long(pFX, _T("[SOMerLineNumber]"), m_SOMerLineNumber);
 	RFX_Long(pFX, _T("[MaterialStatusID]"), m_MaterialStatusID);

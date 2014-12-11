@@ -479,7 +479,7 @@ void CGridSOMerchandise::UpdateRecordSet()
 					COleDateTime time;
 					if (time.ParseDateTime(QuickGetText(EXP_ARRIVAL_DATE, lRow)))
 					{
-						setDetails.m_ExpectedArrivalDate = time;
+						setDetails.m_ExpectedArrivalDate = time.Format();
 					}
 				}
 
@@ -582,9 +582,18 @@ void CGridSOMerchandise::UpdateRecordSet()
 			}
 
 		}
+		catch (CDBException* e)
+		{
+			CString strMsg = e->m_strError;
+			::MessageBox(NULL, strMsg, "Could not close CANCEL PO RECEIVED activity!", MB_OK);
+			e->Delete();
+			bUpdateOK = false;
+		}
 		catch (CException* pE)
 		{
-			pE->Delete() ;
+			char acError[1000];
+			pE->GetErrorMessage(acError, sizeof(acError));
+			pE->Delete();
 			bUpdateOK = false;
 		}
 	}

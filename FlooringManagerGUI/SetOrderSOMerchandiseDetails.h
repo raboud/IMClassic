@@ -29,7 +29,7 @@ public:
 	CString	m_Description;
 	double	m_Quantity;
 	long	m_UOMId;
-	COleDateTime	m_ExpectedArrivalDate;
+	CString	m_ExpectedArrivalDate;
 	long	m_SOLineNumber;
 	long    m_SOMerLineNumber;
 	long	m_MaterialStatusID;
