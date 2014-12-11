@@ -1591,6 +1591,9 @@
     <ClInclude Include="DlgUnitTestResults.h">
       <Filter>Dialogs\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\bitmap2.bmp">
@@ -1687,11 +1690,6 @@
     <None Include="..\Common\SSCE\runtime\lex\userdic.tlx">
       <Filter>lex</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Common\Ssce\sdk\lib\SSCE5332.lib" />
