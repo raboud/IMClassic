@@ -68,7 +68,7 @@ CString CSetPayroll::GetDefaultConnect()
 	CString sSql;
     CString sItem1, sItem2;
     CString sDsn;
-    CString sFile = "\\\\flooring.local\\cfi\\common\\Sub-Contractors.xlsx";        // the file name. Could also be something like C:\\Sheets\\WhatDoIKnow.xls
+    CString sFile = "\\\\atl-fs-01\\common\\Sub-Contractors.xlsx";        // the file name. Could also be something like C:\\Sheets\\WhatDoIKnow.xls
     
     // Retrieve the name of the Excel driver. This is 
     // necessary because Microsoft tends to use language
@@ -84,9 +84,9 @@ CString CSetPayroll::GetDefaultConnect()
     // Create a pseudo DSN including the name of the Driver and the Excel file
     // so we don4t have to have an explicit DSN installed in our ODBC admin
 //    sDsn.Format("ODBC;DRIVER={%s};DSN='';DBQ=%s;",sDriver,sFile);
-    sDsn.Format("DRIVER={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};DBQ=s:\\Sub-Contractors.xlsx;",sDriver,sFile);
-	return sDsn;
-//	return _T("ODBC;DSN=FlooringSub");
+    sDsn.Format("ODBC;DRIVER={%s};DriverID=1046;FIL=excel 12.0;DefaultDir=s:;DBQ=%s;",sDriver,sFile);
+//	return sDsn;
+	return _T("ODBC;DSN=FlooringSub");
 }
 
 CString CSetPayroll::GetDefaultSQL()

@@ -174,6 +174,8 @@ public:
 	static void PayrollReport(CString strGrandTotal, COleDateTime timeWE);
 	static void SetEmployeeID();
 	static void SetEmployeeID(int ID);
+	static void ViewJobAssign();
+	static bool CanViewJobAssign();
 	static bool IsAdmin() ;
 	static CString GetUserFirstAndLastName();
 

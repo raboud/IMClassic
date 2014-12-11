@@ -147,6 +147,8 @@ BEGIN_MESSAGE_MAP(CFlooringApp, CWinApp)
 	ON_UPDATE_COMMAND_UI(ID_LIABILITY_BY_DATE, OnUpdateLiabilityByDate)
 	ON_COMMAND(ID_HELP_REPORTISSUE, OnHelpReportissue)
 	ON_COMMAND(ID_VIEW_ACTIVEPOS, OnViewActivePOs)
+	ON_UPDATE_COMMAND_UI(ID_VIEW_JOBASSIGN, OnUpdateViewJobAssign)
+	ON_COMMAND(ID_VIEW_JOBASSIGN, OnViewJobAssign)
 	ON_COMMAND(ID_VIEW_ACTIVITYLIST, OnViewActivitylist)
 	ON_COMMAND(ID_MATERIALS_DAMAGED, &CFlooringApp::OnMaterialsDamaged)
 	ON_COMMAND(ID_FILE_SETEMAILPASSWORD, &CFlooringApp::OnFileSetEmailPassword)
@@ -766,6 +768,11 @@ void CFlooringApp::OnUpdateWorkmansCompByDate(CCmdUI *pCmdUI)
 	pCmdUI->Enable(CGlobals::HasPermission("ViewReportWorkmansCompByDate") == true) ;
 }
 
+void CFlooringApp::OnUpdateViewJobAssign(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(CGlobals::CanViewJobAssign() == true);
+}
+
 void CFlooringApp::OnUpdateLiabilityByDate(CCmdUI *pCmdUI)
 {
 	pCmdUI->Enable(CGlobals::HasPermission("ViewReportLiabilityByDate") == true) ;
@@ -791,6 +798,10 @@ void CFlooringApp::ImpersonateUser()
 			}
 		}
 	}
+}
+void CFlooringApp::OnViewJobAssign()
+{
+	CGlobals::ViewJobAssign();
 }
 
 void CFlooringApp::OnViewActivePOs()

@@ -149,6 +149,7 @@ public:
 	afx_msg void OnUpdateMaintenanceSpndiscrepancies(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateWorkmansCompByDate(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateLiabilityByDate(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateViewJobAssign(CCmdUI *pCmdUI);
 
 	afx_msg void OnMaintenanceSpndiscrepancies();
 	afx_msg void OnMaintenanceUnitTests();
@@ -163,6 +164,7 @@ public:
 	afx_msg void OnLiabilityByDate();
 	afx_msg void OnHelpReportissue();
 	afx_msg void OnViewActivePOs();
+	afx_msg void OnViewJobAssign();
 	afx_msg void OnViewActivitylist();
 	afx_msg void OnMaterialsDamaged();
 	afx_msg void OnReportsSubPhonelist();

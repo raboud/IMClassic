@@ -1115,6 +1115,16 @@ void CGlobals::PayrollReport(CString strGrandTotal, COleDateTime timeWE)
 	ReportHelper::PayrollReport(gcnew System::String(strGrandTotal), System::DateTime::FromOADate(timeWE), Mode::View);
 }
 
+bool CGlobals::CanViewJobAssign()
+{
+	return CFI::InstallationManager::Shared::Forms::FormWorkorders::CanView(Singleton::Cache->CurrentUser);
+}
+
+void CGlobals::ViewJobAssign()
+{
+	CFI::InstallationManager::Shared::Forms::FormWorkorders::Open(Singleton::Connection->Clone());
+}
+
 void CGlobals::SetEmployeeID(int ID)
 {
 	if (ID != -1)
