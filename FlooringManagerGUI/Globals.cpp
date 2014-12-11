@@ -32,7 +32,7 @@ extern CMultiDocTemplate* g_pTemplateInvoice ;
 using namespace CFI::Utility::Mail;
 using namespace CFI::InstallationManager::Business;
 using namespace CFI::InstallationManager::Reports::UI;
-using namespace CFI::InstallationManager::SharedForms;
+using namespace CFI::InstallationManager::Shared::Forms;
 using namespace CFI::InstallationManager::Controls;
 
 CGlobals::CGlobals(void)
