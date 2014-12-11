@@ -8,6 +8,7 @@
 #include "stdafx.h"
 #include "flooring.h"
 #include "setpayroll.h"
+#include "odbcinst.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -40,7 +41,51 @@ CSetPayroll::CSetPayroll(CDatabase* pdb)
 
 CString CSetPayroll::GetDefaultConnect()
 {
-	return _T("ODBC;DSN=FlooringSub");
+	// Get the name of the Excel-ODBC driver 
+	// Contibuted by Christopher W. Backen - Thanx Christoper
+    char szBuf[2001];
+    WORD cbBufMax = 2000;
+    WORD cbBufOut;
+    char *pszBuf = szBuf;
+    CString sDriver;
+    // Get the names of the installed drivers ("odbcinst.h" has to be included )
+   if(!SQLGetInstalledDrivers(szBuf,cbBufMax,& cbBufOut))
+        return "";
+    
+    // Search for the driver...
+    do
+    {
+        if( strstr( pszBuf, "*.xlsx" ) != 0 )
+        {
+            // Found !
+            sDriver = CString( pszBuf );
+            break;
+        }
+        pszBuf = strchr( pszBuf, '\0' ) + 1;
+    }
+    while( pszBuf[1] != '\0' );
+//    return sDriver;
+	CString sSql;
+    CString sItem1, sItem2;
+    CString sDsn;
+    CString sFile = "c:\\temp\\Sub-Contractors.xlsx";        // the file name. Could also be something like C:\\Sheets\\WhatDoIKnow.xls
+    
+    // Retrieve the name of the Excel driver. This is 
+    // necessary because Microsoft tends to use language
+    // specific names like "Microsoft Excel Driver (*.xls)" versus
+    // "Microsoft Excel Treiber (*.xls)"
+    if( sDriver.IsEmpty() )
+    {
+        // Blast! We didn4t find that driver!
+        AfxMessageBox("No Excel ODBC driver found");
+//        return;
+    }
+    
+    // Create a pseudo DSN including the name of the Driver and the Excel file
+    // so we don4t have to have an explicit DSN installed in our ODBC admin
+    sDsn.Format("ODBC;DRIVER={%s};DSN='';DBQ=%s",sDriver,sFile);
+	return sDsn;
+//	return _T("ODBC;DSN=FlooringSub");
 }
 
 CString CSetPayroll::GetDefaultSQL()
