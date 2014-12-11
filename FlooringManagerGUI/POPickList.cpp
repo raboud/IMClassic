@@ -970,45 +970,48 @@ void CPOPickList::PrintPaperWork(PRINT_MODE enMode)
 			int iOrderID = m_listPOs.GetNext(pos);
 			setOrderDiagrams.m_strFilter.Format("[OrderID] = '%d'", iOrderID) ;
 			setOrderDiagrams.Requery() ;
-			if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramNumber) && !setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramDateTime))
+			if (!setOrderDiagrams.IsEOF())
 			{
-				CString strTimeStamp = setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%y %H:%M") ;
-				setOrders.m_strFilter.Format("[OrderId] = '%d'", iOrderID) ;
-				setOrders.Requery() ;
-				if (!setOrders.IsEOF())
+				if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramNumber) && !setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramDateTime))
 				{
-					CWaitCursor curWait ;
-					CString strStoreNumber = CGlobals::StoreNumberFromOrderID(iOrderID);
-					CString strPONumber = setOrders.m_PurchaseOrderNumber;
-					CString strInstallNumber = setOrders.m_CustOrderNo.Trim();
-					CString strMeasureNumber = setOrderDiagrams.m_DiagramNumber;
-					CString strCalc = setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%y %H:%M");
-					if ( !CInstallerJobData::GetDrawing(true, strStoreNumber, strPONumber, strInstallNumber, strMeasureNumber, setOrderDiagrams.m_DiagramDateTime) )
+					CString strTimeStamp = setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%y %H:%M") ;
+					setOrders.m_strFilter.Format("[OrderId] = '%d'", iOrderID) ;
+					setOrders.Requery() ;
+					if (!setOrders.IsEOF())
 					{
-						MessageBox("Drawing Number or Calculation date is invalid", "Diagram", MB_OK) ;
-					}
-				}
-				else
-				{
-					MessageBox("Order Number could not be found.", "Diagram", MB_OK) ;
-				}
-			}
-			else if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramFileName))
-			{
-				// if there is no measure number / measure date/time, it was probably a drawing sent via SOSI
-				// and is therefore only accessible via the name
-				if (setOrderDiagrams.m_DiagramFileName.GetLength() > 0)
-				{
-					CSetSettings setSettings(&g_dbFlooring);
-					CString strDiagramFolder = setSettings.GetSetting("DrawingsFolder");
-					CString strFileName = strDiagramFolder + setOrderDiagrams.m_DiagramFileName;
-					if (PathFileExists(strFileName))
-					{
-						ShellExecute(NULL, "print", strFileName, NULL, NULL, SW_HIDE ) ;
+						CWaitCursor curWait ;
+						CString strStoreNumber = CGlobals::StoreNumberFromOrderID(iOrderID);
+						CString strPONumber = setOrders.m_PurchaseOrderNumber;
+						CString strInstallNumber = setOrders.m_CustOrderNo.Trim();
+						CString strMeasureNumber = setOrderDiagrams.m_DiagramNumber;
+						CString strCalc = setOrderDiagrams.m_DiagramDateTime.Format("%m/%d/%y %H:%M");
+						if ( !CInstallerJobData::GetDrawing(true, strStoreNumber, strPONumber, strInstallNumber, strMeasureNumber, setOrderDiagrams.m_DiagramDateTime) )
+						{
+							MessageBox("Drawing Number or Calculation date is invalid", "Diagram", MB_OK) ;
+						}
 					}
 					else
 					{
-						MessageBox("Could not find file: " + strFileName, "Diagram", MB_OK) ;
+						MessageBox("Order Number could not be found.", "Diagram", MB_OK) ;
+					}
+				}
+				else if (!setOrderDiagrams.IsFieldNull(&setOrderDiagrams.m_DiagramFileName))
+				{
+					// if there is no measure number / measure date/time, it was probably a drawing sent via SOSI
+					// and is therefore only accessible via the name
+					if (setOrderDiagrams.m_DiagramFileName.GetLength() > 0)
+					{
+						CSetSettings setSettings(&g_dbFlooring);
+						CString strDiagramFolder = setSettings.GetSetting("DrawingsFolder");
+						CString strFileName = strDiagramFolder + setOrderDiagrams.m_DiagramFileName;
+						if (PathFileExists(strFileName))
+						{
+							ShellExecute(NULL, "print", strFileName, NULL, NULL, SW_HIDE ) ;
+						}
+						else
+						{
+							MessageBox("Could not find file: " + strFileName, "Diagram", MB_OK) ;
+						}
 					}
 				}
 			}

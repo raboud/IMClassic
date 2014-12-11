@@ -83,7 +83,7 @@ bool CWorkOrderHelper::SetPoList(CPoList* plistPOs)
 	}
 	m_setOrders.MoveFirst() ;
 
-	if (bOk && (iScheduled != iTotal))
+	if (bOk && (iScheduled != iTotal) && (iScheduled != 0))
 	{
 		int iResponse = AfxMessageBox("Not all POs are scheduled, would you like to schedule all?", MB_YESNO, NULL);
 		if (iResponse != IDYES)
