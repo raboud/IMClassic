@@ -64,7 +64,7 @@ CString CSetSettings::GetSetting(const CString& strSettingName, const CString& s
 	{
 		strValue = SettingsBLL::GetUserSetting(Singleton::Connection->Clone(), gcnew System::String(strSettingName), gcnew System::String(strDefault), iUserID);
 	}
-    
+	
 	return strValue;
 }
 
@@ -93,7 +93,7 @@ CString CSetSettings::GetSettings(const CString& strSettingName, char cSeparator
 
 bool CSetSettings::SetSetting(const CString& strSettingName, const CString& strValue, int iUserID /* -1 */)
 {
-    return SettingsBLL::SetUserSetting(Singleton::Connection->Clone(), gcnew System::String(strSettingName), gcnew System::String(strValue), iUserID);
+	return SettingsBLL::SetUserSetting(Singleton::Connection->Clone(), gcnew System::String(strSettingName), gcnew System::String(strValue), iUserID);
 }
 
 bool CSetSettings::SetSetting(const CString& strSettingName, long lValue, int iUserID /* = -1 */)
