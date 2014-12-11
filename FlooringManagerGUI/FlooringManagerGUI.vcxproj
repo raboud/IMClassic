@@ -92,7 +92,7 @@
       <AdditionalIncludeDirectories>..\..\..\..\Dev\DUNDAS\Ultimate Toolbox\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/MACHINE:I386 /ignore:4254 </AdditionalOptions>
       <AdditionalDependencies>VFW32.LIB;odbc32.lib;version.lib;mpr.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)Flooring.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -148,7 +148,7 @@
       <AdditionalIncludeDirectories>..\common;..\..\..\..\Dev\DUNDAS\Ultimate Toolbox\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/MACHINE:I386 /ignore:4254 </AdditionalOptions>
       <AdditionalDependencies>VFW32.LIB;odbc32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)Flooring.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -175,6 +175,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
     <Link>
       <AdditionalDependencies>odbc32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/MACHINE:I386 /ignore:4254 </AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

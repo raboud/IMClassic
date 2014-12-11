@@ -27,6 +27,8 @@ public:
 	  	// Do nothing.
 	}
 
+#pragma warning(disable:4244)
+
 	// Interactively check the spelling of a CString.
 	SSCE_S32 Check(CString &str, BOOL showContext = TRUE,
 	  HINSTANCE clientInst = 0, const TCHAR *spellDlgTmplt = 0,
@@ -44,7 +46,9 @@ public:
 		str.ReleaseBuffer();
 		return (rv);
 	}
+#pragma warning(default:4244)
 
+#pragma warning(disable:4244)
 	// Interactively check the spelling of a text block.
 	SSCE_S32 Check(SSCE_CHAR *block, SSCE_S32 blkLen, SSCE_S32 blkSz,
 	  BOOL showContext = TRUE, HINSTANCE clientInst = 0,
@@ -54,7 +58,9 @@ public:
 	  	  blkSz, showContext, clientInst, spellDlgTmplt, dictDlgTmplt,
 	  	  optDlgTmplt, newLexDlgTmplt));
 	}
+#pragma warning(default:4244)
 
+#pragma warning(disable:4244)
 	// Interactively check the spelling of a CWnd-derived control.
 	SSCE_S16 Check(CWnd *control, BOOL checkSelectedOnly = FALSE,
 	  HINSTANCE clientInst = 0, const TCHAR *spellDlgTmplt = 0,
@@ -64,7 +70,9 @@ public:
 		  control->m_hWnd, checkSelectedOnly, clientInst, spellDlgTmplt,
 		  dictDlgTmplt, optDlgTmplt, newLexDlgTmplt));
 	}
+#pragma warning(default:4244)
 
+#pragma warning(disable:4244)
 	// Interactively check the spelling of a control based on its hWnd.
 	SSCE_S16 Check(HWND ctrlWin, BOOL checkSelectedOnly = FALSE,
 	  HINSTANCE clientInst = 0, const TCHAR *spellDlgTmplt = 0,
@@ -74,6 +82,7 @@ public:
 		  ctrlWin, checkSelectedOnly, clientInst, spellDlgTmplt,
 		  dictDlgTmplt, optDlgTmplt, newLexDlgTmplt));
 	}
+#pragma warning(default:4244)
 
 #if defined(_WIN32)
 	// Check the spelling of a rich-edit control in the background

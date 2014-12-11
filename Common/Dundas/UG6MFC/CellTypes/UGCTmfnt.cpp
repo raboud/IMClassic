@@ -82,6 +82,7 @@ OnDraw - overloaded CUGCellType::OnDraw
     **See CUGCellType::OnDraw for more details
 	about this function
 ****************************************************/
+#pragma warning(disable:4238)
 void CUGMultiFontType::OnDraw(CDC *dc,RECT *rect,int col,long row,
 							  CUGCell *cell,int selected,int current){
 
@@ -196,6 +197,7 @@ void CUGMultiFontType::OnDraw(CDC *dc,RECT *rect,int col,long row,
 
 	dc->RestoreDC(dcSaveID);
 }
+#pragma warning(default:4238)
 
 
 /***************************************************
@@ -297,6 +299,7 @@ Params:
 Return:
 	<none>
 *****************************************************/
+#pragma warning(disable:4238)
 void CUGMultiFontType::GetBestSize(CDC *dc,CSize *size,CUGCell *cell)
 {
 	//store the current state of the DC so that it can be restored again
@@ -357,3 +360,4 @@ void CUGMultiFontType::GetBestSize(CDC *dc,CSize *size,CUGCell *cell)
 
 	dc->RestoreDC(dcSaveID);
 }
+#pragma warning(default:4238)

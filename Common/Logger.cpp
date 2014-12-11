@@ -50,15 +50,15 @@ bool Logger::Log(CString messageToLog)
 		fileOut.WriteString(messageToLog) ;
 		fileOut.Close();
 	}
-	catch (CMemoryException* e)
+	catch (CMemoryException* /* e */)
 	{
 		bSuccessful = false;
 	}
-	catch (CFileException* e)
+	catch (CFileException* /* e */)
 	{
 		bSuccessful = false;
 	}
-	catch (CException* e)
+	catch (CException* /* e */)
 	{
 		bSuccessful = false;
 	}	

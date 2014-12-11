@@ -107,7 +107,7 @@ int CPropSheetReportIssueWizard::SubmitIssue()
 	return iSubmitID;
 }
 
-void CPropSheetReportIssueWizard::SendIssueEmailSMTP(CString strSubject, CString strBody, int iUserID)
+void CPropSheetReportIssueWizard::SendIssueEmailSMTP(CString strSubject, CString strBody, int /* iUserID */)
 {
 	CString EmailFrom = CGlobals::GetCurrentUserSMTPEmailAddress();
 	CString EmailReplyTo = CGlobals::GetCurrentUserReplyToEmailAddress();

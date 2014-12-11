@@ -193,7 +193,7 @@ LRESULT CMainFrame::OnUpdateUserAlerts(WPARAM, LPARAM)
 	return 0;
 }
 
-LRESULT CMainFrame::OnSendEmailError(WPARAM wp, LPARAM lp)
+LRESULT CMainFrame::OnSendEmailError(WPARAM /* wp */, LPARAM lp)
 {
 	CString* s = (CString*)lp;
 	MessageBox(*s, "Email Send Error!");

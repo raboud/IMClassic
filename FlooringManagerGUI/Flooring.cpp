@@ -212,15 +212,15 @@ int CFlooringApp::Run()
 			bRun = CWinApp::Run();
 			bExit = TRUE;
 		}
-		catch (CMemoryException* e)
+		catch (CMemoryException* /* e */)
 		{
 			TRACE("CMemoryException caught in Run();");
 		}
-		catch (CFileException* e)
+		catch (CFileException* /* e */)
 		{
 			TRACE("CFileException caught in Run();");
 		}
-		catch (CException* e)
+		catch (CException* /* e */)
 		{
 			TRACE("CException caught in Run();");
 		}
