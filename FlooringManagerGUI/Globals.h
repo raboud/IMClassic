@@ -159,6 +159,7 @@ public:
 
 	
 	static void PrintPONote(int iNoteID);
+	static void EmailCosCustSatReport(int iReportID);
 	static void PrintCustSatReport(int iReportID);
 	static void ViewCustSatReport(int iReportID);
 

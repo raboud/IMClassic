@@ -1094,6 +1094,10 @@ bool CGlobals::AddCheckToQuickbooks(int iCheckID)
 	return Quickbooks::CreateInvoice(Singleton::Connection, iCheckID);
 }
 
+void CGlobals::EmailCosCustSatReport(int iReportID)
+{
+	ReportHelper::EmailCosCustSatReport(iReportID);
+}
 void CGlobals::PrintCustSatReport(int iReportID)
 {
 	ReportHelper::CustomerSatisfactionConcern(iReportID, Mode::Print);
