@@ -330,7 +330,7 @@ bool CDlgPo::SaveData()
 			// list...
 			if (m_listPOs.GetCount() == 0)
 			{
-				setOrders.m_strFilter.Format("PurchaseOrderNumber = '%s' AND StoreID = %d AND EnteredBy = %d and DateEntered = '%s'", m_strPONumber, m_lStoreId, pApp->GetEmployeeID(), current.Format("%m/%d/%y %H:%M:%S") );
+				setOrders.m_strFilter.Format("PurchaseOrderNumber = '%s' AND StoreID = %d AND EnteredByID = %d and DateEntered = '%s'", m_strPONumber, m_lStoreId, pApp->GetEmployeeID(), current.Format("%m/%d/%y %H:%M:%S") );
 				setOrders.Requery();
 				while (!setOrders.IsEOF())
 				{
