@@ -244,7 +244,7 @@ bool CSelectMailRecipientsDlg::RemoveMailRecipient(int iIndexToMove)
 	return true;
 }
 
-// // returns a string with semi-colon separated list of email addresses
+// // returns a string with comma separated list of email addresses
 CString CSelectMailRecipientsDlg::GetRecipientAddresses(void)
 {
 	CString strAddresses = "";
@@ -252,7 +252,7 @@ CString CSelectMailRecipientsDlg::GetRecipientAddresses(void)
 	for (int iIndex = 0; iIndex < iCount; iIndex++)
 	{
 		strAddresses += m_astrRecipientEmailAddresses[iIndex];
-		strAddresses += ";";
+		strAddresses += ",";
 	}
 	return strAddresses;
 }
