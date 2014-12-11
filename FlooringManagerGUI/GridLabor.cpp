@@ -244,7 +244,7 @@ void CGridLabor::FilterBasicLabor()
 	{
 		m_setBasicLabor.m_strFilter.Format("[MaterialTypeID] = '%d'", m_lMaterialType ) ;
 	}
-	m_setBasicLabor.m_strSort = "[LaborDescription]" ;
+	m_setBasicLabor.m_strSort = "[Description]" ;
 	if (m_setBasicLabor.IsOpen())
 	{
 		m_setBasicLabor.Requery() ;
@@ -665,7 +665,7 @@ void CGridLabor::FilterBasicLabor(long lRow)
 void CGridLabor::FilterBasicLabor(CString strLaborDescription)
 {
 	strLaborDescription.Replace("'", "''");
-	m_setBasicLabor.m_strFilter.Format("[MaterialTypeID] = '%d' and [LaborDescription] = '%s'", m_lMaterialType, strLaborDescription ) ;
+	m_setBasicLabor.m_strFilter.Format("[MaterialTypeID] = '%d' and [Description] = '%s'", m_lMaterialType, strLaborDescription ) ;
 	m_setBasicLabor.Requery() ;
 }
 
@@ -1754,7 +1754,7 @@ void CGridLabor::FilterOptions(long lRow)
 void CGridLabor::FilterOptions(CString strOptionDescription)
 {
 	strOptionDescription.Replace("'", "''");
-	m_setOptions.m_strFilter.Format("[MaterialTypeID] = '%d' AND [OptionDescription] = '%s'", m_lMaterialType, strOptionDescription ) ;
+	m_setOptions.m_strFilter.Format("[MaterialTypeID] = '%d' AND [Description] = '%s'", m_lMaterialType, strOptionDescription ) ;
 	m_setOptions.Requery() ;
 }
 
@@ -1770,7 +1770,7 @@ void CGridLabor::FilterOptions()
 	{
 		m_setOptions.m_strFilter.Format("[MaterialTypeID] = '%d'", m_lMaterialType ) ;
 	}
-	m_setOptions.m_strSort = "[OptionDescription]" ;
+	m_setOptions.m_strSort = "[Description]" ;
 	if (m_setOptions.IsOpen())
 	{
 		m_setOptions.Requery() ;
@@ -2151,7 +2151,7 @@ void CGridLabor::RefreshPrices()
 		{
 			strTemp = QuickGetText(LABOR_DESC, lRow);
 			strTemp.Replace("'", "''");
-			setBasicLabor.m_strFilter.Format("LaborDescription = '%s' AND MaterialTypeID = %d", strTemp, m_lMaterialType);
+			setBasicLabor.m_strFilter.Format("Description = '%s' AND MaterialTypeID = %d", strTemp, m_lMaterialType);
 			setBasicLabor.Requery();
 			ASSERT(!setBasicLabor.IsEOF());
 			if (!setBasicLabor.IsEOF())
@@ -2177,7 +2177,7 @@ void CGridLabor::RefreshPrices()
 		{
 			strTemp = QuickGetText(LABOR_DESC, lRow);
 			strTemp.Replace("'", "''");
-			setOptions.m_strFilter.Format("OptionDescription = '%s' AND MaterialTypeID = %d", strTemp, m_lMaterialType);
+			setOptions.m_strFilter.Format("Description = '%s' AND MaterialTypeID = %d", strTemp, m_lMaterialType);
 			setOptions.Requery();
 			ASSERT(!setOptions.IsEOF());
 			if (!setOptions.IsEOF())

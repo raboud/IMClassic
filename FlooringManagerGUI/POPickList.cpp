@@ -144,17 +144,6 @@ void CPOPickList::Update(long lCustomerID)
 		QuickSetText(PO, lRow, m_setPickList.m_PurchaseOrderNumber) ;
 		QuickSetText(ORDER_DATE, lRow, m_setPickList.m_OrderDate.Format( "%Y/%m/%d" ));
 
-		//CSetVwOrderBasicLaborDetails setDetails(&g_dbFlooring) ;
-		//setDetails.m_strFilter.Format("([OrderID] = '%d' and [Deleted] = 0 and [PrintOnWO] = 1)", m_setOrders.m_OrderID) ;
-		//setDetails.Open() ;
-		//double fSize = 0 ;
-		//while (!setDetails.IsEOF())
-		//{
-		//	fSize += setDetails.m_InstallQuantity ;
-		//	setDetails.MoveNext() ;
-		//}
-		//setDetails.Close() ;
-
 		if (m_setPickList.m_Scheduled)
 		//if (!m_setPickList.IsFieldNull(&m_setPickList.m_ScheduleStartDate))
 		{

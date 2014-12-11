@@ -24,8 +24,8 @@ public:
 	//{{AFX_FIELD(CSetOptions, CRecordset)
 	long	m_OptionID;
 	CString	m_OptionDescription;
-	CString	m_UnitPrice;
-	CString	m_UnitCost;
+//	CString	m_UnitPrice;
+//	CString	m_UnitCost;
 	long	m_UnitOfMeasureID;
 	long	m_MaterialTypeID;
 	BOOL	m_ApplyToMinimum;

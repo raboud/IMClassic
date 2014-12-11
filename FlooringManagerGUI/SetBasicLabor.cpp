@@ -27,11 +27,9 @@ CSetBasicLabor::CSetBasicLabor(CDatabase* pdb)
 	m_UnitOfMeasureID = 0;
 	m_BasicLaborID = 0;
 	m_LaborDescription = _T("");
-	m_UnitPrice = _T("");
-	m_UnitCost = _T("");
 	m_MaterialTypeID = 0;
 	m_Active = FALSE;
-	m_nFields = 7;
+	m_nFields = 5;
 	//}}AFX_FIELD_INIT
 	m_nDefaultType = dynaset;
 }
@@ -44,7 +42,7 @@ CString CSetBasicLabor::GetDefaultConnect()
 
 CString CSetBasicLabor::GetDefaultSQL()
 {
-	return _T("[dbo].[BasicLabor]");
+	return _T("[dbo].[vwBasicLaborItems]");
 }
 
 void CSetBasicLabor::DoFieldExchange(CFieldExchange* pFX)
@@ -57,9 +55,7 @@ void CSetBasicLabor::DoFieldExchange(CFieldExchange* pFX)
 	}
 	RFX_Long(pFX, _T("[UnitOfMeasureID]"), m_UnitOfMeasureID);
 	RFX_Long(pFX, _T("[BasicLaborID]"), m_BasicLaborID);
-	RFX_Text(pFX, _T("[LaborDescription]"), m_LaborDescription);
-	RFX_Text(pFX, _T("[UnitPrice]"), m_UnitPrice);
-	RFX_Text(pFX, _T("[UnitCost]"), m_UnitCost);
+	RFX_Text(pFX, _T("[Description]"), m_LaborDescription);
 	RFX_Long(pFX, _T("[MaterialTypeID]"), m_MaterialTypeID);
 	RFX_Bool(pFX, _T("[Active]"), m_Active);
 	//}}AFX_FIELD_MAP

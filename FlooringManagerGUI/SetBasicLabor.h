@@ -25,8 +25,6 @@ public:
 	long	m_UnitOfMeasureID;
 	long	m_BasicLaborID;
 	CString	m_LaborDescription;
-	CString	m_UnitPrice;
-	CString	m_UnitCost;
 	long	m_MaterialTypeID;
 	BOOL	m_Active;
 	//}}AFX_FIELD
