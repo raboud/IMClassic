@@ -111,7 +111,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /s ..\Common\SSCE\runtime $(OutDir)</Command>
+      <Command>xcopy /y /s ..\Common\SSCE\runtime $(OutDir)
+copy Flooring.exe.config $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -871,6 +872,10 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Common\SSCE\runtime\SSCE5332.dll" />
+    <None Include="Flooring.exe.config">
+      <DeploymentContent>true</DeploymentContent>
+      <FileType>Document</FileType>
+    </None>
     <None Include="res\bitmap2.bmp" />
     <None Include="res\bold.bmp" />
     <None Include="res\cursor1.cur" />
