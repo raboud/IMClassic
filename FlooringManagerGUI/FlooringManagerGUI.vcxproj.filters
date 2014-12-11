@@ -546,9 +546,6 @@
     <ClCompile Include="SetBasicLabor.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SetBills.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SetCatagories.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
@@ -754,9 +751,6 @@
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetUserMarketDivisionAssignments.cpp">
-      <Filter>Record Sets\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SetUserPermissions.cpp">
       <Filter>Record Sets\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetVendorNumbers.cpp">
@@ -1432,9 +1426,6 @@
     <ClInclude Include="SetBasicLabor.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SetBills.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SetCatagories.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
@@ -1640,9 +1631,6 @@
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetUserMarketDivisionAssignments.h">
-      <Filter>Record Sets\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SetUserPermissions.h">
       <Filter>Record Sets\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SetVendorNumbers.h">

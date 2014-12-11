@@ -468,10 +468,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetActivityTypes.cpp" />
     <ClCompile Include="SetAdmins.cpp" />
     <ClCompile Include="SetBasicLabor.cpp" />
-    <ClCompile Include="SetBills.cpp">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">c:\code\common\include;C:\dev\Dundas\Ultimate Toolbox\include;C:\dev\Dundas\ug97mfc\Include;..\Common;..\..\..\code\CFI\FlooringManager\FlooringManagerGUI</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
     <ClCompile Include="SetCatagories.cpp" />
     <ClCompile Include="SetChargeBacks.cpp" />
     <ClCompile Include="SetCheckCBDetails.cpp" />
@@ -551,7 +547,6 @@ copy Flooring.exe.config $(OutDir)</Command>
     <ClCompile Include="SetUnpaid.cpp" />
     <ClCompile Include="SetUser.cpp" />
     <ClCompile Include="SetUserMarketDivisionAssignments.cpp" />
-    <ClCompile Include="SetUserPermissions.cpp" />
     <ClCompile Include="SetVendorNumbers.cpp" />
     <ClCompile Include="SetVersion.cpp" />
     <ClCompile Include="SetViewOrderRegMerchandiseDetails.cpp" />
@@ -786,7 +781,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetActivityTypes.h" />
     <ClInclude Include="SetAdmins.h" />
     <ClInclude Include="SetBasicLabor.h" />
-    <ClInclude Include="SetBills.h" />
     <ClInclude Include="SetCatagories.h" />
     <ClInclude Include="SetChargeBacks.h" />
     <ClInclude Include="SetCheckCBDetails.h" />
@@ -856,7 +850,6 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ClInclude Include="SetUnpaid.h" />
     <ClInclude Include="SetUser.h" />
     <ClInclude Include="SetUserMarketDivisionAssignments.h" />
-    <ClInclude Include="SetUserPermissions.h" />
     <ClInclude Include="SetVendorNumbers.h" />
     <ClInclude Include="SetVersion.h" />
     <ClInclude Include="SetViewOrderRegMerchandiseDetails.h" />
