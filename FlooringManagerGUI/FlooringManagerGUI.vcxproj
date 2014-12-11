@@ -921,6 +921,9 @@ makehm IDW_,HIDW_,0x50000 resource.h &gt;&gt;"hlp\$(TargetName).hm"
     <ProjectReference Include="..\..\InstallationManager\InstallationManager.ReportsUI\Reports.UI.csproj">
       <Project>{a16da113-dfa3-4724-b6cc-65d4c59c8527}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\InstallationManager\InstallationManagerApp\InstallationManagerApp.csproj">
+      <Project>{4f7db31f-1226-467b-b074-7657fe32f634}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\InstallationManager\TypesAndInterfaces\CFI.InstallationManager.TypesAndInterfaces.csproj">
       <Project>{4f5429bc-ed29-4e3c-8464-5b9cc738cc6b}</Project>
     </ProjectReference>

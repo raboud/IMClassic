@@ -14,6 +14,7 @@ using namespace System::Collections::Generic;
 using namespace CFI::InstallationManager::Business;
 using namespace CFI::DB::Entities;
 using namespace CFI::InstallationManager::Controls;
+using namespace CFI::InstallationManager;
 
 CSetSettings::CSetSettings(CDatabase*  /* pdb */)
 {
@@ -69,7 +70,7 @@ CString CSetSettings::GetSetting(const CString& strSettingName, const CString& s
 
 CString CSetSettings::GetSettings(const CString& strSettingName, char cSeparator/* = ','*/)
 {
-	List<String^> setting =   SettingsBLL::GetSettingsValues(Singleton::Connection, gcnew System::String(strSettingName));
+	List<String^>^ setting =   SettingsBLL::GetSettingsValues(Singleton::Connection, gcnew System::String(strSettingName));
 
 	CString strValue = "";
 	CString strTemp = "";
