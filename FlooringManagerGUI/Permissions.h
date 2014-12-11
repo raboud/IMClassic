@@ -12,11 +12,11 @@ public:
 
 	bool IsAdmin();
 
-	bool HasPermission(CString strPermission);
-	bool HasPermission(CString strPermission, int iMarketID, int iDivisionID);
-	bool HasPermissionMarket(CString strPermission, int iMarketID);
-	bool HasPermissionDivision(CString strPermission, int iDivisionID);
-	bool HasNoteTypePermission(CString strNoteType);
+	bool HasPermission(const CString strPermission);
+	bool HasPermission(const CString strPermission, int iMarketID, int iDivisionID);
+	bool HasPermissionMarket(const CString strPermission, int iMarketID);
+	bool HasPermissionDivision(const CString strPermission, int iDivisionID);
+	bool HasNoteTypePermission(const CString strNoteType);
 
 protected:
 	int m_iUserID;
@@ -28,12 +28,12 @@ inline bool CPermissions::IsAdmin()
 	return m_bIsAdmin;
 }
 
-inline bool CPermissions::HasPermissionMarket(CString strPermission, int iMarketID)
+inline bool CPermissions::HasPermissionMarket(const CString strPermission, int iMarketID)
 {
 	return HasPermission(strPermission, iMarketID, -1);
 }
 
-inline bool CPermissions::HasPermissionDivision(CString strPermission, int iDivisionID)
+inline bool CPermissions::HasPermissionDivision(const CString strPermission, int iDivisionID)
 {
 	return HasPermission(strPermission, -1, iDivisionID);
 }
