@@ -33,6 +33,7 @@ using namespace CFI::Utility::Mail;
 using namespace CFI::InstallationManager::Business;
 using namespace CFI::InstallationManager::Reports::UI;
 using namespace CFI::InstallationManager::SharedForms;
+using namespace CFI::InstallationManager::Controls;
 
 CGlobals::CGlobals(void)
 {
@@ -691,14 +692,12 @@ CString CGlobals::GetTitleName(int iTitleID)
 
 CString CGlobals::GetCurrentUserSMTPEmailAddress()
 {
-	UserBLL^ userBll = CachedData::CurrentUser;
-	return userBll->EmailAddress;	
+	return Singleton::Cache->CurrentUser->EmailAddress;	
 }
 
 CString CGlobals::GetCurrentUserReplyToEmailAddress()
 {
-	UserBLL^ userBll = CachedData::CurrentUser;
-	return userBll->ReplyToEmailAddress;	
+	return Singleton::Cache->CurrentUser->ReplyToEmailAddress;	
 }
 
 bool CGlobals::IsSOSI(int iOrderID)
@@ -926,9 +925,7 @@ int CGlobals::GetEmployeeID()
 
 void CGlobals::SetAdmin()
 {
-	CGlobals::GetEmployeeID();
-	UserBLL^ userBll = gcnew UserBLL(m_iUserID, CachedData::Context);
-	m_bAdmin = userBll->IsAdmin;
+	m_bAdmin = Singleton::Cache->CurrentUser->IsAdmin;
 }
 
 void CGlobals::OnReportsBilling() 
@@ -1108,7 +1105,7 @@ void CGlobals::SetEmployeeID(int ID)
 {
 	if (ID != -1)
 	{
-		CachedData::ImpersonateUser(ID);						
+		Singleton::Cache->ImpersonateUser(ID);						
 	}
 
 	SetEmployeeID();
@@ -1116,9 +1113,8 @@ void CGlobals::SetEmployeeID(int ID)
 
 void CGlobals::SetEmployeeID()
 {
-	UserBLL^ userBll = CachedData::CurrentUser;
-	m_iUserID = userBll->UserID;
-	m_strUserName = userBll->UserName;
+	m_iUserID = Singleton::Cache->CurrentUser->UserID;
+	m_strUserName = Singleton::Cache->CurrentUser->UserName;
 
 	SetAdmin();
 }
@@ -1130,9 +1126,7 @@ bool CGlobals::IsAdmin()
 
 CString CGlobals::GetUserFirstAndLastName()
 {
-	UserBLL^ userBll = CachedData::CurrentUser;
-
-	return userBll->FullName;	
+	return Singleton::Cache->CurrentUser->FullName;	
 }
 
 CString CGlobals::GetComputerName()
@@ -1165,7 +1159,7 @@ BOOL CGlobals::ValidateMinimumVersion( CString strVersion )
 		setSettings.SetSetting("IMClassicVersion", ComputerAndVersionValue, CGlobals::m_iUserID);
 	}
 
-	VersionBLL^ versionBll = gcnew VersionBLL(CachedData::Context);
+	VersionBLL^ versionBll = gcnew VersionBLL(Singleton::Connection);
 
 	if ( (iMinimumVersionMajorSW > versionBll->IMClassicMinimumVersionMajor) ||
 		 ((iMinimumVersionMajorSW == versionBll->IMClassicMinimumVersionMajor) &&
@@ -1190,34 +1184,28 @@ BOOL CGlobals::ValidateMinimumVersion( CString strVersion )
 
 bool CGlobals::HasPermission(const CString strPermission)
 {
-	int m_iUserID = CGlobals::GetEmployeeID();
-	UserBLL^ userBll = gcnew UserBLL(m_iUserID, CachedData::Context);
-	bool bOK = userBll->HasPermission(gcnew System::String(strPermission));
+	bool bOK = Singleton::Cache->CurrentUser->HasPermission(gcnew System::String(strPermission));
 	return bOK;
 }
 
 bool CGlobals::HasPermission(const CString strPermission, int iMarketID, int iDivisionID)
 {
-	int m_iUserID = CGlobals::GetEmployeeID();
-	UserBLL^ userBll = gcnew UserBLL(m_iUserID, CachedData::Context);
-	bool bOK = userBll->HasPermission(iMarketID, iDivisionID, gcnew System::String(strPermission));
+	bool bOK = Singleton::Cache->CurrentUser->HasPermission(iMarketID, iDivisionID, gcnew System::String(strPermission));
 	return bOK;
 }
 
 bool CGlobals::HasNoteTypePermission(const CString strNoteType)
 {
-	int m_iUserID = CGlobals::GetEmployeeID();
-	UserBLL^ userBll = gcnew UserBLL(m_iUserID, CachedData::Context);
-	bool bOK = userBll->HasNoteTypePermission(gcnew System::String(strNoteType));
+	bool bOK = Singleton::Cache->CurrentUser->HasNoteTypePermission(gcnew System::String(strNoteType));
 	return bOK;
 }
 
 bool CGlobals::GetBasicPrices(int iBasicLaborID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice)
 {
 	double temp = -11.0;
-	temp = (double) PricingBLL::GetBasicPrice(CachedData::Context, iBasicLaborID, iStoreID, System::DateTime::FromOADate(OrderDate));
+	temp = (double) PricingBLL::GetBasicPrice(Singleton::Connection, iBasicLaborID, iStoreID, System::DateTime::FromOADate(OrderDate));
 	dPrice = temp;
-	temp = (double) PricingBLL::GetBasicCost(CachedData::Context, iBasicLaborID, iStoreID, System::DateTime::FromOADate(ScheduleDate));
+	temp = (double) PricingBLL::GetBasicCost(Singleton::Connection, iBasicLaborID, iStoreID, System::DateTime::FromOADate(ScheduleDate));
 	dCost = temp;
 	return true;
 }
@@ -1225,9 +1213,9 @@ bool CGlobals::GetBasicPrices(int iBasicLaborID, COleDateTime OrderDate, COleDat
 bool CGlobals::GetOptionPrices(int iOptionID, COleDateTime OrderDate, COleDateTime ScheduleDate, int iStoreID, double& dCost, double& dPrice)
 {
 	double temp = -11.0;
-	temp = (double) PricingBLL::GetOptionPrice(CachedData::Context, iOptionID, iStoreID, System::DateTime::FromOADate(OrderDate));
+	temp = (double) PricingBLL::GetOptionPrice(Singleton::Connection, iOptionID, iStoreID, System::DateTime::FromOADate(OrderDate));
 	dPrice = temp;
-	temp = (double) PricingBLL::GetOptionCost(CachedData::Context, iOptionID, iStoreID, System::DateTime::FromOADate(ScheduleDate));
+	temp = (double) PricingBLL::GetOptionCost(Singleton::Connection, iOptionID, iStoreID, System::DateTime::FromOADate(ScheduleDate));
 	dCost = temp;
 	return true;
 }

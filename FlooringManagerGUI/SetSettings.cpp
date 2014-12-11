@@ -13,6 +13,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 using namespace CFI::InstallationManager::Business;
 using namespace CFI::DB::Entities;
+using namespace CFI::InstallationManager::Controls;
 
 CSetSettings::CSetSettings(CDatabase*  /* pdb */)
 {
@@ -56,11 +57,11 @@ CString CSetSettings::GetSetting(const CString& strSettingName, const CString& s
 
 	if (iUserID == -1)
 	{
-		strValue = SettingsBLL::GetSetting(CachedData::Context, gcnew System::String(strSettingName), gcnew System::String(strDefault));
+		strValue = SettingsBLL::GetSetting(Singleton::Connection, gcnew System::String(strSettingName), gcnew System::String(strDefault));
 	}
 	else
 	{
-		strValue = SettingsBLL::GetUserSetting(CachedData::Context, gcnew System::String(strSettingName), gcnew System::String(strDefault), iUserID);
+		strValue = SettingsBLL::GetUserSetting(Singleton::Connection, gcnew System::String(strSettingName), gcnew System::String(strDefault), iUserID);
 	}
     
 	return strValue;
@@ -68,7 +69,7 @@ CString CSetSettings::GetSetting(const CString& strSettingName, const CString& s
 
 CString CSetSettings::GetSettings(const CString& strSettingName, char cSeparator/* = ','*/)
 {
-	List<String^> setting =   SettingsBLL::GetSettingsValues(CachedData::Context, gcnew System::String(strSettingName));
+	List<String^> setting =   SettingsBLL::GetSettingsValues(Singleton::Connection, gcnew System::String(strSettingName));
 
 	CString strValue = "";
 	CString strTemp = "";
@@ -91,7 +92,7 @@ CString CSetSettings::GetSettings(const CString& strSettingName, char cSeparator
 
 bool CSetSettings::SetSetting(const CString& strSettingName, const CString& strValue, int iUserID /* -1 */)
 {
-    return SettingsBLL::SetUserSetting(gcnew System::String(strSettingName), gcnew System::String(strValue), iUserID, CachedData::Context);
+    return SettingsBLL::SetUserSetting(gcnew System::String(strSettingName), gcnew System::String(strValue), iUserID, Singleton::Connection);
 }
 
 bool CSetSettings::SetSetting(const CString& strSettingName, long lValue, int iUserID /* = -1 */)
