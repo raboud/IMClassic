@@ -6,18 +6,18 @@
 
 // set generic version info
 #define VINFO_HI_FILEVERSION 			03
-#define VINFO_LO_FILEVERSION 			54
+#define VINFO_LO_FILEVERSION 			55
 #define VINFO_HI_FILEBUILD   			00
 #define VINFO_LO_FILEBUILD   			00
 
 #define VINFO_HI_PRODUCTVERSION 		03
-#define VINFO_LO_PRODUCTVERSION 		54
+#define VINFO_LO_PRODUCTVERSION 		55
 #define VINFO_HI_PRODUCTBUILD   		00
 #define VINFO_LO_PRODUCTBUILD   		00
 
 #define VINFO_STRING_COMMENTS			"Installation Manager Classic\000"
 #define VINFO_STRING_COMPANYNAME		"R & R Engineering, LLC\000"
-#define VINFO_STRING_COPYRIGHT			"Copyright © 2001-2013, R & R Engineering, LLC\000"
+#define VINFO_STRING_COPYRIGHT			"Copyright © 2001-2014, R & R Engineering, LLC\000"
 #define VINFO_STRING_FILEDESCRIPTION	"Installation Manager Classic\000"
 #define VINFO_STRING_PRODUCTNAME		"Installation Manager Classic\000"
 
