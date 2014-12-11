@@ -34,12 +34,6 @@ CSetJobDetails::CSetJobDetails(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetJobDetails::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetJobDetails::GetDefaultSQL()
 {
 	return _T("[dbo].[JobDetails]");

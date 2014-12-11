@@ -33,12 +33,6 @@ CSetUnitOfMeasure::CSetUnitOfMeasure(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetUnitOfMeasure::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetUnitOfMeasure::GetDefaultSQL()
 {
 	return _T("[dbo].[UnitOfMeasure]");

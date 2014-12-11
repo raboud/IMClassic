@@ -25,11 +25,6 @@ CSetMeasureCompLineItemData::CSetMeasureCompLineItemData(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetMeasureCompLineItemData::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetMeasureCompLineItemData::GetDefaultSQL()
 {
 	return _T("[dbo].[MeasureCompLineItemData]");

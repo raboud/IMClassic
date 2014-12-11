@@ -47,12 +47,6 @@ CSetChargeBacks::CSetChargeBacks(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetChargeBacks::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetChargeBacks::GetDefaultSQL()
 {
 	return _T("[dbo].[ChargeBacks]");

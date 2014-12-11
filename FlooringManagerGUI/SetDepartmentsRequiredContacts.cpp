@@ -21,11 +21,6 @@ CSetDepartmentsRequiredContacts::CSetDepartmentsRequiredContacts(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetDepartmentsRequiredContacts::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetDepartmentsRequiredContacts::GetDefaultSQL()
 {
 	return _T("[dbo].[DepartmentsRequiredContacts]");

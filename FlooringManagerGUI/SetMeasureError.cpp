@@ -31,12 +31,6 @@ CSetMeasureError::CSetMeasureError(CDatabase* pdb)
 	m_nDefaultType = snapshot;
 }
 
-
-CString CSetMeasureError::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetMeasureError::GetDefaultSQL()
 {
 	return _T("[dbo].[Measure Error]");

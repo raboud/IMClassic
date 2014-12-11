@@ -32,12 +32,6 @@ CSetStoreType::CSetStoreType(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetStoreType::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetStoreType::GetDefaultSQL()
 {
 	return _T("[dbo].[StoreType]");

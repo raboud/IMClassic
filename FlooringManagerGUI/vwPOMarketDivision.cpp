@@ -24,11 +24,6 @@ CvwPOMarketDivision::CvwPOMarketDivision(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CvwPOMarketDivision::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CvwPOMarketDivision::GetDefaultSQL()
 {
 	return _T("[dbo].[vwPOMarketDivision]");

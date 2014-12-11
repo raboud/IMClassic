@@ -22,11 +22,6 @@ CvwWorkOrderMaterialsChecklist::CvwWorkOrderMaterialsChecklist(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CvwWorkOrderMaterialsChecklist::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CvwWorkOrderMaterialsChecklist::GetDefaultSQL()
 {
 	return _T("[dbo].[vwWorkOrderMaterialsChecklist]");

@@ -33,11 +33,6 @@ CSetVwPOPickList::CSetVwPOPickList(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetVwPOPickList::GetDefaultConnect()
-{
-	return _T("DSN=Flooring;ODBC;");
-}
-
 CString CSetVwPOPickList::GetDefaultSQL()
 {
 	return _T("[dbo].[vwPOPickList]");

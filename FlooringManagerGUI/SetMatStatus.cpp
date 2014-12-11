@@ -33,12 +33,6 @@ CSetMatStatus::CSetMatStatus(CDatabase* pdb)
 	m_nDefaultType = snapshot;
 }
 
-
-CString CSetMatStatus::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetMatStatus::GetDefaultSQL()
 {
 	return _T("[dbo].[Material Status]");

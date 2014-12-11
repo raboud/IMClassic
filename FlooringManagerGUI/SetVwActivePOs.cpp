@@ -38,11 +38,6 @@ CSetVwActivePOs::CSetVwActivePOs(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetVwActivePOs::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetVwActivePOs::GetDefaultSQL()
 {
 	return _T("[dbo].[vwActivePOs]");

@@ -30,11 +30,6 @@ CSetPONotesWithName::CSetPONotesWithName(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetPONotesWithName::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetPONotesWithName::GetDefaultSQL()
 {
 	return _T("[dbo].[vwPONotesWithName]");

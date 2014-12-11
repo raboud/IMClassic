@@ -17,11 +17,6 @@ CSetVwMaterialTypesAndMarketsMapping::CSetVwMaterialTypesAndMarketsMapping(CData
 	m_nDefaultType = dynaset;
 }
 
-CString CSetVwMaterialTypesAndMarketsMapping::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetVwMaterialTypesAndMarketsMapping::GetDefaultSQL()
 {
 	return _T("[dbo].[vwMaterialTypesAndMarketsMapping]");

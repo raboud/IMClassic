@@ -36,12 +36,6 @@ CSetDuplicates::CSetDuplicates(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetDuplicates::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetDuplicates::GetDefaultSQL()
 {
 	return _T("[dbo].[Duplicates]");

@@ -42,12 +42,6 @@ CSetCustomer::CSetCustomer(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetCustomer::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetCustomer::GetDefaultSQL()
 {
 	return _T("[dbo].[Customers]");

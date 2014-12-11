@@ -25,11 +25,6 @@ CSetVwOrderBasicLaborDetails::CSetVwOrderBasicLaborDetails(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetVwOrderBasicLaborDetails::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetVwOrderBasicLaborDetails::GetDefaultSQL()
 {
 	return _T("[dbo].[vwOrderBasicLaborDetails]");

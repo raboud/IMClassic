@@ -21,11 +21,6 @@ CSetPayrollMessages::CSetPayrollMessages(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetPayrollMessages::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetPayrollMessages::GetDefaultSQL()
 {
 	return _T("[dbo].[PayrollMessages]");

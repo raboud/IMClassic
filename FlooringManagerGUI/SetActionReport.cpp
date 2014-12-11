@@ -45,12 +45,6 @@ CSetActionReport::CSetActionReport(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetActionReport::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetActionReport::GetDefaultSQL()
 {
 	return _T("[dbo].[ActionReport]");

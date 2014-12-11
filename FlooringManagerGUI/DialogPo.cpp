@@ -64,6 +64,7 @@ CDlgPo::CDlgPo(CWnd* pParent /*=NULL*/)
 	, m_bBilled(false)
 	, m_bUseSOSIDiagram(false)
 	, m_strEntryMethod(_T(""))
+	, m_setDiscrepancies(&g_dbFlooring)
 {
 	CGlobals::GetUserSetting("ShowUnitCost", m_bShowUnitCost) ;
 	CGlobals::GetUserSetting("ShowInactive", m_bShowInactive) ;

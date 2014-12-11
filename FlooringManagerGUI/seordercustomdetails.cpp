@@ -45,12 +45,6 @@ CSetOrderCustomDetails::CSetOrderCustomDetails(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetOrderCustomDetails::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetOrderCustomDetails::GetDefaultSQL()
 {
 	return _T("[dbo].[OrderCustomDetails]");

@@ -22,11 +22,6 @@ CSetOrderDiagrams::CSetOrderDiagrams(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetOrderDiagrams::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetOrderDiagrams::GetDefaultSQL()
 {
 	return _T("[dbo].[OrderDiagrams]");

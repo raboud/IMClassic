@@ -20,11 +20,6 @@ CSetScheduleChangeReasonCodes::CSetScheduleChangeReasonCodes(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetScheduleChangeReasonCodes::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetScheduleChangeReasonCodes::GetDefaultSQL()
 {
 	return _T("[dbo].[ScheduleChangeReasonCodes]");

@@ -24,11 +24,6 @@ CSetDepartmentsStoresAssignments::CSetDepartmentsStoresAssignments(CDatabase* pd
 	m_nDefaultType = dynaset;
 }
 
-CString CSetDepartmentsStoresAssignments::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetDepartmentsStoresAssignments::GetDefaultSQL()
 {
 	return _T("[dbo].[DepartmentsStoresAssignments]");

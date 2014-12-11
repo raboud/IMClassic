@@ -27,10 +27,6 @@ CSetNoteTypes::CSetNoteTypes(CDatabase* pdb)
 	m_nFields = 11;
 	m_nDefaultType = dynaset;
 }
-CString CSetNoteTypes::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
 
 CString CSetNoteTypes::GetDefaultSQL()
 {

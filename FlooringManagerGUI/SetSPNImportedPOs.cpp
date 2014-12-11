@@ -23,11 +23,6 @@ CSetSPNImportedPOs::CSetSPNImportedPOs(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetSPNImportedPOs::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetSPNImportedPOs::GetDefaultSQL()
 {
 	return _T("[dbo].[SPNImportedPOs]");

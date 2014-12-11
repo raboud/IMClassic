@@ -25,11 +25,6 @@ CSetIssues::CSetIssues(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetIssues::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetIssues::GetDefaultSQL()
 {
 	return _T("[dbo].[Issues]");

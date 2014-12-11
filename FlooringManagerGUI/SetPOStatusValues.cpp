@@ -18,10 +18,6 @@ CSetPOStatusValues::CSetPOStatusValues(CDatabase* pdb)
 	m_nFields = 2;
 	m_nDefaultType = dynaset;
 }
-CString CSetPOStatusValues::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
 
 CString CSetPOStatusValues::GetDefaultSQL()
 {

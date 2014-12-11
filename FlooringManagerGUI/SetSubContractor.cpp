@@ -59,12 +59,6 @@ CSetSubContractor::CSetSubContractor(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetSubContractor::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetSubContractor::GetDefaultSQL()
 {
 	return _T("[dbo].[SubContractors]");

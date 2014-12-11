@@ -25,11 +25,6 @@ CSetVwDepartmentsContactTitles::CSetVwDepartmentsContactTitles(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetVwDepartmentsContactTitles::GetDefaultConnect()
-{
-	return _T("DSN=Flooring;ODBC;");
-}
-
 CString CSetVwDepartmentsContactTitles::GetDefaultSQL()
 {
 	return _T("[dbo].[vwDepartmentsContactTitles]");

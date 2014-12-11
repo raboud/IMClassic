@@ -34,12 +34,6 @@ CSetvwChargeback::CSetvwChargeback(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-// store the password in some other form or use a different user authentication.
-CString CSetvwChargeback::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetvwChargeback::GetDefaultSQL()
 {
 	return _T("[dbo].[vwChargeback]");

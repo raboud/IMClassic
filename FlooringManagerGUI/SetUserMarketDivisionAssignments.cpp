@@ -21,11 +21,6 @@ CSetUserMarketDivisionAssignments::CSetUserMarketDivisionAssignments(CDatabase* 
 	m_nDefaultType = dynaset;
 }
 
-CString CSetUserMarketDivisionAssignments::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetUserMarketDivisionAssignments::GetDefaultSQL()
 {
 	return _T("[dbo].[UserMarketDivisionAssignments]");

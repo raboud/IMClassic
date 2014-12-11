@@ -31,12 +31,6 @@ CSetInstallerError::CSetInstallerError(CDatabase* pdb)
 	m_nDefaultType = snapshot;
 }
 
-
-CString CSetInstallerError::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetInstallerError::GetDefaultSQL()
 {
 	return _T("[dbo].[Installer Error]");

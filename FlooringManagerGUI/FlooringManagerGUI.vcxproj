@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <ProjectGuid>{D8C210B2-7A40-4F4C-8AC5-49CFDBCBDAE6}</ProjectGuid>
     <RootNamespace>FlooringManagerGUI</RootNamespace>
     <SccProjectName>SAK</SccProjectName>
@@ -910,6 +911,9 @@ copy Flooring.exe.config $(OutDir)</Command>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\InstallationManager\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>

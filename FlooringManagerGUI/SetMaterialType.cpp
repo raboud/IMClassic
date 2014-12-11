@@ -48,12 +48,6 @@ CSetMaterialType::CSetMaterialType(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetMaterialType::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetMaterialType::GetDefaultSQL()
 {
 	return _T("[dbo].[MaterialType]");

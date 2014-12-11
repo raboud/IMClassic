@@ -35,11 +35,6 @@ CSetMeasureCompCustData::CSetMeasureCompCustData(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetMeasureCompCustData::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetMeasureCompCustData::GetDefaultSQL()
 {
 	return _T("[dbo].[MeasureCompCustData]");

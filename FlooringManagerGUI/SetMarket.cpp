@@ -21,11 +21,6 @@ CSetMarket::CSetMarket(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetMarket::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetMarket::GetDefaultSQL()
 {
 	return _T("[dbo].[Market]");

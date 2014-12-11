@@ -42,12 +42,6 @@ CSetPayments::CSetPayments(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetPayments::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetPayments::GetDefaultSQL()
 {
 	return _T("[dbo].[Payments]");

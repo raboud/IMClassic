@@ -279,7 +279,7 @@ void CGridChecking::InitializeData()
 		setVwChargeBack.MoveNext() ;
 	}
 
-	CSetCheckCBDetail setCbTaken ;
+	CSetCheckCBDetail setCbTaken(&g_dbFlooring);
 	setCbTaken.m_strFilter.Format("[CheckID] = '%d'", this->m_iCheckID) ;
 	setCbTaken.Open() ;
 	

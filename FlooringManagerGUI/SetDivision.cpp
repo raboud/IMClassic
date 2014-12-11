@@ -24,11 +24,6 @@ CSetDivision::CSetDivision(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetDivision::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetDivision::GetDefaultSQL()
 {
 	return _T("[dbo].[Division]");

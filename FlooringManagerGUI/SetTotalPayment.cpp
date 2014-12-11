@@ -31,12 +31,6 @@ CSetTotalPayment::CSetTotalPayment(CDatabase* pdb)
 	m_nDefaultType = snapshot;
 }
 
-
-CString CSetTotalPayment::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetTotalPayment::GetDefaultSQL()
 {
 	return _T("[dbo].[TotalPayment]");

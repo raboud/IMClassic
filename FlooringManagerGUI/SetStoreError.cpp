@@ -31,12 +31,6 @@ CSetStoreError::CSetStoreError(CDatabase* pdb)
 	m_nDefaultType = snapshot;
 }
 
-
-CString CSetStoreError::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetStoreError::GetDefaultSQL()
 {
 	return _T("[dbo].[Store Error]");

@@ -19,11 +19,6 @@ CSetDepartments::CSetDepartments(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetDepartments::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetDepartments::GetDefaultSQL()
 {
 	return _T("[dbo].[Departments]");

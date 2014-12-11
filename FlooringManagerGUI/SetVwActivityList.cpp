@@ -39,11 +39,6 @@ CSetViewActivityList::CSetViewActivityList(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetViewActivityList::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetViewActivityList::GetDefaultSQL()
 {
 	return _T("[dbo].[vwActivityList]");

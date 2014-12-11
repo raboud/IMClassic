@@ -31,12 +31,6 @@ CSetMillError::CSetMillError(CDatabase* pdb)
 	m_nDefaultType = snapshot;
 }
 
-
-CString CSetMillError::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetMillError::GetDefaultSQL()
 {
 	return _T("[dbo].[Mill Error]");

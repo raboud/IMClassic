@@ -31,12 +31,6 @@ CSetUnpaid::CSetUnpaid(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetUnpaid::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetUnpaid::GetDefaultSQL()
 {
 	return _T("[dbo].[CustomerOrders]");

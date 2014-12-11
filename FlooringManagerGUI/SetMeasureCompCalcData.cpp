@@ -22,11 +22,6 @@ CSetMeasureCompCalcData::CSetMeasureCompCalcData(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetMeasureCompCalcData::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetMeasureCompCalcData::GetDefaultSQL()
 {
 	return _T("[dbo].[MeasureCompCalcData]");

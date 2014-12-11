@@ -35,10 +35,6 @@ CSetEmployees::CSetEmployees(CDatabase* pdb)
 	m_nFields = 18;
 	m_nDefaultType = dynaset;
 }
-CString CSetEmployees::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
 
 CString CSetEmployees::GetDefaultSQL()
 {

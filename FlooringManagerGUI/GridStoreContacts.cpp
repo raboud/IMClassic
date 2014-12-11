@@ -9,7 +9,7 @@
 #include "OXRegExpression.h"
 #include "DlgStore.h"
 
-CGridStoreContacts::CGridStoreContacts(void)
+CGridStoreContacts::CGridStoreContacts(void) : m_setDepartments(&g_dbFlooring)
 {
 //	m_setContactTitles.m_strSort.Format("Title");
 //	m_setContactTitles.Open();

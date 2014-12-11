@@ -34,12 +34,6 @@ CSetBasicLabor::CSetBasicLabor(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetBasicLabor::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetBasicLabor::GetDefaultSQL()
 {
 	return _T("[dbo].[vwBasicLaborItems]");

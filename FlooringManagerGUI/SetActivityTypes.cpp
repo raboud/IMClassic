@@ -25,11 +25,6 @@ CSetActivityTypes::CSetActivityTypes(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetActivityTypes::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetActivityTypes::GetDefaultSQL()
 {
 	return _T("[dbo].[ActivityTypes]");

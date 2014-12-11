@@ -21,11 +21,6 @@ CSetVendorNumbers::CSetVendorNumbers(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetVendorNumbers::GetDefaultConnect()
-{
-	return _T("ODBC; DSN=Flooring;");
-}
-
 CString CSetVendorNumbers::GetDefaultSQL()
 {
 	return _T("[dbo].[VendorNumbers]");

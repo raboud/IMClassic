@@ -17,11 +17,6 @@ CSetInstallerStatus::CSetInstallerStatus(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetInstallerStatus::GetDefaultConnect()
-{
-	return _T("ODBC; DSN=Flooring;");
-}
-
 CString CSetInstallerStatus::GetDefaultSQL()
 {
 	return _T("[dbo].[InstallerStatus]");

@@ -693,7 +693,7 @@ BEGIN
     EDITTEXT        IDC_STORES_STORENUMBER,38,10,40,14,ES_AUTOHSCROLL
     LTEXT           "Type",IDC_STATIC,88,13,17,8
     COMBOBOX        IDC_STORES_STORETYPE,109,10,84,56,CBS_DROPDOWNLIST | CBS_SORT | CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    CONTROL         136,IDC_DEPOT,"Static",SS_BITMAP,201,10,89,28
+	CONTROL         IDB_EXPOBITMAP, IDC_DEPOT, "Static", SS_BITMAP, 201, 10, 89, 28
     CONTROL         "Active",IDC_STORES_ACTIVE_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,487,7,34,10
     LTEXT           "Market",IDC_STATIC,83,32,25,8
     COMBOBOX        IDC_STORES_MARKET,109,29,84,56,CBS_DROPDOWNLIST | CBS_SORT | CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
@@ -1923,7 +1923,7 @@ BEGIN
         BEGIN
             MENUITEM "&Billing Cover",              ID_JOBS_BILLINGCOVER
             MENUITEM "&Pull List...",               168
-            POPUP "HD Job &Status"
+            POPUP "&Status"
             BEGIN
                 MENUITEM "&All Stores",                 32814
                 MENUITEM "&Single Store...",            32823
@@ -2079,7 +2079,7 @@ BEGIN
     END
     POPUP "Find"
     BEGIN
-        MENUITEM "By Home Depot PO Number",     ID_FIND_BY_PO
+        MENUITEM "By PO Number",     ID_FIND_BY_PO
         MENUITEM "By Customer Number",          ID_FIND_BY_CUSTOMER_NUMBER
         MENUITEM "By Internal Order Number",    ID_FIND_BY_ORDER_NUMBER
         MENUITEM "By SO Number",                ID_FIND_BY_SPECIAL_ORDER

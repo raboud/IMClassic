@@ -31,11 +31,6 @@ CSetDiscrepancies::CSetDiscrepancies(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetDiscrepancies::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetDiscrepancies::GetDefaultSQL()
 {
 	return _T("[dbo].[Discrepancies]");

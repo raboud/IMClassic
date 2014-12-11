@@ -40,12 +40,6 @@ CSetOptions::CSetOptions(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetOptions::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetOptions::GetDefaultSQL()
 {
 	return _T("[dbo].[vwOptionItems]");

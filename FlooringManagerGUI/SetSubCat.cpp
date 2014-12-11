@@ -31,12 +31,6 @@ CSetSubCat::CSetSubCat(CDatabase* pdb)
 	m_nDefaultType = snapshot;
 }
 
-
-CString CSetSubCat::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetSubCat::GetDefaultSQL()
 {
 	return _T("[dbo].[MatSubCat]");

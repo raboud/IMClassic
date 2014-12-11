@@ -27,10 +27,6 @@ CViewStoreInfo::CViewStoreInfo(CDatabase* pdb)
 	m_nFields = 7;
 	m_nDefaultType = dynaset;
 }
-CString CViewStoreInfo::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
 
 CString CViewStoreInfo::GetDefaultSQL()
 {

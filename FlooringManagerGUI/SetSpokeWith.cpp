@@ -21,11 +21,6 @@ CSetSpokeWith::CSetSpokeWith(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetSpokeWith::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetSpokeWith::GetDefaultSQL()
 {
 	return _T("[dbo].[SpokeWith]");

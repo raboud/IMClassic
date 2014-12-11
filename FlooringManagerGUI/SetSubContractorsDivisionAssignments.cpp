@@ -21,11 +21,6 @@ CSetSubContractorsDivisionAssignments::CSetSubContractorsDivisionAssignments(CDa
 	m_nDefaultType = dynaset;
 }
 
-CString CSetSubContractorsDivisionAssignments::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetSubContractorsDivisionAssignments::GetDefaultSQL()
 {
 	return _T("[dbo].[SubContractorsDivisionAssignments]");

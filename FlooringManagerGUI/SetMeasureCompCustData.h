@@ -33,8 +33,6 @@ public:
 // Overrides
 	// Wizard generated virtual function overrides
 	public:
-	virtual CString GetDefaultConnect();	// Default connection string
-
 	virtual CString GetDefaultSQL(); 	// default SQL for Recordset
 	virtual void DoFieldExchange(CFieldExchange* pFX);	// RFX support
 

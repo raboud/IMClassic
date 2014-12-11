@@ -18,11 +18,6 @@ CSetVwOrdersWithDiscrepancies::CSetVwOrdersWithDiscrepancies(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetVwOrdersWithDiscrepancies::GetDefaultConnect()
-{
-	return _T("DSN=Flooring;ODBC;");
-}
-
 CString CSetVwOrdersWithDiscrepancies::GetDefaultSQL()
 {
 	return _T("[dbo].[vwOrdersWithAlerts]");

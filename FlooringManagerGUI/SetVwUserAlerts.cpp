@@ -29,11 +29,6 @@ CSetVwUserAlerts::CSetVwUserAlerts(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetVwUserAlerts::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetVwUserAlerts::GetDefaultSQL()
 {
 	return _T("[dbo].[vwUserAlerts]");

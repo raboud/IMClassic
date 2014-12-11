@@ -29,11 +29,6 @@ CSetCompanyInfo::CSetCompanyInfo(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-CString CSetCompanyInfo::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
-
 CString CSetCompanyInfo::GetDefaultSQL()
 {
 	return _T("[dbo].[CompanyInfo]");

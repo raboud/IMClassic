@@ -23,10 +23,6 @@ CSetVwChecksWithVendorInfo::CSetVwChecksWithVendorInfo(CDatabase* pdb)
 	m_nFields = 7;
 	m_nDefaultType = dynaset;
 }
-CString CSetVwChecksWithVendorInfo::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring;");
-}
 
 CString CSetVwChecksWithVendorInfo::GetDefaultSQL()
 {

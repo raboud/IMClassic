@@ -33,12 +33,6 @@ CSetCheckDetails::CSetCheckDetails(CDatabase* pdb)
 	m_nDefaultType = dynaset;
 }
 
-
-CString CSetCheckDetails::GetDefaultConnect()
-{
-	return _T("ODBC;DSN=Flooring");
-}
-
 CString CSetCheckDetails::GetDefaultSQL()
 {
 	return _T("[dbo].[CheckDetail]");
