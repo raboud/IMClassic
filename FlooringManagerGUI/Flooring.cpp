@@ -232,9 +232,10 @@ BOOL CFlooringApp::InitInstance()
 
 	try
 	{
-		CString t = CGlobals::InitDefaultContext();
-//		CString t = _T("DSN=Flooring");
-		BOOL ConnectOK = g_dbFlooring.OpenEx( t, CDatabase::noOdbcDialog);		
+		CGlobals::InitDefaultContext();
+		CString t = _T("DSN=Flooring");
+//		CString t = _T("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=InstallationManager;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+		BOOL ConnectOK = g_dbFlooring.OpenEx( t, CDatabase::noOdbcDialog);
 
 		Logger& logger = Logger::Instance();
 		logger.LogMessage("Starting up...");
@@ -249,7 +250,7 @@ BOOL CFlooringApp::InitInstance()
 			return FALSE;
 		}
 	}
-	catch(CDBException e)
+	catch(CDBException* e)
 	{
 		::MessageBox(NULL, "A critical error occurred when connecting to the database.  The program cannot continue.", "Error!", MB_OK);
 		return FALSE;
@@ -281,6 +282,8 @@ BOOL CFlooringApp::InitInstance()
 		RUNTIME_CLASS(CFlooringDoc),
 		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
 		RUNTIME_CLASS(CCustomerView));
+
+	OutputDebugString(_T("Starting\r\n"));
 
 
 	CGlobals::SetEmployeeID() ;

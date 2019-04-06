@@ -1178,6 +1178,7 @@ void CGlobals::ViewJobAssign()
 
 void CGlobals::SetEmployeeID(int ID)
 {
+	OutputDebugString(_T("SetEmployeeID\r\n"));
 	if (ID != -1)
 	{
 		Singleton::Cache->ImpersonateUser(ID);						
@@ -1186,12 +1187,28 @@ void CGlobals::SetEmployeeID(int ID)
 	SetEmployeeID();
 }
 
+
 void CGlobals::SetEmployeeID()
 {
-	m_iUserID = Singleton::Cache->CurrentUser->UserID;
-	m_strUserName = Singleton::Cache->CurrentUser->UserName;
+	OutputDebugString(_T("SetEmployeeID2\r\n"));
+	if (!Singleton::Cache)
+	{
+		OutputDebugString(_T("Cache == null\r\n"));
+		return;
+	}
+	else if (!Singleton::Cache->CurrentUser)
+	{
+		OutputDebugString(_T("CurrentUser == null\r\n"));
+		return;
+	}
+	OutputDebugString(_T("SetEmployeeID2a\r\n"));
 
+	m_iUserID = Singleton::Cache->CurrentUser->UserID;
+	OutputDebugString(_T("SetEmployeeID3\r\n"));
+	m_strUserName = Singleton::Cache->CurrentUser->UserName;
+	OutputDebugString(_T("SetEmployeeID4\r\n"));
 	SetAdmin();
+	OutputDebugString(_T("SetEmployeeID5\r\n"));
 }
 
 bool CGlobals::IsAdmin()
